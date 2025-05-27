@@ -1,0 +1,928 @@
+@media only screen and (max-width: 768px) {
+
+    /* Home Page  */
+    body {
+        overflow-x: hidden !important;
+    }
+
+    .scroll-section .image-container {
+        height: auto;
+        flex-direction: column;
+    }
+
+    .slide1 .content h1,
+    .slide1 .content h2,
+    .slide2 .content h1,
+    .slide3 .content h1,
+    .slide4 .content h1,
+    .slide5 .content h1 {
+        font-size: 28px;
+    }
+
+    .slide5 .content p,
+    .slide3 .content p,
+    .slide2 .content p,
+    .slide4 .content p {
+        font-size: 16px;
+    }
+
+    .hero-slider .item {
+        height: 75vh;
+    }
+
+    .content,
+    .slide4 .content {
+        max-width: 100%;
+    }
+
+    .slide1 .read_more,
+    .slide5 .read_more,
+    .slide2 .read_more,
+    .slide3 .read_more,
+    .slide4 .read_more {
+        padding: 8px 14px;
+    }
+
+    .box-container {
+        flex-wrap: wrap;
+    }
+
+    .box {
+        height: 250px;
+    }
+
+    .box-front,
+    .box-back {
+        min-height: 250px;
+    }
+
+    .box-front h3 {
+        font-size: 22px;
+    }
+
+    .box-front p {
+        font-size: 35px;
+    }
+
+    .box-back p {
+        font-size: 22px;
+    }
+
+    .box-container {
+        gap: 12px;
+    }
+
+    .service-title,
+    .life-at-packfora h2,
+    .technocrats h2,
+    .grow-your-career .sp-info h6 {
+        font-size: 30px;
+    }
+
+    .service-info {
+        font-size: 16px;
+    }
+
+    .impact-title {
+        font-size: 30px;
+    }
+
+    .our-impact .sub-text {
+        font-size: 16px;
+    }
+
+    .scroll-section .image-column:hover .heading {
+        bottom: 230px;
+    }
+
+    .scroll-section .image-column:hover .sub-text {
+        bottom: 180px;
+    }
+
+    .our-impact .values {
+        font-size: 40px;
+    }
+
+    .our-impact .values-content {
+        font-size: 18px;
+    }
+
+    .content-box {
+        width: auto;
+        height: auto;
+        margin-right: 0;
+    }
+
+    .content-box h2 {
+        font-size: 20px;
+    }
+
+    .case-study-carousel .item {
+        height: 50vh;
+    }
+
+    .gallery {
+        height: 50vh !important;
+    }
+
+    .slide-content {
+        padding: 1rem;
+    }
+
+    .blog-slider .blog-item {
+        width: 100%;
+    }
+
+    .clients .owl-carousel .owl-item img {
+        margin: 0;
+    }
+
+    .case-study .sec-title {
+        font-size: 30px;
+    }
+
+    .blog-title {
+        padding-left: 0px !important;
+        font-size: 30px;
+    }
+
+    .contact-sa .info .sec-head h6 {
+        font-size: 30px;
+    }
+
+    .contact-sa .info .sec-head h4 {
+        font-size: 16px;
+    }
+
+    .contact-sa {
+        padding-bottom: 60px;
+    }
+
+    .footer-sa .item .sub-color {
+        font-size: 20px;
+    }
+
+    .footer-sa .social-icon {
+        padding-top: 20px;
+    }
+
+    .footer-sa {
+        padding-bottom: 30px;
+        background-image: none !important;
+    }
+
+    /* About Us Page  */
+    .about-page-title-banner {
+        height: 70vh;
+    }
+
+    .about-page-title-banner .page-title-bar {
+        width: 90%;
+        margin-bottom: 60px;
+    }
+
+    .about-page-title-banner .page-title-bar h2 span {
+        font-size: 37px;
+    }
+
+    .about-page-title-banner .page-title-bar h2 {
+        font-size: 22px;
+    }
+
+    .we-do-title,
+    .our-promise-title,
+    .our-presence-title {
+        font-size: 30px;
+    }
+
+    /* Leadership Page  */
+    .page-title-banner {
+        height: 70vh;
+    }
+
+    .page-title-banner .page-title-bar {
+        width: 90%;
+    }
+
+    .page-title-banner .page-title-bar h2 {
+        font-size: 24px;
+    }
+
+    .page-title-banner .page-title-bar p {
+        font-size: 14px;
+    }
+
+    .our-leadership .read_more {
+        width: auto;
+        margin-bottom: 30px;
+    }
+
+    .connect-expert {
+        margin-top: 0 !important;
+    }
+
+    .leaders-details {
+        padding: 0;
+    }
+
+    .popup {
+        width: 100%;
+        /* Full width on mobile */
+        right: -100%;
+        /* Position fully off-screen initially */
+    }
+
+    /* Career Page */
+    .our-team-page-title-banner {
+        height: 70vh;
+    }
+
+    .our-team-page-title-banner .page-title-bar {
+        width: 90%;
+        margin-bottom: 60px;
+    }
+
+    .our-team-page-title-banner .page-title-bar h2 {
+        font-size: 22px;
+    }
+
+    .our-team-page-title-banner .page-title-bar h1 {
+        font-size: 37px;
+    }
+
+    .shine-us-title {
+        font-size: 30px;
+        margin-bottom: 25px !important;
+    }
+
+    .shine-us-card .card-content h3 {
+        font-size: 20px;
+    }
+
+    .shine-us-card {
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    }
+
+    .shine-us-card .card-content-right,
+    .shine-us-card .card-content-left {
+        padding: 10px;
+        width: 95%;
+    }
+
+    .sp-info {
+        float: left !important;
+    }
+
+    .next-opportunity .sp-info .read_more {
+        font-size: 16px;
+        padding: 10px 20px;
+        margin-top: 10px;
+    }
+
+    .next-opportunity .sp-info h6 {
+        font-size: 28px;
+    }
+
+    .next-opportunity {
+        padding: 40px 0px;
+    }
+
+    .shine-us-card .card-content h4 {
+        font-size: 16px;
+    }
+
+    /* Contact Us Page */
+    .contact-page-title-banner {
+        height: 70vh;
+    }
+
+    .contact-page-title-banner .page-title-bar {
+        width: 90%;
+        margin-bottom: 60px;
+    }
+
+    .contact-page-title-banner .page-title-bar h2 {
+        font-size: 22px;
+    }
+
+    .contact-page-title-banner .page-title-bar h1 {
+        font-size: 37px;
+    }
+
+    .get-in-touch .contact-us-form .dropdown-wrapper {
+        width: 100%;
+    }
+
+    .get-in-touch .contact-us-form .dropdown-options {
+        width: 100%;
+    }
+
+    .get-in-touch .contact-us-form .dropdown-wrapper.active .dropdown-options {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact-us-info img {
+        width: 55px;
+    }
+
+    .contact-us-title,
+    .get-in-touch-title {
+        font-size: 30px;
+    }
+
+    /* services pages */
+    .page-banner {
+        height: 70vh;
+        background: linear-gradient(to right, rgba(33, 64, 154, 0.9) 0%, rgb(107 131 201 / 90%) 100%, transparent 100%);
+    }
+
+    .page-banner .content h2 {
+        font-size: 30px;
+    }
+
+    .page-banner .content p {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .page-banner .content {
+        width: 90%;
+    }
+
+    .offering-title {
+        font-size: 30px;
+    }
+
+    .new-models h4 {
+        font-size: 20px;
+    }
+
+    .our-benefits .sec-title {
+        font-size: 30px;
+    }
+
+    .our-benefits h4 {
+        font-size: 20px;
+    }
+
+    .success-card {
+        margin-bottom: 20px;
+    }
+
+    .success-stories .sec-title {
+        font-size: 30px;
+    }
+
+    .success-stories h1 {
+        font-size: 20px;
+    }
+
+    .success-stories p {
+        font-size: 16px;
+    }
+
+    .our-leaders .sec-title {
+        font-size: 30px;
+    }
+
+    .our-leaders h1 {
+        font-size: 20px;
+    }
+
+    .sustainable-packaging .sp-info h6 {
+        font-size: 28px !important;
+    }
+
+    .sustainable-packaging .sp-info .read_more {
+        font-size: 16px;
+        padding: 10px 20px;
+        margin-top: 20px;
+    }
+
+    .sustainable-packaging {
+        padding: 40px 0px;
+    }
+
+    .market-trends .sec-title {
+        font-size: 30px;
+    }
+
+    .market-trend-02 .market-info,
+    .market-trend-03 .market-info {
+        padding: 0;
+    }
+
+    .market-trends .market-info h2 {
+        font-size: 30px;
+    }
+
+    .offering-co-sus-he {
+        height: 200px;
+    }
+
+    .our-approach .sec-title {
+        font-size: 30px;
+    }
+
+    .our-approach h4 {
+        font-size: 16px;
+    }
+
+    .our-approach .right-fit p {
+        font-size: 20px;
+    }
+
+    .circular-recycle {
+        padding-top: 0;
+    }
+
+    .our-approach .circular-recyclability h5 {
+        font-size: 20px;
+    }
+
+    .sustainable-packaging .sp-info h1 {
+        font-size: 75px;
+    }
+
+    .sustainable-packaging .sp-info h6 {
+        font-size: 20px !important;
+        margin-top: 20px;
+    }
+
+    .sustainable-packaging .sp-info h2 {
+        font-size: 40px;
+        margin-bottom: 0;
+    }
+
+    .offering-main-info {
+        font-size: 16px;
+    }
+
+    .offerings-contact {
+        height: 200px !important;
+    }
+
+    /* Why Packfora Page */
+    .technocrats .owl-carousel .item {
+        width: 90%;
+        margin: auto;
+        padding: 15px;
+    }
+
+    .technocrats .owl-prev {
+        left: 0px;
+    }
+
+    .technocrats .owl-next {
+        right: 0px;
+    }
+
+    .life-at-packfora .owl-carousel .item {
+        width: 90%;
+        margin: auto;
+        padding: 15px;
+    }
+
+    .life-at-packfora .owl-prev {
+        left: -13px !important;
+    }
+
+    .life-at-packfora .owl-next {
+        right: -13px !important;
+    }
+
+    /* Packforam Page */
+    .blue-section {
+        padding: 15px;
+    }
+
+    .thumbnail-container {
+        display: flex;
+    }
+
+    .thumbnail {
+        width: 70px;
+        height: 50px;
+    }
+
+    .impact-number {
+        font-size: 36px;
+        justify-content: center;
+        display: flex;
+    }
+
+    .impact-caption {
+        font-size: 14px;
+    }
+
+    .impact-section {
+        padding-bottom: 0 !important;
+    }
+
+    .watch-text {
+        font-size: 20px;
+    }
+
+    .packforum-title {
+        font-size: 40px;
+    }
+
+    .coming-soon {
+        font-size: 30px;
+    }
+
+    .announcement-text {
+        font-size: 20px;
+        line-height: normal;
+        margin-bottom: 30px;
+    }
+
+    /* add devendra start*/
+
+    .circleMax {
+        display: none;
+    }
+
+    .hero-section {
+        overflow: hidden;
+        padding: 100px 0 0;
+        height: 100%;
+    }
+
+    .hero-section .col-lg-8 {
+        text-align: center;
+    }
+
+    .hero-section h2 {
+        font-size: 14px;
+    }
+
+    .hero-section h1 {
+        font-size: 25px;
+        margin-bottom: 0px;
+    }
+
+    .hero-subheading {
+        font-size: 1.1rem;
+    }
+
+    .hero-heading {
+        font-size: 2rem;
+    }
+
+    .hero-heading {
+        font-size: 2.4rem;
+    }
+
+    .tabs-pill {
+        flex-direction: column;
+        border-radius: 20px;
+        margin-bottom: 40px;
+        width: 100%;
+    }
+
+    .tabs-pill a {
+        border-left: none !important;
+        border-top: 1px solid #eee;
+        width: 100%;
+    }
+
+    .tabs-pill a:first-child {
+        border-top: none;
+    }
+
+    .tabs-pill a:first-child,
+    .tabs-pill a:last-child {
+        border-radius: 0;
+    }
+
+
+    .stats-border {
+        border-left: none !important;
+        border-right: none !important;
+        border-top: 2px solid rgba(255, 255, 255, 0.79);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.79);
+        padding: 1.5rem 0 !important;
+    }
+
+    .stats-section {
+        padding: 40px 0;
+    }
+
+    .stats-section .row>.col-lg-4:last-child,
+    .stats-section .row>.col-lg-4:last-child p {
+        margin-bottom: 0 !important;
+    }
+
+    .gradient-bg h2,
+    .purple-bg h2 {
+        font-size: 36px;
+    }
+
+    .purple-bg {
+        padding: 40px 15px !important;
+    }
+
+    .purpleBgbtmLink ul {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .purpleBgbtmLink ul li,
+    .stats-borderli {
+        padding: 0 15px;
+        margin-right: 0px;
+    }
+
+    .stat-number {
+        font-size: 36px;
+    }
+
+    .stat-text {
+        font-size: 18px;
+    }
+
+    .pd-rl {
+        padding: 0px 0px !important;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .pd-rl .row {
+        width: 48%;
+    }
+
+    .bg-white {
+        padding: 40px 15px !important;
+    }
+
+
+    .pd-rl .row:last-child {
+        border-bottom: 1px solid #dee2e6 !important;
+        padding-bottom: 1rem !important;
+    }
+
+    .pd-rl .row:nth-child(2) {
+        padding-top: 0px !important;
+    }
+
+    .boxes-section {
+        position: relative;
+        padding: 40px 0 200px;
+    }
+
+    .story-section {
+        margin: -155px auto 0px;
+    }
+
+    .stats-section h2,
+    .section-title,
+    .story-section h3,
+    .launch-title {
+        font-size: 36px;
+    }
+
+    .inline-arrows h5 {
+        font-size: 30px;
+    }
+
+    .boxPara {
+        height: auto;
+    }
+
+    .boxes-section .box {
+        height: 100%;
+    }
+
+    .story-section h3 {
+        text-align: center;
+    }
+
+    .story-section h6 {
+        text-align: center;
+        font-size: 15px;
+    }
+
+    .launch-description,
+    .notify-btn {
+        font-size: 18px;
+    }
+
+    .launchWrapp {
+        margin: 0 auto 50px;
+    }
+
+    /* case study */
+    .case-study-inner-ptb {
+        height: 70vh;
+    }
+    .case-study-inner-ptb .page-title-bar h1 {
+        font-size: 37px;
+    }
+
+    .short-description img {
+        display: none;
+    }
+
+    .short-description h5 {
+        text-align: center;
+        line-height: 1.2;
+    }
+
+    .objective-title {
+        font-size: 33px;
+        margin-top: 15px;
+        margin-bottom: 25px !important;
+        text-align: center;
+    }
+
+    .objective-desc {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .the-solution h2 {
+        font-size: 33px;
+        text-align: center;
+    }
+
+    .the-solution p {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .business-impact h2 {
+        font-size: 33px;
+        text-align: center;
+    }
+
+    .why-it-matters h6 {
+        font-size: 33px;
+        text-align: center;
+    }
+
+    .why-it-matters p {
+        font-size: 16px;
+        text-align: center;
+        width: 95%;
+    }
+}
+
+/* add devendra start*/
+@media only screen and (max-width: 1024px) {
+
+    .circleMax {
+        display: none;
+    }
+
+    .hero-section {
+        padding: 120px 0 0;
+        height: auto;
+    }
+
+    .hero-section .col-lg-8 {
+        text-align: center;
+    }
+
+    .hero-section h2 {
+        font-size: 14px;
+    }
+
+    .hero-section h1 {
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+
+    .hero-subheading {
+        font-size: 1.2rem;
+    }
+
+    .hero-heading {
+        font-size: 2.6rem;
+    }
+
+    .tabs-pill {
+        flex-direction: column;
+        border-radius: 20px;
+        margin-bottom: 40px;
+        width: 50%;
+    }
+
+    .tabs-pill a {
+        border-left: none !important;
+        border-top: 1px solid #eee;
+    }
+
+    .tabs-pill a:first-child {
+        border-top: none;
+    }
+
+    .tabs-pill a:first-child,
+    .tabs-pill a:last-child {
+        border-radius: 0;
+    }
+
+    .stats-border {
+        border-left: 2px solid rgb(255 255 255 / 79%);
+        border-right: 2px solid rgb(255 255 255 / 79%);
+        padding: 1.5rem 0 !important;
+    }
+
+    .stats-section {
+        padding: 40px 0;
+    }
+
+    .gradient-bg h2,
+    .purple-bg h2 {
+        font-size: 38px;
+    }
+
+    .stat-number {
+        font-size: 40px;
+    }
+
+    .stat-text {
+        font-size: 20px;
+    }
+
+    .purple-bg {
+        padding: 50px 25px !important;
+    }
+
+    .boxes-section {
+        padding: 40px 0 150px;
+    }
+
+    .launch-description,
+    .notify-btn {
+        font-size: 20px;
+    }
+
+    .launchWrapp {
+        margin: 0 auto 60px;
+    }
+}
+
+@media only screen and (max-width: 820px) {
+
+    .circleMax {
+        display: none;
+    }
+
+    .hero-section {
+        padding: 100px 0 0;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .hero-section .col-lg-8 {
+        text-align: center;
+    }
+
+    .tabs-pill {
+        flex-direction: column;
+        border-radius: 20px;
+        margin-bottom: 40px;
+        width: 100%;
+    }
+
+    .tabs-pill a {
+        border-left: none !important;
+        border-top: 1px solid #eee;
+    }
+
+    .tabs-pill a:first-child {
+        border-top: none;
+    }
+
+    .tabs-pill a:first-child,
+    .tabs-pill a:last-child {
+        border-radius: 0;
+    }
+
+    .stats-border {
+        border: none;
+        border-top: 2px solid rgba(255, 255, 255, 0.79);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.79);
+        padding: 1.5rem 0 !important;
+    }
+
+    .stats-section {
+        padding: 40px 0;
+    }
+
+    .purple-bg {
+        padding: 40px 15px !important;
+    }
+
+    .boxes-section {
+        padding: 40px 0 180px;
+    }
+
+    .launchWrapp {
+        margin: 0 auto 0px;
+    }
+}

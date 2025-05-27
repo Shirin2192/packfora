@@ -1,0 +1,599 @@
+.maxheroslider .item {
+  height: 100vh;
+}
+
+.tabCTA {
+  position: absolute;
+  z-index: 999;
+  bottom: 0;
+}
+
+
+.navbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 20px 0 !important;
+  margin: 0;
+  width: 100%;
+  background: linear-gradient(135deg, #8a2be266 0%, #414099a2 50%);
+  z-index: 9999999;
+}
+
+.navbar.nav-scroll {
+  background: #414099;
+}
+
+.brdright {
+  position: relative;
+}
+
+.nav-link {
+  position: relative;
+  color: #333;
+  padding-bottom: 5px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  bottom: -22px;
+  height: 10px;
+  width: 0%;
+  /* background: linear-gradient(to right, #F47D20, #A154A1); */
+  background: linear-gradient(135deg, #F47D20 0%, #A154A1 50%);
+  transition: width 0.4s ease;
+}
+
+.nav-link:hover::after {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.brdright::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 0;
+  height: 15px;
+  width: 2px;
+  background-color: #fff;
+}
+
+/* Hero Banner Styles */
+.hero-section {
+  background-image: url('../img/home/mx/hero-banner.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  padding: 200px 0 0;
+  height: 110vh;
+}
+
+.hero-section h2 {
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.hero-section h1 {
+  font-size: 90px;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 0;
+}
+
+.tabs-pill {
+  display: inline-flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  border-radius: 50px;
+  background: #fff;
+  border: 1px solid #fff;
+}
+
+.tabs-pill a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 28px;
+  font-size: 16px;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #A154A1;
+  background: #fff;
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  width: 250px;
+}
+
+.tabs-pill a small {
+  font-size: 12px;
+}
+
+.tabs-pill a.active {
+  background: #A154A1;
+  color: #fff;
+}
+
+.tabs-pill a:first-child {
+  border-left: none;
+  /* background: #A154A1;
+  color: #fff; */
+}
+
+.tabs-pill a:first-child {
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+
+.tabs-pill a:last-child {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.tabs-pill a:hover {
+  background: #f0e4ff;
+  color: #A154A1;
+}
+
+.tabs-pill a.active small {
+  color: #fff;
+}
+
+.circlehero {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  border: 30px solid #ff7f00;
+  border-top-left-radius: 100px !important;
+  border-top-right-radius: 100px !important;
+  border-bottom: none;
+  background: transparent;
+  z-index: 0;
+  border-radius: initial;
+}
+
+/* Left Half Circleheros */
+.circlehero.left-1 {
+  top: 40%;
+  left: -50px;
+  transform: rotate(90deg);
+}
+
+.circlehero.left-2 {
+  top: 40%;
+  left: 40px;
+  transform: rotate(-90deg);
+}
+
+/* Right Half Circleheros */
+.circlehero.right-1 {
+  top: 40%;
+  right: 40px;
+  transform: rotate(90deg);
+}
+
+.circlehero.right-2 {
+  top: 40%;
+  right: -50px;
+  transform: rotate(-90deg);
+}
+
+
+
+
+.button-subtitle {
+  display: block;
+  font-size: 10px;
+  opacity: 0.8;
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.stats-section {
+  background-color: #414099;
+  color: white;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.stats-section h2 {
+  font-size: 64px;
+  font-weight: 700;
+  color: #F47D20;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.stats-section p {
+  font-size: 20px;
+  line-height: normal;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 500;
+}
+
+.stats-border {
+  border-left: 2px solid rgb(255 255 255 / 79%);
+  border-right: 2px solid rgb(255 255 255 / 79%);
+}
+
+.maxmold-section {
+  background-color: #ffffff;
+}
+
+.maxmold-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gradient-bg {
+  background: linear-gradient(150deg, #f47d20b5 -13%, #A154A1 30%);
+  color: white;
+  padding: 80px 80px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.gradient-bg h2 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 600;
+  font-size: 52px;
+  line-height: 1.2;
+}
+
+.gradient-bg p {
+  font-size: 22px;
+  font-family: 'Source Sans Pro', sans-serif;
+  line-height: normal;
+  margin-bottom: 0px;
+}
+
+@media (max-width: 767px) {
+  .gradient-bg {
+    padding: 40px 15px;
+  }
+}
+
+.stat-number {
+  color: #F47D20;
+  font-size: 62px;
+  font-weight: bold;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.stat-text {
+  color: #414099;
+  font-size: 24px;
+  font-family: "Bricolage Grotesque", sans-serif;
+  line-height: 26px;
+  display: flex;
+  align-items: center;
+}
+
+.purple-bg {
+  background-color: #414099;
+  color: white;
+  padding-left: 200px !important;
+}
+
+.purple-bg h2 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: normal;
+  color: white;
+}
+
+.purpleBgbtmLink ul {
+  list-style: none;
+  padding: 0;
+  display: inline-flex;
+  margin-bottom: 0;
+}
+
+.purpleBgbtmLink ul li {
+  color: #F47D20;
+  font-size: 22px;
+  font-family: 'Source Sans Pro', sans-serif;
+  line-height: 26px;
+  margin-right: 50px;
+}
+
+.stats-borderli {
+  border-left: 2px solid #F47D20;
+  border-right: 2px solid #F47D20;
+  text-align: center;
+  padding: 0 50px;
+}
+
+.pd-rl {
+  padding: 0px 0px !important;
+  width: 80%;
+}
+
+/* --- Boxes Section with Gradient --- */
+.boxes-section {
+  position: relative;
+  background: linear-gradient(135deg, #FFB9C3 0%, #E2A0F0 10%, #8381FF 40%, #8381FF 100%);
+  padding: 80px 0 385px;
+  color: white;
+}
+
+.section-title {
+  font-size: 54px;
+  font-family: "Bricolage Grotesque", sans-serif;
+  color: #fff;
+  font-weight: normal;
+  margin-bottom: 30px;
+}
+
+.box {
+  padding: 30px 25px;
+  background-color: #414099;
+  /* updated box background */
+  transition: 0.4s ease;
+  height: 100%;
+
+}
+
+.box:hover {
+  background-color: #F47D20;
+  transform: translateY(-5px);
+
+}
+
+.boxPara {
+  padding: 0 30px;
+  position: relative;
+  height: 225px;
+}
+
+.inline-arrows h5 {
+  margin: 0;
+  font-weight: bold;
+  color: #fff;
+  font-size: 36px;
+  opacity: 0.4;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.box:hover .inline-arrows h5 {
+  opacity: 1;
+  color: #414099;
+}
+
+.arrow-img {
+  width: 30px;
+  height: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 1;
+  transition: 0.3s ease;
+}
+
+
+.boxPara::before,
+.boxPara::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  width: 30px;
+  height: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  transition: 0.3s ease;
+}
+
+.boxPara::before {
+  left: -10px;
+  background-image: url('../img/home/mx/left.png');
+}
+
+.boxPara::after {
+  right: -10px;
+  background-image: url('../img/home/mx/right.png');
+}
+
+/* On hover: increase arrow opacity */
+.box:hover .boxPara::before,
+.box:hover .boxPara::after {
+  opacity: 1;
+}
+
+.box p {
+  font-size: 18px;
+  line-height: normal;
+  color: #fff;
+  font-weight: 400;
+  opacity: 0.4;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.box:hover .boxPara p,
+.box:hover .know-more {
+  opacity: 1;
+  color: #414099;
+}
+
+.knowWrapp {
+  padding: 0 30px;
+}
+
+.know-more {
+  color: white;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 18px;
+  opacity: 0.4;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+
+.arrow-line {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.arrow-line::after {
+  content: "";
+  display: inline-block;
+  width: 80px;
+  height: 2px;
+  background-color: #fff;
+  margin-left: 10px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.arrow-line::before {
+  content: "";
+  position: absolute;
+  right: 0px;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transform: rotate(45deg);
+  margin-top: 0px;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.arrow-line:hover::after {
+  width: 32px;
+  background-color: #ffffff;
+}
+
+.arrow-line:hover::before {
+  opacity: 1;
+  right: -10px;
+  border-color: #ffffff;
+}
+
+
+
+/* --- Story Section --- */
+.story-section {
+  position: relative;
+  /* max-width: 800px; */
+  margin: -330px auto 0px;
+  /* pull up to overlap */
+  background-color: #fff;
+  border-radius: 40px 40px 0 0;
+  padding: 40px 20px 60px;
+  color: #333;
+  z-index: 2;
+}
+
+.launchWrapp {
+  margin: 0 auto;
+  max-width: 90%;
+}
+
+.story-section h3 {
+  color: #414099;
+  margin-bottom: 10px;
+  font-size: 52px;
+  font-weight: 400;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.story-section h6 {
+  color: #F47D20;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+
+
+.story-placeholder {
+  background-color: #e0e0e0;
+  height: 300px;
+  border-radius: 20px;
+}
+
+.launch-section {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.launch-title {
+  color: #414099;
+  font-size: 54px;
+  margin-bottom: 0;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+}
+
+.launch-title img {
+  width: 290px;
+}
+
+.launch-subtitle {
+  color: #414099;
+  font-size: 2rem;
+
+}
+
+.launch-description {
+  color: #A154A1;
+  font-weight: 400;
+  max-width: 650px;
+  font-size: 23px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.notify-btn {
+  background-color: #F47D20;
+  color: white;
+  border: none;
+  font-size: 24px;
+  border-radius: 50px;
+  padding: 10px 30px;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.notify-btn:hover {
+  background-color: #F47D20;
+  transform: translateY(-2px);
+}
+
+.contact-us-mx .sec-head h6 {
+  color: #414099 !important;
+}
+
+.contact-us-mx .sec-head h4 {
+  color: #A154A1 !important;
+}
+
+.contact-us-mx .submit {
+  background-color: #414099 !important;
+}
+
+.contact-us-mx .submit:hover {
+  background-color: #F47D20 !important;
+}
