@@ -1,4 +1,5 @@
 <!-- ==================== Start Navbar ==================== -->
+ <?php include 'config.php'; ?>
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <!-- Logo -->
