@@ -117,18 +117,23 @@
                     <source src="assets/img/services/talent-flex/talent-flex.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%); z-index: 1;">
+
+                <div
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%); z-index: 1;">
                 </div>
             </div>
-            
+
             <div class="container" style="position: relative; z-index: 1;">
                 <div class="row">
                     <div class="content">
                         <h1 class="wow fadeInUp" data-wow-delay="0.2s">Talent Flex</h1>
                         <h2 class="wow fadeInUp" data-wow-delay="0.2s">Elevate Your Team Capability</h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">77% of businesses globally reported difficulty finding the skilled talent they need. Talent Flex helps you stay ahead by bridging skill gaps, enhancing productivity, and enabling businesses to manage complex packaging priorities.</p>
-                        <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.6s">Let's Work Together</a>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s">77% of businesses globally reported difficulty
+                            finding the skilled talent they need. Talent Flex helps you stay ahead by bridging skill
+                            gaps, enhancing productivity, and enabling businesses to manage complex packaging
+                            priorities.</p>
+                        <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.6s">Let's Work
+                            Together</a>
                     </div>
                 </div>
             </div>
@@ -150,7 +155,8 @@
                                 </div>
                                 <div class="offering-content offering-sl-content">
                                     <h4 class="mb-2">Capacity</h4>
-                                    <p>We provide qualified talent with enhanced skill set to complement your packaging team.</p>
+                                    <p>We provide qualified talent with enhanced skill set to complement your packaging
+                                        team.</p>
                                 </div>
                             </div>
                         </div>
@@ -161,7 +167,8 @@
                                 </div>
                                 <div class="offering-content offering-sl-content">
                                     <h4 class="mb-2">Capability</h4>
-                                    <p>We offer end-to-end packaging value chain understanding and structured skill upgrades.</p>
+                                    <p>We offer end-to-end packaging value chain understanding and structured skill
+                                        upgrades.</p>
                                 </div>
                             </div>
                         </div>
@@ -172,13 +179,15 @@
                                 </div>
                                 <div class="offering-content offering-sl-content">
                                     <h4 class="mb-2">Flexibility</h4>
-                                    <p>We support multiple sites and global operations across geographies and time zones.</p>
+                                    <p>We support multiple sites and global operations across geographies and time
+                                        zones.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="new-models">
-                                <h4 class="wow fadeIn">The Talent Flex resourcing is available on all the three models as under:</h4>
+                                <h4 class="wow fadeIn">The Talent Flex resourcing is available on all the three models
+                                    as under:</h4>
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -188,7 +197,8 @@
                                 </div>
                                 <div class="offering-content offering-sl-content">
                                     <h4 class="mb-2">Onshore</h4>
-                                    <p class="mb-3" style="padding-bottom: 3.19px;">Model offers In-house resourcing for clients on a global scale at client's location.</p>
+                                    <p class="mb-3" style="padding-bottom: 3.19px;">Model offers In-house resourcing for
+                                        clients on a global scale at client's location.</p>
                                 </div>
                             </div>
                         </div>
@@ -199,7 +209,8 @@
                                 </div>
                                 <div class="offering-content offering-sl-content">
                                     <h4 class="mb-2">Offshore</h4>
-                                    <p>Model offers resourcing for clients in an efficient way for workstreams that can be managed virtually.</p>
+                                    <p>Model offers resourcing for clients in an efficient way for workstreams that can
+                                        be managed virtually.</p>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +221,8 @@
                                 </div>
                                 <div class="offering-content offering-sl-content">
                                     <h4 class="mb-2">Hybrid</h4>
-                                    <p class="mb-3" style="padding-bottom: 3.19px;">Model offers resourcing for clients that provides the flexibility of offering best of both worlds.</p>
+                                    <p class="mb-3" style="padding-bottom: 3.19px;">Model offers resourcing for clients
+                                        that provides the flexibility of offering best of both worlds.</p>
                                 </div>
                             </div>
                         </div>
@@ -247,7 +259,8 @@
                     <div class="col-md-3 py-4">
                         <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
                             <div class="icon">
-                                <img src="assets/img/services/talent-flex/shape/tailored-expertise.png" alt="" srcset="">
+                                <img src="assets/img/services/talent-flex/shape/tailored-expertise.png" alt=""
+                                    srcset="">
                             </div>
                             <h4>Tailored Expertise</h4>
                             <p>For FMCG, QSR, Pharma & Retail packaging needs</p>
@@ -274,7 +287,8 @@
                     <div class="col-md-3 pt-4">
                         <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
                             <div class="icon">
-                                <img src="assets/img/services/talent-flex/shape/deploy-talent-faster.png" alt="" srcset="">
+                                <img src="assets/img/services/talent-flex/shape/deploy-talent-faster.png" alt=""
+                                    srcset="">
                             </div>
                             <h4>Deploy Talent Faster</h4>
                             <p>With our pre-vetted specialists</p>
@@ -292,7 +306,8 @@
                     <div class="success-stories-header">
                         <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
                         <h1 class="wow fadeInUp" data-wow-delay="0.4s">Delivering Impact. Driving Results.</h1>
-                        <p class="wow fadeInUp" data-wow-delay="0.6s">Packfora's solutions have consistently helped global brands achieve
+                        <p class="wow fadeInUp" data-wow-delay="0.6s">Packfora's solutions have consistently helped
+                            global brands achieve
                             their environmental and business goals.</p>
                     </div>
                 </div>
@@ -301,24 +316,32 @@
                     <div class="col-md-6">
                         <div class="success-card wow zoomIn" data-wow-delay="0.6s">
                             <div class="card-img">
-                                <img src="assets/img/services/talent-flex/stories/mould-management-for-a-global-QSR-chain.webp" alt="Jameson">
+                                <img src="assets/img/services/talent-flex/stories/mould-management-for-a-global-QSR-chain.webp"
+                                    alt="Jameson">
                             </div>
                             <div class="card-content">
                                 <h3>Mold Management for a Global QSR Chain</h3>
-                                <p>Read how we streamlined mold management, enhancing efficiency and turnaround speed—securing a 24-month contract extension.</p>
-                                <a href="#"><h5>Learn More</h5></a>
+                                <p>Read how we streamlined mold management, enhancing efficiency and turnaround
+                                    speed—securing a 24-month contract extension.</p>
+                                <a href="#">
+                                    <h5>Learn More</h5>
+                                </a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="success-card wow zoomIn" data-wow-delay="0.6s">
                             <div class="card-img">
-                                <img src="assets/img/services/talent-flex/stories/lab-and-prototyping-management-for-FMCG.webp" alt="unilever">
+                                <img src="assets/img/services/talent-flex/stories/lab-and-prototyping-management-for-FMCG.webp"
+                                    alt="unilever">
                             </div>
                             <div class="card-content">
                                 <h3>Lab & Prototyping Management for FMCG</h3>
-                                <p>Explore how we digitized lab operations, cutting prototyping time by 60%, accelerating product launches, and driving continuous innovation.</p>
-                                <a href="#"><h5>Learn More</h5></a>
+                                <p>Explore how we digitized lab operations, cutting prototyping time by 60%,
+                                    accelerating product launches, and driving continuous innovation.</p>
+                                <a href="#">
+                                    <h5>Learn More</h5>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -375,31 +398,34 @@
 
                     <div class="col-md-3 col-6">
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-01.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/brijesh.webp" class="w-100">
+                            <p>Brijesh Sounderrajan<br>Talent Flex <br><a
+                                    href="https://www.linkedin.com/in/brijesh-sounderrajan-5378277/" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-02.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/pradeep.webp" class="w-100">
+                            <p>Pradeep Nair<br>Foods, Pharma & CHC <br><a
+                                    href="https://www.linkedin.com/in/pradeep-nair-7b0175119/" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-03.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/prachi.webp" class="w-100">
+                            <p>Prachi Balchandani<br>Human Resources<br><a
+                                    href="https://www.linkedin.com/in/prachibalchandani/" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
                         </div>
                     </div>
 
-                    <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-04.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -447,16 +473,17 @@
                     var $this = $(this),
                         target = $this.data('target');
 
-                    $({ count: $this.text() }).animate(
-                        { count: target },
-                        {
-                            duration: 2000, // Duration of the counter animation
-                            easing: 'swing',
-                            step: function (now) {
-                                $this.text(Math.ceil(now)); // Update the text
-                            },
-                        }
-                    );
+                    $({
+                        count: $this.text()
+                    }).animate({
+                        count: target
+                    }, {
+                        duration: 2000, // Duration of the counter animation
+                        easing: 'swing',
+                        step: function (now) {
+                            $this.text(Math.ceil(now)); // Update the text
+                        },
+                    });
                 });
             }
 
@@ -465,8 +492,9 @@
                 function () {
                     animateCounter();
                     this.destroy(); // Prevent the animation from running again
-                },
-                { offset: '75%' } // Trigger when 75% of the section is in view
+                }, {
+                offset: '75%'
+            } // Trigger when 75% of the section is in view
             );
         });
     </script>

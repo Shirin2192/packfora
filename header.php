@@ -1,5 +1,4 @@
 <!-- ==================== Start Navbar ==================== -->
- <?php include 'config.php'; ?>
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <!-- Logo -->
@@ -24,7 +23,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                         <li><a class="dropdown-item" href="about-us.php">Why Packfora</a></li>
-                        <li><a class="dropdown-item" href="#">Our Capabilities</a></li>
+                        <!-- <li><a class="dropdown-item" href="#">Our Capabilities</a></li> -->
                         <li><a class="dropdown-item" href="leadership.php">Our Leadership</a></li>
                     </ul>
                 </li>
@@ -51,14 +50,14 @@
                                 <li><a class="dropdown-item" href="sustainability.php">Sustainability</a></li>
                                 <li><a class="dropdown-item" href="supply-chain-automation.php">Supply Chain
                                         Automation</a></li>
-                                <li><a class="dropdown-item" href="#">Product Innovation</a></li>
+                                <!-- <li><a class="dropdown-item" href="#">Product Innovation</a></li> -->
                                 <li><a class="dropdown-item" href="design-to-value.php">Design to Value</a></li>
-                                <li><a class="dropdown-item" href="#">Mold Management</a></li>
+                                <!-- <li><a class="dropdown-item" href="#">Mold Management</a></li> -->
                                 <li><a class="dropdown-item" href="packaging-innovation-and-engineering.php">Packaging
                                         Innovation & Engineering</a></li>
                                 <li><a class="dropdown-item" href="packaging-procurement.php">Packaging Procurement</a>
                                 </li>
-                                <li><a class="dropdown-item" href="#">Specification Management</a></li>
+                                <li><a class="dropdown-item" href="specification-management.php">Specification Management</a></li>
                             </ul>
                         </li>
                         <li class="dropdown-submenu">
@@ -146,7 +145,7 @@
                                 <a href="about-us.php" class="sub-link">Why Packfora</a>
                             </li>
                             <li>
-                                <a href="#" class="sub-link">Our Capabilities</a>
+                                <!-- <a href="#" class="sub-link">Our Capabilities</a> -->
                             </li>
                             <li>
                                 <a href="leadership.php" class="sub-link">Our Leadership</a>
@@ -165,7 +164,7 @@
                         <ul>
                             <li>
                                 <div class="link cursor-pointer submenu-toggle">
-                                    <span class="sub-link">Services</span>
+                                    <span class="sub-link"><a href="#">Services</a></span>
                                     <i class="fa fa-angle-down"></i>
                                 </div>
                                 <ul class="inner-sub-menu ps-3" style="display: none;">
@@ -173,14 +172,14 @@
                                     <li><a href="sustainability.php" class="sub-link">Sustainability</a></li>
                                     <li><a href="supply-chain-automation.php" class="sub-link">Supply Chain
                                             Automation</a></li>
-                                    <li><a href="#" class="sub-link">Product Innovation</a></li>
+                                    <!-- <li><a href="#" class="sub-link">Product Innovation</a></li> -->
                                     <li><a href="design-to-value.php" class="sub-link">Design to Value</a></li>
-                                    <li><a href="#" class="sub-link">Mold Management</a></li>
+                                    <!-- <li><a href="#" class="sub-link">Mold Management</a></li> -->
                                     <li><a href="packaging-innovation-and-engineering.php" class="sub-link">Packaging
                                             Innovation & Engineering</a></li>
                                     <li><a href="packaging-procurement.php" class="sub-link">Packaging Procurement</a>
                                     </li>
-                                    <li><a href="#" class="sub-link">Specification Management</a></li>
+                                    <li><a href="specification-management.php" class="sub-link">Specification Management</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -194,7 +193,8 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> 
+                
                 <li>
                     <div class="o-hidden">
                         <div class="link cursor-pointer dmenu">

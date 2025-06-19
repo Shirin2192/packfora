@@ -158,67 +158,15 @@
                         </div>
                         <div class="col-md-3">
                             <div class="leader mb-4">
-                                <img src="assets/img/leaders/chirag-master.webp" class="w-100 leader-img"
-                                    data-title="Chirag Master"
-                                    data-para1="Chirag Master is a Strategic Home & Personal Care, Others, Talent Flex with 20+ years of experience."
-                                    data-para2="He specializes in front-end frameworks and UX design."
-                                    data-designation="Strategic Home & Personal Care, Others, Talent Flex"
-                                    data-social='{"linkedin":"https://www.linkedin.com/in/chirag-master-54364bb/?originalSubdomain=in"}'>
-                                <div class="leader-info">
-                                    <h6 class="leader-name">Chirag Master</h6>
-                                    <p>Strategic Home & Personal Care, Others, Talent Flex</p>
-                                    <div class="post">
-                                        <div class="linkedin-icon">
-                                            <a href="https://www.linkedin.com/in/chirag-master-54364bb/?originalSubdomain=in" target="_blank">
-                                                <img src="assets/img/leaders/linkedin.png" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="open-info">
-                                            <a>
-                                                <img src="assets/img/home/intro/Vector.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="leader mb-4">
-                                <img src="assets/img/leaders/jikul-purohit.webp" class="w-100 leader-img"
-                                    data-title="Jikul Purohit"
-                                    data-para1="Jikul Purohit is a Packfora Future with 5+ years of experience."
-                                    data-para2="He specializes in front-end frameworks and UX design."
-                                    data-designation="Packfora Future"
-                                    data-social='{"linkedin":"https://www.linkedin.com/in/jikul-purohit-6532526/?originalSubdomain=uk"}'>
-                                <div class="leader-info">
-                                    <h6 class="leader-name">Jikul Purohit</h6>
-                                    <p>Packfora Future</p>
-                                    <div class="post">
-                                        <div class="linkedin-icon">
-                                            <a href="https://www.linkedin.com/in/jikul-purohit-6532526/?originalSubdomain=uk" target="_blank">
-                                                <img src="assets/img/leaders/linkedin.png" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="open-info">
-                                            <a>
-                                                <img src="assets/img/home/intro/Vector.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="leader mb-4">
                                 <img src="assets/img/leaders/hitesh-shinoy.webp" class="w-100 leader-img"
-                                    data-title="Hitesh Shinoy"
-                                    data-para1="Hitesh Shinoy is a Food, Pharma & CHC with 5+ years of experience."
+                                    data-title="Hitesh Shenoy"
+                                    data-para1="Hitesh Shenoy is a VP & BU Lead - Growth - Foods & Pharma with 5+ years of experience."
                                     data-para2="He specializes in front-end frameworks and UX design."
-                                    data-designation="Food, Pharma & CHC"
+                                    data-designation="VP & BU Lead - Growth - Foods & Pharma"
                                     data-social='{"linkedin":"https://www.linkedin.com/in/hitesh-shenoy-2a84492/?originalSubdomain=sg"}'>
                                 <div class="leader-info">
-                                    <h6 class="leader-name">Hitesh Shinoy</h6>
-                                    <p>Food, Pharma & CHC</p>
+                                    <h6 class="leader-name">Hitesh Shenoy</h6>
+                                    <p>VP & BU Lead - Growth - Foods & Pharma</p>
                                     <div class="post">
                                         <div class="linkedin-icon">
                                             <a href="https://www.linkedin.com/in/hitesh-shenoy-2a84492/?originalSubdomain=sg" target="_blank">
@@ -236,18 +184,18 @@
                         </div>
                         <div class="col-md-3">
                             <div class="leader mb-4">
-                                <img src="assets/img/leaders/indra-jeevanandam.webp" class="w-100 leader-img"
-                                    data-title="Indra Jeevanandam"
-                                    data-para1="Indra Jeevanandam is a Finance Business Partner with 5+ years of experience."
+                                <img src="assets/img/leaders/jikul-purohit.webp" class="w-100 leader-img"
+                                    data-title="Jikul Purohit"
+                                    data-para1="Jikul Purohit is a VP & BU Lead - Delivery - Foods & Pharma with 5+ years of experience."
                                     data-para2="He specializes in front-end frameworks and UX design."
-                                    data-designation="Finance Business Partner"
-                                    data-social='{"linkedin":"https://www.linkedin.com/in/indra-kartik-3a9582201/?originalSubdomain=in"}'>
+                                    data-designation="VP & BU Lead - Delivery - Foods & Pharma"
+                                    data-social='{"linkedin":"https://www.linkedin.com/in/jikul-purohit-6532526/?originalSubdomain=uk"}'>
                                 <div class="leader-info">
-                                    <h6 class="leader-name">Indra Jeevanandam</h6>
-                                    <p>Finance Business Partner</p>
+                                    <h6 class="leader-name">Jikul Purohit</h6>
+                                    <p>VP & BU Lead - Delivery - Foods & Pharma</p>
                                     <div class="post">
                                         <div class="linkedin-icon">
-                                            <a href="https://www.linkedin.com/in/indra-kartik-3a9582201/?originalSubdomain=in" target="_blank">
+                                            <a href="https://www.linkedin.com/in/jikul-purohit-6532526/?originalSubdomain=uk" target="_blank">
                                                 <img src="assets/img/leaders/linkedin.png" alt="">
                                             </a>
                                         </div>
@@ -262,44 +210,18 @@
                         </div>
                         <div class="col-md-3">
                             <div class="leader mb-4">
-                                <img src="assets/img/leaders/prashant-sukhtankar.webp" class="w-100 leader-img"
-                                    data-title="Prashant Sukhtankar"
-                                    data-para1="Prashant Sukhtankar is a Packaging Technology & Capability with 5+ years of experience."
+                                <img src="assets/img/leaders/chirag-master.webp" class="w-100 leader-img"
+                                    data-title="Chirag Master"
+                                    data-para1="Chirag Master is a VP & BU Lead - Growth, Delivery - SHPCO, Talent Flex, & Mold Management Services with 20+ years of experience."
                                     data-para2="He specializes in front-end frameworks and UX design."
-                                    data-designation="Packaging Technology & Capability"
-                                    data-social='{"linkedin":"https://www.linkedin.com/in/prashant-sukhtankar-70a90a18/?originalSubdomain=in"}'>
+                                    data-designation="VP & BU Lead - Growth, Delivery - SHPCO, Talent Flex, & Mold Management Services"
+                                    data-social='{"linkedin":"https://www.linkedin.com/in/chirag-master-54364bb/?originalSubdomain=in"}'>
                                 <div class="leader-info">
-                                    <h6 class="leader-name">Prashant Sukhtankar</h6>
-                                    <p>Packaging Technology & Capability</p>
+                                    <h6 class="leader-name">Chirag Master</h6>
+                                    <p>VP & BU Lead - Growth, Delivery - SHPCO, Talent Flex, & Mold Management Services</p>
                                     <div class="post">
                                         <div class="linkedin-icon">
-                                            <a href="https://www.linkedin.com/in/prashant-sukhtankar-70a90a18/?originalSubdomain=in" target="_blank">
-                                                <img src="assets/img/leaders/linkedin.png" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="open-info">
-                                            <a>
-                                                <img src="assets/img/home/intro/Vector.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="leader mb-4">
-                                <img src="assets/img/leaders/samrat-dasgupta.webp" class="w-100 leader-img"
-                                    data-title="Samrat Dasgupta"
-                                    data-para1="Samrat Dasgupta is a Packaging & Others with 5+ years of experience."
-                                    data-para2="He specializes in front-end frameworks and UX design."
-                                    data-designation="Packaging & Others"
-                                    data-social='{"linkedin":"https://www.linkedin.com/in/samrat-dasgupta-1326583a/"}'>
-                                <div class="leader-info">
-                                    <h6 class="leader-name">Samrat Dasgupta</h6>
-                                    <p>Packaging & Others</p>
-                                    <div class="post">
-                                        <div class="linkedin-icon">
-                                            <a href="https://www.linkedin.com/in/samrat-dasgupta-1326583a/" target="_blank">
+                                            <a href="https://www.linkedin.com/in/chirag-master-54364bb/?originalSubdomain=in" target="_blank">
                                                 <img src="assets/img/leaders/linkedin.png" alt="">
                                             </a>
                                         </div>
@@ -340,17 +262,18 @@
                         </div>
                         <div class="col-md-3">
                             <div class="leader mb-4">
-                                <img src="assets/img/leaders/ankheeta-lath.webp" class="w-100 leader-img"
-                                    data-title="Ankheeta Lath"
-                                    data-para1="Ankheeta Lath is a Marketing with 5+ years of experience."
+                                <img src="assets/img/leaders/prashant-sukhtankar.webp" class="w-100 leader-img"
+                                    data-title="Prashant Sukhtankar"
+                                    data-para1="Prashant Sukhtankar is a Foods, Pharma & CHC  with 5+ years of experience."
                                     data-para2="He specializes in front-end frameworks and UX design."
-                                    data-designation="Marketing" data-social='{"linkedin":"https://www.linkedin.com/in/ankheeta-lath-122a6598/?originalSubdomain=in"}'>
+                                    data-designation="Foods, Pharma & CHC "
+                                    data-social='{"linkedin":"https://www.linkedin.com/in/prashant-sukhtankar-70a90a18/?originalSubdomain=in"}'>
                                 <div class="leader-info">
-                                    <h6 class="leader-name">Ankheeta Lath</h6>
-                                    <p>Marketing</p>
+                                    <h6 class="leader-name">Prashant Sukhtankar</h6>
+                                    <p>Foods, Pharma & CHC </p>
                                     <div class="post">
                                         <div class="linkedin-icon">
-                                            <a href="https://www.linkedin.com/in/ankheeta-lath-122a6598/?originalSubdomain=in" target="_blank">
+                                            <a href="https://www.linkedin.com/in/prashant-sukhtankar-70a90a18/?originalSubdomain=in" target="_blank">
                                                 <img src="assets/img/leaders/linkedin.png" alt="">
                                             </a>
                                         </div>
@@ -367,13 +290,13 @@
                             <div class="leader mb-4">
                                 <img src="assets/img/leaders/ankita-lokhande.webp" class="w-100 leader-img"
                                     data-title="Ankita Lokhande"
-                                    data-para1="Ankita Lokhande is a Packfora Future with 5+ years of experience."
+                                    data-para1="Ankita Lokhande is a Foods, Pharma & CHC with 5+ years of experience."
                                     data-para2="He specializes in front-end frameworks and UX design."
-                                    data-designation="Packfora Future"
+                                    data-designation="Foods, Pharma & CHC"
                                     data-social='{"linkedin":"https://www.linkedin.com/in/ankita-lokhande-8baa43168/?originalSubdomain=in"}'>
                                 <div class="leader-info">
                                     <h6 class="leader-name">Ankita Lokhande</h6>
-                                    <p>Packfora Future</p>
+                                    <p>Foods, Pharma & CHC</p>
                                     <div class="post">
                                         <div class="linkedin-icon">
                                             <a href="https://www.linkedin.com/in/ankita-lokhande-8baa43168/?originalSubdomain=in" target="_blank">
@@ -391,40 +314,14 @@
                         </div>
                         <div class="col-md-3">
                             <div class="leader mb-4">
-                                <img src="assets/img/leaders/baskaran-thiagarajan.webp" class="w-100 leader-img"
-                                    data-title="Baskaran Thiagarajan"
-                                    data-para1="Baskaran Thiagarajan is a Home & Personal Care with 5+ years of experience."
-                                    data-para2="He specializes in front-end frameworks and UX design."
-                                    data-designation="Home & Personal Care"
-                                    data-social='{"linkedin":"https://www.linkedin.com/in/baskaran-thiagarajan/?originalSubdomain=in"}'>
-                                <div class="leader-info">
-                                    <h6 class="leader-name">Baskaran Thiagarajan</h6>
-                                    <p>Home & Personal Care</p>
-                                    <div class="post">
-                                        <div class="linkedin-icon">
-                                            <a href="https://www.linkedin.com/in/baskaran-thiagarajan/?originalSubdomain=in" target="_blank">
-                                                <img src="assets/img/leaders/linkedin.png" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="open-info">
-                                            <a>
-                                                <img src="assets/img/home/intro/Vector.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="leader mb-4">
                                 <img src="assets/img/leaders/brijesh-sounderajjan.webp" class="w-100 leader-img"
                                     data-title="Brijesh Sounderajjan"
-                                    data-para1="Brijesh Sounderajjan is a Talent Flex with 5+ years of experience."
+                                    data-para1="Brijesh Sounderajjan is a SHPCO & Talent Flex with 5+ years of experience."
                                     data-para2="He specializes in front-end frameworks and UX design."
-                                    data-designation="Talent Flex" data-social='{"linkedin":"https://www.linkedin.com/in/brijesh-sounderrajan-5378277/"}'>
+                                    data-designation="SHPCO & Talent Flex" data-social='{"linkedin":"https://www.linkedin.com/in/brijesh-sounderrajan-5378277/"}'>
                                 <div class="leader-info">
                                     <h6 class="leader-name">Brijesh Sounderajjan</h6>
-                                    <p>Talent Flex</p>
+                                    <p>SHPCO & Talent Flex</p>
                                     <div class="post">
                                         <div class="linkedin-icon">
                                             <a href="https://www.linkedin.com/in/brijesh-sounderrajan-5378277/" target="_blank">
@@ -442,18 +339,69 @@
                         </div>
                         <div class="col-md-3">
                             <div class="leader mb-4">
-                                <img src="assets/img/leaders/chinmay-vasavada.webp" class="w-100 leader-img"
-                                    data-title="Chinmay Vasavada"
-                                    data-para1="Chinmay Vasavada is a People and Culture with 5+ years of experience."
+                                <img src="assets/img/leaders/ankheeta-lath.webp" class="w-100 leader-img"
+                                    data-title="Ankheeta Lath"
+                                    data-para1="Ankheeta Lath is a Director - Marketing with 5+ years of experience."
                                     data-para2="He specializes in front-end frameworks and UX design."
-                                    data-designation="People and Culture"
-                                    data-social='{"linkedin":"https://www.linkedin.com/in/chinmay-vasavada-9956651b/?originalSubdomain=in"}'>
+                                    data-designation="Director - Marketing " data-social='{"linkedin":"https://www.linkedin.com/in/ankheeta-lath-122a6598/?originalSubdomain=in"}'>
                                 <div class="leader-info">
-                                    <h6 class="leader-name">Chinmay Vasavada</h6>
-                                    <p>People and Culture</p>
+                                    <h6 class="leader-name">Ankheeta Lath</h6>
+                                    <p>Director - Marketing </p>
                                     <div class="post">
                                         <div class="linkedin-icon">
-                                            <a href="https://www.linkedin.com/in/chinmay-vasavada-9956651b/?originalSubdomain=in" target="_blank">
+                                            <a href="https://www.linkedin.com/in/ankheeta-lath-122a6598/?originalSubdomain=in" target="_blank">
+                                                <img src="assets/img/leaders/linkedin.png" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="open-info">
+                                            <a>
+                                                <img src="assets/img/home/intro/Vector.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="leader mb-4">
+                                <img src="assets/img/leaders/baskaran-thiagarajan.webp" class="w-100 leader-img"
+                                    data-title="SHPCO"
+                                    data-para1="Baskaran Thiagarajan is a SHPCO with 5+ years of experience."
+                                    data-para2="He specializes in front-end frameworks and UX design."
+                                    data-designation="SHPCO"
+                                    data-social='{"linkedin":"https://www.linkedin.com/in/baskaran-thiagarajan/?originalSubdomain=in"}'>
+                                <div class="leader-info">
+                                    <h6 class="leader-name">Baskaran Thiagarajan</h6>
+                                    <p>SHPCO</p>
+                                    <div class="post">
+                                        <div class="linkedin-icon">
+                                            <a href="https://www.linkedin.com/in/baskaran-thiagarajan/?originalSubdomain=in" target="_blank">
+                                                <img src="assets/img/leaders/linkedin.png" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="open-info">
+                                            <a>
+                                                <img src="assets/img/home/intro/Vector.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="leader mb-4">
+                                <img src="assets/img/leaders/samrat-dasgupta.webp" class="w-100 leader-img"
+                                    data-title="Samrat Dasgupta"
+                                    data-para1="Samrat Dasgupta is a SHPCO with 5+ years of experience."
+                                    data-para2="He specializes in front-end frameworks and UX design."
+                                    data-designation="SHPCO"
+                                    data-social='{"linkedin":"https://www.linkedin.com/in/samrat-dasgupta-1326583a/"}'>
+                                <div class="leader-info">
+                                    <h6 class="leader-name">Samrat Dasgupta</h6>
+                                    <p>SHPCO</p>
+                                    <div class="post">
+                                        <div class="linkedin-icon">
+                                            <a href="https://www.linkedin.com/in/samrat-dasgupta-1326583a/" target="_blank">
                                                 <img src="assets/img/leaders/linkedin.png" alt="">
                                             </a>
                                         </div>
@@ -470,13 +418,13 @@
                             <div class="leader mb-4">
                                 <img src="assets/img/leaders/sheryll-umagtang.webp" class="w-100 leader-img"
                                     data-title="Sheryll Umagtang"
-                                    data-para1="Sheryll Umagtang is a Food, Pharma & CHC (SEA) with 5+ years of experience."
+                                    data-para1="Sheryll Umagtang is a Food, Pharma & CHC with 5+ years of experience."
                                     data-para2="He specializes in front-end frameworks and UX design."
-                                    data-designation="Food, Pharma & CHC (SEA)"
+                                    data-designation="Food, Pharma & CHC"
                                     data-social='{"linkedin":"https://www.linkedin.com/in/sheryll-umagtang-174439216/"}'>
                                 <div class="leader-info">
                                     <h6 class="leader-name">Sheryll Umagtang</h6>
-                                    <p>Foods, Pharma and CHC (SEA)</p>
+                                    <p>Foods, Pharma and CHC</p>
                                     <div class="post">
                                         <div class="linkedin-icon">
                                             <a href="https://www.linkedin.com/in/sheryll-umagtang-174439216/" target="_blank">
@@ -492,16 +440,42 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-md-3">
+                        <div class="col-md-3">
                             <div class="leader mb-4">
-                                <img src="assets/img/leaders/ramaiah-muthusubramanian.png" class="w-100 leader-img"
-                                    data-title="Aunjna Agarvval"
-                                    data-para1="Aunjna Agarvval is a Food, Pharma & CHC with 5+ years of experience."
-                                    data-para2="He specializes in front-end frameworks and UX design."
+                                <img src="assets/img/leaders/rodney-pease.webp" class="w-100 leader-img"
+                                    data-title="Rodney Pease"
+                                    data-para1="Rodney Pease is a Food, Pharma & CHC with over years of experience."
+                                    data-para2="He specializes in sustainable packaging, equipment optimization, and aligning packaging strategy with business goals."
                                     data-designation="Food, Pharma & CHC"
-                                    data-social='{"linkedin":"https://linkedin.com"}'>
+                                    data-social='{"linkedin":"https://www.linkedin.com/in/rodney-pease-2768a850"}'>
                                 <div class="leader-info">
-                                    <h6 class="leader-name">Aunjna Agarvval</h6>
+                                    <h6 class="leader-name">Rodney Pease</h6>
+                                    <p>Foods, Pharma & CHC</p>
+                                    <div class="post">
+                                        <div class="linkedin-icon">
+                                            <a href="https://www.linkedin.com/in/rodney-pease-2768a850" target="_blank">
+                                                <img src="assets/img/leaders/linkedin.png" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="open-info">
+                                            <a href="#">
+                                                <img src="assets/img/home/intro/Vector.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="leader mb-4">
+                                <img src="assets/img/leaders/micheal-harris.webp" class="w-100 leader-img"
+                                    data-title="Micheal Harris"
+                                    data-para1="Micheal Harris is a Foods, Pharma & CHC with 20+ years of experience."
+                                    data-para2="He specializes in packaging innovation and supplier collaboration across CPG, pharma, and F&B."
+                                    data-designation="Foods, Pharma & CHC"
+                                    data-social='{"linkedin":"https://www.linkedin.com/in/michael-l-harris-41a9897"}'>
+                                <div class="leader-info">
+                                    <h6 class="leader-name">Micheal Harris</h6>
                                     <p>Foods, Pharma & CHC</p>
                                     <div class="post">
                                         <div class="linkedin-icon">
@@ -520,30 +494,56 @@
                         </div>
                         <div class="col-md-3">
                             <div class="leader mb-4">
-                                <img src="assets/img/leaders/ramaiah-muthusubramanian.png" class="w-100 leader-img"
-                                    data-title="Fazal Farooqui"
-                                    data-para1="Fazal Farooqui is a Foods and Pharma- India and MENA with 5+ years of experience."
+                                <img src="assets/img/leaders/chinmay-vasavada.webp" class="w-100 leader-img"
+                                    data-title="Chinmay Vasavada"
+                                    data-para1="Chinmay Vasavada is a Director - People & Culture with 5+ years of experience."
                                     data-para2="He specializes in front-end frameworks and UX design."
-                                    data-designation="Foods and Pharma- India and MENA"
-                                    data-social='{"linkedin":"https://linkedin.com"}'>
+                                    data-designation="Director - People & Culture"
+                                    data-social='{"linkedin":"https://www.linkedin.com/in/chinmay-vasavada-9956651b/?originalSubdomain=in"}'>
                                 <div class="leader-info">
-                                    <h6 class="leader-name">Fazal Farooqui</h6>
-                                    <p>Foods and Pharma- India and MENA</p>
+                                    <h6 class="leader-name">Chinmay Vasavada</h6>
+                                    <p>Director - People & Culture</p>
                                     <div class="post">
                                         <div class="linkedin-icon">
-                                            <a href="#" target="_blank">
+                                            <a href="https://www.linkedin.com/in/chinmay-vasavada-9956651b/?originalSubdomain=in" target="_blank">
                                                 <img src="assets/img/leaders/linkedin.png" alt="">
                                             </a>
                                         </div>
                                         <div class="open-info">
-                                            <a href="#">
+                                            <a>
                                                 <img src="assets/img/home/intro/Vector.png" alt="">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
+                        <div class="col-md-3">
+                            <div class="leader mb-4">
+                                <img src="assets/img/leaders/indra-jeevanandam.webp" class="w-100 leader-img"
+                                    data-title="Indra Jeevanandam"
+                                    data-para1="Indra Jeevanandam is a Finance Business Partner with 5+ years of experience."
+                                    data-para2="He specializes in front-end frameworks and UX design."
+                                    data-designation="Finance Business Partner"
+                                    data-social='{"linkedin":"https://www.linkedin.com/in/indra-kartik-3a9582201/?originalSubdomain=in"}'>
+                                <div class="leader-info">
+                                    <h6 class="leader-name">Indra Jeevanandam</h6>
+                                    <p>Finance Business Partner</p>
+                                    <div class="post">
+                                        <div class="linkedin-icon">
+                                            <a href="https://www.linkedin.com/in/indra-kartik-3a9582201/?originalSubdomain=in" target="_blank">
+                                                <img src="assets/img/leaders/linkedin.png" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="open-info">
+                                            <a>
+                                                <img src="assets/img/home/intro/Vector.png" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

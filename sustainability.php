@@ -117,21 +117,24 @@
                     <source src="assets/img/services/sustainability/sustainability.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%); z-index: 1;">
+
+                <div
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%); z-index: 1;">
                 </div>
             </div>
-            
+
             <div class="container" style="position: relative; z-index: 1;">
                 <div class="row">
                     <div class="content">
                         <h1 class="wow fadeInUp" data-wow-delay="0.2s">Sustainability</h1>
                         <h2 class="wow fadeInUp" data-wow-delay="0.2s">Sustainability is the New Core of Packaging</h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">Stricter regulations, plastic bans, and growing demand for eco-friendly products are
+                        <p class="wow fadeInUp" data-wow-delay="0.4s">Stricter regulations, plastic bans, and growing
+                            demand for eco-friendly products are
                             reshaping packaging industry sustainability is not just a requirement, but also
                             a competitive advantage. We help you stay ahead with smart, sustainable solutions that
                             drive growth while protecting the planet.</p>
-                        <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.4s">Speak to our Expert Today</a>
+                        <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.4s">Speak to our
+                            Expert Today</a>
                     </div>
                 </div>
             </div>
@@ -183,34 +186,43 @@
                         <div class="col-lg-3">
                             <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
                                 <div class="offering-img">
-                                    <img src="assets/img/services/sustainability/future-proof-your-business-with-sustainable-packaging.webp" class="w-100">
+                                    <img src="assets/img/services/sustainability/future-proof-your-business-with-sustainable-packaging.webp"
+                                        class="w-100">
                                 </div>
                                 <div class="offering-content">
                                     <h4 class="mb-2">Future-Proof Your Business with Sustainable Packaging</h4>
-                                    <p class="offering-sus-he1">Sustainability isn't just about compliance-it's about growth, efficiency, and brand leadership. We help you eliminate waste, lower emissions, and transition to circular economy models that secure your business for the future.</p>
+                                    <p class="offering-sus-he1">Sustainability isn't just about compliance-it's about
+                                        growth, efficiency, and brand leadership. We help you eliminate waste, lower
+                                        emissions, and transition to circular economy models that secure your business
+                                        for the future.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
                                 <div class="offering-img">
-                                    <img src="assets/img/services/sustainability/R&D-in-sustainable-packaging.webp" class="w-100">
+                                    <img src="assets/img/services/sustainability/R&D-in-sustainable-packaging.webp"
+                                        class="w-100">
                                 </div>
                                 <div class="offering-content">
                                     <h4 class="mb-2">R&D in Sustainable Packaging: Smarter Materials, Less Waste</h4>
-                                    <p>Leverage scientific research and advanced materials to make packaging lighter, stronger, and more sustainable without compromising performance.</p>
+                                    <p>Leverage scientific research and advanced materials to make packaging lighter,
+                                        stronger, and more sustainable without compromising performance.</p>
 
                                     <ul>
-                                        <li><strong>Plastic-Light:</strong> Reduce plastic use while optimizing functionality</li>
+                                        <li><strong>Plastic-Light:</strong> Reduce plastic use while optimizing
+                                            functionality</li>
                                     </ul>
-                                
+
                                     <div class="more-content" style="display: none;">
                                         <ul>
-                                            <li><strong>Smart Plastics:</strong> Shift to recycled, bio-based, or biodegradable alternatives</li>
-                                            <li><strong>Zero Plastic:</strong> Explore innovative non-plastic solutions for a fully sustainable future</li>
+                                            <li><strong>Smart Plastics:</strong> Shift to recycled, bio-based, or
+                                                biodegradable alternatives</li>
+                                            <li><strong>Zero Plastic:</strong> Explore innovative non-plastic solutions
+                                                for a fully sustainable future</li>
                                         </ul>
                                     </div>
-                                
+
                                     <a href="javascript:void(0);" class="read-more-toggle">
                                         <span class="toggle-text">Read More</span>
                                         <i class="fa fa-chevron-down toggle-icon"></i>
@@ -221,23 +233,29 @@
                         <div class="col-lg-3">
                             <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
                                 <div class="offering-img">
-                                    <img src="assets/img/services/sustainability/mastering-sustainability-compliance.webp" class="w-100">
+                                    <img src="assets/img/services/sustainability/mastering-sustainability-compliance.webp"
+                                        class="w-100">
                                 </div>
                                 <div class="offering-content">
                                     <h4 class="mb-2">Mastering Sustainability Compliance: Stay Ahead of
                                         Regulations</h4>
-                                    <p class="offering-sus-he1">Global regulations on plastic waste, recyclability, and sustainability are evolving fast. We provide expert insights and compliance frameworks that keep you ahead of legal changes-ensuring smooth, risk-free operations.</p>
+                                    <p class="offering-sus-he1">Global regulations on plastic waste, recyclability, and
+                                        sustainability are evolving fast. We provide expert insights and compliance
+                                        frameworks that keep you ahead of legal changes-ensuring smooth, risk-free
+                                        operations.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
                                 <div class="offering-img">
-                                    <img src="assets/img/services/sustainability/science-backed-circularity.webp" class="w-100">
+                                    <img src="assets/img/services/sustainability/science-backed-circularity.webp"
+                                        class="w-100">
                                 </div>
                                 <div class="offering-content">
                                     <h4 class="mb-2">Science-Backed Circularity: Optimize Every Decision</h4>
-                                    <p>We use Life Cycle Assessment (LCA), Carbon Footprinting, and AI-powered analytics to help you:</p>
+                                    <p>We use Life Cycle Assessment (LCA), Carbon Footprinting, and AI-powered analytics
+                                        to help you:</p>
                                     <ul>
                                         <li>Choose the most sustainable materials</li>
                                         <li>Reduce environmental impact while maintaining cost-effectiveness</li>
@@ -248,7 +266,7 @@
                                             <li>Improve waste management and recyclability across the supply chain</li>
                                         </ul>
                                     </div>
-                                
+
                                     <a href="javascript:void(0);" class="read-more-toggle">
                                         <span class="toggle-text">Read More</span>
                                         <i class="fa fa-chevron-down toggle-icon"></i>
@@ -259,40 +277,50 @@
                         <div class="col-lg-3">
                             <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
                                 <div class="offering-img">
-                                    <img src="assets/img/services/sustainability/strategic-sustainability-consulting.webp" class="w-100">
+                                    <img src="assets/img/services/sustainability/strategic-sustainability-consulting.webp"
+                                        class="w-100">
                                 </div>
                                 <div class="offering-content offering-sus-he2">
                                     <h4 class="mb-2">Strategic Sustainability Consulting: Future-Proof Your
                                         Brand</h4>
-                                    <p>A winning sustainability strategy goes beyond materials. We provide end-to-end consulting to align your packaging with consumer expectations, regulatory trends, and industry best practices-driving long-term success.</p>
+                                    <p>A winning sustainability strategy goes beyond materials. We provide end-to-end
+                                        consulting to align your packaging with consumer expectations, regulatory
+                                        trends, and industry best practices-driving long-term success.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
                                 <div class="offering-img">
-                                    <img src="assets/img/services/sustainability/discover-the-future-of-sustainable-packaging.webp" class="w-100">
+                                    <img src="assets/img/services/sustainability/discover-the-future-of-sustainable-packaging.webp"
+                                        class="w-100">
                                 </div>
                                 <div class="offering-content offering-sus-he2">
                                     <h4 class="mb-2">Discover the Future of Sustainable Packaging</h4>
-                                    <p class="mb-4" style="padding-bottom: 12px;">Experience the future of sustainable packaging at our exclusive industry fairs. Discover innovations, network with experts, and stay ahead of market trends.</p>
+                                    <p class="mb-4" style="padding-bottom: 12px;">Experience the future of sustainable
+                                        packaging at our exclusive industry fairs. Discover innovations, network with
+                                        experts, and stay ahead of market trends.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
                                 <div class="offering-img">
-                                    <img src="assets/img/services/sustainability/market-intelligence.webp" class="w-100">
+                                    <img src="assets/img/services/sustainability/market-intelligence.webp"
+                                        class="w-100">
                                 </div>
                                 <div class="offering-content offering-sus-he2">
                                     <h4 class="mb-2">Market Intelligence: Stay Competitive with Data-Driven
                                         Insights</h4>
-                                    <p>Don't follow the trends-stay ahead of them. Our real-time sustainability market intelligence helps you spot opportunities, anticipate shifts, and gain a competitive advantage in an evolving industry.</p>
+                                    <p>Don't follow the trends-stay ahead of them. Our real-time sustainability market
+                                        intelligence helps you spot opportunities, anticipate shifts, and gain a
+                                        competitive advantage in an evolving industry.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            <div class="offerings-contact mb-4 mb-md-0 offering-co-sus-he wow zoomIn" data-wow-delay="0.2s"
+                            <div class="offerings-contact mb-4 mb-md-0 offering-co-sus-he wow zoomIn"
+                                data-wow-delay="0.2s"
                                 style="background-image: url('assets/img/services/services-contact-us.webp'); background-repeat: no-repeat; background-position: top;">
                                 <h3>Smarter Packaging, Better Future.</h3>
                                 <p>Innovative, efficient, and sustainable solutions for all your packaging
@@ -339,29 +367,50 @@
                     <div class="circular-recycle wow fadeInUp" data-wow-delay="0.6s">
                         <div class="connecting-line"></div>
                         <div class="arrow-container">
-                            <div class="arrow-left">
-                                <img src="assets/img/services/sustainability/arrow-left.png" alt="">
-                            </div>
                             <div class="arrow-right">
                                 <img src="assets/img/services/sustainability/arrow-right.png" alt="">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="circular-recyclability">
-                                    <h5>Circular Economy:</h5>
-                                    <p>Via Material Optimisation, LCA</p>
+                        <div class="proocess-content position-relative">
+                            <div class="ourapproach-card1 d-flex align-items-center">
+                                <div class="circle-badge-1">1</div>
+                                <div class="ourapproach-content-1">
+                                    <h6>Deep Dive & Design for Circularity</h6>
+                                    <ul class="mb-0">
+                                        <li>Analyze packaging specs</li>
+                                        <li>Embed circular design</li>
+                                        <li>Ensure compliance with evolving global regulations</li>
+                                    </ul>
+
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="circular-recyclability float-end">
-                                    <h5>Recyclability Assessment:</h5>
-                                    <p>Regulatory Compliant & cost-effective Solution</p>
+                            <div class="ourapproach-card2 d-flex align-items-center">
+                                <div class="circle-badge-2">2</div>
+                                <div class="ourapproach-content-2">
+                                    <h6>Measure What Matters</h6>
+                                    <ul class="mb-0">
+                                        <li>Conduct scientific carbon footprinting</li>
+                                        <li>Map environmental impacts across packaging lifecycle</li>
+                                    </ul>
+
                                 </div>
                             </div>
+                            <div class="ourapproach-card3 d-flex align-items-center">
+                                <div class="circle-badge-3">3</div>
+                                <div class="ourapproach-content-3">
+                                    <h6>Act & Advance Towards Net Zero</h6>
+                                    <ul class="mb-0">
+                                        <li>Povide actionable insights</li>
+                                        <li>Support your path to Carbon Neutrality / Net Zero targets</li>
+                                    </ul>
+
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </section>
         <!-- ==== End Our Approach ==== -->
@@ -373,7 +422,8 @@
                     <div class="success-stories-header">
                         <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
                         <h1 class="wow fadeInUp" data-wow-delay="0.4s">Delivering Impact. Driving Results.</h1>
-                        <p class="wow fadeInUp" data-wow-delay="0.6s">Packfora's solutions have consistently helped global brands achieve
+                        <p class="wow fadeInUp" data-wow-delay="0.6s">Packfora's solutions have consistently helped
+                            global brands achieve
                             their environmental and business goals.</p>
                     </div>
                 </div>
@@ -386,8 +436,11 @@
                             <img src="assets/img/services/sustainability/stories/global-spirit.webp" alt="Jameson">
                         </div>
                         <div class="card-content he-70 sus-cs-cont">
-                            <h3>Global Spirits Leader Cuts Packaging Waste & Boosts Sustainability Without Compromising Luxury</h3>
-                            <a href="#"><h5>Learn More</h5></a>
+                            <h3>Global Spirits Leader Cuts Packaging Waste & Boosts Sustainability Without Compromising
+                                Luxury</h3>
+                            <a href="#">
+                                <h5>Learn More</h5>
+                            </a>
                         </div>
                     </div>
 
@@ -396,8 +449,11 @@
                             <img src="assets/img/services/sustainability/stories/personal-care.webp" alt="unilever">
                         </div>
                         <div class="card-content he-70 sus-cs-cont">
-                            <h3>Revolutionizing Personal Care Packaging: A Sustainability Breakthrough for a Global FMCG Giant</h3>
-                            <a href="#"><h5>Learn More</h5></a>
+                            <h3>Revolutionizing Personal Care Packaging: A Sustainability Breakthrough for a Global FMCG
+                                Giant</h3>
+                            <a href="#">
+                                <h5>Learn More</h5>
+                            </a>
                         </div>
                     </div>
 
@@ -407,7 +463,9 @@
                         </div>
                         <div class="card-content he-70 sus-cs-cont">
                             <h3>Navigating Africa's Evolving Packaging Regulations: A Compliance Success Story</h3>
-                            <a href="#"><h5>Learn More</h5></a>
+                            <a href="#">
+                                <h5>Learn More</h5>
+                            </a>
                         </div>
                     </div>
 
@@ -416,8 +474,11 @@
                             <img src="assets/img/services/sustainability/stories/transform.webp" alt="unilever">
                         </div>
                         <div class="card-content he-70 sus-cs-cont">
-                            <h3>Transforming Fresh Produce Packaging: How a Global Brand Reduced Waste & Maximized Shelf Life</h3>
-                            <a href="#"><h5>Learn More</h5></a>
+                            <h3>Transforming Fresh Produce Packaging: How a Global Brand Reduced Waste & Maximized Shelf
+                                Life</h3>
+                            <a href="#">
+                                <h5>Learn More</h5>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -436,31 +497,31 @@
 
                     <div class="col-md-3 col-6">
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-01.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/jikul.webp" class="w-100">
+                            <p>Jikul Purohit<br>VP & BU Lead - Delivery - Foods & Pharma<br><a href="https://www.linkedin.com/in/jikul-purohit-6532526/?originalSubdomain=uk" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-02.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/ankita.webp" class="w-100">
+                            <p>Ankita Lokhande<br>Foods, Pharma & CHC<br><a href="https://www.linkedin.com/in/ankita-lokhande-8baa43168/?originalSubdomain=in" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-03.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/supriya.webp" class="w-100">
+                            <p>Supriya Mantri<br>Foods, Pharma & CHC<br><a href="https://www.linkedin.com/in/supriya-mantri-a80977179/" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
                         </div>
                     </div>
 
-                    <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-04.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -503,7 +564,7 @@
     <script src="assets/js/scripts.js"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('.success-slider').owlCarousel({
                 center: true,
                 loop: true,

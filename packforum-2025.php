@@ -397,7 +397,7 @@
             <!-- ==== End clients ==== -->
 
             <!-- ==== Start Impact Stats Section ==== -->
-            <section class="impact-section py-5">
+            <section class="impact-section py-5 d-none">
                 <div class="container text-left">
                     <h2 class="shine-us-title mb-50">A Global Dialogue with Real Impact</h2>
                     <div class="row justify-content-center align-items-center g-0">
@@ -437,7 +437,7 @@
             <!-- ==== End Impact Stats Section ==== -->
 
             <!-- ==== Start Smart Packaging Section ==== -->
-            <section class="smart-packaging">
+            <section class="smart-packaging d-none">
                 <div class="container">
                     <h1 class="shine-us-title mb-20 wow fadeIn" data-wow-duration="1s" data-wow-offset="0">From Smart
                         Packaging to Circular Systems</h1>
@@ -573,7 +573,7 @@
             <!-- ==== End Smart Packaging Section ==== -->
 
             <!-- ==== Start Feature Speakers Section ==== -->
-            <section class="py-5">
+            <section class="py-5 d-none">
                 <div class="container text-left">
                     <h2 class="shine-us-title mb-50 wow fadeIn" data-wow-duration="1s" data-wow-offset="0">Featured
                         Speakers

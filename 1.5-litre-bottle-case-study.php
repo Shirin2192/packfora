@@ -162,11 +162,11 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-6 wow fadeIn" data-wow-delay="0.2s">
-                        <img src="assets/img/case-study/inner/objective.webp" alt="" srcset="">
+                        <img src="assets/img/case-study/inner/1.5l-objective.webp" alt="" srcset="">
                     </div>
                     <div class="col-md-6">
                         <h2 class="objective-title mb-4 wow fadeIn" data-wow-delay="0.2s">Objective</h2>
-                        <p class="objective-desc wow fadeInUp" data-wow-delay="0.4s">To close the gap between public health recommendations and daily consumer behavior —through a packaging intervention that simplifies decision-making, builds structure, and drives consistent fruit intake.</p>
+                        <p class="objective-desc wow fadeInUp" data-wow-delay="0.4s">To eliminate reliance on shrink film in water collation — through a packaging intervention that balances transit performance, cost efficiency, and carbon footprint without capital-intensive changes.</p>
                     </div>
                 </div>
             </div>
@@ -179,35 +179,32 @@
                 <div class="row">
                     <div class="col-12">
                         <h2 class="wow fadeIn">The Solution</h2>
-                        <p class="wow fadeIn" data-wow-delay="0.2s">We created a behavior-first packaging format that enables action, not just access. Rooted in real consumer behavior, the format made healthy choices easy, visible, and repeatable.</p>
+                        <p class="wow fadeIn" data-wow-delay="0.2s">Packfora explored 15+ combinations of formats across three levels of intervention:</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4 py-4">
                         <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <h4>Built for daily life</h4>
                             <div class="solution-icon">
-                                <img src="assets/img/our-team/clientele.png" alt="" srcset="">
+                                <img src="assets/img/case-study/inner/primary.svg" alt="" srcset="">
                             </div>
-                            <P>Fridge-fit, shelf-ready, and intuitive to use</P>
+                            <h4>Primary Packaging</h4>
                         </div>
                     </div>
                     <div class="col-md-4 py-4">
                         <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <h4>Sustainably made</h4>
                             <div class="solution-icon">
-                                <img src="assets/img/our-team/projects.png" alt="" srcset="">
+                                <img src="assets/img/case-study/inner/secondary.svg" alt="" srcset="">
                             </div>
-                            <P>100% recyclable materials and vegetable-based ink</P>
+                            <h4>Secondary Packaging</h4>
                         </div>
                     </div>
                     <div class="col-md-4 py-4">
                         <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <h4>Inclusive by design</h4>
                             <div class="solution-icon">
-                                <img src="assets/img/our-team/culture.png" alt="" srcset="">
+                                <img src="assets/img/case-study/inner/integrated-primary.svg" alt="" srcset="">
                             </div>
-                            <P>Tactile cues for the visually impaired</P>
+                            <h4>Integrated Primary + Secondary Systems</h4>
                         </div>
                     </div>
                 </div>

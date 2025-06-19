@@ -115,7 +115,7 @@
             <div class="container">
                 <div class="row">
                     <div class="page-title-bar text-center">
-                        <h1 class="wow fadeInUp" data-wow-delay="0.2s">Packaging that Drives Business Impact</h1>
+                        <h1 class="wow fadeInUp" data-wow-delay="0.2s">Packaging that Drives <br> Business Impact</h1>
                         <p class="wow fadeInUp m-auto" data-wow-delay="0.4s" style="width: 70%;">Real stories of how Packfora helped leading brands unlock efficiency, sustainability, and value across the packaging value</p>
                     </div>
                 </div>
@@ -141,9 +141,9 @@
                             <span class="label">Featured Topics</span>
                             <span class="close-btn d-none">&times;</span>
                         </div>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" data-value="Sustainability">Sustainability</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Design-to-Value">Design-to-Value</a></li>
+                        <ul class="dropdown-menu dropdown-menus">
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Sustainability">Sustainability</a></li>
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Design-to-Value">Design-to-Value</a></li>
                         </ul>
                     </div>
 
@@ -153,31 +153,31 @@
                             <span class="label">Capabilities</span>
                             <span class="close-btn d-none">&times;</span>
                         </div>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" data-value="Specification Management">Specification
+                        <ul class="dropdown-menu dropdown-menus">
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Specification Management">Specification
                                     Management</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="MaxMold">MaxMold</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Simulation & Modeling">Simulation &
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="MaxMold">MaxMold</a></li>
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Simulation & Modeling">Simulation &
                                     Modeling</a>
                             </li>
-                            <li><a class="dropdown-item" href="#" data-value="Supply Chain Optimization">Supply Chain
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Supply Chain Optimization">Supply Chain
                                     Optimization</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Procurement & Cost Reduction">Procurement
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Procurement & Cost Reduction">Procurement
                                     & Cost
                                     Reduction</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Packaging Design & Engineering">Packaging
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Packaging Design & Engineering">Packaging
                                     Design &
                                     Engineering</a></li>
-                            <li><a class="dropdown-item" href="#"
+                            <li><a class="dropdown-item dropdown-items" href="#"
                                     data-value="Sustainability & Carbon Reduction">Sustainability
                                     & Carbon Reduction</a></li>
-                            <li><a class="dropdown-item" href="#"
+                            <li><a class="dropdown-item dropdown-items" href="#"
                                     data-value="Global-to-Local Harmonization">Global-to-Local
                                     Harmonization</a></li>
-                            <li><a class="dropdown-item" href="#"
+                            <li><a class="dropdown-item dropdown-items" href="#"
                                     data-value="Digital Transformation in Packaging">Digital
                                     Transformation in Packaging</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Pack Format Innovation">Pack Format
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Pack Format Innovation">Pack Format
                                     Innovation</a>
                             </li>
                         </ul>
@@ -189,22 +189,22 @@
                             <span class="label">Industries</span>
                             <span class="close-btn d-none">&times;</span>
                         </div>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" data-value="Pharmaceuticals">Pharmaceuticals</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Food & Beverage">Food & Beverage</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Personal Care & Cosmetics">Personal Care &
+                        <ul class="dropdown-menu dropdown-menus">
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Pharmaceuticals">Pharmaceuticals</a></li>
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Food & Beverage">Food & Beverage</a></li>
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Personal Care & Cosmetics">Personal Care &
                                     Cosmetics</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="FMCG & CPG">FMCG & CPG</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Automotive">Automotive</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Chemicals & Explosives">Chemicals &
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="FMCG & CPG">FMCG & CPG</a></li>
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Automotive">Automotive</a></li>
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Chemicals & Explosives">Chemicals &
                                     Explosives</a>
                             </li>
-                            <li><a class="dropdown-item" href="#" data-value="Packaging Producers">Packaging
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Packaging Producers">Packaging
                                     Producers</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="B2B Industrial">B2B Industrial</a></li>
-                            <li><a class="dropdown-item" href="#" data-value="Healthcare Devices">Healthcare Devices</a>
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="B2B Industrial">B2B Industrial</a></li>
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Healthcare Devices">Healthcare Devices</a>
                             </li>
-                            <li><a class="dropdown-item" href="#" data-value="Retail & E-commerce">Retail &
+                            <li><a class="dropdown-item dropdown-items" href="#" data-value="Retail & E-commerce">Retail &
                                     E-commerce</a></li>
                         </ul>
                     </div>
@@ -294,9 +294,8 @@
                 <div class="row align-items-center">
                     <div class="col-md-9">
                         <h6 class="wow fadeInUp" data-wow-delay="0.2s">Why It Matters</h6>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">As consumer wellness becomes more behavior-driven,
-                            packaging must evolve from passive protection to active participation. This project proved
-                            that structured, inclusive design can unlock new value — for consumers and for business.</p>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s">Our approach turns challenges into opportunities and delivers outcomes
+                            that drive value for business and consumers alike. </p>
                     </div>
                     <div class="col-md-3">
                         <div class="sp-info float-end">
@@ -323,64 +322,64 @@
     <!-- custom scripts -->
     <script src="assets/js/scripts.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const dropdownItems = document.querySelectorAll('.dropdown-item');
-        const dropdowns = document.querySelectorAll('.filter-dropdown');
-        const contentSections = document.querySelectorAll('.content-section');
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownItems = document.querySelectorAll('.dropdown-items');
+            const dropdowns = document.querySelectorAll('.filter-dropdown');
+            const contentSections = document.querySelectorAll('.content-section');
 
-        dropdownItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                const selectedValue = this.getAttribute('data-value');
-                const parentDropdown = this.closest('.dropdown');
-                const categoryId = parentDropdown.id;
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const selectedValue = this.getAttribute('data-value');
+                    const parentDropdown = this.closest('.dropdown');
+                    const categoryId = parentDropdown.id;
 
-                // Reset all dropdowns
-                dropdowns.forEach(dropdown => {
-                    dropdown.classList.remove('active');
-                    const label = dropdown.querySelector('.label');
-                    label.textContent = dropdown.id === 'featured-topics' ?
-                        'Featured Topics' :
-                        dropdown.id === 'capabilities' ? 'Capabilities' :
-                        'Industries';
-                    dropdown.querySelector('.close-btn').classList.add('d-none');
+                    // Reset all dropdowns
+                    dropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                        const label = dropdown.querySelector('.label');
+                        label.textContent = dropdown.id === 'featured-topics' ?
+                            'Featured Topics' :
+                            dropdown.id === 'capabilities' ? 'Capabilities' :
+                            'Industries';
+                        dropdown.querySelector('.close-btn').classList.add('d-none');
+                    });
+
+                    // Update clicked dropdown
+                    parentDropdown.classList.add('active');
+                    parentDropdown.querySelector('.label').textContent = selectedValue;
+                    const closeBtn = parentDropdown.querySelector('.close-btn');
+                    closeBtn.classList.remove('d-none');
+
+                    // Show content sections that match selectedValue in data-tags
+                    contentSections.forEach(section => {
+                        const tags = section.getAttribute('data-tags') || '';
+                        if (tags.includes(selectedValue)) {
+                            section.classList.remove('hidden');
+                        } else {
+                            section.classList.add('hidden');
+                        }
+                    });
+
+                    // Close button logic
+                    closeBtn.onclick = function(event) {
+                        event.stopPropagation();
+                        parentDropdown.classList.remove('active');
+                        parentDropdown.querySelector('.label').textContent =
+                            categoryId === 'featured-topics' ? 'Featured Topics' :
+                            categoryId === 'capabilities' ? 'Capabilities' : 'Industries';
+                        closeBtn.classList.add('d-none');
+                        contentSections.forEach(section => section.classList.remove('hidden'));
+
+                        // Close the dropdown menu when close button is clicked
+                        const dropdownMenu = parentDropdown.querySelector('.dropdown-menus');
+                        if (dropdownMenu) {
+                            dropdownMenu.classList.remove('show');
+                        }
+                    };
                 });
-
-                // Update clicked dropdown
-                parentDropdown.classList.add('active');
-                parentDropdown.querySelector('.label').textContent = selectedValue;
-                const closeBtn = parentDropdown.querySelector('.close-btn');
-                closeBtn.classList.remove('d-none');
-
-                // Show content sections that match selectedValue in data-tags
-                contentSections.forEach(section => {
-                    const tags = section.getAttribute('data-tags') || '';
-                    if (tags.includes(selectedValue)) {
-                        section.classList.remove('hidden');
-                    } else {
-                        section.classList.add('hidden');
-                    }
-                });
-
-                // Close button logic
-                closeBtn.onclick = function(event) {
-                    event.stopPropagation();
-                    parentDropdown.classList.remove('active');
-                    parentDropdown.querySelector('.label').textContent =
-                        categoryId === 'featured-topics' ? 'Featured Topics' :
-                        categoryId === 'capabilities' ? 'Capabilities' : 'Industries';
-                    closeBtn.classList.add('d-none');
-                    contentSections.forEach(section => section.classList.remove('hidden'));
-
-                    // Close the dropdown menu when close button is clicked
-                    const dropdownMenu = parentDropdown.querySelector('.dropdown-menu');
-                    if (dropdownMenu) {
-                        dropdownMenu.classList.remove('show');
-                    }
-                };
             });
         });
-    });
     </script>
 </body>
 

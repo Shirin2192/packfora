@@ -445,6 +445,14 @@ svg.custom-logo {
 .box {
     width: 100%;
     height: 320px;
+    opacity: 0.1;
+    animation: fadeInSlow 5s forwards;
+}
+
+@keyframes fadeInSlow {
+    to {
+        opacity: 1;
+    }
 }
 
 .box.show {
@@ -539,7 +547,15 @@ svg.custom-logo {
 }
 
 .box:nth-child(4) .box-front {
-    background-image: url(../img/home/intro/client-satisfaction.webp);
+    background-image: url(../img/home/intro/client-satisfaction.jpg);
+    background-size: cover;
+}
+
+@media (max-width: 768px) {
+    .box:nth-child(4) .box-front {
+        background-repeat: no-repeat;
+        background-position: center;
+    }
 }
 
 .box-back {
@@ -666,7 +682,7 @@ svg.custom-logo {
     background-color: #ffffff;
     padding: 15px;
     position: relative;
-    height: 160px;
+    height: 200px;
 }
 
 .services-card .service-content h4 {
@@ -776,7 +792,7 @@ svg.custom-logo {
 
 .more-services-card {
     position: relative;
-    height: 420px;
+    height: 460px;
     overflow: hidden;
     color: white;
 }
@@ -789,6 +805,33 @@ svg.custom-logo {
     font-weight: 700;
     font-size: 45px;
     line-height: 1;
+}
+
+.additional-services {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.8s ease;
+    transform: translateY(-20px);
+    padding: 0;
+    margin: 0;
+}
+
+.additional-services.show {
+    opacity: 1;
+    max-height: 100%;
+    transform: translateY(0);
+}
+
+.load-more-clickable {
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .additional-services {
+        padding: 0;
+        margin: 0;
+    }
 }
 
 /* Our Clients */
@@ -1164,7 +1207,8 @@ svg.custom-logo {
 .read-more-btn:hover {
     background: #f68f33;
 }
-.case-studies p{
+
+.case-studies p {
     color: #21409A;
     font-size: 20px;
     line-height: normal;
@@ -1172,6 +1216,7 @@ svg.custom-logo {
     font-weight: 400;
     margin-bottom: 26px;
 }
+
 .dropdown-container {
     display: flex;
     gap: 15px;
@@ -1807,6 +1852,7 @@ svg.custom-logo {
     font-weight: lighter;
     position: relative;
     border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
 }
 
 .technology-header {
@@ -1849,13 +1895,13 @@ svg.custom-logo {
     font-weight: bold;
     font-size: 16px;
     margin-bottom: 10px;
-    text-align: left;
+    text-align: center;
 }
 
 .strategy-item {
     color: #21409adb;
     font-size: 14px;
-    text-align: left;
+    text-align: center;
 }
 
 .divider {
@@ -1866,17 +1912,17 @@ svg.custom-logo {
 
 /* Our Approach */
 .our-approach {
-    background: #21409A;
-    padding: 60px 0px 100px 0px;
+    background: #21409a;
+    padding: 60px 0px 350px 0px;
     position: relative;
     overflow: hidden;
 }
 
 .our-approach .sec-title {
     font-size: 40px;
-    color: #C9DA2A;
+    color: #c9da2a;
     line-height: normal;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     font-weight: 700;
     margin-bottom: 5px;
 }
@@ -1885,7 +1931,7 @@ svg.custom-logo {
     font-size: 27px;
     color: #ffffff;
     line-height: normal;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     font-weight: 700;
     margin-bottom: 20px;
 }
@@ -1899,16 +1945,16 @@ svg.custom-logo {
 
 .our-approach .right-fit p {
     font-size: 27px;
-    color: #21409A;
+    color: #21409a;
     line-height: normal;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     font-weight: 700;
     text-align: center;
     margin-bottom: 0;
 }
 
 .our-approach .circular-recyclability {
-    background: #00B8F1;
+    background: #00b8f1;
     border-radius: 50px;
     padding: 10px;
     width: 90%;
@@ -1920,7 +1966,7 @@ svg.custom-logo {
     font-size: 36px;
     color: #ffffff;
     line-height: normal;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     font-weight: 700;
     text-align: center;
     margin-bottom: 0;
@@ -1930,7 +1976,7 @@ svg.custom-logo {
     font-size: 18px;
     color: #ffffff;
     line-height: normal;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     font-weight: 700;
     text-align: center;
     margin-bottom: 0;
@@ -1942,26 +1988,15 @@ svg.custom-logo {
     z-index: 2;
 }
 
-.our-approach .arrow-right {
-    position: absolute;
-    top: 90px;
-    right: 45%;
-    color: #FF7F00;
-    font-size: 40px;
-    font-weight: bold;
-    z-index: 3;
-}
-
-.our-approach .arrow-right img,
 .our-approach .arrow-left img {
     width: 90px;
 }
 
-.our-approach .arrow-left {
+.our-approach .arrow-right {
     position: absolute;
-    top: -72px;
+    top: -70px;
     left: 45.5%;
-    color: #FF7F00;
+    color: #ff7f00;
     font-size: 40px;
     font-weight: bold;
     z-index: 3;
@@ -1969,11 +2004,11 @@ svg.custom-logo {
 
 .our-approach .connecting-line {
     position: absolute;
-    height: 115%;
-    width: 69%;
-    left: 15%;
+    height: 155px;
+    width: 58%;
+    left: 21%;
     top: 0;
-    border: 8px solid #D4FF00;
+    border: 8px solid #d4ff00;
     border-radius: 98px;
     z-index: 1;
 }
@@ -1985,8 +2020,133 @@ svg.custom-logo {
 }
 
 .process-container {
-    margin-top: 30px;
+    margin-top: 60px;
     position: relative;
+}
+
+.process-container .ourapproach-content-1 {
+    background: #00b8f1;
+    border-radius: 16px;
+    padding: 20px;
+    position: absolute;
+    right: -46px;
+    width: 265px;
+    bottom: -130px;
+}
+
+.process-container .ourapproach-content-1 h6 {
+    font-size: 22px;
+    color: #fff;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 700;
+}
+
+.process-container .ourapproach-content-1 ul {
+    padding-left: 25px;
+}
+
+.process-container .ourapproach-content-1 li {
+    list-style: disc;
+    color: #fff;
+    font-size: 16px;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 600;
+}
+
+.process-container .circle-badge-1 {
+    background: #fff;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    padding: 0px 18px 0px;
+    font-size: 38px;
+    color: #21409a;
+    font-weight: 700;
+    right: 206px;
+    position: absolute;
+    z-index: 999;
+    top: 10px;
+}
+
+.process-container .ourapproach-content-3 {
+    background: #00b8f1;
+    border-radius: 16px;
+    padding: 20px;
+    position: absolute;
+    left: -46px;
+    width: 265px;
+    bottom: -130px;
+}
+
+.process-container .ourapproach-content-3 h6 {
+    font-size: 22px;
+    color: #fff;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 700;
+}
+
+.process-container .ourapproach-content-3 li {
+    list-style: disc;
+    color: #fff;
+    font-size: 16px;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 600;
+}
+
+.process-container .circle-badge-3 {
+    background: #fff;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    padding: 0px 18px 0px;
+    font-size: 38px;
+    color: #21409a;
+    font-weight: 700;
+    left: 206px;
+    position: absolute;
+    z-index: 999;
+    top: 10px;
+}
+
+.process-container .ourapproach-content-2 {
+    background: #00b8f1;
+    border-radius: 16px;
+    padding: 30px 20px;
+    position: absolute;
+    left: 418px;
+    width: 285px;
+    top: 107px;
+    z-index: 1;
+}
+
+.process-container .ourapproach-content-2 h6 {
+    font-size: 22px;
+    color: #fff;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 700;
+}
+
+.process-container .ourapproach-content-2 li {
+    list-style: disc;
+    color: #fff;
+    font-size: 16px;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 600;
+}
+
+.process-container .circle-badge-2 {
+    background: #fff;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    padding: 0px 18px 0px;
+    font-size: 38px;
+    color: #21409a;
+    font-weight: 700;
+    left: 525px;
+    position: absolute;
+    z-index: 999;
+    top: 74px;
 }
 
 @media (max-width: 768px) {
@@ -2007,6 +2167,46 @@ svg.custom-logo {
 
     .our-approach .connecting-line {
         display: none;
+    }
+
+    .process-container {
+        margin-top: 0;
+    }
+
+    .process-container .ourapproach-content-1 {
+        position: unset;
+        width: 100%;
+    }
+
+    .process-container .ourapproach-content-2 {
+        position: unset;
+        width: 100%;
+    }
+
+    .process-container .ourapproach-content-3 {
+        position: unset;
+        width: 100%;
+    }
+
+    .process-container .circle-badge-1 {
+        position: unset;
+    }
+
+    .process-container .circle-badge-2 {
+        position: unset;
+    }
+
+    .process-container .circle-badge-3 {
+        position: unset;
+    }
+
+    .ourapproach-card1,
+    .ourapproach-card2 {
+        margin-bottom: 25px;
+    }
+
+    .our-approach {
+        padding: 60px 0px 45px 0px;
     }
 }
 
@@ -2442,14 +2642,18 @@ svg.custom-logo {
 
 .we-do-card {
     text-align: center;
+    background-color: #00b8f11a;
+    padding: 30px 0 0px;
+    min-height: 300px;
 }
 
 .we-do-card h4 {
     font-size: 24px;
-    color: #00B8F1;
+    color: #21409A;
     line-height: 1.2;
     font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 700;
+    font-weight: 600;
+    margin: 20px 0;
 }
 
 .we-do-card p {
@@ -2463,8 +2667,23 @@ svg.custom-logo {
 }
 
 .we-do-img img {
-    width: 140px;
-    padding: 10px 0px 25px 0px;
+    width: 80px;
+    background: rgba(0, 184, 241, 0.7);
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.we-do-card-btn {
+    font-size: 16px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+    background-color: #f68f33;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    display: table;
+    margin: 0 auto;
 }
 
 .world-map-container,
@@ -2522,7 +2741,7 @@ svg.custom-logo {
     color: white;
     text-align: center;
     padding: 20px;
-    cursor: pointer;
+    /* cursor: pointer; */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
 }
@@ -4512,7 +4731,7 @@ sup {
     left: 0;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.3);
     z-index: -1;
 }
 
@@ -4590,21 +4809,26 @@ sup {
 
 .the-solution .solutions .solution-icon {
     margin-bottom: 20px;
-    border: none;
+    width: 75px;
+    height: 75px;
+    padding: 10px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
 }
 
-.the-solution .solutions .solution-icon img {
+/* .the-solution .solutions .solution-icon img {
     width: 90px;
-}
+} */
 
 .the-solution .solutions h4 {
     font-size: 20px;
-    color: #ffffff;
+    color: #F68F33;
     line-height: normal;
     font-weight: 600;
     margin: 15px 0;
     font-style: italic;
     font-family: 'Source Serif Pro', serif;
+    text-align: left;
 }
 
 .the-solution .solutions p {
@@ -4614,7 +4838,13 @@ sup {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 400;
     width: 70%;
-    margin: auto;
+    /* margin: auto; */
+    text-align: left;
+
+}
+
+.solution-list li {
+    list-style: disc;
 }
 
 .business-impact {
@@ -4723,10 +4953,12 @@ sup {
     border: 1px solid #dadada;
     padding: 12px 10px;
 }
+
 .related-blog-details {
     position: relative;
     height: 119px;
 }
+
 .related-blog-details h5 {
     color: #00368C;
     position: absolute;
@@ -4739,6 +4971,7 @@ sup {
     font-style: italic;
     margin-bottom: 0px;
 }
+
 .related-blog-details::after {
     content: '';
     background-image: url(../img/home/intro/Vector.png);
@@ -4851,6 +5084,11 @@ sup {
     color: #888888;
 }
 
+.blog-detail-content a {
+    color: #21409A;
+    text-decoration: underline;
+}
+
 table thead tr {
     background: #21409A;
 }
@@ -4864,11 +5102,16 @@ table tbody tr td {
     padding: 10px 40px !important;
 }
 
-table th, table td {
+table th,
+table td {
     font-size: 16px;
     line-height: normal;
     font-family: 'Source Sans Pro', sans-serif;
     color: #888888;
+}
+
+.publisher-img img {
+    width: 50px;
 }
 
 .related-blogs {
@@ -4882,4 +5125,12 @@ table th, table td {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 400;
     color: #888888;
+}
+
+.related-blog h4 {
+    font-size: 24px;
+    line-height: normal;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+    color: #21409A;
 }

@@ -117,11 +117,11 @@
                     <source src="assets/img/services/supply-chain-automation/supply-chain-automation.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                
+
                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%); z-index: 1;">
                 </div>
             </div>
-            
+
             <div class="container" style="position: relative; z-index: 1;">
                 <div class="row">
                     <div class="content">
@@ -339,7 +339,9 @@
                             <div class="card-content">
                                 <h3>Adhesive Supply Chain Technology & Investment Choices</h3>
                                 <p class="he-60">A Market Leader in Adhesives wanted to develop Supply Chain Automation plan to increase production capabilities and revamp existing packaging operations for achieving end-to-end value chain unlock.</p>
-                                <a href="#"><h5>Learn More</h5></a>
+                                <a href="#">
+                                    <h5>Learn More</h5>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -352,7 +354,9 @@
                             <div class="card-content">
                                 <h3>F&B Packaging Operations</h3>
                                 <p class="he-60">A leading coffee manufacturer wanted to streamline the existing packaging operations, enhance productivity & reduce labor intensive operations.</p>
-                                <a href="#"><h5>Learn More</h5></a>
+                                <a href="#">
+                                    <h5>Learn More</h5>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -398,29 +402,53 @@
 
                     <div class="col-md-3 col-6">
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-01.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/chirag.webp" class="w-100">
+                            <p>Chirag Master
+                                <br>VP & BU Lead - Growth, Delivery - sHPCO, Talent Flex & Mold Management Services
+                                <br><a href="https://www.linkedin.com/in/chirag-master-54364bb/?originalSubdomain=in
+                            " target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a>
+                            </p>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-02.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/samrat.webp" class="w-100">
+                            <p>Samrat Dasgupta
+                                <br>Packaging Producers
+                                <br><a href="https://www.linkedin.com/in/samrat-dasgupta-1326583a/
+                                " target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a>
+                            </p>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-03.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/shaktivel.webp" class="w-100">
+                            <p>Shaktivel Nadar
+                                <br>SHPCO
+                                <br><a href="https://www.linkedin.com/in/shaktivel-nadar-02315927/
+                                " target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a>
+                            </p>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-04.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/amit.webp" class="w-100">
+                            <p>Amit Purkayastha
+                                <br>SHPCO
+                                <br><a href="https://www.linkedin.com/in/amit-purkayastha-537081103/
+                                " target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -464,39 +492,41 @@
     <script src="assets/js/scripts.js"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Function to animate the counter
             function animateCounter() {
-                $('.title-font').each(function () {
+                $('.title-font').each(function() {
                     var $this = $(this),
                         target = $this.data('target');
 
-                    $({ count: $this.text() }).animate(
-                        { count: target },
-                        {
-                            duration: 2000, // Duration of the counter animation
-                            easing: 'swing',
-                            step: function (now) {
-                                $this.text(Math.ceil(now)); // Update the text
-                            },
-                        }
-                    );
+                    $({
+                        count: $this.text()
+                    }).animate({
+                        count: target
+                    }, {
+                        duration: 2000, // Duration of the counter animation
+                        easing: 'swing',
+                        step: function(now) {
+                            $this.text(Math.ceil(now)); // Update the text
+                        },
+                    });
                 });
             }
 
             // Trigger the counter animation when the section is in view
             $('.states').waypoint(
-                function () {
+                function() {
                     animateCounter();
                     this.destroy(); // Prevent the animation from running again
-                },
-                { offset: '75%' } // Trigger when 75% of the section is in view
+                }, {
+                    offset: '75%'
+                } // Trigger when 75% of the section is in view
             );
         });
     </script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('.success-slider').owlCarousel({
                 center: true,
                 loop: true,

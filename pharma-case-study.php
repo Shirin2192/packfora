@@ -169,13 +169,14 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-6 wow fadeIn" data-wow-delay="0.2s">
-                        <img src="assets/img/case-study/inner/objective.webp" alt="" srcset="">
+                        <img src="assets/img/case-study/inner/pharma-objective.webp" alt="" srcset="">
                     </div>
                     <div class="col-md-6">
                         <h2 class="objective-title mb-4 wow fadeIn" data-wow-delay="0.2s">Objective</h2>
-                        <p class="objective-desc wow fadeInUp" data-wow-delay="0.4s">To close the gap between public
-                            health recommendations and daily consumer behavior —through a packaging intervention that
-                            simplifies decision-making, builds structure, and drives consistent fruit intake.</p>
+                        <p class="objective-desc wow fadeInUp" data-wow-delay="0.4s">To improve the quality and
+                            reliability of existing spec data across more than 20 global manufacturing sites while
+                            accelerating new product development, establishing unified governance, and enabling a smooth
+                            transition to the client’s new PLM platform.</p>
                     </div>
                 </div>
             </div>
@@ -195,30 +196,46 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4 py-4">
-                        <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <h4>Built for daily life</h4>
+                        <div class="solutions wow zoomIn" data-wow-delay="0.4s">
                             <div class="solution-icon">
-                                <img src="assets/img/our-team/clientele.png" alt="" srcset="">
+                                <img src="assets/img/case-study/inner/data-quality.svg" alt="" srcset="">
                             </div>
-                            <P>Fridge-fit, shelf-ready, and intuitive to use</P>
+                            <h4>Data Quality & Validation <br> Process</h4>
+                            <ul class="p-0 text-white text-left solution-list">
+                                <li>Built a specialized 20+ member team of packaging and product SMEs — in under 2
+                                    months</li>
+                                <li>Established global contact nodes across 20+ manufacturing sites</li>
+                                <li>Executed a maker-checker model to improve and validate data prior to PLM migration
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="col-md-4 py-4">
                         <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <h4>Sustainably made</h4>
                             <div class="solution-icon">
-                                <img src="assets/img/our-team/projects.png" alt="" srcset="">
+                                <img src="assets/img/case-study/inner/end-to-end.svg" alt="" srcset="">
                             </div>
-                            <P>100% recyclable materials and vegetable-based ink</P>
+                            <h4>End-to-End Specification <br> Management</h4>
+                            <ul class="p-0 text-white text-left solution-list">
+                                <li>Took full accountability of specification creation in both legacy and new PLM
+                                    systems</li>
+                                <li>Reduced turnaround time for new specs — especially for NPD programs</li>
+                                <li>Delivered structured reporting across regulatory, sustainability, and cost-saving
+                                    metrics</li>
+                            </ul>
                         </div>
                     </div>
                     <div class="col-md-4 py-4">
                         <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <h4>Inclusive by design</h4>
                             <div class="solution-icon">
-                                <img src="assets/img/our-team/culture.png" alt="" srcset="">
+                                <img src="assets/img/case-study/inner/global-data.svg" alt="" srcset="">
                             </div>
-                            <P>Tactile cues for the visually impaired</P>
+                            <h4>Global Data Governance for Change Management</h4>
+                            <ul class="p-0 text-white text-left solution-list">
+                                <li>Designed one global process with harmonized specification protocols</li>
+                                <li>Defined minimum data requirements for spec accuracy across all regions</li>
+                                <li>Ensured alignment with compliance and regulatory standards</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -305,26 +322,26 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-    const video = document.getElementById('bgVideo');
-    const playPauseBtn = document.getElementById('playPauseBtn');
-    const muteUnmuteBtn = document.getElementById('muteUnmuteBtn');
+        const video = document.getElementById('bgVideo');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const muteUnmuteBtn = document.getElementById('muteUnmuteBtn');
 
-    playPauseBtn.addEventListener('click', () => {
-        const icon = playPauseBtn.querySelector('i');
-        if (video.paused) {
-            video.play();
-            icon.className = 'fas fa-pause';
-        } else {
-            video.pause();
-            icon.className = 'fas fa-play';
-        }
-    });
+        playPauseBtn.addEventListener('click', () => {
+            const icon = playPauseBtn.querySelector('i');
+            if (video.paused) {
+                video.play();
+                icon.className = 'fas fa-pause';
+            } else {
+                video.pause();
+                icon.className = 'fas fa-play';
+            }
+        });
 
-    muteUnmuteBtn.addEventListener('click', () => {
-        const icon = muteUnmuteBtn.querySelector('i');
-        video.muted = !video.muted;
-        icon.className = video.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
-    });
+        muteUnmuteBtn.addEventListener('click', () => {
+            const icon = muteUnmuteBtn.querySelector('i');
+            video.muted = !video.muted;
+            icon.className = video.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+        });
     </script>
 </body>
 

@@ -149,7 +149,7 @@
                                             <img src="assets/img/shape/vector.png" alt="Jameson">
                                         </div>
                                         <p>Whether you're on-site, remote, or working across time zones — flexibility is
-                                            built into the way we work. .</p>
+                                            built into the way we work.</p>
                                     </div>
                                 </div>
                             </div>
@@ -176,7 +176,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <!-- <div class="col-md-12">
                         <div class="shine-us-card mb-4 wow fadeInUp" data-wow-delay="0.2s">
                             <div class="row">
                                 <div class="col-md-5">
@@ -196,24 +196,24 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-12">
                         <div class="shine-us-card wow fadeInUp" data-wow-delay="0.2s">
                             <div class="row flex-column-reverse flex-md-row">
+                                <div class="col-md-5">
+                                    <div class="card-img">
+                                        <img src="assets/img/our-team/performance-that-gets-recognized.webp"
+                                            alt="Jameson">
+                                    </div>
+                                </div>
                                 <div class="col-md-7">
                                     <div class="card-content card-content-left">
                                         <div class="d-flex">
                                             <h3>Performance That Gets Recognized</h3>
                                             <img src="assets/img/shape/vector.png" alt="Jameson">
                                         </div>
-                                        <p>We celebrate outcomes and reward effort — with feedback, recognition, and
+                                        <p>We celebrate outcomes and reward effort with feedback, recognition, and
                                             opportunities to grow.</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="card-img">
-                                        <img src="assets/img/our-team/performance-that-gets-recognized.webp"
-                                            alt="Jameson">
                                     </div>
                                 </div>
                             </div>
@@ -466,7 +466,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             // Initialize the carousel
             $('.packforalife-nav').owlCarousel({
                 loop: true,
@@ -476,152 +476,151 @@
                 autoplay: true,
                 autoplayTimeout: 3000,
                 autoplayHoverPause: true,
-                navText: ['<span>&lt;</span>','<span>&gt;</span>'],
-                responsive:{
-                    0:{
+                navText: ['<span>&lt;</span>', '<span>&gt;</span>'],
+                responsive: {
+                    0: {
                         items: 1
                     },
-                    576:{
+                    576: {
                         items: 2
                     },
-                    992:{
+                    992: {
                         items: 3
                     }
                 }
             });
-            
- // Create video elements for each item
- $('.video-container').each(function() {
-        var $container = $(this);
-        var $item = $container.closest('.item');
-        var videoUrl = $item.data('video-url');
-        
-        // Create video element
-        var video = document.createElement('video');
-        video.className = 'hover-video';
-        video.src = videoUrl;
-        video.preload = 'metadata';
-        video.muted = true;
-        video.loop = false;
-        
-        // Insert video after the image but keep play button visible
-        $container.append(video);
-        
-        // Create YouTube-style progress bar
-        var progressBarContainer = document.createElement('div');
-        progressBarContainer.className = 'progress-bar-container';
-        
-        var progressBar = document.createElement('div');
-        progressBar.className = 'progress-bar';
-        
-        var timeDisplay = document.createElement('div');
-        timeDisplay.className = 'time-display';
-        timeDisplay.innerHTML = '0:00 / 0:00';
-        
-        progressBarContainer.appendChild(progressBar);
-        $container.append(progressBarContainer);
-        $container.append(timeDisplay);
-    });
 
-    // Video hover functionality
-    $('.video-container').hover(
-        function() { // Mouse enter
-            var $container = $(this);
-            var video = $container.find('video')[0];
-            var $progressBar = $container.find('.progress-bar');
-            var $timeDisplay = $container.find('.time-display');
-            var $playBtn = $container.find('.play-btn');
-            
-            // Hide the placeholder image and completely hide play button
-            $container.find('img').first().css('opacity', '0');
-            $playBtn.css('opacity', '0');
-            
-            // Show video
-            $(video).css('opacity', '1');
-            
-            // Play video
-            if (video.paused) {
-                var playPromise = video.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.then(_ => {
-                        // Show progress bar and time display
-                        $container.find('.progress-bar-container').css('opacity', '1');
-                        $timeDisplay.css('opacity', '1');
-                        
-                        // Update progress bar and time
+            // Create video elements for each item
+            $('.video-container').each(function() {
+                var $container = $(this);
+                var $item = $container.closest('.item');
+                var videoUrl = $item.data('video-url');
+
+                // Create video element
+                var video = document.createElement('video');
+                video.className = 'hover-video';
+                video.src = videoUrl;
+                video.preload = 'metadata';
+                video.muted = true;
+                video.loop = false;
+
+                // Insert video after the image but keep play button visible
+                $container.append(video);
+
+                // Create YouTube-style progress bar
+                var progressBarContainer = document.createElement('div');
+                progressBarContainer.className = 'progress-bar-container';
+
+                var progressBar = document.createElement('div');
+                progressBar.className = 'progress-bar';
+
+                var timeDisplay = document.createElement('div');
+                timeDisplay.className = 'time-display';
+                timeDisplay.innerHTML = '0:00 / 0:00';
+
+                progressBarContainer.appendChild(progressBar);
+                $container.append(progressBarContainer);
+                $container.append(timeDisplay);
+            });
+
+            // Video hover functionality
+            $('.video-container').hover(
+                function() { // Mouse enter
+                    var $container = $(this);
+                    var video = $container.find('video')[0];
+                    var $progressBar = $container.find('.progress-bar');
+                    var $timeDisplay = $container.find('.time-display');
+                    var $playBtn = $container.find('.play-btn');
+
+                    // Hide the placeholder image and completely hide play button
+                    $container.find('img').first().css('opacity', '0');
+                    $playBtn.css('opacity', '0');
+
+                    // Show video
+                    $(video).css('opacity', '1');
+
+                    // Play video
+                    if (video.paused) {
+                        var playPromise = video.play();
+
+                        if (playPromise !== undefined) {
+                            playPromise.then(_ => {
+                                    // Show progress bar and time display
+                                    $container.find('.progress-bar-container').css('opacity', '1');
+                                    $timeDisplay.css('opacity', '1');
+
+                                    // Update progress bar and time
+                                    updateProgressAndTime(video, $progressBar, $timeDisplay);
+                                })
+                                .catch(e => {
+                                    console.log("Autoplay prevented:", e);
+                                    // Show play button if autoplay fails
+                                    $playBtn.css('opacity', '1');
+                                });
+                        }
+                    }
+                },
+                function() { // Mouse leave
+                    var $container = $(this);
+                    var video = $container.find('video')[0];
+                    var $playBtn = $container.find('.play-btn');
+
+                    // Show placeholder image and play button again
+                    $container.find('img').first().css('opacity', '1');
+                    $playBtn.css('opacity', '1');
+
+                    // Hide video, progress bar and time
+                    $(video).css('opacity', '0');
+                    $container.find('.progress-bar-container').css('opacity', '0');
+                    $container.find('.time-display').css('opacity', '0');
+
+                    // Pause video
+                    if (!video.paused) {
+                        video.pause();
+                    }
+                }
+            );
+
+            // Function to update progress bar and time display
+            function updateProgressAndTime(video, $progressBar, $timeDisplay) {
+                // Update only if video is playing
+                if (!video.paused) {
+                    // Update progress bar width
+                    var progress = (video.currentTime / video.duration) * 100;
+                    $progressBar.css('width', progress + '%');
+
+                    // Format and update time display
+                    var currentMinutes = Math.floor(video.currentTime / 60);
+                    var currentSeconds = Math.floor(video.currentTime % 60);
+                    var durationMinutes = Math.floor(video.duration / 60);
+                    var durationSeconds = Math.floor(video.duration % 60);
+
+                    // Add leading zero if seconds < 10
+                    currentSeconds = currentSeconds < 10 ? '0' + currentSeconds : currentSeconds;
+                    durationSeconds = durationSeconds < 10 ? '0' + durationSeconds : durationSeconds;
+
+                    $timeDisplay.text(currentMinutes + ':' + currentSeconds + ' / ' +
+                        durationMinutes + ':' + durationSeconds);
+
+                    // Call this function again in 250ms if video is still playing
+                    setTimeout(function() {
                         updateProgressAndTime(video, $progressBar, $timeDisplay);
-                    })
-                    .catch(e => {
-                        console.log("Autoplay prevented:", e);
-                        // Show play button if autoplay fails
-                        $playBtn.css('opacity', '1');
-                    });
+                    }, 250);
                 }
             }
-        },
-        function() { // Mouse leave
-            var $container = $(this);
-            var video = $container.find('video')[0];
-            var $playBtn = $container.find('.play-btn');
-            
-            // Show placeholder image and play button again
-            $container.find('img').first().css('opacity', '1');
-            $playBtn.css('opacity', '1');
-            
-            // Hide video, progress bar and time
-            $(video).css('opacity', '0');
-            $container.find('.progress-bar-container').css('opacity', '0');
-            $container.find('.time-display').css('opacity', '0');
-            
-            // Pause video
-            if (!video.paused) {
-                video.pause();
-            }
-        }
-    );
 
-    // Function to update progress bar and time display
-    function updateProgressAndTime(video, $progressBar, $timeDisplay) {
-        // Update only if video is playing
-        if (!video.paused) {
-            // Update progress bar width
-            var progress = (video.currentTime / video.duration) * 100;
-            $progressBar.css('width', progress + '%');
-            
-            // Format and update time display
-            var currentMinutes = Math.floor(video.currentTime / 60);
-            var currentSeconds = Math.floor(video.currentTime % 60);
-            var durationMinutes = Math.floor(video.duration / 60);
-            var durationSeconds = Math.floor(video.duration % 60);
-            
-            // Add leading zero if seconds < 10
-            currentSeconds = currentSeconds < 10 ? '0' + currentSeconds : currentSeconds;
-            durationSeconds = durationSeconds < 10 ? '0' + durationSeconds : durationSeconds;
-            
-            $timeDisplay.text(currentMinutes + ':' + currentSeconds + ' / ' + 
-                             durationMinutes + ':' + durationSeconds);
-            
-            // Call this function again in 250ms if video is still playing
-            setTimeout(function() {
-                updateProgressAndTime(video, $progressBar, $timeDisplay);
-            }, 250);
-        }
-    }
+            // Enable click on entire video container to open modal
+            $('.video-container').on('click', function() {
+                var videoUrl = $(this).closest('.item').data('video-url');
+                $('#videoPlayer').attr('src', videoUrl);
+                $('#videoModal').modal('show');
+            });
 
-    // Enable click on entire video container to open modal
-    $('.video-container').on('click', function() {
-        var videoUrl = $(this).closest('.item').data('video-url');
-        $('#videoPlayer').attr('src', videoUrl);
-        $('#videoModal').modal('show');
-    });
-    
-    // Reset video src when modal is closed
-    $('#videoModal').on('hidden.bs.modal', function () {
-        $('#videoPlayer').attr('src', '');
-    });
-});
-
+            // Reset video src when modal is closed
+            $('#videoModal').on('hidden.bs.modal', function() {
+                $('#videoPlayer').attr('src', '');
+            });
+        });
     </script>
 </body>
 

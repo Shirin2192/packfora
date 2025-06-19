@@ -134,35 +134,38 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="we-do-card mb-4">
-                            <h4 class="wow fadeInUp" data-wow-delay="0.2s">Triple Bottom Line Approach</h4>
                             <div class="we-do-img wow fadeInUp" data-wow-delay="0.4s">
                                 <img src="assets/img/about/we-do-01.png">
                             </div>
+                            <h4 class="wow fadeInUp" data-wow-delay="0.2s">Triple Bottom Line Approach</h4>
                             <p class="wow fadeInUp" data-wow-delay="0.4s">We integrate People, Planet and Profit into every packaging solution. Balancing impact and profitability.</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="we-do-card mb-4">
-                            <h4 class="wow fadeInUp" data-wow-delay="0.2s">End-to-End Value Chain</h4>
                             <div class="we-do-img wow fadeInUp" data-wow-delay="0.4s">
                                 <img src="assets/img/about/we-do-02.png">
                             </div>
+                            <h4 class="wow fadeInUp" data-wow-delay="0.2s">End-to-End Value Chain</h4>
                             <p class="wow fadeInUp" data-wow-delay="0.4s">From packaging ideation to execution, our strategies seamlessly integrate into
                                 your operations, ensuring efficiency & compliance.</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="we-do-card mb-4">
-                            <h4 class="wow fadeInUp" data-wow-delay="0.2s">Digitization & Innovation</h4>
                             <div class="we-do-img wow fadeInUp" data-wow-delay="0.4s">
                                 <img src="assets/img/about/we-do-03.png">
                             </div>
+                            <h4 class="wow fadeInUp" data-wow-delay="0.2s">Digitization & Innovation</h4>
                             <p class="wow fadeInUp" data-wow-delay="0.4s">We leverage AI, automation, and real-time data to ensure efficient, innovative,
                                 and sustainable packaging solutions that benefit your business, our team, and
                                 the planet.</p>
                         </div>
                     </div>
                 </div>
+                <div class="we-do-card-btn mt-25">
+                            <a href="case-studies.php">Discover Our Process </a>
+                        </div>
             </div>
         </div>
         <!-- ==== End How We Do It? ==== -->
@@ -186,7 +189,7 @@
                                     <p>We bring unparalleled knowledge and experience to every aspect of
                                         packaging, ensuring that your solutions are crafted with precision and
                                         expertise.</p>
-                                    <a href="#">
+                                    <a href="case-studies.php">
                                         <h5>Learn More</h5>
                                     </a>
                                 </div>
@@ -201,7 +204,7 @@
                                     <h4 class="mb-4">Above &<br>Beyond</h4>
                                     <p>Our dedication goes above and beyond mere promises. We are committed to
                                         delivering results that exceed your expectations, every time.</p>
-                                    <a href="#">
+                                    <a href="case-studies.php">
                                         <h5>Learn More</h5>
                                     </a>
                                 </div>
@@ -217,7 +220,7 @@
                                     <p class="mb-4" style="padding-bottom: 11.20px;">We prioritize building
                                         lasting partnerships with our clients. Trust, collaboration, and mutual
                                         success are at the heart of everything we do.</p>
-                                    <a href="#">
+                                    <a href="case-studies.php">
                                         <h5>Learn More</h5>
                                     </a>
                                 </div>
@@ -249,13 +252,13 @@
                         </div>
                         <div class="stat-circles">
                             <div class="circle blue experts wow bounceIn" data-wow-delay="0.2s">
-                                <div class="number">140+</div>
+                                <div class="number">150+</div>
                                 <div class="title">Global Experts</div>
                                 <div class="subtitle">Bringing Deep, Cross-Functional Expertise</div>
                             </div>
                             <div class="circle orange experience wow bounceIn" data-wow-delay="0.2s">
                                 <div class="number">1000<sup>+</sup></div>
-                                <div class="title">Years of <span style="color: #21409A;">Leadership</span> Experience</div>
+                                <div class="title">Years of Leadership Experience</div>
                                 <div class="subtitle">Across the Packaging Value Chain</div>
                             </div>
                             <div class="circle blue team wow bounceIn" data-wow-delay="0.2s">

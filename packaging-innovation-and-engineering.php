@@ -449,29 +449,37 @@
 
                     <div class="col-md-3 col-6">
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-01.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/tom.webp" class="w-100">
+                            <p>Tom Oravez<br>Foods, Pharma & CHC (USA)<br><a href="https://www.linkedin.com/in/tom-oravez/" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-02.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/prashant.webp" class="w-100">
+                            <p>Prashant Sukhtankar<br>Foods, Pharma & CHC<br><a href="https://www.linkedin.com/in/prashant-sukhtankar-70a90a18/?originalSubdomain=in" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-03.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/aunjna.webp" class="w-100">
+                            <p>Aunjna Agarvval<br>Foods, Pharma & CHC<br><a href="https://www.linkedin.com/in/aunjna-agarvval-743b90204/" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-04.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/avinash.webp" class="w-100">
+                            <p>Avinash Singh<br>SHPCO<br><a href="https://www.linkedin.com/in/avinash-singh-68345356/" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
                         </div>
                     </div>
                 </div>

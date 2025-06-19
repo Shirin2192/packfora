@@ -745,7 +745,7 @@
     $(document).ready(function() {
         $('.featured-speakers').owlCarousel({
             dots: false,
-            nav: true,
+            nav: false,
             loop: true,
             margin: 10,
             responsiveClass: true,
@@ -765,7 +765,7 @@
                     items: 3
                 },
                 1200: {
-                    items: 4
+                    items: 3
                 }
             }
         });
