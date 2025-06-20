@@ -18,222 +18,71 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Get the form values
     $full_name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $phone_number = mysqli_real_escape_string($conn, $_POST['subject']);
+    $country_code = mysqli_real_escape_string($conn, $_POST['country_code']);
+    $phone_number = mysqli_real_escape_string($conn, $_POST['phone']);
     $service = isset($_POST['services']) ? mysqli_real_escape_string($conn, $_POST['services']) : null;  // Check if 'services' is set
     $message = mysqli_real_escape_string($conn, $_POST['message']);
+// print_r($_POST);die;
+    // Initialize response array
+    $response = [
+        'success' => false,
+        'errors' => []
+    ];
 
-    // Validate each field
-    if (empty($full_name)) {
-        echo "Full Name is required.";
-        exit;
+    // Validate Full Name
+   if (empty($full_name)) {
+        $response['errors']['name'] = 'Full Name is required.';
     } elseif (!preg_match("/^[a-zA-Z ]+$/", $full_name)) {
-        echo "Full Name must contain only letters and spaces.";
-        exit;
+        $response['errors']['name'] = 'Full Name must contain only letters and spaces.';
     }
 
+    // Validate Email
     if (empty($email)) {
-        echo "Email Address is required.";
-        exit;
+        $response['errors']['email'] = 'Email Address is required.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Invalid Email Address format.";
-        exit;
+        $response['errors']['email'] = 'Invalid Email Address format.';
     }
 
     if (empty($phone_number)) {
-    echo "Phone Number is required.";
-    exit;
-} elseif (!preg_match('/^\+(\d{1,4})\s?(\d{4,14})$/', $phone_number, $matches)) {
-    echo "Invalid Phone Number format. Must start with +CountryCode and number.";
-    exit;
-} else {
-    // Extract the country code and the number part
-    $country_code = $matches[1];  // Country code part (e.g., '91' for India)
-    $number_part = $matches[2];   // Phone number part (digits after country code)
-
-    // FULL Country code - expected number lengths
-   $country_number_lengths = [
-            '1'    => 10, // USA/Canada
-            '7'    => 10, // Russia/Kazakhstan
-            '20'   => 10, // Egypt
-            '27'   => 9,  // South Africa
-            '30'   => 10, // Greece
-            '31'   => 9,  // Netherlands
-            '32'   => 9,  // Belgium
-            '33'   => 9,  // France
-            '34'   => 9,  // Spain
-            '36'   => 9,  // Hungary
-            '39'   => 10, // Italy
-            '40'   => 9,  // Romania
-            '41'   => 9,  // Switzerland
-            '43'   => 10, // Austria
-            '44'   => 10, // United Kingdom
-            '45'   => 8,  // Denmark
-            '46'   => 9,  // Sweden
-            '47'   => 8,  // Norway
-            '48'   => 9,  // Poland
-            '49'   => 10, // Germany
-            '51'   => 9,  // Peru
-            '52'   => 10, // Mexico
-            '53'   => 8,  // Cuba
-            '54'   => 10, // Argentina
-            '55'   => 10, // Brazil
-            '56'   => 9,  // Chile
-            '57'   => 10, // Colombia
-            '58'   => 10, // Venezuela
-            '60'   => 9,  // Malaysia
-            '61'   => 9,  // Australia
-            '62'   => 10, // Indonesia
-            '63'   => 10, // Philippines
-            '64'   => 9,  // New Zealand
-            '65'   => 8,  // Singapore
-            '66'   => 9,  // Thailand
-            '81'   => 10, // Japan
-            '82'   => 9,  // South Korea
-            '84'   => 9,  // Vietnam
-            '86'   => 11, // China
-            '90'   => 10, // Turkey
-            '91'   => 10, // India
-            '92'   => 10, // Pakistan
-            '93'   => 9,  // Afghanistan
-            '94'   => 9,  // Sri Lanka
-            '95'   => 9,  // Myanmar
-            '98'   => 10, // Iran
-            '211'  => 9,  // South Sudan
-            '212'  => 9,  // Morocco
-            '213'  => 9,  // Algeria
-            '216'  => 8,  // Tunisia
-            '218'  => 9,  // Libya
-            '220'  => 7,  // Gambia
-            '221'  => 9,  // Senegal
-            '222'  => 8,  // Mauritania
-            '223'  => 8,  // Mali
-            '224'  => 9,  // Guinea
-            '225'  => 8,  // Ivory Coast
-            '226'  => 8,  // Burkina Faso
-            '227'  => 8,  // Niger
-            '228'  => 8,  // Togo
-            '229'  => 8,  // Benin
-            '230'  => 7,  // Mauritius
-            '231'  => 7,  // Liberia
-            '232'  => 8,  // Sierra Leone
-            '233'  => 9,  // Ghana
-            '234'  => 10, // Nigeria
-            '235'  => 8,  // Chad
-            '236'  => 8,  // Central African Republic
-            '237'  => 9,  // Cameroon
-            '238'  => 7,  // Cape Verde
-            '239'  => 7,  // Sao Tome and Principe
-            '240'  => 9,  // Equatorial Guinea
-            '241'  => 7,  // Gabon
-            '242'  => 9,  // Congo
-            '243'  => 9,  // DRC Congo
-            '244'  => 9,  // Angola
-            '245'  => 7,  // Guinea-Bissau
-            '246'  => 7,  // British Indian Ocean Territory
-            '248'  => 7,  // Seychelles
-            '249'  => 9,  // Sudan
-            '250'  => 9,  // Rwanda
-            '251'  => 9,  // Ethiopia
-            '252'  => 8,  // Somalia
-            '253'  => 8,  // Djibouti
-            '254'  => 9,  // Kenya
-            '255'  => 9,  // Tanzania
-            '256'  => 9,  // Uganda
-            '257'  => 8,  // Burundi
-            '258'  => 9,  // Mozambique
-            '260'  => 9,  // Zambia
-            '261'  => 9,  // Madagascar
-            '263'  => 9,  // Zimbabwe
-            '264'  => 9,  // Namibia
-            '265'  => 8,  // Malawi
-            '266'  => 8,  // Lesotho
-            '267'  => 8,  // Botswana
-            '268'  => 8,  // Swaziland
-            '269'  => 7,  // Comoros
-            '290'  => 5,  // Saint Helena
-            '291'  => 7,  // Eritrea
-            '297'  => 7,  // Aruba
-            '298'  => 6,  // Faroe Islands
-            '299'  => 6,  // Greenland
-            '350'  => 8,  // Gibraltar
-            '351'  => 9,  // Portugal
-            '352'  => 8,  // Luxembourg
-            '353'  => 9,  // Ireland
-            '354'  => 7,  // Iceland
-            '355'  => 9,  // Albania
-            '356'  => 8,  // Malta
-            '357'  => 8,  // Cyprus
-            '358'  => 9,  // Finland
-            '359'  => 9,  // Bulgaria
-            '370'  => 8,  // Lithuania
-            '371'  => 8,  // Latvia
-            '372'  => 7,  // Estonia
-            '373'  => 8,  // Moldova
-            '374'  => 8,  // Armenia
-            '375'  => 9,  // Belarus
-            '376'  => 6,  // Andorra
-            '377'  => 8,  // Monaco
-            '378'  => 8,  // San Marino
-            '380'  => 9,  // Ukraine
-            '381'  => 9,  // Serbia
-            '382'  => 8,  // Montenegro
-            '383'  => 8,  // Kosovo
-            '385'  => 9,  // Croatia
-            '386'  => 8,  // Slovenia
-            '387'  => 8,  // Bosnia and Herzegovina
-            '389'  => 8,  // North Macedonia
-            '420'  => 9,  // Czech Republic
-            '421'  => 9,  // Slovakia
-            '423'  => 7,  // Liechtenstein
-        ];
-
-    // Check if country code exists in the array
-    if (isset($country_number_lengths[$country_code])) {
-        $expected_length = $country_number_lengths[$country_code];
-        if (strlen($number_part) != $expected_length) {
-            // If the number part length is incorrect, show this error
-            echo "Phone number too long for +$country_code. Expected $expected_length digits only.";
-            exit;
-        }
-    } else {
-        // If the country code is not found in the array, validate based on general length
-        if (strlen($number_part) < 6 || strlen($number_part) > 14) {
-            echo "Invalid Phone Number length. Number should be between 6 and 14 digits.";
-            exit;
-        }
+        $response['errors']['subject'] = 'Phone Number is required.';
     }
-}
 
+    // Validate Service
     if (empty($service)) {
-        echo "Please select a service.";
-        exit;
+        $response['errors']['services'] = 'Please select a service.';
     }
 
+    // Validate Message
     if (empty($message)) {
-        echo "Message field cannot be empty.";
-        exit;
+        $response['errors']['message'] = 'Message field cannot be empty.';
     }
 
+    // If any validation error, return immediately
+    if (!empty($response['errors'])) {
+        echo json_encode($response);
+        exit;
+    }
     // Insert data into database
+    $phone_number_1 = $country_code.$phone_number; // Combine country code and phone number
     $stmt = $conn->prepare("INSERT INTO contact_requests (full_name, email, phone_number, service, message) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $full_name, $email, $phone_number, $service, $message);
+    $stmt->bind_param("sssss", $full_name, $email, $phone_number_1, $service, $message);
     if ($stmt->execute()) {
         // Database insert success, now send email
          // Define missing variables
          $from_name = "Packfora Contact Form";     // Sender Name
-         $to_email = "shirin@sda-zone.com";   // Receiver Email
+         $to_email = "moiz@sda-zone.com";   // Receiver Email
  
          $mail = new PHPMailer(true);
 
         try {
             // Server settings
-            $mail->isSMTP();
-            $mail->Host       = 'eternal.herosite.pro'; 
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'connect@sda.in.net';    
-            $mail->Password   = 'c_bo*bm#)4g*';         
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 587;
+            // $mail->isSMTP();
+            // $mail->Host       = 'eternal.herosite.pro'; 
+            // $mail->SMTPAuth   = true;
+            // $mail->Username   = 'connect@sda.in.net';    
+            // $mail->Password   = 'c_bo*bm#)4g*';         
+            // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            // $mail->Port       = 587;
 
             // Sender and recipient
             $mail->setFrom('connect@sda.in.net', $from_name); 
@@ -311,7 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class='content'>
                             <p><strong>Name:</strong> {$full_name}</p>
                             <p><strong>Email:</strong> {$email}</p>
-                            <p><strong>Phone:</strong> {$phone_number}</p>
+                            <p><strong>Phone:</strong> {$phone_number_1}</p>
                             <p><strong>Service:</strong> {$service}</p>
                             <p><strong>Message:</strong><br>{$message}</p>
                         </div>
@@ -324,18 +173,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </html>
                 ";
             $mail->send();
-            echo "Thank you for contacting us! We have received your request.";
+            $response['success'] = true;
+            $response['message'] = "Thank you for contacting us! We have received your request.";
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+             $response['errors']['mail'] = 'Mailer Error: ' . $mail->ErrorInfo;
         }
 
     } else {
-        echo "Database error: " . $stmt->error;
+         $response['errors']['database'] = 'Database error: ' . $stmt->error;
     }
 
     $stmt->close();
 }
 
 $conn->close();
+echo json_encode($response);
 ?>
 

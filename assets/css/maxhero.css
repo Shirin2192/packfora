@@ -494,6 +494,7 @@
 .story-section {
   position: relative;
   /* max-width: 800px; */
+  max-width: 85%;
   margin: -330px auto 0px;
   /* pull up to overlap */
   background-color: #fff;
@@ -526,9 +527,22 @@
 
 
 .story-placeholder {
-  background-color: #e0e0e0;
-  height: 300px;
+  background: linear-gradient(150deg, #f47d20b5 -13%, #A154A1 30%);
+  /* height: 300px; */
+  padding: 60px 55px;
   border-radius: 20px;
+}
+.maxmold-story{
+  padding: 0 0 0 22px;
+}
+.maxmold-story p{
+  color: #fff;
+  font-size: 16px;
+  font-family: "Bricolage Grotesque", sans-serif;
+  margin-bottom: 12px;
+}
+.maxmold-story p:last-child{
+  margin-bottom: 0;
 }
 
 .launch-section {

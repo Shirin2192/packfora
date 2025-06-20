@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/themify-icons/1.0.1/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <style>
-       
+
     </style>
 </head>
 
@@ -117,7 +117,7 @@
             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
                 <video autoplay muted loop playsinline
                     style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
-                    <source src="assets/img/services/dtv/dtv.mp4" type="video/mp4">
+                    <source src="assets/img/services/dtv/dtv.webm" type="video/webm">
                     Your browser does not support the video tag.
                 </video>
 
@@ -151,11 +151,11 @@
                                 <div class="section-card">
                                     <div class="section-header technology-header">
                                         Technology
-                                        <div class="header-image">
+                                        <!-- <div class="header-image">
                                             <img src="https://sda.in.net/web/packfora/final/assets/img/shape/gradient-02.png" alt="Technology">
-                                        </div>
+                                        </div> -->
                                     </div>
-<div class="content-area">
+                                    <div class="content-area">
                                         <div class="row">
                                             <div class="col-md-4 border-end">
                                                 <div class="strategy-title mt-4">Reduce</div>
@@ -188,11 +188,11 @@
                                 <div class="section-card">
                                     <div class="section-header procurement-header">
                                         Procurement
-                                        <div class="header-image">
+                                        <!-- <div class="header-image">
                                             <img src="https://sda.in.net/web/packfora/final/assets/img/shape/gradient-02.png" alt="Procurement">
-                                        </div>
+                                        </div> -->
                                     </div>
-<div class="content-area">
+                                    <div class="content-area">
                                         <div class="row">
                                             <div class="col-md-5 border-end">
                                                 <div class="strategy-title">Supplier Strategy</div>
@@ -251,7 +251,7 @@
                     <div class="col-md-4 py-4">
                         <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
                             <div class="icon">
-                                <img src="assets/img/services/dtv/shape/strategic-value-driver-model.png" alt="" srcset="">
+                                <img src="assets/img/services/dtv/shape/strategic-value-driver-model.svg" alt="" srcset="">
                             </div>
                             <h4>Strategic Value Driver Model</h4>
                             <p>Our proprietary DTV framework maximizes value by addressing material efficiency, technological advancements, and procurement strategies-all in one holistic solution.</p>
@@ -260,7 +260,7 @@
                     <div class="col-md-4 pt-4">
                         <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
                             <div class="icon">
-                                <img src="assets/img/services/dtv/shape/people-planet-profit.png" alt="" srcset="">
+                                <img src="assets/img/services/dtv/shape/people-planet-profit.svg" alt="" srcset="">
                             </div>
                             <h4>People, Planet & Profit</h4>
                             <p>Sustainability is at the core of our process. By balancing economic, environmental, and consumer needs, we help brands achieve triple-bottom-line impact.</p>
@@ -269,7 +269,7 @@
                     <div class="col-md-4 pt-4">
                         <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
                             <div class="icon">
-                                <img src="assets/img/services/dtv/shape/end-to-end-optimization.png" alt="" srcset="">
+                                <img src="assets/img/services/dtv/shape/end-to-end-optimization.svg" alt="" srcset="">
                             </div>
                             <h4>End-to-End Optimization</h4>
                             <p>From concept to commercialization, we ensure every element of packaging is designed for efficiency, sustainability, and long-term success.</p>
@@ -383,33 +383,51 @@
                         <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Our Leaders</h2>
                         <h1 class="wow fadeInUp" data-wow-delay="0.4s">A Dedicated Team of Packaging Professionals.</h1>
                     </div>
-
-                    <div class="col-md-3 col-6">
+                    <div class="owl-carousel owl-theme mt-3 team-leaders">
+                    <div>
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-01.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/hitesh.webp" class="w-100">
+                            <p>Hitesh Shenoy<br>VP & BU Lead - Growth - Foods & Pharma<br><a href="https://www.linkedin.com/in/hitesh-shenoy-2a84492/?originalSubdomain=sg" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
                         </div>
                     </div>
 
-                    <div class="col-md-3 col-6">
+                    <div>
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-02.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/chirag.webp" class="w-100">
+                            <p>Chirag Master<br>VP & BU Lead - Growth, Delivery - SHPCO, Talent Flex & Mold Management Services<br><a href="https://www.linkedin.com/in/chirag-master-54364bb/?originalSubdomain=in" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
                         </div>
                     </div>
 
-                    <div class="col-md-3 col-6">
+                    <div>
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-03.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/tom.webp" class="w-100">
+                            <p>Tom Oravez<br>Foods, Pharma & CHC (USA)<br><a href="https://www.linkedin.com/in/tom-oravez/" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
                         </div>
                     </div>
 
-                    <div class="col-md-3 col-6">
+                    <div>
                         <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/team-04.webp" class="w-100">
-                            <p>Annette Black<br>Packaging Engineer</p>
+                            <img src="assets/img/teams/sheryll.webp" class="w-100">
+                            <p>Sheryll Umagtang<br>Foods, Pharma & CHC (SEA)<br><a href="https://www.linkedin.com/in/sheryll-umagtang-174439216/" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
                         </div>
+                    </div>
+
+                    <div>
+                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
+                            <img src="assets/img/teams/micheal.webp" class="w-100">
+                            <p>Micheal Harris<br>Foods, Pharma & CHC (USA)<br><a href="https://www.linkedin.com/in/michael-l-harris-41a9897/" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                                </a></p>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -472,6 +490,38 @@
                 }
             });
         });
+    </script>
+     <script>
+    $(document).ready(function() {
+        $('.team-leaders').owlCarousel({
+            dots: false,
+            nav: false,
+            loop: true,
+            margin: 10,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                576: {
+                    items: 1
+                },
+                768: {
+                    items: 2
+                },
+                992: {
+                    items: 4
+                },
+                1200: {
+                    items: 4
+                }
+            }
+        });
+        $(".owl-prev").html('<i class="fa-solid fa-arrow-left"></i>');
+        $(".owl-next").html('<i class="fa-solid fa-arrow-right"></i>');
+    });
     </script>
 </body>
 

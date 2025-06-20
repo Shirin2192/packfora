@@ -190,28 +190,28 @@
                 <div class="row">
                     <div class="col-md-4 py-4">
                         <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <h4>Built for daily life</h4>
                             <div class="solution-icon">
                                 <img src="assets/img/our-team/clientele.png" alt="" srcset="">
                             </div>
+                            <h4>Built for daily life</h4>
                             <P>Fridge-fit, shelf-ready, and intuitive to use</P>
                         </div>
                     </div>
                     <div class="col-md-4 py-4">
                         <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <h4>Sustainably made</h4>
                             <div class="solution-icon">
                                 <img src="assets/img/our-team/projects.png" alt="" srcset="">
                             </div>
+                            <h4>Sustainably made</h4>
                             <P>100% recyclable materials and vegetable-based ink</P>
                         </div>
                     </div>
                     <div class="col-md-4 py-4">
                         <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <h4>Inclusive by design</h4>
                             <div class="solution-icon">
                                 <img src="assets/img/our-team/culture.png" alt="" srcset="">
                             </div>
+                            <h4>Inclusive by design</h4>
                             <P>Tactile cues for the visually impaired</P>
                         </div>
                     </div>

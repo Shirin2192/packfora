@@ -14,19 +14,19 @@
                         <h3 class="sub-color mb-3">Solutions</h3>
                         <p><a href="talent-flex.php">Talent Flex</a></p>
                         <p><a href="sustainability.php">Sustainability</a></p>
-                        <p><a href="#">Product Innovation</a></p>
+                        <!-- <p><a href="#">Product Innovation</a></p> -->
                         <p><a href="design-to-value.php">Design to Value</a></p>
-                        <p><a href="#">Mold Management</a></p>
+                        <!-- <p><a href="#">Mold Management</a></p> -->
+                        <p><a href="maxmold.php" target="_blank">MaxMold</a></p>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                <div class="item">
+                    <div class="item">
                         <h3 class="sub-color mb-3" style="color: #fff">-</h3>
                         <p><a href="supply-chain-automation.php">Supply Chain Automation</a></p>
                         <p><a href="packaging-innovation-and-engineering.php">Packaging Innovation & Engineering</a></p>
                         <p><a href="packaging-procurement.php">Packaging Procurement</a></p>
-                        <p><a href="maxmold.php" target="_blank">MaxMold</a></p>
-                        <p><a href="#">Specification Management</a></p>
+                        <p><a href="specification-management.php">Specification Management</a></p>
                     </div>
                 </div>
                 <div class="col-lg-3">

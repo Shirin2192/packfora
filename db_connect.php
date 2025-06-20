@@ -3,9 +3,9 @@
 
 // Database credentials
 $servername = "localhost";
-$username = "fsrqglou_db_packfora";
-$password = "KEGN!Qi_C!yT";
-$dbname = "fsrqglou_db_packfora"; // <-- Change this to your actual database name
+$username = "root"; // <-- Change this to your actual database username
+$password = "";
+$dbname = "db_packfora"; // <-- Change this to your actual database name
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

@@ -19,38 +19,46 @@ document.addEventListener("click", function(e) {
     }
 });
 
-$(document).ready(function() {
-    $('#contact-us-form').on('submit', function(e) {
-        e.preventDefault(); // Stop form from submitting normally
+$(document).ready(function () {
+        $('#contact-us-form').on('submit', function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        // Clear previous error messages
+        $('.error-message').remove();
 
         $.ajax({
             type: 'POST',
             url: 'contact-save.php',
             data: $(this).serialize(),
-            success: function(response) {
-                if (response.includes('Thank you for contacting us!')) {
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
                     Swal.fire({
                         title: 'Success!',
-                        text: response,
+                        text: response.message,
                         icon: 'success'
                     }).then(() => {
-                        $('#contact-us-form')[0]
-                    .reset(); // Reset form after success
+                        $('#contact-us-form')[0].reset(); // Reset form
                     });
-                } else {
-                    Swal.fire({
-                        title: 'Error!',
-                        text: response,
-                        icon: 'error'
+                } else if (response.errors) {
+                    $.each(response.errors, function (field, message) {
+                        const fieldElement = $('[name="' + field + '"]');
+                        if (fieldElement.length) {
+                            const $error = $('<div class="error-message" style="color:red; font-size: 13px; margin-top: 4px;">' + message + '</div>');
+                            fieldElement.after($error);
+
+                            // Auto-hide after 5 seconds
+                            setTimeout(function () {
+                                $error.fadeOut(300, function () {
+                                    $(this).remove();
+                                });
+                            }, 5000);
+                        }
                     });
                 }
             },
-            error: function() {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'An unexpected error occurred. Please try again later.',
-                    icon: 'error'
-                });
+            error: function () {
+                console.error('AJAX error occurred');
             }
         });
     });

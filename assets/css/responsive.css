@@ -34,7 +34,10 @@
     .slide4 .content {
         max-width: 100%;
     }
-
+    .content,
+    .slide5 .content {
+        max-width: 100%;
+    }
     .slide1 .read_more,
     .slide5 .read_more,
     .slide2 .read_more,
@@ -333,7 +336,8 @@
 
     /* services pages */
     .page-banner {
-        height: 70vh;
+        max-height: 100%;
+        /* height: 80vh; */
         background: linear-gradient(to right, rgba(33, 64, 154, 0.9) 0%, rgb(107 131 201 / 90%) 100%, transparent 100%);
     }
 
@@ -676,6 +680,7 @@
 
     .story-section {
         margin: -155px auto 0px;
+        max-width: 100%;
     }
 
     .stats-section h2,
@@ -924,5 +929,12 @@
 
     .launchWrapp {
         margin: 0 auto 0px;
+        max-width: 100%;
+    }
+    .maxmold-story{
+        padding: 25px 0 0;
+    }
+    .story-placeholder{
+      padding: 60px 25px;
     }
 }
