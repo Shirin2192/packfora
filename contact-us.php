@@ -37,6 +37,9 @@
 </head>
 
 <body>
+    <?php include 'db_connect.php';
+         include 'config.php';  
+         ?>
     <!-- ==================== Start Loading ==================== -->
     <!-- <div class="loader-wrap">
         <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
@@ -136,74 +139,38 @@
                     <h2 class="contact-us-title mb-40 wow fadeIn">Contact Us</h2>
                 </div>
                 <div class="row">
-                    <!-- <div class="col-lg-2">
-                        <div class="contact-us-info">
-                            <h6>Phone No.:</h6>
-                            <p><a href="#" target="_blank">+91 96649 73055</a></p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 border-left-right">
-                        <div class="contact-us-info px-5">
-                            <h6>Email:</h6>
-                            <p><a href="#" target="_blank">contact@packfora.com</a></p>
-                            <p><a href="#" target="_blank">ankheeta.lath@packfora.com</a></p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="contact-us-info px-5">
-                            <h6>Address:</h6>
-                            <p>B-307/B-308, 3rd Floor, Everest Chambers, Andheri-Kurla Road, Marol Naka, Near Star TV
-                                Office, Andheri (E), Mumbai-400059</p>
-                        </div>
-                    </div> -->
+                     <?php
+                        $sql = "SELECT * FROM tbl_contact_us WHERE is_delete = 1";
+                        $result = $conn->query($sql);
 
-                    <div class="col-lg-3">
-                        <div class="contact-us-info wow fadeInUp" data-wow-delay="0.2s">
+                        $delay = 0.2;
+                        $i = 0;
+
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $designation = nl2br($row['designation']);
+                                $delayValue = number_format($delay + ($i * 0.2), 1);
+                                $i++;
+                        ?>
+                    <div class="col-lg-3 <?= ($i % 4 !== 1) ? 'my-md-0 my-4' : '' ?>">
+                        <div class="contact-us-info wow fadeInUp" data-wow-delay="<?= $delayValue ?>s">
                             <div class="d-flex align-items-end justify-content-between">
-                                <h5>Marketing & Communications</h5>
-                                <img src="assets/img/shape/gradient-03.png" alt="">
+                                <h5><?= $designation ?></h5>
+                                <img src="<?= BASE_URL .$row['attachment'] ?>" alt="">
                             </div>
-                            <h6>Ankheeta Lath</h6>
-                            <p><a href="tel:+919664973055" target="_blank">+91 96649 73055</a></p>
-                            <p><a href="mailto:ankheeta.lath@packfora.com"
-                                    target="_blank">ankheeta.lath@packfora.com</a></p>
+                            <h6><?= $row['name'] ?></h6>
+                            <p><a href="tel:<?= preg_replace('/\D/', '', $row['contact_no']) ?>" target="_blank"><?= $row['contact_no'] ?></a></p>
+                            <p><a href="mailto:<?= $row['email'] ?>" target="_blank"><?= $row['email'] ?></a></p>
                         </div>
                     </div>
-                    <div class="col-lg-3 my-md-0 my-4">
-                        <div class="contact-us-info wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="d-flex align-items-end justify-content-between">
-                                <h5>Inquiries & Partnership Opportunities</h5>
-                                <img src="assets/img/shape/gradient-01.png" alt="">
-                            </div>
-                            <h6>Brijesh Sounderrajan</h6>
-                            <p><a href="tel:+919820030019" target="_blank">+91 98200 30019</a></p>
-                            <p><a href="mailto:brijesh.sounderrajan@packfora.com"
-                                    target="_blank">brijesh.sounderrajan@packfora.com</a></p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 my-md-0 my-4">
-                        <div class="contact-us-info wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="d-flex align-items-end justify-content-between">
-                                <h5>Human <br> Resources</h5>
-                                <img src="assets/img/shape/gradient-02.png" alt="">
-                            </div>
-                            <h6>Prachi Balchandani</h6>
-                            <p><a href="tel:+917710039221" target="_blank">+91 77100 39221</a></p>
-                            <p><a href="mailto:prachi.balchandani@packfora.com"
-                                    target="_blank">prachi.balchandani@packfora.com</a></p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="contact-us-info wow fadeInUp" data-wow-delay="0.8s">
-                            <div class="d-flex align-items-end justify-content-between">
-                                <h5>General <br> Inquires</h5>
-                                <img src="assets/img/shape/gradient-01.png" alt="">
-                            </div>
-                            <h6>Shweta Rao</h6>
-                            <p><a href="tel:+919833851623" target="_blank">+91 98338 51623</a></p>
-                            <p><a href="mailto:contact@packfora.com" target="_blank">contact@packfora.com</a></p>
-                        </div>
-                    </div>
+                    <?php
+                }
+            } else {
+                echo "<p>No contact data available.</p>";
+            }
+
+            $conn->close();
+            ?>
                 </div>
             </div>
         </div>

@@ -59,12 +59,6 @@
     <!-- <div class="cursor"></div> -->
 
     <!-- ==================== Start progress-scroll-button ==================== -->
-    <!-- <div class="progress-wrap cursor-pointer">
-        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
-        </svg>
-    </div> -->
-
     <div id="scrollProgress"></div>
     <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to Top">
         <svg class="custom-logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +101,8 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-
+<?php include 'db_connect.php';
+                include 'config.php' ?>
     <main>
         <!-- ==== Start Home Banner ==== -->
         <section class="our-team-page-title-banner"
@@ -133,161 +128,144 @@
                 <div class="row">
                     <h2 class="shine-us-title mb-50 wow fadeIn" data-wow-delay="0.2s">Why People Choose Packfora</h2>
                 </div>
+
+
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="shine-us-card mb-4 wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="card-img">
-                                        <img src="assets/img/our-team/work-your-way.webp" alt="Jameson">
-                                    </div>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card-content card-content-right">
-                                        <div class="d-flex">
-                                            <h3>Work Your Way</h3>
-                                            <img src="assets/img/shape/vector.png" alt="Jameson">
-                                        </div>
-                                        <p>Whether you're on-site, remote, or working across time zones — flexibility is
-                                            built into the way we work.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="shine-us-card mb-4 wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="row flex-column-reverse flex-md-row">
-                                <div class="col-md-7">
-                                    <div class="card-content card-content-left">
-                                        <div class="d-flex">
-                                            <h3>Second Chances, Fresh Starts</h3>
-                                            <img src="assets/img/shape/vector.png" alt="Jameson">
-                                        </div>
-                                        <p>We support professionals returning after a career break because talent
-                                            doesn't come with an expiry date.</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="card-img">
-                                        <img src="assets/img/our-team/second-chances-fresh-starts.webp" alt="Jameson">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="col-md-12">
-                        <div class="shine-us-card mb-4 wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="card-img">
-                                        <img src="assets/img/our-team/spousal-careers.webp" alt="Jameson">
-                                    </div>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card-content card-content-right">
-                                        <div class="d-flex">
-                                            <h3>Spousal Careers</h3>
-                                            <img src="assets/img/shape/vector.png" alt="Jameson">
-                                        </div>
-                                        <p>We believe when one person thrives, families thrive too. That's why we offer
-                                            dual-career opportunities for spouses and partners.</p>
+                    <?php
+                    $sql = "SELECT * FROM tbl_why_people_choose_packfora WHERE is_delete = 1 ORDER BY id ASC";
+                    $result = $conn->query($sql);
+                    $reverse = false;
+
+                    if ($result->num_rows > 0):
+                        while ($row = $result->fetch_assoc()):
+                            // Determine layout direction (alternate rows)
+                            $flexClass = $reverse ? 'flex-column-reverse flex-md-row' : '';
+                            ?>
+                            <div class="col-md-12">
+                                <div class="shine-us-card mb-4 wow fadeInUp" data-wow-delay="0.2s">
+                                    <div class="row <?= $flexClass ?>">
+                                        <?php if ($reverse): ?>
+                                            <div class="col-md-7">
+                                                <div class="card-content card-content-left">
+                                                    <div class="d-flex">
+                                                        <h3><?= htmlspecialchars($row['title']) ?></h3>
+                                                        <img src="assets/img/shape/vector.png" alt="Decoration">
+                                                    </div>
+                                                    <p><?= htmlspecialchars($row['description']) ?></p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-img">
+                                                    <img src="<?= htmlspecialchars(BASE_URL .$row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                                                </div>
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="col-md-5">
+                                                <div class="card-img">
+                                                    <img src="<?= htmlspecialchars(BASE_URL .$row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="card-content card-content-right">
+                                                    <div class="d-flex">
+                                                        <h3><?= htmlspecialchars($row['title']) ?></h3>
+                                                        <img src="assets/img/shape/vector.png" alt="Decoration">
+                                                    </div>
+                                                    <p><?= htmlspecialchars($row['description']) ?></p>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div> -->
-                    <div class="col-md-12">
-                        <div class="shine-us-card wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="row flex-column-reverse flex-md-row">
-                                <div class="col-md-5">
-                                    <div class="card-img">
-                                        <img src="assets/img/our-team/performance-that-gets-recognized.webp"
-                                            alt="Jameson">
-                                    </div>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card-content card-content-left">
-                                        <div class="d-flex">
-                                            <h3>Performance That Gets Recognized</h3>
-                                            <img src="assets/img/shape/vector.png" alt="Jameson">
-                                        </div>
-                                        <p>We celebrate outcomes and reward effort with feedback, recognition, and
-                                            opportunities to grow.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                            $reverse = !$reverse; // toggle layout for next card
+                        endwhile;
+                    else:
+                        echo "<p>No records found.</p>";
+                    endif;
+
+                    
+                    ?>
                 </div>
+
             </div>
         </div>
         <!-- ==== End Shine With Us ==== -->
 
         <!-- Start Student Talent Economy -->
-        <div class="student-talent">
-            <div class="container-fluid p-md-0">
-                <div class="row">
-                    <div class="col-md-6 p-0 wow fadeIn" data-wow-delay="0.2s">
-                        <img src="assets/img/our-team/student-talent-economy.webp" alt="" srcset="">
-                    </div>
-                    <div class="col-md-6 student-talent-economy p-md-5 p-3">
-                        <div class="row">
-                            <h2 class="shine-us-title wow fadeIn" data-wow-delay="0.2s">Student Talent Economy</h2>
-                            <div class="tomorrows-leaders py-5 my-md-3 wow fadeInUp" data-wow-delay="0.4s">
-                                <h6>Building tomorrow's leaders, today.</h6>
-                                <p>We love working with students and early-career professionals who bring curiosity,
-                                    energy, and bold ideas to the table. Whether you're joining us through our
-                                    Graduate or Management Trainee Programs, or as part of our scholarship network —
-                                    Packfora is built to nurture emerging talent.</p>
-                            </div>
-                            <div class="learn-more-btn wow fadeInUp" data-wow-delay="0.6s">
-                                <a href="#" class="learn-more">Learn More</a>
+         <?php
+            $query = "SELECT * FROM tbl_student_talent_economy ORDER BY id DESC LIMIT 1";
+            $result = $conn->query($query);
+
+            if ($result->num_rows > 0):
+                $row = $result->fetch_assoc();
+        ?>
+            <div class="student-talent">
+                <div class="container-fluid p-md-0">
+                    <div class="row">
+                        <div class="col-md-6 p-0 wow fadeIn" data-wow-delay="0.2s">
+                            <img src="<?= htmlspecialchars(BASE_URL .$row['image']) ?>" alt="Student Talent Economy">
+                        </div>
+                        <div class="col-md-6 student-talent-economy p-md-5 p-3">
+                            <div class="row">
+                                <h2 class="shine-us-title wow fadeIn" data-wow-delay="0.2s">Student Talent Economy</h2>
+                                <div class="tomorrows-leaders py-5 my-md-3 wow fadeInUp" data-wow-delay="0.4s">
+                                    <h6><?= htmlspecialchars($row['title']) ?></h6>
+                                    <p><?= nl2br(htmlspecialchars($row['description'])) ?></p>
+                                </div>
+                                <div class="learn-more-btn wow fadeInUp" data-wow-delay="0.6s">
+                                    <a href="javascript:void(0);" class="learn-more">Learn More</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php
+        else:
+            echo "<p class='text-center'>No Student Talent data available.</p>";
+        endif;
+        ?>
         <!-- End Student Talent Economy -->
 
         <!-- ==== Start Our Benefits ==== -->
-        <section class="our-benefits" style="background: #21409A;">
+
+       <section class="our-benefits" style="background: #21409A;">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <h2 class="sec-title wow fadeIn">A Global Culture</h2>
-                        <h4 class="wow fadeIn" data-wow-delay="0.2s">With global presence of 10+ countries, we bring global perspectives to local execution.</h4>
+                        <h4 class="wow fadeIn" data-wow-delay="0.2s">
+                            With global presence of 10+ countries, we bring global perspectives to local execution.
+                        </h4>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 py-4">
-                        <div class="global-culture text-center wow zoomIn" data-wow-delay="0.4s">
-                            <h4>Clientele</h4>
-                            <div class="icon">
-                                <img src="assets/img/our-team/clientele.png" alt="" srcset="">
+                    <?php
+                    $sql = "SELECT * FROM tbl_global_culture WHERE is_delete = 1 ORDER BY id ASC";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0):
+                        while ($row = $result->fetch_assoc()):
+                    ?>
+                            <div class="col-md-4 py-4">
+                                <div class="global-culture text-center wow zoomIn" data-wow-delay="0.4s">
+                                    <h4><?= htmlspecialchars($row['title']) ?></h4>
+                                    <div class="icon">
+                                        <img src="<?= htmlspecialchars(BASE_URL .$row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                                    </div>
+                                    <p><?= htmlspecialchars($row['description']) ?></p>
+                                </div>
                             </div>
-                            <P>Trusted by brands across continents</P>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="global-culture text-center wow zoomIn" data-wow-delay="0.4s">
-                            <h4>Projects</h4>
-                            <div class="icon">
-                                <img src="assets/img/our-team/projects.png" alt="" srcset="">
-                            </div>
-                            <P>International in spirit, even when local in scope</P>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="global-culture text-center wow zoomIn" data-wow-delay="0.4s">
-                            <h4>Culture</h4>
-                            <div class="icon">
-                                <img src="assets/img/our-team/culture.png" alt="" srcset="">
-                            </div>
-                            <P>Diverse, inclusive, and deeply collaborative</P>
-                        </div>
-                    </div>
+                    <?php
+                        endwhile;
+                    else:
+                        echo '<div class="col-12 text-white text-center"><p>No records found.</p></div>';
+                    endif;
+
+                
+                    ?>
                 </div>
             </div>
         </section>
@@ -298,54 +276,41 @@
             <div class="container">
                 <div class="row">
                     <h2 class="mb-3 wow fadeInUp">Work with technocrats</h2>
-                    <p class="mb-4 wow fadeInUp" data-wow-delay="0.2s">At Packfora, you're never boxed in by your job title. You're empowered by the people
-                        around you — experts, creators, and collaborators who span the full packaging ecosystem. You'll
-                        work with:</p>
+                    <p class="mb-4 wow fadeInUp" data-wow-delay="0.2s">
+                        At Packfora, you're never boxed in by your job title. You're empowered by the people
+                        around you — experts, creators, and collaborators who span the full packaging ecosystem.
+                        You'll work with:
+                    </p>
                 </div>
-                
 
                 <div class="row">
                     <div class="technocrats-slider wow fadeInUp" data-wow-delay="0.4s">
                         <div class="owl-carousel owl-theme technocrats-nav">
-                            <div class="item work-technocrats">
-                                <div class="item-content">
-                                    <h3>Subject Matter Experts (SMEs)</h3>
-                                    <p>Technical specialists driving deep impact.</p>
-                                </div>
-                            </div>
+                            <?php
+                            $query = "SELECT * FROM tbl_work_with_technocarts WHERE is_delete = 1 ORDER BY id ASC";
+                            $result = $conn->query($query);
 
-                            <div class="item work-technocrats">
-                                <div class="item-content">
-                                    <h3>Brand Owners</h3>
-                                    <p>The minds behind category-defining brands.</p>
+                            if ($result->num_rows > 0):
+                                while ($row = $result->fetch_assoc()):
+                            ?>
+                                <div class="item work-technocrats">
+                                    <div class="item-content">
+                                        <h3><?= htmlspecialchars($row['title']) ?></h3>
+                                        <p><?= htmlspecialchars($row['description']) ?></p>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="item work-technocrats">
-                                <div class="item-content">
-                                    <h3>Producers & Converters</h3>
-                                    <p>Partners who bring big ideas to life.</p>
-                                </div>
-                            </div>
-
-                            <div class="item work-technocrats">
-                                <div class="item-content">
-                                    <h3>Design Houses</h3>
-                                    <p>Creatives who fuse form with function.</p>
-                                </div>
-                            </div>
-
-                            <div class="item work-technocrats">
-                                <div class="item-content">
-                                    <h3>Technology Leaders like Dassault Systèmes</h3>
-                                    <p>Tools that keep us future-ready.</p>
-                                </div>
-                            </div>
+                            <?php
+                                endwhile;
+                            else:
+                                echo '<div class="text-center">No technocrats data available.</div>';
+                            endif;                          
+                            ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- End Work with technocrats -->
 
         <!-- Start Life at Packfora  -->
@@ -355,65 +320,40 @@
                     <h2 class="wow fadeIn">Life at Packfora</h2>
                 </div>
 
-                <div class="row">
+               <div class="row">
                     <div class="packfora-life-slider wow fadeInUp" data-wow-delay="0.2s">
                         <div class="owl-carousel owl-theme packforalife-nav">
-                            <div class="item"
-                                data-video-url="assets/img/our-team/life-at-packfora/Aries.mp4">
-                                <div class="video-container">
-                                    <img src="assets/img/our-team/life-at-packfora/aries-thumbnail.webp"
-                                        alt="">
-                                    <div class="play-btn"><img src="assets/img/our-team/play.webp" alt=""></div>
-                                </div>
-                            </div>
+                            <?php
+                            $sql = "SELECT * FROM tbl_life_at_packfora WHERE is_delete = 1 ORDER BY id ASC";
+                            $result = $conn->query($sql);
 
-                            <div class="item"
-                                data-video-url="assets/img/our-team/life-at-packfora/cherrie.mp4">
-                                <div class="video-container">
-                                    <img src="assets/img/our-team/life-at-packfora/cherrie-thumbnail.webp"
-                                        alt="">
-                                    <div class="play-btn"><img src="assets/img/our-team/play.webp" alt=""></div>
-                                </div>
-                            </div>
+                            if ($result->num_rows > 0):
+                                while ($row = $result->fetch_assoc()):
+                                    $videoPath = htmlspecialchars(BASE_URL . $row['video']);
 
-                            <div class="item"
-                                data-video-url="assets/img/our-team/life-at-packfora/joel.mp4">
-                                <div class="video-container">
-                                    <img src="assets/img/our-team/life-at-packfora/joel-thumbnail.webp"
-                                        alt="">
-                                    <div class="play-btn"><img src="assets/img/our-team/play.webp" alt=""></div>
+                                    // Assuming thumbnail name is manually linked to video or stored in `image` column
+                                    $thumbnailPath = BASE_URL . $row['image'];
+                            ?>
+                                <div class="item" data-video-url="<?= $videoPath ?>">
+                                    <div class="video-container">
+                                        <img src="<?= $thumbnailPath ?>" alt="Thumbnail">
+                                        <div class="play-btn">
+                                            <img src="assets/img/our-team/play.webp" alt="Play">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php
+                                endwhile;
+                            else:
+                                echo '<div class="text-center text-white">No videos found.</div>';
+                            endif;
 
-                            <div class="item"
-                                data-video-url="assets/img/our-team/life-at-packfora/sheryll.mp4">
-                                <div class="video-container">
-                                    <img src="assets/img/our-team/life-at-packfora/sheryll-thumbnail.webp"
-                                        alt="">
-                                    <div class="play-btn"><img src="assets/img/our-team/play.webp" alt=""></div>
-                                </div>
-                            </div>
-
-                            <div class="item"
-                                data-video-url="assets/img/our-team/life-at-packfora/supriya.mp4">
-                                <div class="video-container">
-                                    <img src="assets/img/our-team/life-at-packfora/supriya-thumbnail.webp"
-                                        alt="">
-                                    <div class="play-btn"><img src="assets/img/our-team/play.webp" alt=""></div>
-                                </div>
-                            </div>
-
-                            <div class="item"
-                                data-video-url="assets/img/our-team/life-at-packfora/tom.mp4">
-                                <div class="video-container">
-                                    <img src="assets/img/our-team/life-at-packfora/thomas-thumbnail.webp"
-                                        alt="">
-                                    <div class="play-btn"><img src="assets/img/our-team/play.webp" alt=""></div>
-                                </div>
-                            </div>
+                            $conn->close(); // Only for core PHP setup
+                            ?>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <!-- End Life at Packfora  -->

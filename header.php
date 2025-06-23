@@ -16,43 +16,43 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0);" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Who We Are
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                         <li><a class="dropdown-item" href="about-us.php">Why Packfora</a></li>
-                        <!-- <li><a class="dropdown-item" href="#">Our Capabilities</a></li> -->
+                        <!-- <li><a class="dropdown-item" href="javascript:void(0);">Our Capabilities</a></li> -->
                         <li><a class="dropdown-item" href="leadership.php">Our Leadership</a></li>
                     </ul>
                 </li>
                 <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0);" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         What We Do
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Services</a></li>
-                        <li><a class="dropdown-item" href="#">Digital</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);">Services</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);">Digital</a></li>
                     </ul>
                 </li> -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         What We Do
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-toggle" href="#">Services</a>
+                            <a class="dropdown-item dropdown-toggle" href="javascript:void(0);">Services</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="talent-flex.php">Talent Flex</a></li>
                                 <li><a class="dropdown-item" href="sustainability.php">Sustainability</a></li>
                                 <li><a class="dropdown-item" href="supply-chain-automation.php">Supply Chain
                                         Automation</a></li>
-                                <!-- <li><a class="dropdown-item" href="#">Product Innovation</a></li> -->
+                                <!-- <li><a class="dropdown-item" href="javascript:void(0);">Product Innovation</a></li> -->
                                 <li><a class="dropdown-item" href="design-to-value.php">Design to Value</a></li>
-                                <!-- <li><a class="dropdown-item" href="#">Mold Management</a></li> -->
+                                <!-- <li><a class="dropdown-item" href="javascript:void(0);">Mold Management</a></li> -->
                                 <li><a class="dropdown-item" href="packaging-innovation-and-engineering.php">Packaging
                                         Innovation & Engineering</a></li>
                                 <li><a class="dropdown-item" href="packaging-procurement.php">Packaging Procurement</a>
@@ -61,7 +61,7 @@
                             </ul>
                         </li>
                         <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-toggle" href="#">Digital</a>
+                            <a class="dropdown-item dropdown-toggle" href="javascript:void(0);">Digital</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="maxmold.php" target="_blank">MaxMold</a></li>
                             </ul>
@@ -69,19 +69,19 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0);" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         How We Do It
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Our Approach</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);">Our Approach</a></li>
                         <li><a class="dropdown-item" href="case-studies.php">Case Studies</a></li>
                         <li><a class="dropdown-item" href="knowledge-centre.php">Knowledge Centre</a></li>
                         <li class="dropdown-submenu">
-                            <a class="dropdown-item dropdown-toggle" href="#">Events</a>
+                            <a class="dropdown-item dropdown-toggle" href="javascript:void(0);">Events</a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Packforum</a>
+                                    <a class="dropdown-item dropdown-toggle" href="javascript:void(0);">Packforum</a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="packforum-2024.php">2024</a></li>
                                         <li><a class="dropdown-item" href="packforum-2025.php">2025</a></li>
@@ -95,7 +95,7 @@
                     <a class="nav-link" href="maxmold.php">MaxMold</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0);" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Career
                     </a>
@@ -110,7 +110,7 @@
             </ul>
         </div>
         <div class="topnav d-flex align-items-center">
-            <!-- <a href="#" class="butn butn-rounded">
+            <!-- <a href="javascript:void(0);" class="butn butn-rounded">
                     <div class="d-flex align-items-center">
                         <span>Enquire Now</span>
                         <span class="icon ml-10 arrow-icon">
@@ -145,7 +145,7 @@
                                 <a href="about-us.php" class="sub-link">Why Packfora</a>
                             </li>
                             <li>
-                                <!-- <a href="#" class="sub-link">Our Capabilities</a> -->
+                                <!-- <a href="javascript:void(0);" class="sub-link">Our Capabilities</a> -->
                             </li>
                             <li>
                                 <a href="leadership.php" class="sub-link">Our Leadership</a>
@@ -164,7 +164,7 @@
                         <ul>
                             <li>
                                 <div class="link cursor-pointer submenu-toggle">
-                                    <span class="sub-link"><a href="#">Services</a></span>
+                                    <span class="sub-link"><a href="javascript:void(0);">Services</a></span>
                                     <i class="fa fa-angle-down"></i>
                                 </div>
                                 <ul class="inner-sub-menu ps-3" style="display: none;">
@@ -172,9 +172,9 @@
                                     <li><a href="sustainability.php" class="sub-link">Sustainability</a></li>
                                     <li><a href="supply-chain-automation.php" class="sub-link">Supply Chain
                                             Automation</a></li>
-                                    <!-- <li><a href="#" class="sub-link">Product Innovation</a></li> -->
+                                    <!-- <li><a href="javascript:void(0);" class="sub-link">Product Innovation</a></li> -->
                                     <li><a href="design-to-value.php" class="sub-link">Design to Value</a></li>
-                                    <!-- <li><a href="#" class="sub-link">Mold Management</a></li> -->
+                                    <!-- <li><a href="javascript:void(0);" class="sub-link">Mold Management</a></li> -->
                                     <li><a href="packaging-innovation-and-engineering.php" class="sub-link">Packaging
                                             Innovation & Engineering</a></li>
                                     <li><a href="packaging-procurement.php" class="sub-link">Packaging Procurement</a>
@@ -205,7 +205,7 @@
                     <div class="sub-menu">
                         <ul>
                             <li>
-                                <a href="#" class="sub-link">Our Approach</a>
+                                <a href="javascript:void(0);" class="sub-link">Our Approach</a>
                             </li>
                             <li>
                                 <a href="case-studies.php" class="sub-link">Case Studies</a>
@@ -290,7 +290,7 @@
                         <i class="fab fa-youtube"></i>
                     </a>
 
-                    <a href="#" target="_blank">
+                    <a href="javascript:void(0);" target="_blank">
                         <i class="fas fa-rss"></i>
                     </a>
                 </div>

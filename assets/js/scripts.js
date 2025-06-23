@@ -303,49 +303,54 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', animateCounters);
 });
 // Home Page Load More Services
-let servicesVisible = false;
+// let servicesVisible = false;
 
-function toggleMoreServices(event) {
-    event.preventDefault(); // Prevent default link behavior
+// function toggleMoreServices(event) {
+//     event.preventDefault();
 
-    const additionalServices = document.getElementById('additionalServices');
-    const loadMoreText = document.getElementById('loadMoreText');
-    const plusIcon = document.getElementById('plusIcon');
+//     const additionalServices = document.querySelectorAll('.additional-services');
+//     const loadMoreText = document.getElementById('loadMoreText');
+//     const plusIcon = document.getElementById('plusIcon');
 
-    if (!servicesVisible) {
-        // Show services
-        additionalServices.classList.add('show');
-        loadMoreText.innerHTML = 'For More<br>Services<br>Click here <span id="plusIcon">-</span>';
-        servicesVisible = true;
+//     if (!servicesVisible) {
+//         // Show additional services
+//         additionalServices.forEach(el => el.classList.remove('d-none'));
+//         loadMoreText.innerHTML = 'Show Less <span id="plusIcon">−</span>';
+//         servicesVisible = true;
 
-        // Trigger wow animations for service cards
-        const serviceCards = additionalServices.querySelectorAll('.wow');
-        serviceCards.forEach((card, index) => {
-            setTimeout(() => {
-                card.classList.add('animated', 'fadeInUp');
-            }, index * 200);
-        });
+//         // Trigger animations
+//         additionalServices.forEach(section => {
+//             const cards = section.querySelectorAll('.wow');
+//             cards.forEach((card, index) => {
+//                 setTimeout(() => {
+//                     card.classList.add('animated', 'fadeInUp');
+//                 }, index * 100); // Adjust delay for stagger effect
+//             });
+//         });
 
-    } else {
-        // Hide services
-        additionalServices.classList.remove('show');
-        loadMoreText.innerHTML = 'For More<br>Services<br>Click here <span id="plusIcon">+</span>';
-        servicesVisible = false;
+//     } else {
+//         // Hide additional services
+//         additionalServices.forEach(el => el.classList.add('d-none'));
+//         loadMoreText.innerHTML = 'For More<br>Services<br>Click here <span id="plusIcon">+</span>';
+//         servicesVisible = false;
 
-        // Reset animations
-        const serviceCards = additionalServices.querySelectorAll('.wow');
-        serviceCards.forEach(card => {
-            card.classList.remove('animated', 'fadeInUp');
-        });
-    }
-}
+//         // Remove animation classes
+//         additionalServices.forEach(section => {
+//             const cards = section.querySelectorAll('.wow');
+//             cards.forEach(card => {
+//                 card.classList.remove('animated', 'fadeInUp');
+//             });
+//         });
+//     }
+// }
 
-// Initialize page
-document.addEventListener('DOMContentLoaded', function () {
-    // Hide additional services initially
-    const additionalServices = document.getElementById('additionalServices');
-    additionalServices.style.display = 'flex';
-});
+// // Optional: Initialize with additional services hidden
+// document.addEventListener('DOMContentLoaded', function () {
+//     const additionalServices = document.querySelectorAll('.additional-services');
+//     additionalServices.forEach(el => el.classList.add('d-none'));
+// });
+
+
 
 // Service Pages
 $(document).ready(function () {
