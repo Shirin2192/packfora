@@ -15,12 +15,12 @@ use PHPMailer\PHPMailer\Exception;
 
 $response = ['status' => 'success', 'errors' => []];
 
-$name = trim($_POST['name']);
-$email = trim($_POST['email']);
-$company = trim($_POST['company']);
-$role = trim($_POST['role']);
-$industry = trim($_POST['industry']);
-$country = trim($_POST['country']);
+$name = isset($_POST['name']) ? trim($_POST['name']) : '';
+$email = isset($_POST['email']) ? trim($_POST['email']) : '';
+$company = isset($_POST['company']) ? trim($_POST['company']) : '';
+$role = isset($_POST['role']) ? trim($_POST['role']) : '';
+$industry = isset($_POST['industry']) ? trim($_POST['industry']) : '';
+$country = isset($_POST['country']) ? trim($_POST['country']) : '';
 $optin = isset($_POST['optin']) ? 1 : 0;
 
 // Validation
@@ -34,6 +34,15 @@ if (empty($email)) {
 }
 if (empty($country)) {
     $response['errors']['country'] = "Country is required.";
+}
+if (empty($company)) {
+    $response['errors']['company'] = "Company is required.";
+}
+if (empty($industry)) {
+    $response['errors']['industry'] = "Industry is required.";
+}
+if (empty($role)) {
+    $response['errors']['role'] = "Role is required.";
 }
 
 if (!empty($response['errors'])) {
@@ -49,7 +58,7 @@ $stmt->bind_param("ssssssi", $name, $email, $company, $role, $industry, $country
 if ($stmt->execute()) {
     // SEND EMAILS
     $from_name = "Packfora";     // Sender Name
-    $to_email = "moiz@sda-zone.com"; 
+    $to_email = "shirin@sda-zone.com"; 
 
    
     $subject = "New Whitepaper Download Request from $name";
@@ -84,7 +93,7 @@ if ($stmt->execute()) {
         //  $mail->addAddress('moiz@sda-zone.com');  // Second recipient (add your second email here)
 
         // Attach uploaded resume
-        $mail->addAttachment($target_file, $file_name);
+        // $mail->addAttachment($target_file, $file_name);
 
         $mail->isHTML(true);
         $mail->Subject = $subject;
