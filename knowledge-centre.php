@@ -37,6 +37,9 @@
 </head>
 
 <body>
+    <?php include 'db_connect.php';
+         include 'config.php';  
+         ?>
     <!-- ==================== Start Loading ==================== -->
     <!-- <div class="loader-wrap">
         <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
@@ -134,69 +137,46 @@
                 <div class="row">
                     <h2 class="offering-title mb-3 wow fadeIn" style="color: #21409A;">Blog</h2>
                 </div>
-                <div class="row">
+                <?php
+                    $query = "SELECT * FROM tbl_blogs WHERE is_delete = '1' ORDER BY id DESC LIMIT 1"; // You can extend to multiple if needed
+                    $result = mysqli_query($conn, $query);
+
+                    if (mysqli_num_rows($result) > 0) {
+                    $blog = mysqli_fetch_assoc($result);
+                    // Split description into paragraphs for animation
+                    $paragraphs = preg_split("/\.\s+/", $blog['description']);
+                ?>
+              <div class="row">
                     <div class="col-md-12">
                         <div class="container-fluid blogs-content active pe-lg-0">
                             <div class="row align-items-center">
-                                <div class="col-md-6 py-4 pe-lg-0">
-                                    <div class="blog-content">
-                                        <h3 class="wow fadeInUp" data-wow-delay="0.2s">Late Varianting in Packaging: On-Demand Corrugate Printing for Agility and Sustainability</h3>
-                                        <p class="wow fadeInUp" data-wow-delay="0.3s">In recent conversations with both global FMCG firms and high-growth nutraceutical startups, one challenge keeps surfacing: packaging is lagging the rest of the supply chain.</p>
-                                        <p class="wow fadeInUp" data-wow-delay="0.4s">Earlier this year, we worked with a client preparing to launch a personalized subscription product across multiple markets. Formulations were finalized; marketing was locked in—but a last-minute regulatory update required changes to their packaging artwork. Because the corrugate boxes were pre-printed weeks in advance, everything stalled. The delay cost them a high visibility launch window.</p>
-                                        <p class="wow fadeInUp" data-wow-delay="0.5s">Scenarios like these highlight a deeper issue: traditional packaging workflows—planned early, printed in bulk, and forecasted far in advance—no longer align with today's market dynamics.</p>
-                                        <div class="about-banner-btn mt-40 wow fadeInUp" data-wow-delay="0.5s">
-                                            <a href="#get-in-touch" class="read_more">Read Blogs</a>
-                                        </div>
-                                    </div>
+                            <div class="col-md-6 py-4 pe-lg-0">
+                                <div class="blog-content">
+                                <h3 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($blog['title']); ?></h3>
+                                <?php
+                                $delay = 0.3;
+                                foreach ($paragraphs as $para) {
+                                    $trimmed = trim($para);
+                                    if (!empty($trimmed)) {
+                                    echo '<p class="wow fadeInUp" data-wow-delay="' . number_format($delay, 1) . 's">' . htmlspecialchars($trimmed) . '.</p>';
+                                    $delay += 0.1;
+                                    }
+                                }
+                                ?>
+                                <div class="about-banner-btn mt-40 wow fadeInUp" data-wow-delay="<?= number_format($delay, 1) ?>s">
+                                    <a href="<?= !empty($blog['link']) ? $blog['link'] : '#get-in-touch'; ?>" class="read_more">Read Blogs</a>
                                 </div>
-                                <div class="col-md-6 pe-lg-0 wow zoomIn" data-wow-delay="0.2s">
-                                    <img src="assets/img/blog/main-blog.webp" alt="" srcset="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="col-md-3 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="related-blog mt-3 mt-lg-auto">
-                            <div class="row">
-                                <div class="col-md-6 col-6">
-                                    <img src="assets/img/blog/main-blog.webp" alt="" srcset="">
-                                </div>
-                                <div class="col-md-6 col-6 ps-0">
-                                    <div class="related-blog-details">
-                                        <h6>The Problem with Packaging That's Planned Too Early</h6>
-                                        <h5>Learn More</h5>
-                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="related-blog my-3">
-                            <div class="row">
-                                <div class="col-md-6 col-6">
-                                    <img src="assets/img/blog/main-blog.webp" alt="" srcset="">
-                                </div>
-                                <div class="col-md-6 col-6 ps-0">
-                                    <div class="related-blog-details">
-                                        <h6>The Problem with Packaging That's Planned Too Early</h6>
-                                        <h5>Learn More</h5>
-                                    </div>
-                                </div>
+                            <div class="col-md-6 pe-lg-0 wow zoomIn" data-wow-delay="0.2s">
+                                <img src="<?= BASE_URL . htmlspecialchars($blog['image']); ?>" alt="Main Blog Image">
+                            </div>
                             </div>
                         </div>
-                        <div class="related-blog">
-                            <div class="row">
-                                <div class="col-md-6 col-6">
-                                    <img src="assets/img/blog/main-blog.webp" alt="" srcset="">
-                                </div>
-                                <div class="col-md-6 col-6 ps-0">
-                                    <div class="related-blog-details">
-                                        <h6>The Problem with Packaging That's Planned Too Early</h6>
-                                        <h5>Learn More</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
+            <?php
+            }
+            ?>
             </div>
         </section>
         <!-- ==== End Blog ==== -->

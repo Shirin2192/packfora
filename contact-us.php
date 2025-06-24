@@ -452,9 +452,7 @@
 
                                                             <!-- Phone number input -->
                                                             <input id="Phone_Number" class="NumberOnly" type="text"
-                                                                name="PhoneNumber" placeholder="Your phone number"
-                                                                maxlength="10" minlength="10"
-                                                                style="flex-grow: 1; width: 100%;">
+                                                                name="PhoneNumber" placeholder="Your phone number" style="flex-grow: 1; width: 100%;">
                                                         </div>
                                                     </div>
                                                 </div>

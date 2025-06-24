@@ -235,7 +235,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- Case Study 2: Personal Care / Pharma -->
                         <div class="col-lg-4 my-3 content-section"
                             data-tags="Specification Management,Pharmaceuticals,Personal Care & Cosmetics,Healthcare Devices">
