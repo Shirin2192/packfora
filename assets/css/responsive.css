@@ -34,10 +34,12 @@
     .slide4 .content {
         max-width: 100%;
     }
+
     .content,
     .slide5 .content {
         max-width: 100%;
     }
+
     .slide1 .read_more,
     .slide5 .read_more,
     .slide2 .read_more,
@@ -198,6 +200,54 @@
         font-size: 30px;
     }
 
+    /* Capabilities Page */
+    .capabilities-title-banner {
+        height: 70vh;
+    }
+
+    .capabilities-title-banner .page-title-bar {
+        width: 90%;
+        margin-bottom: 60px;
+    }
+
+    .capabilities-title-banner .page-title-bar h2 {
+        font-size: 37px;
+    }
+
+    .capabilities-title-banner .page-title-bar h3 {
+        font-size: 22px;
+    }
+
+    .measurable-results-01,
+    .measurable-results-02,
+    .border-end {
+        border: none !important;
+    }
+
+    .measurable-results-02 .measurable-result,
+    .measurable-results-03 .measurable-result {
+        padding: 0;
+    }
+
+    .impact-enabled h2,
+    .our-pillars h2 {
+        font-size: 30px;
+    }
+
+    .holistic-value-model p,
+    .value-chain-expertise p {
+        width: 100%;
+    }
+
+    .strategy-title-mob-top {
+        border-top: 2px solid #dee2e6;
+        margin-top: 25px !important;
+        padding-top: 35px;
+        width: 75%;
+        margin: auto;
+        display: table;
+    }
+
     /* Leadership Page  */
     .page-title-banner {
         height: 70vh;
@@ -233,6 +283,12 @@
         /* Full width on mobile */
         right: -100%;
         /* Position fully off-screen initially */
+    }
+
+    .popup-mob {
+        max-height: 80vh;
+        overflow-y: auto;
+        padding-right: 20px;
     }
 
     /* Career Page */
@@ -336,7 +392,7 @@
 
     /* services pages */
     .page-banner {
-        max-height: 100%;
+        height: 100%;
         /* height: 80vh; */
         background: linear-gradient(to right, rgba(33, 64, 154, 0.9) 0%, rgb(107 131 201 / 90%) 100%, transparent 100%);
     }
@@ -352,6 +408,11 @@
 
     .page-banner .content {
         width: 90%;
+        margin: 150px 0 100px 0;
+    }
+
+    .page-banner .content h1 {
+        font-size: 36px;
     }
 
     .offering-title {
@@ -724,6 +785,7 @@
     .case-study-inner-ptb {
         height: 70vh;
     }
+
     .case-study-inner-ptb .page-title-bar h1 {
         font-size: 37px;
     }
@@ -931,10 +993,12 @@
         margin: 0 auto 0px;
         max-width: 100%;
     }
-    .maxmold-story{
+
+    .maxmold-story {
         padding: 25px 0 0;
     }
-    .story-placeholder{
-      padding: 60px 25px;
+
+    .story-placeholder {
+        padding: 60px 25px;
     }
 }

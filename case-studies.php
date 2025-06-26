@@ -107,7 +107,9 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-
+    <?php include 'db_connect.php';
+         include 'config.php';  
+         ?>
     <main>
         <!-- ==== Start Home Banner ==== -->
         <section class="case-study-inner-ptb"
@@ -122,8 +124,18 @@
             </div>
         </section>
         <!-- ==== End Home Banner ==== -->
-
+        
         <!-- Start All Case Study -->
+        <?php 
+            $sql = "SELECT * FROM tbl_case_study WHERE is_delete = '1' ORDER BY id ASC";
+            $result = $conn->query($sql);
+            $case_studies = [];
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $case_studies[] = $row;
+                }
+            }
+        ?>
         <section class="case-studies">
             <div class="container mt-5">
                 <h2 class="offering-title mb-3 wow fadeIn"
@@ -211,6 +223,7 @@
                 </div>
 
                 <!-- Content sections with case studies -->
+
                 <div class="content-sections">
                     <div class="row">
                         <!-- Case Study 1: Foods / FMCG -->
@@ -248,8 +261,7 @@
                                         <div class="case-study-body">
                                             <a href="pharma-case-study.php">
                                                 <p class="meta">MAY 3, 2025</p>
-                                                <h5 class="title">How Packfora streamlined a major pharma company in
-                                                    their specification management.</h5>
+                                                <h5 class="title">How Packfora streamlined a major pharma company in their specification management.</h5>
                                                 <h6>Read Full Case Study</h6>
                                             </a>
                                         </div>

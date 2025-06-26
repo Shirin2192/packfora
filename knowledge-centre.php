@@ -187,63 +187,41 @@
                 <div class="row">
                     <h2 class="offering-title mb-3 wow fadeIn" style="color: #21409A;">More Blogs</h2>
                 </div>
+                <?php
+                    // Query to get blogs where is_delete = '1' and id != 1
+                    $sql = "SELECT * FROM tbl_blogs WHERE is_delete = '1' AND id != 1 ORDER BY id ASC";
+                    $result = $conn->query($sql);
+
+                    $blogs = [];
+                    if ($result && $result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $blogs[] = $row;
+                        }
+                    }
+                ?>
                 <div class="row">
-                    <div class="col-lg-3 my-2 my-lg-auto">
-                        <div class="blogs-card wow zoomIn slow" data-wow-delay="0.2s">
-                            <div class="blogs-img">
-                                <img src="assets/img/services/product-innovation.webp" class="w-100">
-                            </div>
-                            <div class="blogs-content">
-                                <h4 class="mb-2">Product Innovation</h4>
-                                <p>Leverage data-driven insights to accelerate go-to-market strategies and
-                                    amplify packaging's role in brand growth.</p>
-                                <h5>Learn More</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 my-2 my-lg-auto">
-                        <div class="blogs-card wow zoomIn slow" data-wow-delay="0.2s">
-                            <div class="blogs-img">
-                                <img src="assets/img/services/design-to-value.webp" class="w-100">
-                            </div>
-                            <div class="blogs-content">
-                                <h4 class="mb-2">Design to Value</h4>
-                                <p>Design cost-effective packaging solutions that align with evolving
-                                    industry trends and consumer expectations.</p>
-                                <a href="design-to-value.php">
-                                    <h5>Learn More</h5>
-                                </a>
+                    <?php foreach ($blogs as $blog): ?>
+                        <div class="col-lg-3 my-2 my-lg-auto">
+                            <div class="blogs-card wow zoomIn slow" data-wow-delay="0.2s">
+                                <div class="blogs-img">
+                                    <img src="<?= BASE_URL .htmlspecialchars($blog['image']) ?>" class="w-100" alt="<?= htmlspecialchars($blog['title']) ?>">
+                                </div>
+                                <div class="blogs-content">
+                                    <h4 class="mb-2"><?= htmlspecialchars($blog['title']) ?></h4>
+                                    <p><?= htmlspecialchars($blog['description']) ?></p>
+                                    <?php if (!empty($blog['link']) && $blog['link'] !== '#'): ?>
+                                        <a href="<?= htmlspecialchars($blog['link']) ?>">
+                                            <h5>Learn More</h5>
+                                        </a>
+                                    <?php else: ?>
+                                        <h5>Learn More</h5>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 my-2 my-lg-auto">
-                        <div class="blogs-card wow zoomIn slow" data-wow-delay="0.2s">
-                            <div class="blogs-img">
-                                <img src="assets/img/services/mold-management.webp" class="w-100">
-                            </div>
-                            <div class="blogs-content">
-                                <h4 class="mb-2">Mold Management</h4>
-                                <p>Optimize production with advanced mold management, extending lifecycle
-                                    value and minimizing costs.</p>
-                                <h5>Learn More</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 my-2 my-lg-auto">
-                        <div class="blogs-card wow zoomIn slow" data-wow-delay="0.2s">
-                            <div class="blogs-img">
-                                <img src="assets/img/services/packaging-innovation-engineering.webp" class="w-100">
-                            </div>
-                            <div class="blogs-content">
-                                <h4 class="mb-2">Packaging Innovation & Engineering</h4>
-                                <p>Pushing the boundaries of packaging with next-gen innovations—leveraging rapid prototyping.</p>
-                                <a href="packaging-innovation-and-engineering.php">
-                                    <h5>Learn More</h5>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
+
             </div>
         </div>
         <!-- ==== End More Blog ==== -->

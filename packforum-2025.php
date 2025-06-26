@@ -37,6 +37,9 @@
 </head>
 
 <body>
+       <?php  include 'db_connect.php';
+            include 'config.php';  
+         ?>
     <!-- ==================== Start Loading ==================== -->
     <!-- <div class="loader-wrap">
         <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
@@ -110,13 +113,22 @@
 
     <main>
         <!-- ==== Start Home Banner ==== -->
-        <section id="videoSection" class="page-banner"
+         <?php // Query to fetch active video (is_delete = '1')
+            $sql = "SELECT * FROM tbl_video_banner WHERE is_delete = '1' ORDER BY id DESC LIMIT 1";
+            $result = $conn->query($sql);
+            $videoData = $result->fetch_assoc();
+            ?>
+          <section id="videoSection" class="page-banner"
             style="position: sticky; height: 110vh; top: 0; overflow: hidden;">
             <div class="video-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                <video id="bgVideo" autoplay muted loop playsinline
-                    style="width: 100%; height: 100%; object-fit: cover;">
-                    <source src="assets/img/packforum/packforum-usa-coverage.webm" type="video/webm">
-                </video>
+                <?php if (!empty($videoData['video'])): ?>
+                    <video id="bgVideo" autoplay muted loop playsinline
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                        <source src="<?= BASE_URL . htmlspecialchars($videoData['video']) ?>" type="video/webm">
+                    </video>
+                <?php else: ?>
+                    <p style="color: white;">No video available</p>
+                <?php endif; ?>
             </div>
             <div id="videoControls" style="position: absolute; top: 100px; right: 20px; z-index: 2;">
                 <button id="playPauseBtn"><i class="fas fa-pause"></i></button>
@@ -191,31 +203,40 @@
                         </div>
 
                         <!-- Right Section - Very subtle animation for the image gallery -->
+                       <?php 
+                        $sql = "SELECT * FROM tbl_event_slider WHERE is_delete = '1' ORDER BY id ASC";
+                        $result = $conn->query($sql);
+
+                        $images = [];
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $images[] = $row;
+                            }
+                        }
+                        ?>
                         <div class="col-md-6 p-0 wow fadeIn" data-wow-duration="1.5s" data-wow-offset="0">
                             <div class="image-container">
                                 <div class="image-overlay"
                                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, #0d3a89, rgb(13 59 139 / 50%) 30%, transparent 70%);">
                                 </div>
-                                <img id="mainImage" src="assets/img/packforum/gallery/packforum-01.webp"
-                                    alt="Main Display" class="main-image">
 
-                                <div class="thumbnail-container" id="thumbnailContainer">
-                                    <div class="thumbnails">
-                                        <img src="assets/img/packforum/gallery/packforum-01.webp"
-                                            class="thumbnail active">
-                                        <img src="assets/img/packforum/gallery/packforum-02.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-03.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-04.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-05.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-06.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-07.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-08.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-09.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-10.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-11.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-12.webp" class="thumbnail">
+                                <?php if (!empty($images)): ?>
+                                    <!-- Main Image -->
+                                    <img id="mainImage" src="<?= BASE_URL . htmlspecialchars($images[0]['image']) ?>"
+                                        alt="Main Display" class="main-image">
+
+                                    <!-- Thumbnails -->
+                                    <div class="thumbnail-container" id="thumbnailContainer">
+                                        <div class="thumbnails">
+                                            <?php foreach ($images as $index => $img): ?>
+                                                <img src="<?= BASE_URL .htmlspecialchars($img['image']) ?>"
+                                                    class="thumbnail <?= $index === 0 ? 'active' : '' ?>">
+                                            <?php endforeach; ?>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php else: ?>
+                                    <p>No images found.</p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -225,130 +246,41 @@
             <!-- ==== End Packforum  Movement ==== -->
 
         <!-- ==== Start clients ==== -->
-        <div class="clients" id="client">
-            <div class="clients-ds py-5">
-                <div class="container">
-                    <!-- <h2 class="impact-title mb-4 wow fadeIn">Our Clients</h2> -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="owl-carousel row sm-marg clientOwl wow fadeIn" data-wow-delay="0.2s">
-                                <div class="col-lg md-mb30">
-                                    <div class="item d-flex align-items-center justify-content-center">
-                                        <div class="img">
-                                            <img src="assets/img/clients/abott.webp" alt="">
-                                        </div>
-                                    </div>
-                                </div>
+            <?php 
+                $sql = "SELECT * FROM our_clients WHERE is_delete = '1' ORDER BY id ASC";
+                $result = $conn->query($sql);
 
-                                <div class="col-lg md-mb30">
-                                    <div class="item d-flex align-items-center justify-content-center">
-                                        <div class="img">
-                                            <img src="assets/img/clients/berry.webp" alt="">
+                $clients = [];
+                if ($result && $result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $clients[] = $row;
+                    }
+                }
+            ?>
+            <div class="clients" id="client">
+                <div class="clients-ds py-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="owl-carousel row sm-marg clientOwl wow fadeIn" data-wow-delay="0.2s">
+                                    <?php foreach ($clients as $client): ?>
+                                        <div class="col-lg md-mb30">
+                                            <div class="item d-flex align-items-center justify-content-center">
+                                                <div class="img">
+                                                    <img src="<?= BASE_URL . htmlspecialchars($client['image']) ?>" alt="Client Logo">
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    <?php endforeach; ?>
+                                    <?php if (empty($clients)): ?>
+                                        <p>No clients found.</p>
+                                    <?php endif; ?>
                                 </div>
-
-                                <div class="col-lg md-mb30">
-                                    <div class="item d-flex align-items-center justify-content-center">
-                                        <div class="img">
-                                            <img src="assets/img/clients/brillon.webp" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg md-mb30">
-                                    <div class="item d-flex align-items-center justify-content-center">
-                                        <div class="img">
-                                            <img src="assets/img/clients/danone.webp" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg md-mb30">
-                                    <div class="item d-flex align-items-center justify-content-center">
-                                        <div class="img">
-                                            <img src="assets/img/clients/diageo.webp" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg md-mb30">
-                                    <div class="item d-flex align-items-center justify-content-center">
-                                        <div class="img">
-                                            <img src="assets/img/clients/encube.webp" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg md-mb30">
-                                    <div class="item d-flex align-items-center justify-content-center">
-                                        <div class="img">
-                                            <img src="assets/img/clients/glenmark.webp" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg md-mb30">
-                                    <div class="item d-flex align-items-center justify-content-center">
-                                        <div class="img">
-                                            <img src="assets/img/clients/hersheys.webp" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg md-mb30">
-                                    <div class="item d-flex align-items-center justify-content-center">
-                                        <div class="img">
-                                            <img src="assets/img/clients/marico.webp" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-lg md-mb30">
-                                    <div class="item d-flex align-items-center justify-content-center">
-                                        <div class="img">
-                                            <img src="assets/img/clients/mondelez.webp" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg md-mb30">
-                                    <div class="item d-flex align-items-center justify-content-center">
-                                        <div class="img">
-                                            <img src="assets/img/clients/olam.webp" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg md-mb30">
-                                    <div class="item d-flex align-items-center justify-content-center">
-                                        <div class="img">
-                                            <img src="assets/img/clients/pernod.webp" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg md-mb30">
-                                    <div class="item d-flex align-items-center justify-content-center">
-                                        <div class="img">
-                                            <img src="assets/img/clients/reckitt.webp" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg md-mb30">
-                                    <div class="item d-flex align-items-center justify-content-center">
-                                        <div class="img">
-                                            <img src="assets/img/clients/sln.webp" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         <!-- ==== End clients ==== -->
 
             <!-- ==== Start Impact Stats Section ==== -->

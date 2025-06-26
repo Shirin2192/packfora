@@ -38,6 +38,9 @@
 </head>
 
 <body>
+     <?php  include 'db_connect.php';
+            include 'config.php';  
+         ?>
     <!-- ==================== Start Loading ==================== -->
     <!-- <div class="loader-wrap">
         <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
@@ -111,19 +114,29 @@
 
     <main>
         <!-- ==== Start Home Banner ==== -->
+        <?php // Query to fetch active video (is_delete = '1')
+            $sql = "SELECT * FROM tbl_video_banner WHERE is_delete = '1' ORDER BY id DESC LIMIT 1";
+            $result = $conn->query($sql);
+            $videoData = $result->fetch_assoc();
+            ?>
         <section id="videoSection" class="page-banner"
             style="position: sticky; height: 110vh; top: 0; overflow: hidden;">
             <div class="video-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                <video id="bgVideo" autoplay muted loop playsinline
-                    style="width: 100%; height: 100%; object-fit: cover;">
-                    <source src="assets/img/packforum/packforum-usa-coverage.webm" type="video/webm">
-                </video>
+                <?php if (!empty($videoData['video'])): ?>
+                    <video id="bgVideo" autoplay muted loop playsinline
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                        <source src="<?= BASE_URL . htmlspecialchars($videoData['video']) ?>" type="video/webm">
+                    </video>
+                <?php else: ?>
+                    <p style="color: white;">No video available</p>
+                <?php endif; ?>
             </div>
             <div id="videoControls" style="position: absolute; top: 100px; right: 20px; z-index: 2;">
                 <button id="playPauseBtn"><i class="fas fa-pause"></i></button>
                 <button id="muteUnmuteBtn"><i class="fas fa-volume-mute"></i></button>
             </div>
         </section>
+
         <!-- ==== End Home Banner ==== -->
 
         <div class="below-section" style="position: relative; background: #ffffff;">
@@ -193,33 +206,43 @@
                         </div>
 
                         <!-- Right Section - Very subtle animation for the image gallery -->
+                        <?php 
+                        $sql = "SELECT * FROM tbl_event_slider WHERE is_delete = '1' ORDER BY id ASC";
+                        $result = $conn->query($sql);
+
+                        $images = [];
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $images[] = $row;
+                            }
+                        }
+                        ?>
                         <div class="col-md-6 p-0 wow fadeIn" data-wow-duration="1.5s" data-wow-offset="0">
                             <div class="image-container">
                                 <div class="image-overlay"
                                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, #0d3a89, rgb(13 59 139 / 50%) 30%, transparent 70%);">
                                 </div>
-                                <img id="mainImage" src="assets/img/packforum/gallery/packforum-01.webp"
-                                    alt="Main Display" class="main-image">
 
-                                <div class="thumbnail-container" id="thumbnailContainer">
-                                    <div class="thumbnails">
-                                        <img src="assets/img/packforum/gallery/packforum-01.webp"
-                                            class="thumbnail active">
-                                        <img src="assets/img/packforum/gallery/packforum-02.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-03.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-04.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-05.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-06.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-07.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-08.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-09.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-10.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-11.webp" class="thumbnail">
-                                        <img src="assets/img/packforum/gallery/packforum-12.webp" class="thumbnail">
+                                <?php if (!empty($images)): ?>
+                                    <!-- Main Image -->
+                                    <img id="mainImage" src="<?= BASE_URL . htmlspecialchars($images[0]['image']) ?>"
+                                        alt="Main Display" class="main-image">
+
+                                    <!-- Thumbnails -->
+                                    <div class="thumbnail-container" id="thumbnailContainer">
+                                        <div class="thumbnails">
+                                            <?php foreach ($images as $index => $img): ?>
+                                                <img src="<?= BASE_URL .htmlspecialchars($img['image']) ?>"
+                                                    class="thumbnail <?= $index === 0 ? 'active' : '' ?>">
+                                            <?php endforeach; ?>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php else: ?>
+                                    <p>No images found.</p>
+                                <?php endif; ?>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -227,236 +250,126 @@
             <!-- ==== End Packforum  Movement ==== -->
 
             <!-- ==== Start clients ==== -->
+            <?php 
+                $sql = "SELECT * FROM our_clients WHERE is_delete = '1' ORDER BY id ASC";
+                $result = $conn->query($sql);
+
+                $clients = [];
+                if ($result && $result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $clients[] = $row;
+                    }
+                }
+            ?>
             <div class="clients" id="client">
                 <div class="clients-ds py-5">
                     <div class="container">
-                        <!-- <h2 class="impact-title mb-4 wow fadeIn">Our Clients</h2> -->
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="owl-carousel row sm-marg clientOwl wow fadeIn" data-wow-delay="0.2s">
-                                    <div class="col-lg md-mb30">
-                                        <div class="item d-flex align-items-center justify-content-center">
-                                            <div class="img">
-                                                <img src="assets/img/clients/abott.webp" alt="">
+                                    <?php foreach ($clients as $client): ?>
+                                        <div class="col-lg md-mb30">
+                                            <div class="item d-flex align-items-center justify-content-center">
+                                                <div class="img">
+                                                    <img src="<?= BASE_URL . htmlspecialchars($client['image']) ?>" alt="Client Logo">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="col-lg md-mb30">
-                                        <div class="item d-flex align-items-center justify-content-center">
-                                            <div class="img">
-                                                <img src="assets/img/clients/berry.webp" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg md-mb30">
-                                        <div class="item d-flex align-items-center justify-content-center">
-                                            <div class="img">
-                                                <img src="assets/img/clients/brillon.webp" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg md-mb30">
-                                        <div class="item d-flex align-items-center justify-content-center">
-                                            <div class="img">
-                                                <img src="assets/img/clients/danone.webp" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg md-mb30">
-                                        <div class="item d-flex align-items-center justify-content-center">
-                                            <div class="img">
-                                                <img src="assets/img/clients/diageo.webp" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg md-mb30">
-                                        <div class="item d-flex align-items-center justify-content-center">
-                                            <div class="img">
-                                                <img src="assets/img/clients/encube.webp" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg md-mb30">
-                                        <div class="item d-flex align-items-center justify-content-center">
-                                            <div class="img">
-                                                <img src="assets/img/clients/glenmark.webp" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg md-mb30">
-                                        <div class="item d-flex align-items-center justify-content-center">
-                                            <div class="img">
-                                                <img src="assets/img/clients/hersheys.webp" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg md-mb30">
-                                        <div class="item d-flex align-items-center justify-content-center">
-                                            <div class="img">
-                                                <img src="assets/img/clients/marico.webp" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-lg md-mb30">
-                                        <div class="item d-flex align-items-center justify-content-center">
-                                            <div class="img">
-                                                <img src="assets/img/clients/mondelez.webp" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg md-mb30">
-                                        <div class="item d-flex align-items-center justify-content-center">
-                                            <div class="img">
-                                                <img src="assets/img/clients/olam.webp" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg md-mb30">
-                                        <div class="item d-flex align-items-center justify-content-center">
-                                            <div class="img">
-                                                <img src="assets/img/clients/pernod.webp" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg md-mb30">
-                                        <div class="item d-flex align-items-center justify-content-center">
-                                            <div class="img">
-                                                <img src="assets/img/clients/reckitt.webp" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg md-mb30">
-                                        <div class="item d-flex align-items-center justify-content-center">
-                                            <div class="img">
-                                                <img src="assets/img/clients/sln.webp" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    <?php endforeach; ?>
+                                    <?php if (empty($clients)): ?>
+                                        <p>No clients found.</p>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- ==== End clients ==== -->
 
             <!-- ==== Start Impact Stats Section ==== -->
+            <?php 
+            $sql = "SELECT * FROM tbl_global_dialogue WHERE is_delete = '1' ORDER BY id ASC";
+            $result = $conn->query($sql);
+
+            $stats = [];
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $stats[] = $row;
+                }
+            }
+            ?>
             <section class="impact-section py-5">
                 <div class="container text-left">
                     <h2 class="shine-us-title mb-50">A Global Dialogue with Real Impact</h2>
                     <div class="row justify-content-center align-items-center g-0">
+                        <?php foreach ($stats as $index => $stat): ?>
+                            <!-- Stat -->
+                            <div class="col-4 col-md-3 d-flex flex-column align-items-center">
+                                <h2 class="impact-number">
+                                    <em class="counter" data-count="<?= htmlspecialchars($stat['title']) ?>">
+                                        <?= htmlspecialchars($stat['title']) ?>
+                                    </em>
+                                </h2>
+                                <p class="impact-caption text-center"><?= nl2br(htmlspecialchars($stat['description'])) ?></p>
+                            </div>
 
-                        <!-- Stat 1 -->
-                        <div class="col-4 col-md-3 d-flex flex-column align-items-center">
-                            <h2 class="impact-number"><em class="counter" data-count="18">18</em> <span
-                                    class="fst-normal">+</span></h2>
-                            <p class="impact-caption text-center">Participating<br>Companies</p>
-                        </div>
-
-                        <!-- Divider for desktop only -->
-                        <div class="d-none d-md-block col-md-1 d-flex justify-content-center">
-                            <div class="vertical-divider"></div>
-                        </div>
-
-                        <!-- Stat 2 -->
-                        <div class="col-4 col-md-4">
-                            <h2 class="impact-number"><em class="counter" data-count="500">$500</em>B</h2>
-                            <p class="impact-caption text-center">in combined<br>company revenue</p>
-                        </div>
-
-                        <!-- Divider for desktop only -->
-                        <div class="d-none d-md-block col-md-1 d-flex justify-content-center">
-                            <div class="vertical-divider"></div>
-                        </div>
-
-                        <!-- Stat 3 -->
-                        <div class="col-4 col-md-3">
-                            <h2 class="impact-number"><em class="counter" data-count="30">$30</em>B</h2>
-                            <p class="impact-caption text-center">in collective<br>packaging spend</p>
-                        </div>
-
+                            <!-- Divider after every stat, except the last one -->
+                            <?php if ($index < count($stats) - 1): ?>
+                                <div class="d-none d-md-block col-md-1 d-flex justify-content-center">
+                                    <div class="vertical-divider"></div>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </section>
             <!-- ==== End Impact Stats Section ==== -->
-
             <!-- ==== Start Smart Packaging Section ==== -->
-            <section class="smart-packaging">
+            <?php 
+                $sql = "SELECT * FROM tbl_smart_to_circular WHERE is_delete = '1' ORDER BY id ASC";
+                $result = $conn->query($sql);
+
+                $future_forces = [];
+                $new_values = [];
+
+                if ($result && $result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        if ($row['title'] === 'Future Forces') {
+                            $future_forces[] = $row;
+                        } elseif ($row['title'] === 'New Values') {
+                            $new_values[] = $row;
+                        }
+                    }
+                }
+            ?>
+           <section class="smart-packaging">
                 <div class="container">
-                    <h1 class="shine-us-title mb-20 wow fadeIn" data-wow-duration="1s" data-wow-offset="0">From Smart
-                        Packaging to Circular Systems</h1>
+                    <h1 class="shine-us-title mb-20 wow fadeIn" data-wow-duration="1s" data-wow-offset="0">
+                        From Smart Packaging to Circular Systems
+                    </h1>
 
                     <div class="row">
                         <!-- Left Section: Future Forces -->
                         <div class="col-md-6">
                             <h2 class="category-title">Future Forces</h2>
                             <div class="row">
-                                <!-- Card 1 -->
-                                <div class="col-md-5">
-                                    <div class="card-container wow fadeInUp" data-wow-delay="0.2s">
-                                        <div class="card">
-                                            <div class="card-img-wrapper">
-                                                <img src="assets/img/packforum/evolving-regulations.webp"
-                                                    alt="Plastic bottles representing evolving regulations">
-                                                <div class="card-label">Evolving Regulations</div>
+                                <?php foreach ($future_forces as $index => $item): ?>
+                                    <div class="col-md-<?= ($index % 2 == 0) ? '5' : '7' ?> <?= ($index % 2 != 0) ? 'ps-md-0 ps-lg-0' : '' ?>">
+                                        <div class="card-container wow fadeInUp" data-wow-delay="<?= 0.2 + ($index * 0.2) ?>s">
+                                            <div class="card">
+                                                <div class="card-img-wrapper">
+                                                    <img src="<?= BASE_URL. htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['image_name']) ?>">
+                                                    <div class="card-label"><?= htmlspecialchars($item['image_name']) ?></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <!-- Card 2 -->
-                                <div class="col-md-7 ps-md-0 ps-lg-0">
-                                    <div class="card-container wow fadeInUp" data-wow-delay="0.4s">
-                                        <div class="card">
-                                            <div class="card-img-wrapper">
-                                                <img src="assets/img/packforum/smart-supply-chain.webp"
-                                                    alt="Jack Daniels bottle representing smart supply chain">
-                                                <div class="card-label">Smart Supply Chain</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <!-- Card 3 -->
-                                <div class="col-md-6">
-                                    <div class="card-container wow fadeInUp" data-wow-delay="0.2s">
-                                        <div class="card">
-                                            <div class="card-img-wrapper">
-                                                <img src="assets/img/packforum/smart-commerce.webp"
-                                                    alt="Person scanning a package representing smart commerce">
-                                                <div class="card-label">Smart Commerce</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Card 4 -->
-                                <div class="col-md-6 ps-md-0 ps-lg-0">
-                                    <div class="card-container wow fadeInUp" data-wow-delay="0.4s">
-                                        <div class="card">
-                                            <div class="card-img-wrapper">
-                                                <img src="assets/img/packforum/next-gen-recycling.webp"
-                                                    alt="Natural materials representing next-gen recycling">
-                                                <div class="card-label">Next-Gen Recycling</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <?php if (($index + 1) % 2 == 0 && $index + 1 < count($future_forces)): ?>
+                                        </div><div class="row">
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
                             </div>
                         </div>
 
@@ -464,63 +377,26 @@
                         <div class="col-md-6">
                             <h2 class="category-title">New Values</h2>
                             <div class="row">
-                                <!-- Card 5 -->
-                                <div class="col-md-7">
-                                    <div class="card-container wow fadeInUp" data-wow-delay="0.4s">
-                                        <div class="card">
-                                            <div class="card-img-wrapper">
-                                                <img src="assets/img/packforum/blurred-boundaries.webp"
-                                                    alt="Digital interface representing blurred boundaries">
-                                                <div class="card-label">Blurred Boundaries</div>
+                                <?php foreach ($new_values as $index => $item): ?>
+                                    <div class="col-md-<?= ($index % 2 == 0) ? '7' : '5' ?> <?= ($index % 2 != 0) ? 'ps-md-0 ps-lg-0' : '' ?>">
+                                        <div class="card-container wow fadeInUp" data-wow-delay="<?= 0.2 + ($index * 0.2) ?>s">
+                                            <div class="card">
+                                                <div class="card-img-wrapper">
+                                                    <img src="<?= BASE_URL. htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['image_name']) ?>">
+                                                    <div class="card-label"><?= htmlspecialchars($item['image_name']) ?></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <!-- Card 6 -->
-                                <div class="col-md-5 ps-md-0 ps-lg-0">
-                                    <div class="card-container wow fadeInUp" data-wow-delay="0.2s">
-                                        <div class="card">
-                                            <div class="card-img-wrapper">
-                                                <img src="assets/img/packforum/globa-market-shifts.webp"
-                                                    alt="Colorful beverage can representing global market shifts">
-                                                <div class="card-label">Global Market Shifts</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <!-- Card 7 -->
-                                <div class="col-md-6">
-                                    <div class="card-container wow fadeInUp" data-wow-delay="0.4s">
-                                        <div class="card">
-                                            <div class="card-img-wrapper">
-                                                <img src="assets/img/packforum/inclusivit-diversity.webp"
-                                                    alt="Diverse group of people representing inclusivity and diversity">
-                                                <div class="card-label">Inclusivity & Diversity</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Card 8 -->
-                                <div class="col-md-6 ps-md-0 ps-lg-0">
-                                    <div class="card-container wow fadeInUp" data-wow-delay="0.2s">
-                                        <div class="card">
-                                            <div class="card-img-wrapper">
-                                                <img src="assets/img/packforum/refill-revolution.webp"
-                                                    alt="Refillable container representing refill revolution">
-                                                <div class="card-label">Refill Revolution</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <?php if (($index + 1) % 2 == 0 && $index + 1 < count($new_values)): ?>
+                                        </div><div class="row">
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
-                    <!-- Buttons -->
+
+                    <!-- Button -->
                     <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 mt-4 wow fadeInUp"
                         data-wow-delay="0.4s">
                         <a href="#" class="btn btn-full-whitepaper px-4 py-2" data-bs-toggle="modal"
@@ -528,62 +404,39 @@
                     </div>
                 </div>
             </section>
+
             <!-- ==== End Smart Packaging Section ==== -->
 
             <!-- ==== Start Feature Speakers Section ==== -->
+           <?php 
+            $sql = "SELECT * FROM tbl_featured_speakers WHERE is_delete = '1' ORDER BY id ASC";
+            $result = $conn->query($sql);
+
+            $speakers = [];
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $speakers[] = $row;
+                }
+            }
+            ?>
             <section class="py-5">
                 <div class="container text-left">
-                    <h2 class="shine-us-title mb-50 wow fadeIn" data-wow-duration="1s" data-wow-offset="0">Featured
-                        Speakers
-                    </h2>
+                    <h2 class="shine-us-title mb-50 wow fadeIn" data-wow-duration="1s" data-wow-offset="0">Featured Speakers</h2>
                     <div class="owl-carousel owl-theme mt-3 featured-speakers">
-                        <!-- Quote Card 1 -->
-                        <div class="quote-card wow zoomIn" data-wow-duration="0.8s" data-wow-delay="0.2s"
-                            data-wow-offset="0">
-                            <img src="assets/img/packforum/ramaiah.webp" alt="Ramaiah Muthusubramanian"
-                                class="quote-img">
-                            <div class="quote-body">
-                                <p class="quote-text">"Smart packaging can be the first moment of truth."</p>
-                                <p class="quote-name">Ramaiah Muthusubramanian,</p>
-                                <p class="quote-company">CEO Packfora</p>
+                        <?php foreach ($speakers as $speaker): ?>
+                            <div class="quote-card wow zoomIn" data-wow-duration="0.8s" data-wow-delay="0.2s" data-wow-offset="0">
+                                <img src="<?= BASE_URL . htmlspecialchars($speaker['image_path']) ?>" alt="<?= htmlspecialchars($speaker['name']) ?>" class="quote-img">
+                                <div class="quote-body">
+                                    <p class="quote-text">"<?= htmlspecialchars($speaker['quote_text']) ?>"</p>
+                                    <p class="quote-name"><?= htmlspecialchars($speaker['name']) ?>,</p>
+                                    <p class="quote-company"><?= htmlspecialchars($speaker['designation']) ?></p>
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- Quote Card 2 -->
-                        <div class="quote-card wow zoomIn" data-wow-duration="0.8s" data-wow-delay="0.2s"
-                            data-wow-offset="0">
-                            <img src="assets/img/packforum/kory.webp" alt="Kory Nook" class="quote-img">
-                            <div class="quote-body">
-                                <p class="quote-text">"Carbon is the new currency."</p>
-                                <p class="quote-name">Kory Nook,</p>
-                                <p class="quote-company">Danone</p>
-                            </div>
-                        </div>
-
-                        <!-- Quote Card 3 -->
-                        <div class="quote-card wow zoomIn" data-wow-duration="0.8s" data-wow-delay="0.2s"
-                            data-wow-offset="0">
-                            <img src="assets/img/packforum/brett.webp" alt="Brett Domoy" class="quote-img">
-                            <div class="quote-body">
-                                <p class="quote-text">"Inclusive design starts at the brief."</p>
-                                <p class="quote-name">Brett Domoy,</p>
-                                <p class="quote-company">Unilever</p>
-                            </div>
-                        </div>
-
-                        <!-- Quote Card 4 -->
-                        <div class="quote-card wow zoomIn" data-wow-duration="0.8s" data-wow-delay="0.2s"
-                            data-wow-offset="0">
-                            <img src="assets/img/packforum/abhay.webp" alt="Abhay Bhagwat" class="quote-img">
-                            <div class="quote-body">
-                                <p class="quote-text">"Design must unite science, brand, and insight."</p>
-                                <p class="quote-name">Abhay Bhagwat,</p>
-                                <p class="quote-company">ZBD Expert</p>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </section>
+
             <!-- ==== End Feature Speakers Section ==== -->
 
             <!-- ==== Start Packforum 2025 Announcement ==== -->

@@ -37,6 +37,7 @@
 </head>
 
 <body>
+    
     <!-- ==================== Start Loading ==================== -->
     <!-- <div class="loader-wrap">
         <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
@@ -107,7 +108,9 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-
+    <?php include 'db_connect.php';
+         include 'config.php';  
+         ?>
     <main>
         <!-- ==== Start Home Banner ==== -->
         <section class="page-banner" style="position: relative; overflow: hidden;">

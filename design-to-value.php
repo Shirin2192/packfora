@@ -40,6 +40,9 @@
 </head>
 
 <body>
+    <?php include 'db_connect.php';
+         include 'config.php';  
+         ?>
     <!-- ==================== Start Loading ==================== -->
     <!-- <div class="loader-wrap">
         <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
@@ -113,29 +116,48 @@
 
     <main>
         <!-- ==== Start Home Banner ==== -->
-        <section class="page-banner" style="position: relative; overflow: hidden;">
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
-                <video autoplay muted loop playsinline
-                    style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
-                    <source src="assets/img/services/dtv/dtv.webm" type="video/webm">
-                    Your browser does not support the video tag.
-                </video>
+        <?php
 
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%); z-index: 1;">
-                </div>
-            </div>
+            $banner_video = [];
+            
+                $query = "SELECT * FROM tbl_service_banner_video WHERE fk_service_id = 5 AND is_delete = '1' LIMIT 1";
+                $result = mysqli_query($conn, $query);
 
-            <div class="container" style="position: relative; z-index: 1;">
-                <div class="row">
-                    <div class="content">
-                        <h1 class="wow fadeInUp" data-wow-delay="0.2s">Design to Value</h1>
-                        <h2 class="wow fadeInUp" data-wow-delay="0.2s">Smarter Packaging. Shining Impact.</h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">We believe that packaging is a strategic business weapon and our Design to Value (DTV) creates impact similarly by blending innovation & efficiency to create packaging solutions that optimize costs, enhance consumer experience, and future-proof your business.</p>
-                        <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.4s">Speak to our Expert Today</a>
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $banner_video = mysqli_fetch_assoc($result);
+                }
+                ?>
+        
+            <section class="page-banner" style="position: relative; overflow: hidden;">
+                <!-- Video Background -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+                    <video autoplay muted loop playsinline
+                        style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
+                        <source src="<?= BASE_URL . htmlspecialchars($banner_video['video']) ?>" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+
+                    <!-- Overlay -->
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+                                background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%);
+                                z-index: 1;">
                     </div>
                 </div>
-            </div>
-        </section>
+
+                <!-- Text Content -->
+                <div class="container" style="position: relative; z-index: 1;">
+                    <div class="row">
+                        <div class="content">
+                            <h1 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($banner_video['title']) ?></h1>
+                            <h2 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($banner_video['sub_title']) ?></h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.4s"><?= htmlspecialchars($banner_video['description']) ?></p>
+                            <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.6s">Let's Work Together</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+
         <!-- ==== End Home Banner ==== -->
 
         <!-- ==== Start Offering ==== -->
@@ -238,8 +260,19 @@
         <!-- ==== End Offering ==== -->
 
         <!-- ==== Start Our Benefits ==== -->
-        <section class="our-benefits"
-            style="background-image: url(assets/img/services/sustainability/our-approach.webp); background-size: cover; background-position: left center; background-repeat: no-repeat, no-repeat;">
+        <?php
+            $benefits = [];
+           
+                $query = "SELECT * FROM tbl_discover_benefits WHERE fk_service_id = 5 AND is_delete = '1'";
+                $result = mysqli_query($conn, $query);
+                if ($result && mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $benefits[] = $row;
+                    }
+                }
+            
+        ?>
+        <section class="our-benefits" style="background-image: url(assets/img/services/sustainability/our-approach.webp); background-size: cover; background-position: left center; background-repeat: no-repeat;">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -248,40 +281,36 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/dtv/shape/strategic-value-driver-model.svg" alt="" srcset="">
+                    <?php foreach ($benefits as $benefit): ?>
+                        <div class="col-md-4 py-4">
+                            <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
+                                <div class="icon">
+                                    <img src="<?= BASE_URL . htmlspecialchars($benefit['image']) ?>" alt="<?= htmlspecialchars($benefit['title']) ?>">
+                                </div>
+                                <h4><?= htmlspecialchars($benefit['title']) ?></h4>
+                                <p><?= htmlspecialchars($benefit['description']) ?></p>
                             </div>
-                            <h4>Strategic Value Driver Model</h4>
-                            <p>Our proprietary DTV framework maximizes value by addressing material efficiency, technological advancements, and procurement strategies-all in one holistic solution.</p>
                         </div>
-                    </div>
-                    <div class="col-md-4 pt-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/dtv/shape/people-planet-profit.svg" alt="" srcset="">
-                            </div>
-                            <h4>People, Planet & Profit</h4>
-                            <p>Sustainability is at the core of our process. By balancing economic, environmental, and consumer needs, we help brands achieve triple-bottom-line impact.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 pt-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/dtv/shape/end-to-end-optimization.svg" alt="" srcset="">
-                            </div>
-                            <h4>End-to-End Optimization</h4>
-                            <p>From concept to commercialization, we ensure every element of packaging is designed for efficiency, sustainability, and long-term success.</p>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </section>
         <!-- ==== End Our Approach ==== -->
 
         <!-- ==== Start Success Stories ==== -->
-        <section class="success-stories">
+        <?php
+            $success_stories = [];
+           
+                $query = "SELECT * FROM tbl_success_stories WHERE fk_service_id = 5 AND is_delete = '1'";
+                $result = mysqli_query($conn, $query);
+                if ($result && mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $success_stories[] = $row;
+                    }
+                }
+           
+        ?>
+       <section class="success-stories">
             <div class="container">
                 <div class="row">
                     <div class="success-stories-header">
@@ -295,81 +324,20 @@
 
             <div class="container-fluid wow fadeInUp" data-wow-delay="0.8s">
                 <div class="owl-carousel owl-theme success-slider dtv-success">
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/dtv/stories/fresh-food-packaging-reinvented.webp" alt="Jameson">
+                    <?php foreach ($success_stories as $story): ?>
+                        <div class="success-card">
+                            <div class="card-img">
+                                <img src="<?= BASE_URL . htmlspecialchars($story['image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
+                            </div>
+                            <div class="card-content">
+                                <h3><?= htmlspecialchars($story['title']) ?></h3>
+                                <p><?= htmlspecialchars($story['description']) ?></p>
+                                <a href="javascript:void(0);">
+                                    <h5>Learn More</h5>
+                                </a>
+                            </div>
                         </div>
-                        <div class="card-content">
-                            <h3>Fresh Produce Packaging Reinvented</h3>
-                            <p>Redesigned corrugated boxes for a global produce brand, increasing strength by 21% with zero additional cost, ensuring optimal air circulation.</p>
-                            <a href="#">
-                                <h5>Learn More</h5>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/dtv/stories/productivity-saving-for-high-volume.webp" alt="Jameson">
-                        </div>
-                        <div class="card-content">
-                            <h3>Productivity Savings for High-Volume Packaging</h3>
-                            <p>Optimized fruit box specifications, reducing inventory by 23% and unlocking $8.4M in annual savings.</p>
-                            <a href="#">
-                                <h5>Learn More</h5>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/dtv/stories/sustainable-frozen-food-packaging.webp" alt="Jameson">
-                        </div>
-                        <div class="card-content">
-                            <h3>Sustainable Frozen Food Packaging Transformation</h3>
-                            <p>Transitioned from non-recyclable laminated plastic to fossil-free, recyclable pouches—maintaining performance while enhancing sustainability.</p>
-                            <a href="#">
-                                <h5>Learn More</h5>         
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/dtv/stories/thermoformed-PP-otimization.webp" alt="Jameson">
-                        </div>
-                        <div class="card-content">
-                            <h3>Thermoformed PP Bowl Optimization</h3>
-                            <p>Achieved up to 9% reduction in plastic consumption through advanced material optimization, lowering costs without compromising strength.</p>
-                            <a href="#">
-                                <h5>Learn More</h5>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/dtv/stories/corrugate-cost-saving-pipeline.webp" alt="Jameson">
-                        </div>
-                        <div class="card-content">
-                            <h3>Corrugate Cost-Saving Pipeline</h3>
-                            <p>Built a $4.1M annual savings roadmap for a leading CPG brand, halving implementation time while improving manufacturability.</p>
-                            <a href="#">
-                                <h5>Learn More</h5>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/dtv/stories/ISTA-test.webp" alt="Jameson">
-                        </div>
-                        <div class="card-content">
-                            <h3>ISTA-Test Protocol Development for India</h3>
-                            <p>Developed localized ISTA-equivalent testing protocols to minimize Defects Per Million Opportunities (DPMO), driving packaging innovation and process efficiency.</p>
-                            <a href="#">
-                                <h5>Learn More</h5>
-                            </a>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </section>
