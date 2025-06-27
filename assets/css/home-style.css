@@ -333,7 +333,7 @@
 
 .clients {
   background: #ddddefb3;
-  /* background-image: url(../imgs/shapes/stripes1.png); */
+  /* background-image: url(../img/shapes/stripes1.png); */
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -592,7 +592,7 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background-image: url(../imgs/services/services-bg.webp);
+  background-image: url(../img/services/services-bg.webp);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -647,7 +647,7 @@
 /* --------------- Contact --------------- */
 .contact-sa .box {
   padding: 120px 60px;
-  background-image: url(../imgs/gr-back.png);
+  background-image: url(../img/gr-back.png);
   background-size: cover;
   background-position: center center;
   border-radius: 30px;

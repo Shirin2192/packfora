@@ -6,15 +6,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="HTML5">
-    <meta name="description" content="Multi-Purpose">
-    <meta name="author" content="">
-
+    <meta name="keywords" content="sustainable packaging, eco-friendly packaging, green packaging solutions, packaging and environment">
+    <meta name="description" content="See how Packfora leads in sustainable packaging with eco-friendly innovations that reduce waste and carbon footprint.">
+    <meta name="author" content="Packfora">
+    <link rel="canonical" href="https://packfora.com/sustainability.php">
     <!-- Title  -->
-    <title>End-to-End Packaging and Brand Consulting Solutions - Packfora</title>
+    <title>Sustainable Packaging Solutions | Packfora</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" href="assets/img/favicon.svg">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
@@ -107,14 +107,27 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-
+     <?php include 'db_connect.php';
+         include 'config.php';  
+    ?>
     <main>
         <!-- ==== Start Home Banner ==== -->
+        <?php
+
+            $banner_video = [];
+            
+                $query = "SELECT * FROM tbl_service_banner_video WHERE fk_service_id = 2 AND is_delete = '1' LIMIT 1";
+                $result = mysqli_query($conn, $query);
+
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $banner_video = mysqli_fetch_assoc($result);
+                }
+                ?>
         <section class="page-banner" style="position: relative; overflow: hidden;">
             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
                 <video autoplay muted loop playsinline
                     style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
-                    <source src="assets/img/services/sustainability/sustainability.mp4" type="video/mp4">
+                    <source src="<?= BASE_URL . htmlspecialchars($banner_video['video']) ?>" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
 
@@ -126,13 +139,9 @@
             <div class="container" style="position: relative; z-index: 1;">
                 <div class="row">
                     <div class="content">
-                        <h1 class="wow fadeInUp" data-wow-delay="0.2s">Sustainability</h1>
-                        <h2 class="wow fadeInUp" data-wow-delay="0.2s">Sustainability is the New Core of Packaging</h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">Stricter regulations, plastic bans, and growing
-                            demand for eco-friendly products are
-                            reshaping packaging industry sustainability is not just a requirement, but also
-                            a competitive advantage. We help you stay ahead with smart, sustainable solutions that
-                            drive growth while protecting the planet.</p>
+                        <h1 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($banner_video['title']) ?></h1>
+                        <h2 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($banner_video['sub_title']) ?></h2>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s"><?= htmlspecialchars($banner_video['description']) ?></p>
                         <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.4s">Speak to our
                             Expert Today</a>
                     </div>
@@ -142,37 +151,46 @@
         <!-- ==== End Home Banner ==== -->
 
         <!-- ==== Start Market Trends ==== -->
+        <?php
+        // Query to get market trends for fk_service_id = 2 and is_delete = 1
+        $sql = "SELECT * FROM tbl_market_trends WHERE fk_service_id = 2 AND is_delete = 1";
+        $result = $conn->query($sql);
+        $market_trends = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $market_trends[] = $row;
+            }
+        }
+        ?>
+        <?php
+    // Fixed class pattern
+    $trend_classes = ['market-trend-01', 'market-trend-02', 'market-trend-02', 'market-trend-03'];
+?>
+
         <section class="market-trends wow fadeIn">
             <div class="container">
+                <h2 class="sec-title wow fadeIn" data-wow-delay="0.6s">Market Trends</h2>
+
                 <div class="row">
-                    <h2 class="sec-title wow fadeIn" data-wow-delay="0.6s">Market Trends</h2>
-                    <div class="col-md-3 market-trend-info market-trend-01 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="market-info">
-                            <h2>40%</h2>
-                            <p>of the planet's plastic waste originates from packaging materials.</p>
+                    <?php foreach ($market_trends as $index => $trend): ?>
+                        <?php
+                            // Safely get the class, or fallback to a default
+                            $trend_class = $trend_classes[$index] ?? 'market-trend-01';
+                        ?>
+                        <div class="col-md-3 market-trend-info <?= $trend_class ?> wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="market-info">
+                                <h2><?= htmlspecialchars($trend['title']) ?></h2>
+                                <p><?= nl2br(htmlspecialchars($trend['description'])) ?></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 market-trend-info market-trend-02 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="market-info">
-                            <h2>14.5MT.</h2>
-                            <p>of plastic containers and packaging were generated in the U.S. in 2018.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 market-trend-info market-trend-02 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="market-info">
-                            <h2>09%</h2>
-                            <p>of the 9.2 billion tons of plastic produced have only been recycled properly.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 market-trend-info market-trend-03 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="market-info">
-                            <h2>31.3%</h2>
-                            <p>of glass containers were recycled in the U.S. in 2018.</p>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </section>
+
+
+
+
         <!-- ==== End Market Trends ==== -->
 
         <!-- ==== Start Offering ==== -->
@@ -416,74 +434,45 @@
         <!-- ==== End Our Approach ==== -->
 
         <!-- ==== Start Success Stories ==== -->
+          <?php
+        $service_id = 2; // Replace with the actual service context if dynamic
+        $sql = "SELECT * FROM tbl_success_stories WHERE fk_service_id = $service_id AND is_delete = 1 ORDER BY id ASC";
+        $result = $conn->query($sql);
+        $success_stories = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+        ?>
+
         <section class="success-stories">
             <div class="container">
                 <div class="row">
                     <div class="success-stories-header">
                         <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
                         <h1 class="wow fadeInUp" data-wow-delay="0.4s">Delivering Impact. Driving Results.</h1>
-                        <p class="wow fadeInUp" data-wow-delay="0.6s">Packfora's solutions have consistently helped
-                            global brands achieve
-                            their environmental and business goals.</p>
+                        <p class="wow fadeInUp" data-wow-delay="0.6s">
+                            Packfora's solutions have consistently helped global brands achieve their environmental and business goals.
+                        </p>
                     </div>
                 </div>
             </div>
 
             <div class="container-fluid wow fadeInUp" data-wow-delay="0.8s">
                 <div class="owl-carousel owl-theme success-slider">
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/global-spirit.webp" alt="Jameson">
+                    <?php foreach ($success_stories as $story): ?>
+                        <div class="success-card">
+                            <div class="card-img">
+                                <img src="<?= BASE_URL . $story['image'] ?>" alt="<?= htmlspecialchars($story['title']) ?>">
+                            </div>
+                            <div class="card-content he-70 sus-cs-cont">
+                                <h3><?= htmlspecialchars($story['title']) ?></h3>
+                                <a href="#">
+                                    <h5>Learn More</h5>
+                                </a>
+                            </div>
                         </div>
-                        <div class="card-content he-70 sus-cs-cont">
-                            <h3>Global Spirits Leader Cuts Packaging Waste & Boosts Sustainability Without Compromising
-                                Luxury</h3>
-                            <a href="#">
-                                <h5>Learn More</h5>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/personal-care.webp" alt="unilever">
-                        </div>
-                        <div class="card-content he-70 sus-cs-cont">
-                            <h3>Revolutionizing Personal Care Packaging: A Sustainability Breakthrough for a Global FMCG
-                                Giant</h3>
-                            <a href="#">
-                                <h5>Learn More</h5>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/africa.webp" alt="Jameson">
-                        </div>
-                        <div class="card-content he-70 sus-cs-cont">
-                            <h3>Navigating Africa's Evolving Packaging Regulations: A Compliance Success Story</h3>
-                            <a href="#">
-                                <h5>Learn More</h5>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/transform.webp" alt="unilever">
-                        </div>
-                        <div class="card-content he-70 sus-cs-cont">
-                            <h3>Transforming Fresh Produce Packaging: How a Global Brand Reduced Waste & Maximized Shelf
-                                Life</h3>
-                            <a href="#">
-                                <h5>Learn More</h5>
-                            </a>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </section>
+
         <!-- ==== End Success Stories ==== -->
 
         <!-- ==== Start Our Leaders ==== -->
@@ -496,28 +485,28 @@
                     </div>
 
                     <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
+                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
                             <img src="assets/img/teams/jikul.webp" class="w-100">
-                            <p>Jikul Purohit<br>VP & BU Lead - Delivery - Foods & Pharma<br><a href="https://www.linkedin.com/in/jikul-purohit-6532526/?originalSubdomain=uk" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
+                            <p>Jikul Purohit</p><h6>VP & BU Lead - Delivery - Foods & Pharma</h6><a href="https://www.linkedin.com/in/jikul-purohit-6532526/?originalSubdomain=uk" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
+                                </a>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
+                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
                             <img src="assets/img/teams/ankita.webp" class="w-100">
-                            <p>Ankita Lokhande<br>Foods, Pharma & CHC<br><a href="https://www.linkedin.com/in/ankita-lokhande-8baa43168/?originalSubdomain=in" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
+                            <p>Ankita Lokhande</p><h6>Foods, Pharma & CHC</h6><a href="https://www.linkedin.com/in/ankita-lokhande-8baa43168/?originalSubdomain=in" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
+                                </a>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
+                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
                             <img src="assets/img/teams/supriya.webp" class="w-100">
-                            <p>Supriya Mantri<br>Foods, Pharma & CHC<br><a href="https://www.linkedin.com/in/supriya-mantri-a80977179/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
+                            <p>Supriya Mantri</p><h6>Foods, Pharma & CHC</h6><a href="https://www.linkedin.com/in/supriya-mantri-a80977179/" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
                                 </a></p>
                         </div>
                     </div>

@@ -130,7 +130,7 @@ figure {
 
 .hamenu:after {
   content: '';
-  background-image: url(../imgs/menu-shape.png);
+  background-image: url(../img/menu-shape.png);
   background-size: contain;
   background-repeat: repeat;
   position: absolute;

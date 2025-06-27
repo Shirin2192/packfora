@@ -6,15 +6,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="HTML5">
-    <meta name="description" content="Multi-Purpose">
-    <meta name="author" content="">
-
+    <meta name="keywords" content="packaging procurement, packaging sourcing, packaging vendors, strategic procurement">
+    <meta name="description" content="Drive cost efficiency and supplier excellence with Packfora’s packaging procurement, strategic sourcing, and vendor management services.">
+    <meta name="author" content="Packfora">
+    <link rel="canonical" href="https://packfora.com/packaging-procurement.php">
     <!-- Title  -->
-    <title>End-to-End Packaging and Brand Consulting Solutions - Packfora</title>
+    <title>Strategic Packaging Procurement Services | Packfora</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" href="assets/img/favicon.svg">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
@@ -126,8 +126,8 @@
                 <div class="row">
                     <div class="content">
                         <h1 class="wow fadeInUp" data-wow-delay="0.2s">Packaging Procurement</h1>
-                        <h2 class="wow fadeInUp" data-wow-delay="0.2s">Optimise Your Packaging</h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">Packaging Spend typically accounts for ~ 5% to max 15% of the total procurement spend of an organization. With the right approach, we can reduce costs, improve efficiency, and enhance brand impact.</p>
+                        <h2 class="wow fadeInUp" data-wow-delay="0.2s">Cost Intelligence Engine</h2>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s">We leverage should-cost models, market index trends and ordering pattern analytics to drive the next level of efficiencies and future-proof your operations against the impact of inflation.</p>
                         <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.4s">Speak to our Expert Today</a>
                     </div>
                 </div>
@@ -412,29 +412,29 @@
                     </div>
 
                     <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
+                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
                             <img src="assets/img/teams/chirag.webp" class="w-100">
-                            <p>Chirag Master<br>VP & BU Lead - Growth, Delivery - sHPCO, Talent Flex & Mold Management Services<br><a href="https://www.linkedin.com/in/chirag-master-54364bb/?originalSubdomain=in" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
+                            <p>Chirag Master</p><h6>VP & BU Lead - Growth, Delivery - sHPCO, Talent Flex & Mold Management Services</h6><a href="https://www.linkedin.com/in/chirag-master-54364bb/?originalSubdomain=in" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
+                                </a>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
+                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
                             <img src="assets/img/teams/minoti.webp" class="w-100">
-                            <p>Minoti Banerjee<br>SHPCO<br><a href="https://www.linkedin.com/in/minoti-banerjee/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
+                            <p>Minoti Banerjee</p><h6>SHPCO</h6><a href="https://www.linkedin.com/in/minoti-banerjee/" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
+                                </a>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
+                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
                             <img src="assets/img/teams/saiket.webp" class="w-100">
-                            <p>Saikat Jana<br>SHPCO<br><a href="https://www.linkedin.com/in/saikat-jana-048a2a13b/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
+                            <p>Saikat Jana</p><h6>SHPCO</h6><a href="https://www.linkedin.com/in/saikat-jana-048a2a13b/" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
+                                </a>
                         </div>
                     </div>
                 </div>

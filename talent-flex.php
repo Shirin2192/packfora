@@ -6,15 +6,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="HTML5">
-    <meta name="description" content="Multi-Purpose">
-    <meta name="author" content="">
+    <meta name="keywords" content="flexible packaging talent, supply chain staffing, packaging consultants">
+    <meta name="description" content="Leverage Packfora’s flexible talent solutions to scale your packaging needs efficiently with expert support.">
+    <meta name="author" content="Packfora">
+    <link rel="canonical" href="https://packfora.com/talent-flex.php">
 
     <!-- Title  -->
-    <title>End-to-End Packaging and Brand Consulting Solutions - Packfora</title>
+    <title>Flexible Talent Solutions for Packaging Innovation</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" href="assets/img/favicon.svg">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
@@ -37,7 +38,6 @@
 </head>
 
 <body>
-    
     <!-- ==================== Start Loading ==================== -->
     <!-- <div class="loader-wrap">
         <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
@@ -108,9 +108,7 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-    <?php include 'db_connect.php';
-         include 'config.php';  
-         ?>
+
     <main>
         <!-- ==== Start Home Banner ==== -->
         <section class="page-banner" style="position: relative; overflow: hidden;">
@@ -130,11 +128,8 @@
                 <div class="row">
                     <div class="content">
                         <h1 class="wow fadeInUp" data-wow-delay="0.2s">Talent Flex</h1>
-                        <h2 class="wow fadeInUp" data-wow-delay="0.2s">Elevate Your Team Capability</h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">77% of businesses globally reported difficulty
-                            finding the skilled talent they need. Talent Flex helps you stay ahead by bridging skill
-                            gaps, enhancing productivity, and enabling businesses to manage complex packaging
-                            priorities.</p>
+                        <h2 class="wow fadeInUp" data-wow-delay="0.2s">Expand your team's ability to deliver high-impact packaging solutions</h2>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s">77% of businesses globally report difficulty in finding the skilled talent they need. Talent Flex helps organizations stay ahead by bridging skill gaps, enhancing productivity and enabling them to manage complex packaging priorities.</p>
                         <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.6s">Let's Work
                             Together</a>
                     </div>
@@ -400,32 +395,32 @@
                     </div>
 
                     <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
+                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
                             <img src="assets/img/teams/brijesh.webp" class="w-100">
-                            <p>Brijesh Sounderrajan<br>Talent Flex <br><a
+                            <p>Brijesh Sounderrajan</p><h6>Talent Flex </h6><a
                                     href="https://www.linkedin.com/in/brijesh-sounderrajan-5378277/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
+                                </a>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
+                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
                             <img src="assets/img/teams/pradeep.webp" class="w-100">
-                            <p>Pradeep Nair<br>Foods, Pharma & CHC <br><a
+                            <p>Pradeep Nair</p><h6>Foods, Pharma & CHC </h6><a
                                     href="https://www.linkedin.com/in/pradeep-nair-7b0175119/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
+                                </a>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
+                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
                             <img src="assets/img/teams/prachi.webp" class="w-100">
-                            <p>Prachi Balchandani<br>Human Resources<br><a
+                            <p>Prachi Balchandani</p><h6>Human Resources</h6><a
                                     href="https://www.linkedin.com/in/prachibalchandani/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
+                                </a>
                         </div>
                     </div>
 
@@ -476,17 +471,16 @@
                     var $this = $(this),
                         target = $this.data('target');
 
-                    $({
-                        count: $this.text()
-                    }).animate({
-                        count: target
-                    }, {
-                        duration: 2000, // Duration of the counter animation
-                        easing: 'swing',
-                        step: function (now) {
-                            $this.text(Math.ceil(now)); // Update the text
-                        },
-                    });
+                    $({ count: $this.text() }).animate(
+                        { count: target },
+                        {
+                            duration: 2000, // Duration of the counter animation
+                            easing: 'swing',
+                            step: function (now) {
+                                $this.text(Math.ceil(now)); // Update the text
+                            },
+                        }
+                    );
                 });
             }
 
@@ -495,9 +489,8 @@
                 function () {
                     animateCounter();
                     this.destroy(); // Prevent the animation from running again
-                }, {
-                offset: '75%'
-            } // Trigger when 75% of the section is in view
+                },
+                { offset: '75%' } // Trigger when 75% of the section is in view
             );
         });
     </script>

@@ -6,15 +6,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="HTML5">
-    <meta name="description" content="Multi-Purpose">
-    <meta name="author" content="">
-
+    <meta name="keywords" content="packaging engineering, packaging R&D, packaging innovation, packaging development">
+    <meta name="description" content="Explore how Packfora transforms ideas into engineered packaging solutions tailored to your product and brand.">
+    <meta name="author" content="Packfora">
+    <link rel="canonical" href="https://packfora.com/packaging-innovation-and-engineering.php">
     <!-- Title  -->
-    <title>End-to-End Packaging and Brand Consulting Solutions - Packfora</title>
+    <title>Packaging Innovation & Engineering Expertise | Packfora</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" href="assets/img/favicon.svg">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
@@ -107,41 +107,58 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-
+     <?php include 'db_connect.php';
+         include 'config.php';  
+         ?>
     <main>
         <!-- ==== Start Home Banner ==== -->
-        <section class="page-banner" style="position: relative; overflow: hidden;">
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
-                <video autoplay muted loop playsinline
-                    style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
-                    <source src="assets/img/services/innovation-and-engineering/innovation-and-engineering.mp4"
-                        type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+        <?php
 
-                <div
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%); z-index: 1;">
-                </div>
-            </div>
+            $banner_video = [];
+            
+                $query = "SELECT * FROM tbl_service_banner_video WHERE fk_service_id = 7 AND is_delete = '1' LIMIT 1";
+                $result = mysqli_query($conn, $query);
 
-            <div class="container" style="position: relative; z-index: 1;">
-                <div class="row">
-                    <div class="content">
-                        <h1 class="wow fadeInUp" data-wow-delay="0.2s">Packaging Innovation and Engineering</h1>
-                        <h2 class="wow fadeInUp" data-wow-delay="0.2s">Inspire. Innovate. Impact.</h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">We design packaging solutions that blend
-                            innovation, sustainability, and efficiency. By leveraging cutting-edge technology, strategic
-                            thinking, and deep industry expertise, we create packaging that delivers value for people,
-                            the planet, and profit.</p>
-                        <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.4s">Speak to our
-                            Expert Today</a>
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $banner_video = mysqli_fetch_assoc($result);
+                }
+                ?>
+            <section class="page-banner" style="position: relative; overflow: hidden;">
+                <!-- Video Background -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+                    <video autoplay muted loop playsinline
+                        style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
+                        <source src="<?= BASE_URL . htmlspecialchars($banner_video['video']) ?>" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+
+                    <!-- Overlay -->
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+                                background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%);
+                                z-index: 1;">
                     </div>
                 </div>
-            </div>
-        </section>
+
+                <!-- Text Content -->
+                <div class="container" style="position: relative; z-index: 1;">
+                    <div class="row">
+                        <div class="content">
+                            <h1 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($banner_video['title']) ?></h1>
+                            <h2 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($banner_video['sub_title']) ?></h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.4s"><?= htmlspecialchars($banner_video['description']) ?></p>
+                            <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.6s">Speak to our Expert Today</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
         <!-- ==== End Home Banner ==== -->
 
         <!-- ==== Start Offering ==== -->
+            <?php // Fetch offerings with fk_service_id = 7
+                $sql = "SELECT * FROM tbl_our_offering WHERE fk_service_id = 7 AND is_delete = 1";
+                $result = $conn->query($sql);
+                ?>
+
         <div class="offerings-container">
             <div class="all-offerings">
                 <div class="container">
@@ -149,117 +166,76 @@
                         <h2 class="offering-title mb-3 wow fadeIn" style="color: #21409A;">Our Offerings</h2>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/innovation-and-engineering/creative-design.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Packaging Innovation</h4>
-                                    <ul>
-                                        <li>End-to-end, fast-tracked product and packaging development powered by
-                                            digital tools for rapid prototyping and agile execution</li>
-                                    </ul>
+                        <?php if ($result->num_rows > 0): ?>
+                            <?php while ($row = $result->fetch_assoc()): ?>
+                                <div class="col-lg-3">
+                                    <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
+                                        <div class="offering-img">
+                                            <img src="<?= BASE_URL. htmlspecialchars($row['image']) ?>" class="w-100" alt="<?= htmlspecialchars($row['title']) ?>">
+                                        </div>
+                                        <div class="offering-content offering-sl-content">
+                                            <h4 class="mb-2"><?= htmlspecialchars($row['title']) ?></h4>
+                                            
+                                            <?php
+                                            // Try to intelligently split the description
+                                            $description = htmlspecialchars($row['description']);
+                                            $desc_parts = preg_split('/(?<=\.|\n|\:|\-)\s+/', $description, 2);
+                                            $main_point = $desc_parts[0] ?? '';
+                                            $more_points = $desc_parts[1] ?? '';
+                                            ?>
 
-                                    <div class="more-content" style="display: none;">
-                                        <ul>
-                                            <li>Mock-ups</li>
-                                            <li>Aesthetic Prototypes</li>
-                                            <li>Functional Prototypes</li>
-                                            <li>Pilot Mold Trials</li>
-                                            <li>Assembly & Finishing</li>
-                                            <li>Driving creativity through innovation fairs and collaborative ideation
-                                            </li>
-                                        </ul>
+                                            <ul>
+                                                <li><?= $main_point ?></li>
+                                            </ul>
+
+                                            <?php if (!empty($more_points)): ?>
+                                                <div class="more-content" style="display: none;">
+                                                    <ul>
+                                                        <?php
+                                                        // Split further for individual bullet points if needed
+                                                        $bullets = preg_split('/(?<=\.|\:)\s+/', $more_points);
+                                                        foreach ($bullets as $point):
+                                                            if (trim($point)):
+                                                        ?>
+                                                            <li><?= trim($point) ?></li>
+                                                        <?php endif; endforeach; ?>
+                                                    </ul>
+                                                </div>
+
+                                                <a href="javascript:void(0);" class="read-more-toggle">
+                                                    <span class="toggle-text">Read More</span>
+                                                    <i class="fa fa-chevron-down toggle-icon"></i>
+                                                </a>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
-
-                                    <a href="javascript:void(0);" class="read-more-toggle">
-                                        <span class="toggle-text">Read More</span>
-                                        <i class="fa fa-chevron-down toggle-icon"></i>
-                                    </a>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/innovation-and-engineering/design-led-research.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Packaging Engineering</h4>
-                                    <ul>
-                                        <li>Expertise in 2D & 3D packaging design</li>
-                                        <li>Digital simulation for performance optimization</li>
-                                        <li>Scalable and efficient packaging manufacturing</li>
-                                    </ul>
-
-                                    <div class="more-content" style="display: none;">
-                                        <ul>
-                                            <li>Focus on innovation, sustainability, and cost-effectiveness</li>
-                                            <li>Parametric CAD development: DFM, DFA and DFMEA</li>
-                                            <li>Manufacturing Drawings</li>
-                                        </ul>
-                                    </div>
-
-                                    <a href="javascript:void(0);" class="read-more-toggle">
-                                        <span class="toggle-text">Read More</span>
-                                        <i class="fa fa-chevron-down toggle-icon"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/innovation-and-engineering/design-validation.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Transit & Distribution Modelling</h4>
-                                    <ul>
-                                        <li>Comprehensive transit and distribution simulations</li>
-                                        <li>Testing aligned with ISTA scenarios and global standards</li>
-                                    </ul>
-
-                                    <div class="more-content" style="display: none;">
-                                        <ul>
-                                            <li>Ensures product protection, minimizes material waste</li>
-                                            <li>Supports reliability across diverse supply chain conditions</li>
-                                        </ul>
-                                    </div>
-
-                                    <a href="javascript:void(0);" class="read-more-toggle mb-3" style="padding-bottom: 3px;">
-                                        <span class="toggle-text">Read More</span>
-                                        <i class="fa fa-chevron-down toggle-icon"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/innovation-and-engineering/engineering-excellence.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Channel-Specific Solutions</h4>
-                                    <ul class="mb-4">
-                                        <li>Tailored packaging for e-commerce and D2C</li>
-                                        <li>Optimized for protection, efficiency, and cost</li>
-                                        <li>Designed to enhance digital brand experience</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <p>No offerings found.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
+
+      
+
         <!-- ==== End Offering ==== -->
 
         <!-- ==== Start Our Benefits ==== -->
+        <?php
+            $benefits = [];
+           
+                $query = "SELECT * FROM tbl_discover_benefits WHERE fk_service_id = 7 AND is_delete = '1'";
+                $result = mysqli_query($conn, $query);
+                if ($result && mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $benefits[] = $row;
+                    }
+                }
+            
+        ?>
         <section class="our-benefits"
             style="background-image: url(assets/img/services/sustainability/our-approach.webp); background-size: cover; background-position: left center; background-repeat: no-repeat, no-repeat;">
             <div class="container">
@@ -270,72 +246,35 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/innovation-and-engineering/shape/sustainability-driven.png"
-                                    alt="" srcset="">
+                    <?php foreach ($benefits as $benefit): ?>
+                        <div class="col-md-4 py-4">
+                            <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
+                                <div class="icon">
+                                    <img src="<?= BASE_URL . htmlspecialchars($benefit['image']) ?>" alt="<?= htmlspecialchars($benefit['title']) ?>">
+                                </div>
+                                <h4><?= htmlspecialchars($benefit['title']) ?></h4>
+                                <p><?= htmlspecialchars($benefit['description']) ?></p>
                             </div>
-                            <h4>Sustainability-Driven</h4>
-                            <p>Optimize materials, reduce waste, and lower carbon footprint.</p>
                         </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/innovation-and-engineering/shape/end-to-end-solutions.png"
-                                    alt="" srcset="">
-                            </div>
-                            <h4>End-to-End Solutions</h4>
-                            <p>From concept to commercialization, ensuring efficiency at every step.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/innovation-and-engineering/shape/cost-effective-innovation.png"
-                                    alt="" srcset="">
-                            </div>
-                            <h4>Cost-Effective Innovation</h4>
-                            <p>Smarter designs that drive cost savings without compromising quality.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 pt-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/innovation-and-engineering/shape/industry-specific-customization.png"
-                                    alt="" srcset="">
-                            </div>
-                            <h4>Industry-Specific Customization</h4>
-                            <p>Tailored solutions for FMCG, Pharma, Automotive, and more.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 pt-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/innovation-and-engineering/shape/speed-and-agility.png"
-                                    alt="" srcset="">
-                            </div>
-                            <h4>Speed & Agility</h4>
-                            <p>Rapid prototyping and AI-powered processes to reduce time-to-market.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 pt-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/innovation-and-engineering/shape/digital-precision.png"
-                                    alt="" srcset="">
-                            </div>
-                            <h4>Digital Precision</h4>
-                            <p>AI, VR, and automation ensure accuracy in design and execution.</p>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </section>
         <!-- ==== End Our Approach ==== -->
 
         <!-- ==== Start Success Stories ==== -->
+        <?php
+            $success_stories = [];
+           
+                $query = "SELECT * FROM tbl_success_stories WHERE fk_service_id = 7 AND is_delete = '1'";
+                $result = mysqli_query($conn, $query);
+                if ($result && mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $success_stories[] = $row;
+                    }
+                }
+           
+        ?>
         <section class="success-stories">
             <div class="container">
                 <div class="row">
@@ -348,54 +287,23 @@
                 </div>
 
                 <div class="row">
+                    <?php foreach ($success_stories as $story): ?>
                     <div class="col-md-4">
                         <div class="success-card wow zoomIn" data-wow-delay="0.6s">
                             <div class="card-img">
-                                <img src="assets/img/services/innovation-and-engineering/stories/global-health.webp"
-                                    alt="Jameson">
+                                <img src="<?= BASE_URL . htmlspecialchars($story['image']) ?>"
+                                    alt="<?= htmlspecialchars($story['title']) ?>">
                             </div>
                             <div class="card-content">
-                                <h3>Global Health Company</h3>
-                                <p class="he-60">Delivered a comprehensive sustainability agenda, developing an
-                                    ambitious program targeting 2030 goals.</p>
-                                <a href="#">
+                                <h3><?= htmlspecialchars($story['title']) ?></h3>
+                                <p class="he-60"><?= htmlspecialchars($story['description']) ?></p>
+                                <a href="javascript:void(0);">
                                     <h5>Learn More</h5>
                                 </a>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="success-card wow zoomIn" data-wow-delay="0.6s">
-                            <div class="card-img">
-                                <img src="assets/img/services/innovation-and-engineering/stories/leading-CPG.webp"
-                                    alt="unilever">
-                            </div>
-                            <div class="card-content">
-                                <h3>Leading CPG Manufacturer</h3>
-                                <p class="he-60">Achieved $90M in savings through packaging innovations and strategic
-                                    partnerships.</p>
-                                <a href="#">
-                                    <h5>Learn More</h5>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="success-card wow zoomIn" data-wow-delay="0.6s">
-                            <div class="card-img">
-                                <img src="assets/img/services/innovation-and-engineering/stories/FMCG-giant.webp"
-                                    alt="Jameson">
-                            </div>
-                            <div class="card-content">
-                                <h3>FMCG Giant</h3>
-                                <p class="he-60">Centralized and digitized lab operations, reducing design and
-                                    prototyping time by 60%.</p>
-                                <a href="#">
-                                    <h5>Learn More</h5>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    </div>    
+                     <?php endforeach; ?>               
                 </div>
             </div>
 
@@ -439,6 +347,18 @@
         <!-- ==== End Success Stories ==== -->
 
         <!-- ==== Start Our Leaders ==== -->
+         <?php
+        // Query to get leaders with `fk_service_id = 4` and `is_delete = 1`
+        $sql = "SELECT * FROM tbl_our_leaders WHERE fk_service_id = 4 AND is_delete = 1";
+        $result = $conn->query($sql);
+        $our_leaders = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $our_leaders[] = $row;
+            }
+        }
+        ?>
+
         <section class="our-leaders">
             <div class="container">
                 <div class="row">
@@ -447,44 +367,24 @@
                         <h1 class="wow fadeInUp" data-wow-delay="0.4s">A Dedicated Team of Packaging Professionals.</h1>
                     </div>
 
-                    <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/tom.webp" class="w-100">
-                            <p>Tom Oravez<br>Foods, Pharma & CHC (USA)<br><a href="https://www.linkedin.com/in/tom-oravez/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
+                    <?php foreach ($our_leaders as $leader): ?>
+                        <div class="col-md-3 col-6">
+                            <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
+                                <img src="<?= BASE_URL . htmlspecialchars($leader['image']) ?>" class="w-100" alt="<?= htmlspecialchars($leader['name']) ?>">
+                                <p><?= htmlspecialchars($leader['name']) ?></p>
+                                <h6><?= htmlspecialchars($leader['designation']) ?></h6>
+                                <?php if (!empty($leader['link'])): ?>
+                                    <a href="<?= htmlspecialchars($leader['link']) ?>" target="_blank">
+                                        <img src="assets/img/leaders/linkedin.png" alt="LinkedIn" class="p-0">
+                                    </a>
+                                <?php endif; ?>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/prashant.webp" class="w-100">
-                            <p>Prashant Sukhtankar<br>Foods, Pharma & CHC<br><a href="https://www.linkedin.com/in/prashant-sukhtankar-70a90a18/?originalSubdomain=in" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/aunjna.webp" class="w-100">
-                            <p>Aunjna Agarvval<br>Foods, Pharma & CHC<br><a href="https://www.linkedin.com/in/aunjna-agarvval-743b90204/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/avinash.webp" class="w-100">
-                            <p>Avinash Singh<br>SHPCO<br><a href="https://www.linkedin.com/in/avinash-singh-68345356/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </section>
+      
         <!-- ==== End Our Leaders ==== -->
 
         <!-- ==== Start Sustainable Packaging ==== -->
@@ -576,6 +476,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>

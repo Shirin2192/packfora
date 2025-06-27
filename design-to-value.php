@@ -344,6 +344,10 @@
         <!-- ==== End Success Stories ==== -->
 
         <!-- ==== Start Our Leaders ==== -->
+        <?php // Query to get leaders with `fk_service_id = 5` and `is_delete = 1`
+            $sql = "SELECT * FROM tbl_our_leaders WHERE fk_service_id = 5 AND is_delete = 1";
+            $result = $conn->query($sql);
+        ?>
         <section class="our-leaders">
             <div class="container">
                 <div class="row">
@@ -351,55 +355,35 @@
                         <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Our Leaders</h2>
                         <h1 class="wow fadeInUp" data-wow-delay="0.4s">A Dedicated Team of Packaging Professionals.</h1>
                     </div>
+
                     <div class="owl-carousel owl-theme mt-3 team-leaders">
-                    <div>
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/hitesh.webp" class="w-100">
-                            <p>Hitesh Shenoy<br>VP & BU Lead - Growth - Foods & Pharma<br><a href="https://www.linkedin.com/in/hitesh-shenoy-2a84492/?originalSubdomain=sg" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/chirag.webp" class="w-100">
-                            <p>Chirag Master<br>VP & BU Lead - Growth, Delivery - SHPCO, Talent Flex & Mold Management Services<br><a href="https://www.linkedin.com/in/chirag-master-54364bb/?originalSubdomain=in" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/tom.webp" class="w-100">
-                            <p>Tom Oravez<br>Foods, Pharma & CHC (USA)<br><a href="https://www.linkedin.com/in/tom-oravez/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/sheryll.webp" class="w-100">
-                            <p>Sheryll Umagtang<br>Foods, Pharma & CHC (SEA)<br><a href="https://www.linkedin.com/in/sheryll-umagtang-174439216/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/micheal.webp" class="w-100">
-                            <p>Micheal Harris<br>Foods, Pharma & CHC (USA)<br><a href="https://www.linkedin.com/in/michael-l-harris-41a9897/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a></p>
-                        </div>
-                    </div>
+                        <?php if ($result->num_rows > 0): ?>
+                            <?php while ($row = $result->fetch_assoc()): ?>
+                                <div>
+                                    <div class="leaders wow zoomIn" data-wow-delay="0.4s">
+                                        <img src="<?= BASE_URL .htmlspecialchars($row['image']) ?>" class="w-100" alt="<?= htmlspecialchars($row['name']) ?>">
+                                        <p>
+                                            <?= htmlspecialchars($row['name']) ?><br>
+                                            <?= htmlspecialchars($row['designation']) ?><br>
+                                            <?php if (!empty($row['link'])): ?>
+                                                <a href="<?= htmlspecialchars($row['link']) ?>" target="_blank">
+                                                    <img src="assets/img/leaders/linkedin.png" alt="LinkedIn" class="p-2">
+                                                </a>
+                                            <?php endif; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <p class="text-center">No leaders found.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
-            </div>
+            </div>          
         </section>
+         <?php
+            $conn->close();
+            ?>
         <!-- ==== End Our Leaders ==== -->
 
         <!-- ==== Start Sustainable Packaging ==== -->

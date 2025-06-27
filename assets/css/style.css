@@ -4750,7 +4750,7 @@ sup {
 /* --------------- Works --------------- */
 .work-card .card-item {
     margin-bottom: 30px;
-    background-image: url(../imgs/services/services-bg.webp);
+    background-image: url(../img/services/services-bg.webp);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -5547,7 +5547,7 @@ table td {
 .optimize-packaging-points img {
     width: 20px;
     height: 20px;
-    margin-right: 30px;
+    margin-right: 20px;
 }
 
 .science-backed-approach .science-backed {
@@ -5619,6 +5619,29 @@ table td {
     font-weight: 400;
 }
 
+/* .custom-bullets {
+    list-style: none;
+    padding-left: 0;
+}
+
+.custom-bullets li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+}
+
+.custom-bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 20px;
+    height: 20px;
+    background-image: url('assets/img/home/intro/Vector.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+} */
+
 .levers-activate .levers {
     background: #F68F33;
     border-radius: 50px;
@@ -5660,13 +5683,19 @@ table td {
 }
 
 .value-chain-expertise-box {
-    background-color: #21409A;
+    background-color: #ffffff;
     padding: 30px 20px;
+}
+
+.value-chain-expertise-box:hover {
+    background: linear-gradient(135deg, rgba(26, 59, 126, 0.9) 0%, rgba(65, 105, 225, 0.9) 100%), url('../img/our-team/technocrats-bg.webp');
+    background-size: contain;
+    background-blend-mode: overlay;
 }
 
 .value-chain-expertise-box h2 {
     font-size: 24px;
-    color: #ffffff;
+    color: #21409A;
     line-height: normal;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 700;
@@ -5676,11 +5705,15 @@ table td {
 
 .value-chain-expertise-box p {
     font-size: 14px;
-    color: #ffffff;
+    color: #21409A;
     line-height: normal;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 400;
     width: 90%;
     margin-bottom: 0px;
     height: 94px;
+}
+
+.value-chain-expertise-box:hover h2, .value-chain-expertise-box:hover p {
+    color: #ffffff;
 }
