@@ -107,32 +107,61 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-
+ <?php include 'db_connect.php';
+         include 'config.php';  
+    ?>
     <main>
         <!-- ==== Start Home Banner ==== -->
-        <section class="page-banner" style="position: relative; overflow: hidden;">
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
-                <video autoplay muted loop playsinline
-                    style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
-                    <source src="assets/img/services/packaging-procurement/packaging-procurement.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+            <?php 
 
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%); z-index: 1;">
-                </div>
-            </div>
+            // Set the service ID (dynamic or static)
+            $service_id = 8; // ← change to required service ID
 
-            <div class="container" style="position: relative; z-index: 1;">
-                <div class="row">
-                    <div class="content">
-                        <h1 class="wow fadeInUp" data-wow-delay="0.2s">Packaging Procurement</h1>
-                        <h2 class="wow fadeInUp" data-wow-delay="0.2s">Cost Intelligence Engine</h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">We leverage should-cost models, market index trends and ordering pattern analytics to drive the next level of efficiencies and future-proof your operations against the impact of inflation.</p>
-                        <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.4s">Speak to our Expert Today</a>
+            // Prepare and execute query
+            $sql = "SELECT title, sub_title, description, video FROM tbl_service_banner_video 
+                    WHERE fk_service_id = ? AND is_delete = '1' LIMIT 1";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $service_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            // Check if data is found
+            $banner = $result->fetch_assoc();
+
+            $stmt->close();
+            
+            ?>
+
+            <?php if ($banner): ?>
+            <section class="page-banner" style="position: relative; overflow: hidden;">
+                <!-- Video Background -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+                    <video autoplay muted loop playsinline
+                        style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
+                        <source src="<?= BASE_URL . htmlspecialchars($banner['video']) ?>" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+                         background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%);
+                         z-index: 1;">
                     </div>
                 </div>
-            </div>
-        </section>
+
+                <!-- Text Content -->
+                <div class="container" style="position: relative; z-index: 1;">
+                    <div class="row">
+                        <div class="content">
+                            <h1 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($banner['title']) ?></h1>
+                            <h2 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($banner['sub_title']) ?></h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.4s"><?= htmlspecialchars($banner['description']) ?></p>
+                            <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.4s">Speak to our Expert Today</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <?php endif; ?>
+
         <!-- ==== End Home Banner ==== -->
 
         <!-- ==== Start Market Trends ==== -->
@@ -170,236 +199,197 @@
         <!-- ==== End Market Trends ==== -->
 
         <!-- ==== Start Offering ==== -->
-        <div class="offerings-container">
-            <div class="all-offerings">
-                <div class="container">
-                    <div class="row">
-                        <h2 class="offering-title mb-3 wow fadeIn" style="color: #21409A;">Our Offerings</h2>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/packaging-procurement/sourcing-and-dtv.webp" class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Sourcing & Design-to-Value (DTV)</h4>
-                                    <ul style="padding-left: 25px;">
-                                        <li class="custom-marker"><strong>Foundational Strategies</strong></li>
-                                        <ul style="padding-left: 18px; margin-bottom: 10px;">
-                                            <li>Spend Analytics & Market Intelligence</li>
-                                            <li>Strategic & Tactical Sourcing (Short & Long-Term)</li>
-                                            <li>Supplier Pricing Review & Benchmarking</li>
-                                            <li>Contract Lifecycle Management</li>
-                                            <li>Driving Business Goals Through Smart Procurement</li>
-                                        </ul>
-                                    </ul>
+       <?php
 
-                                    <div class="more-content" style="display: none;">
-                                        <ul style="padding-left: 25px;">
-                                            <li class="custom-marker"><strong>Advanced Optimization Levers</strong></li>
-                                            <ul style="padding-left: 18px;">
-                                                <li>Spec Optimization & Material Alternatives</li>
-                                                <li>Standardization & Complexity Reduction</li>
-                                                <li>Value Chain Assessment for End-to-End Efficiency</li>
-                                            </ul>
-                                        </ul>
+            $service_id = 8; // Example: Packaging Procurement
+
+            $sql = "SELECT title, description, image FROM tbl_our_offering 
+                    WHERE fk_service_id = ? AND is_delete = '1' ORDER BY id ASC LIMIT 3";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $service_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $offerings = [];
+            while ($row = $result->fetch_assoc()) {
+                $offerings[] = $row;
+            }
+            $stmt->close();
+                       ?>
+
+            <div class="offerings-container">
+                <div class="all-offerings">
+                    <div class="container">
+                        <div class="row">
+                            <h2 class="offering-title mb-3 wow fadeIn" style="color: #21409A;">Our Offerings</h2>
+                        </div>
+                        <div class="row">
+
+                            <?php foreach ($offerings as $index => $offering): ?>
+                                <div class="col-lg-4">
+                                    <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
+                                        <div class="offering-img">
+                                            <img src="<?= BASE_URL . htmlspecialchars($offering['image']) ?>" class="w-100" alt="<?= htmlspecialchars($offering['title']) ?>">
+                                        </div>
+                                        <div class="offering-content offering-sl-content">
+                                            <h4 class="mb-2"><?= htmlspecialchars($offering['title']) ?></h4>
+
+                                            <?php if ($index === 0): ?>
+                                                <!-- Example: Special logic for 1st offering with read more block -->
+                                                <ul style="padding-left: 25px;">
+                                                    <li class="custom-marker"><strong>Foundational Strategies</strong></li>
+                                                    <ul style="padding-left: 18px; margin-bottom: 10px;">
+                                                        <li>Spend Analytics & Market Intelligence</li>
+                                                        <li>Strategic & Tactical Sourcing (Short & Long-Term)</li>
+                                                        <li>Supplier Pricing Review & Benchmarking</li>
+                                                        <li>Contract Lifecycle Management</li>
+                                                        <li>Driving Business Goals Through Smart Procurement</li>
+                                                    </ul>
+                                                </ul>
+
+                                                <div class="more-content" style="display: none;">
+                                                    <ul style="padding-left: 25px;">
+                                                        <li class="custom-marker"><strong>Advanced Optimization Levers</strong></li>
+                                                        <ul style="padding-left: 18px;">
+                                                            <li>Spec Optimization & Material Alternatives</li>
+                                                            <li>Standardization & Complexity Reduction</li>
+                                                            <li>Value Chain Assessment for End-to-End Efficiency</li>
+                                                        </ul>
+                                                    </ul>
+                                                </div>
+
+                                                <a href="javascript:void(0);" class="read-more-toggle mt-0">
+                                                    <span class="toggle-text">Read More</span>
+                                                    <i class="fa fa-chevron-down toggle-icon"></i>
+                                                </a>
+
+                                            <?php else: ?>
+                                                <p class="mb-0"><?= nl2br(htmlspecialchars($offering['description'])) ?></p>
+                                            <?php endif; ?>
+
+                                        </div>
                                     </div>
+                                </div>
+                            <?php endforeach; ?>
 
-                                    <a href="javascript:void(0);" class="read-more-toggle mt-0">
-                                        <span class="toggle-text">Read More</span>
-                                        <i class="fa fa-chevron-down toggle-icon"></i>
-                                    </a>
-                                </div>
+                            <!-- Keep the last empty 4th box if needed -->
+                            <div class="col-lg-3">
+                                <div class="offerings-card mb-4"></div>
                             </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/packaging-procurement/procurement-models-and-digital-tools.webp" class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Procurement Models & Digital Tools</h4>
-                                    <p class="mb-0"><strong>Fundamental Tools for Procurement Excellence</strong></p>
-                                    <ul class="mb-70">
-                                        <li>Market Intelligence & Should-Cost Models</li>
-                                        <li>RFX Templates & Supplier Training</li>
-                                        <li>Price Benchmarking & Supplier Relationship Management (SRM)</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/packaging-procurement/advanced-digital-enablement.webp" class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Advanced Digital Enablement</h4>
-                                    <ul class="mb-70">
-                                        <li>AI-Based Spend Analytics & Risk Management</li>
-                                        <li>Automated Global Control Tower Linkage for Real-Time Procurement Oversight</li>
-                                        <li>Predictive Cost Models for Market Forecasting</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4">
-                                <!-- <div class="offering-img">
-                                    <img src="assets/img/services/service-07.webp" class="w-100">
-                                </div>
-                                <div class="offering-content">
-                                    <h4 class="mb-2">Market Intelligence: Stay Competitive with Data-Driven
-                                        Insights</h4>
-                                    <p>Don't follow the trends—stay ahead of them. Our real-time sustainability
-                                        market intelligence helps you spot...</p>
-                                </div> -->
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
         <!-- ==== End Offering ==== -->
 
         <!-- ==== Start Our Benefits ==== -->
-        <section class="our-benefits"
-            style="background-image: url(assets/img/services/sustainability/our-approach.webp); background-size: cover; background-position: left center; background-repeat: no-repeat, no-repeat;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Why Choose Us?</h2>
-                        <h4 class="wow fadeInUp" data-wow-delay="0.4s">Discover the Benefits of Packaging Procurement</h4>
+        <?php
+            // Your DB connection file
+
+            $service_id = 8; // Replace with dynamic ID if needed
+
+            $sql = "SELECT title, description, image FROM tbl_discover_benefits 
+                    WHERE fk_service_id = ? AND is_delete = '1' ORDER BY id ASC LIMIT 3";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $service_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $benefits = [];
+            while ($row = $result->fetch_assoc()) {
+                $benefits[] = $row;
+            }
+            $stmt->close();
+
+            ?>
+
+            <section class="our-benefits"
+                style="background-image: url(assets/img/services/sustainability/our-approach.webp); background-size: cover; background-position: left center; background-repeat: no-repeat;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Why Choose Us?</h2>
+                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Discover the Benefits of Packaging Procurement</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <?php foreach ($benefits as $benefit): ?>
+                            <div class="col-md-4 py-4">
+                                <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
+                                    <div class="icon">
+                                        <img src="<?= BASE_URL . htmlspecialchars($benefit['image']) ?>" alt="<?= htmlspecialchars($benefit['title']) ?>">
+                                    </div>
+                                    <h4><?= htmlspecialchars($benefit['title']) ?></h4>
+                                    <ul>
+                                        <?php
+                                        $desc_lines = preg_split('/\r\n|\n|\r/', $benefit['description']);
+                                        foreach ($desc_lines as $line) {
+                                            if (!empty(trim($line))) {
+                                                echo "<li>" . htmlspecialchars(trim($line)) . "</li>";
+                                            }
+                                        }
+                                        ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/packaging-procurement/shape/build-a-strong-foundation.png" alt="" srcset="">
-                            </div>
-                            <h4>Build a Strong Foundation</h4>
-                            <ul>
-                                <!-- <li>P2P Optimization</li> -->
-                                <li>Rapid Sourcing & Tail Spend Management</li>
-                                <li>Supplier Lifecycle Management</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/packaging-procurement/shape/accelerate-and-optimize.png" alt="" srcset="">
-                            </div>
-                            <h4>Accelerate & Optimize</h4>
-                            <ul>
-                                <li>Spend Analytics & Cost Modelling</li>
-                                <li>Supplier Performance Management & LCC Sourcing</li>
-                                <li>Complexity Reduction & Specification Optimization</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/packaging-procurement/shape/strategic-procurement-transformation.png" alt="" srcset="">
-                            </div>
-                            <h4>Strategic Procurement Transformation</h4>
-                            <ul>
-                                <li>Integrated Business Planning & Category Management</li>
-                                <li>Supplier Collaboration for Innovation & ESG Strategy Development</li>
-                                <li>New Materials Adoption & Business Model Innovation</li>
-                                <li>Mergers, Acquisitions & Strategic Divestments</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
+
         <!-- ==== End Our Approach ==== -->
 
         <!-- ==== Start Success Stories ==== -->
-        <section class="success-stories">
-            <div class="container">
-                <div class="row">
-                    <div class="success-stories-header">
-                        <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
-                        <h1 class="wow fadeInUp" data-wow-delay="0.4s">Proven Success with Global Clients</h1>
-                        <p class="wow fadeInUp" data-wow-delay="0.6s">Packfora's solutions have consistently helped global brands achieve
-                            their environmental and business goals.</p>
+        <?php
+            $fk_service_id = 8; // Replace with the correct service ID (optional filter)
+
+            $query = "SELECT title, description, image 
+                      FROM tbl_success_stories 
+                      WHERE fk_service_id = ? AND is_delete = '1' 
+                      ORDER BY id ASC LIMIT 2";
+
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("i", $fk_service_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            ?>
+
+            <section class="success-stories">
+                <div class="container">
+                    <div class="row">
+                        <div class="success-stories-header">
+                            <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
+                            <h1 class="wow fadeInUp" data-wow-delay="0.4s">Proven Success with Global Clients</h1>
+                            <p class="wow fadeInUp" data-wow-delay="0.6s">
+                                Packfora's solutions have consistently helped global brands achieve
+                                their environmental and business goals.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <div class="col-md-6">
+                                <div class="success-card wow zoomIn" data-wow-delay="0.6s">
+                                    <div class="card-img">
+                                        <img src="<?= BASE_URL. htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                                    </div>
+                                    <div class="card-content">
+                                        <h3><?= htmlspecialchars($row['title']) ?></h3>
+                                        <p class="he-96"><?= htmlspecialchars($row['description']) ?></p>
+                                        <a href="javascript:void(0);">
+                                            <h5>Learn More</h5>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
                     </div>
                 </div>
+            </section>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="success-card wow zoomIn" data-wow-delay="0.6s">
-                            <div class="card-img">
-                                <img src="assets/img/services/packaging-procurement/stories/unlock-embedded-cost-through-should-cost-modelling.webp" alt="Jameson">
-                            </div>
-                            <div class="card-content">
-                                <h3>Unlock Embedded Cost through Should Cost Modelling</h3>
-                                <p class="he-96">Optimized packaging costs by building Should Cost Models, mapping the value chain, and
-                                    identifying negotiation levers. Linked conversion costs to market dynamics like power,
-                                    labour, and interest rates while estimating real-time wastage—empowering the client to
-                                    unlock 3-4% savings on total spend.</p>
-                                <a href="#">
-                                    <h5>Learn More</h5>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="success-card wow zoomIn" data-wow-delay="0.6s">
-                            <div class="card-img">
-                                <img src="assets/img/services/packaging-procurement/stories/cost-model-analysis-to-unlock-savings-opportunities.webp" alt="unilever">
-                            </div>
-                            <div class="card-content">
-                                <h3>Cost Model Analysis to unlock Savings opportunities</h3>
-                                <p class="he-96">By benchmarking costs for aerosol cans, cartons, corrugates, and laminates, we uncovered
-                                    pricing gaps, identified competitive suppliers, optimized specifications, and introduced
-                                    automation—unlocking 13% in savings through smarter negotiations.</p>
-                                <a href="#">
-                                    <h5>Learn More</h5>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- <div class="container-fluid">
-                <div class="owl-carousel owl-theme success-slider">
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/jameson.webp" alt="Jameson">
-                        </div>
-                        <div class="card-content">
-                            <h3>Unlock Embedded Cost through Should Cost Modelling</h3>
-                            <p class="mb-3">Optimized packaging costs by building Should Cost Models, mapping the value chain, and
-                                identifying negotiation levers. Linked conversion costs to market dynamics like power,
-                                labour, and interest rates while estimating real-time wastage—empowering the client to
-                                unlock 3-4% savings on total spend.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/unilever.webp" alt="unilever">
-                        </div>
-                        <div class="card-content">
-                            <h3>Cost Model Analysis to unlock Savings opportunities</h3>
-                            <p class="mb-4" style="padding-bottom: 10px;">By benchmarking costs for aerosol cans, cartons, corrugates, and laminates, we uncovered
-                                pricing gaps, identified competitive suppliers, optimized specifications, and introduced
-                                automation—unlocking 13% in savings through smarter negotiations.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-        </section>
         <!-- ==== End Success Stories ==== -->
 
         <!-- ==== Start Our Leaders ==== -->
@@ -533,6 +523,18 @@
             });
         });
     </script>
+ <!--    <script>
+document.querySelectorAll('.read-more-toggle').forEach(function(toggle) {
+    toggle.addEventListener('click', function () {
+        const moreContent = this.previousElementSibling;
+        moreContent.style.display = moreContent.style.display === 'none' ? 'block' : 'none';
+        this.querySelector('.toggle-text').innerText = moreContent.style.display === 'none' ? 'Read More' : 'Read Less';
+        this.querySelector('.toggle-icon').classList.toggle('fa-chevron-down');
+        this.querySelector('.toggle-icon').classList.toggle('fa-chevron-up');
+    });
+});
+</script> -->
+
 </body>
 
 </html>

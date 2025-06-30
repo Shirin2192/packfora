@@ -108,37 +108,65 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-
+     <?php include 'db_connect.php';
+         include 'config.php';  
+    ?>
     <main>
         <!-- ==== Start Home Banner ==== -->
-        <section class="page-banner" style="position: relative; overflow: hidden;">
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
-                <video autoplay muted loop playsinline
-                    style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
-                    <source src="assets/img/services/talent-flex/talent-flex.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+        <?php
+$fk_service_id = 1; // Change based on current service page
+$sql = "SELECT title, sub_title, description, video FROM tbl_service_banner_video 
+        WHERE fk_service_id = $fk_service_id AND is_delete = 1 LIMIT 1";
+$result = $conn->query($sql);
 
-                <div
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%); z-index: 1;">
-                </div>
-            </div>
+if ($result && $result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $title = htmlspecialchars($row['title']);
+    $subtitle = htmlspecialchars($row['sub_title']);
+    $description = htmlspecialchars($row['description']);
+    $video_path = htmlspecialchars($row['video']);
+?>
+<section class="page-banner" style="position: relative; overflow: hidden;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+        <video autoplay muted loop playsinline
+            style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
+            <source src="<?= BASE_URL. $video_path; ?>" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
 
-            <div class="container" style="position: relative; z-index: 1;">
-                <div class="row">
-                    <div class="content">
-                        <h1 class="wow fadeInUp" data-wow-delay="0.2s">Talent Flex</h1>
-                        <h2 class="wow fadeInUp" data-wow-delay="0.2s">Expand your team's ability to deliver high-impact packaging solutions</h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">77% of businesses globally report difficulty in finding the skilled talent they need. Talent Flex helps organizations stay ahead by bridging skill gaps, enhancing productivity and enabling them to manage complex packaging priorities.</p>
-                        <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.6s">Let's Work
-                            Together</a>
-                    </div>
-                </div>
+        <div
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%); z-index: 1;">
+        </div>
+    </div>
+
+    <div class="container" style="position: relative; z-index: 1;">
+        <div class="row">
+            <div class="content">
+                <h1 class="wow fadeInUp" data-wow-delay="0.2s"><?= $title; ?></h1>
+                <h2 class="wow fadeInUp" data-wow-delay="0.2s"><?= $subtitle; ?></h2>
+                <p class="wow fadeInUp" data-wow-delay="0.4s"><?= $description; ?></p>
+                <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.6s">Let's Work Together</a>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+<?php } ?>
+
         <!-- ==== End Home Banner ==== -->
 
         <!-- ==== Start Offering ==== -->
+        <?php
+        $fk_service_id = 1; // Example: Talent Flex service ID
+        $sql = "SELECT title, description, image FROM tbl_our_offering 
+                WHERE fk_service_id = $fk_service_id AND is_delete = 1 
+                ORDER BY id ASC";
+        $result = $conn->query($sql);
+
+        $sql_models = "SELECT title, description, image FROM tbl_resourcing_model 
+               WHERE is_delete = '1' ORDER BY id ASC";
+        $result_models = $conn->query($sql_models);
+        ?>
+                
         <div class="offerings-container">
             <div class="all-offerings">
                 <div class="container">
@@ -146,97 +174,52 @@
                         <h2 class="offering-title mb-3 wow fadeIn" style="color: #21409A;">Our Offerings</h2>
                     </div>
                     <div class="row">
+                        <?php if ($result && $result->num_rows > 0): ?>
+                    <?php 
+                        $count = 0;
+                        while($row = $result->fetch_assoc()):
+                            $count++;
+                            $title = htmlspecialchars($row['title']);
+                            $desc = nl2br(htmlspecialchars($row['description']));
+                            $img = htmlspecialchars($row['image']);
+                    ?>
                         <div class="col-lg-4">
                             <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
                                 <div class="offering-img">
-                                    <img src="assets/img/services/talent-flex/capacity.webp" class="w-100">
+                                    <img src="<?= BASE_URL. $img ?>" class="w-100">
                                 </div>
                                 <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Capacity</h4>
-                                    <p>We provide qualified talent with enhanced skill set to complement your packaging
-                                        team.</p>
+                                    <h4 class="mb-2"><?= $title ?></h4>
+                                    <p><?= $desc ?></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/talent-flex/capability.webp" class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Capability</h4>
-                                    <p>We offer end-to-end packaging value chain understanding and structured skill
-                                        upgrades.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/talent-flex/flexibility.webp" class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Flexibility</h4>
-                                    <p>We support multiple sites and global operations across geographies and time
-                                        zones.</p>
-                                </div>
-                            </div>
-                        </div>
+                         <?php endwhile; ?>
+                        <?php endif; ?>
                         <div class="col-lg-12">
                             <div class="new-models">
-                                <h4 class="wow fadeIn">The Talent Flex resourcing is available on all the three models
-                                    as under:</h4>
+                                <h4 class="wow fadeIn">The Talent Flex resourcing is available on all the three models as under:</h4>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/talent-flex/onshore.webp" class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Onshore</h4>
-                                    <p class="mb-3" style="padding-bottom: 3.19px;">Model offers In-house resourcing for
-                                        clients on a global scale at client's location.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/talent-flex/offshore.webp" class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Offshore</h4>
-                                    <p>Model offers resourcing for clients in an efficient way for workstreams that can
-                                        be managed virtually.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/talent-flex/hybrid.webp" class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Hybrid</h4>
-                                    <p class="mb-3" style="padding-bottom: 3.19px;">Model offers resourcing for clients
-                                        that provides the flexibility of offering best of both worlds.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4">
-                                <!-- <div class="offering-img">
-                                    <img src="assets/img/services/service-07.webp" class="w-100">
-                                </div>
-                                <div class="offering-content">
-                                    <h4 class="mb-2">Market Intelligence: Stay Competitive with Data-Driven
-                                        Insights</h4>
-                                    <p>Don't follow the trends—stay ahead of them. Our real-time sustainability
-                                        market intelligence helps you spot...</p>
-                                </div> -->
-                            </div>
-                        </div>
+
+                        <!-- Wrap dynamic columns inside a .row -->
+                        <div class="row">
+                            <?php if ($result_models && $result_models->num_rows > 0): ?>
+                                <?php while($model = $result_models->fetch_assoc()): ?>
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
+                                            <div class="offering-img">
+                                                <img src="<?= BASE_URL . htmlspecialchars($model['image']) ?>" class="w-100" alt="<?= htmlspecialchars($model['title']) ?>">
+                                            </div>
+                                            <div class="offering-content offering-sl-content">
+                                                <h4 class="mb-2"><?= htmlspecialchars($model['title']) ?></h4>
+                                                <p class="mb-3"><?= nl2br(htmlspecialchars($model['description'])) ?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endwhile; ?>
+                            <?php endif; ?>
+                        </div>                       
                     </div>
                 </div>
             </div>
@@ -244,189 +227,167 @@
         <!-- ==== End Offering ==== -->
 
         <!-- ==== Start Our Benefits ==== -->
-        <section class="our-benefits"
-            style="background-image: url(assets/img/services/sustainability/our-approach.webp); background-size: cover; background-position: left center; background-repeat: no-repeat, no-repeat;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Why Choose Us?</h2>
-                        <h4 class=" wow fadeInUp" data-wow-delay="0.4s">Discover the Benefits of Talent Flex</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/talent-flex/shape/tailored-expertise.png" alt=""
-                                    srcset="">
+        <?php
+                // Service ID for which to fetch benefits (e.g. 1 for Talent Flex)
+                $service_id = 1;
+
+                $sql = "SELECT id, title, description, image 
+                        FROM tbl_discover_benefits 
+                        WHERE fk_service_id = ? AND is_delete = '1' 
+                        ORDER BY id ASC";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $service_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0):
+                ?>
+                <section class="our-benefits" style="background-image: url(assets/img/services/sustainability/our-approach.webp); background-size: cover; background-position: left center; background-repeat: no-repeat;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Why Choose Us?</h2>
+                                <h4 class="wow fadeInUp" data-wow-delay="0.4s">Discover the Benefits of Talent Flex</h4>
                             </div>
-                            <h4>Tailored Expertise</h4>
-                            <p>For FMCG, QSR, Pharma & Retail packaging needs</p>
+                        </div>
+                        <div class="row">
+                            <?php while($row = $result->fetch_assoc()): ?>
+                                <div class="col-md-3 pt-4">
+                                    <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
+                                        <div class="icon">
+                                            <img src="<?= BASE_URL. htmlspecialchars($row['image']) ?>" alt="">
+                                        </div>
+                                        <h4><?= htmlspecialchars($row['title']) ?></h4>
+                                        <p><?= htmlspecialchars($row['description']) ?></p>
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
                         </div>
                     </div>
-                    <div class="col-md-3 pt-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/talent-flex/shape/global-coverage.png" alt="" srcset="">
-                            </div>
-                            <h4>Global Coverage</h4>
-                            <p>Across time zones for continuous execution</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 pt-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/talent-flex/shape/scalability.png" alt="" srcset="">
-                            </div>
-                            <h4>Scalability</h4>
-                            <p>To address spike and slumps in resource demand.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 pt-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/talent-flex/shape/deploy-talent-faster.png" alt=""
-                                    srcset="">
-                            </div>
-                            <h4>Deploy Talent Faster</h4>
-                            <p>With our pre-vetted specialists</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                </section>
+                <?php
+                endif;
+
+                $stmt->close();
+                ?>
         <!-- ==== End Our Approach ==== -->
 
         <!-- ==== Start Success Stories ==== -->
+        <?php $service_id = 1;
+
+        // Fetch stories
+        $sql = "SELECT title, description, image FROM tbl_success_stories 
+                WHERE fk_service_id = ? AND is_delete = '1'
+                ORDER BY id ASC LIMIT 6";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $service_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        ?>
         <section class="success-stories">
             <div class="container">
                 <div class="row">
                     <div class="success-stories-header">
                         <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
                         <h1 class="wow fadeInUp" data-wow-delay="0.4s">Delivering Impact. Driving Results.</h1>
-                        <p class="wow fadeInUp" data-wow-delay="0.6s">Packfora's solutions have consistently helped
-                            global brands achieve
-                            their environmental and business goals.</p>
+                        <p class="wow fadeInUp" data-wow-delay="0.6s">
+                            Packfora's solutions have consistently helped global brands achieve their environmental and business goals.
+                        </p>
                     </div>
                 </div>
 
                 <div class="row">
+                    <?php
+                    if ($result->num_rows > 0):
+                        while ($story = $result->fetch_assoc()):
+                    ?>
                     <div class="col-md-6">
                         <div class="success-card wow zoomIn" data-wow-delay="0.6s">
                             <div class="card-img">
-                                <img src="assets/img/services/talent-flex/stories/mould-management-for-a-global-QSR-chain.webp"
-                                    alt="Jameson">
+                                <img src="<?= BASE_URL. htmlspecialchars($story['image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
                             </div>
                             <div class="card-content">
-                                <h3>Mold Management for a Global QSR Chain</h3>
-                                <p>Read how we streamlined mold management, enhancing efficiency and turnaround
-                                    speed—securing a 24-month contract extension.</p>
-                                <a href="#">
+                                <h3><?= htmlspecialchars($story['title']) ?></h3>
+                                <p><?= htmlspecialchars($story['description']) ?></p>
+                                <a href="javascript:void(0);">
                                     <h5>Learn More</h5>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="success-card wow zoomIn" data-wow-delay="0.6s">
-                            <div class="card-img">
-                                <img src="assets/img/services/talent-flex/stories/lab-and-prototyping-management-for-FMCG.webp"
-                                    alt="unilever">
-                            </div>
-                            <div class="card-content">
-                                <h3>Lab & Prototyping Management for FMCG</h3>
-                                <p>Explore how we digitized lab operations, cutting prototyping time by 60%,
-                                    accelerating product launches, and driving continuous innovation.</p>
-                                <a href="#">
-                                    <h5>Learn More</h5>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                        endwhile;
+                    else:
+                        echo '<div class="col-12"><p class="text-center">No success stories available.</p></div>';
+                    endif;
+                    ?>
                 </div>
             </div>
-
-            <!-- <div class="container-fluid">
-                <div class="owl-carousel owl-theme success-slider">
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/jameson.webp" alt="Jameson">
-                        </div>
-                        <div class="card-content">
-                            <h3>Global Health Company</h3>
-                            <p>Delivered a comprehensive sustainability agenda, developing an ambitious program targeting 2030 goals.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/unilever.webp" alt="unilever">
-                        </div>
-                        <div class="card-content">
-                            <h3>Leading CPG Manufacturer</h3>
-                            <p>Achieved $90M in savings through packaging innovations and strategic partnerships.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/jameson.webp" alt="Jameson">
-                        </div>
-                        <div class="card-content">
-                            <h3>FMCG Giant</h3>
-                            <p>Centralized and digitized lab operations, reducing design and prototyping time by 60%.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </section>
-        <!-- ==== End Success Stories ==== -->
+        <?php
+$stmt->close();
+                ?>
+                <!-- ==== End Success Stories ==== -->
 
         <!-- ==== Start Our Leaders ==== -->
-        <section class="our-leaders">
-            <div class="container">
-                <div class="row">
-                    <div class="success-stories-header">
-                        <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Our Leaders</h2>
-                        <h1 class="wow fadeInUp" data-wow-delay="0.4s">A Dedicated Team of Packaging Professionals.</h1>
-                    </div>
+        <?php
 
-                    <div class="col-md-3 col-6">
-                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/brijesh.webp" class="w-100">
-                            <p>Brijesh Sounderrajan</p><h6>Talent Flex </h6><a
-                                    href="https://www.linkedin.com/in/brijesh-sounderrajan-5378277/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
-                                </a>
+           $service_id = 1;
+
+            // Prepare and execute the query
+            $sql = "SELECT name, designation, link, image FROM tbl_our_leaders 
+                    WHERE fk_service_id = ? AND is_delete = '1' 
+                    ORDER BY id ASC";
+
+            $stmt = $conn->prepare($sql);
+            if ($stmt === false) {
+                die("Prepare failed: " . $conn->error);
+            }
+
+            $stmt->bind_param("i", $service_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            ?>
+
+            <!-- Our Leaders Section -->
+            <section class="our-leaders">
+                <div class="container">
+                    <div class="row">
+                        <div class="success-stories-header">
+                            <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Our Leaders</h2>
+                            <h1 class="wow fadeInUp" data-wow-delay="0.4s">A Dedicated Team of Packaging Professionals.</h1>
                         </div>
-                    </div>
 
-                    <div class="col-md-3 col-6">
-                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/pradeep.webp" class="w-100">
-                            <p>Pradeep Nair</p><h6>Foods, Pharma & CHC </h6><a
-                                    href="https://www.linkedin.com/in/pradeep-nair-7b0175119/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
-                                </a>
-                        </div>
+                        <?php if ($result->num_rows > 0): ?>
+                            <?php while($leader = $result->fetch_assoc()): ?>
+                                <div class="col-md-3 col-6">
+                                    <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
+                                        <img src="<?= BASE_URL . htmlspecialchars($leader['image']) ?>" class="w-100" alt="<?= htmlspecialchars($leader['name']) ?>">
+                                        <p><?= htmlspecialchars($leader['name']) ?></p>
+                                        <h6><?= htmlspecialchars($leader['designation']) ?></h6>
+                                        <?php if (!empty($leader['link'])): ?>
+                                            <a href="<?= htmlspecialchars($leader['link']) ?>" target="_blank">
+                                                <img src="assets/img/leaders/linkedin.png" alt="LinkedIn" class="p-0">
+                                            </a>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <div class="col-12">
+                                <p class="text-center">No leaders found for this service.</p>
+                            </div>
+                        <?php endif; ?>
                     </div>
-
-                    <div class="col-md-3 col-6">
-                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/prachi.webp" class="w-100">
-                            <p>Prachi Balchandani</p><h6>Human Resources</h6><a
-                                    href="https://www.linkedin.com/in/prachibalchandani/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
-                                </a>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
-        </section>
+            </section>
+
+            <?php
+            // Close resources
+            $stmt->close();
+            $conn->close();
+            ?>
         <!-- ==== End Our Leaders ==== -->
 
         <!-- ==== Start Sustainable Packaging ==== -->

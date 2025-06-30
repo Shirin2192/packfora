@@ -6,15 +6,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="HTML5">
-    <meta name="description" content="Multi-Purpose">
-    <meta name="author" content="">
-
+    <meta name="keywords" content="packaging automation, supply chain optimization, automated packaging solutions, smart packaging">
+    <meta name="description" content="Optimize your packaging operations with Packfora’s automated supply chain solutions built for speed and accuracy.">
+    <meta name="author" content="Packfora">
+    <link rel="canonical" href="https://packfora.com/supply-chain-automation.php">
     <!-- Title  -->
-    <title>End-to-End Packaging and Brand Consulting Solutions - Packfora</title>
+    <title>Smart Packaging Supply Chain Automation | Packfora</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" href="assets/img/favicon.svg">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
@@ -107,14 +107,30 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-
+     <?php include 'db_connect.php';
+         include 'config.php';  
+    ?>
     <main>
         <!-- ==== Start Home Banner ==== -->
+        <?php
+        // Assuming $fk_service_id is defined based on current service context (e.g., 3 for Supply Chain Automation)
+        $fk_service_id = 3; // Change as needed dynamically per page
+
+        $sql = "SELECT title, sub_title, description, video FROM tbl_service_banner_video WHERE fk_service_id = '$fk_service_id' AND is_delete = '1' LIMIT 1";
+        $result = $conn->query($sql);
+
+        if ($result && $result->num_rows > 0) {
+            $banner = $result->fetch_assoc();
+            $video_path = htmlspecialchars($banner['video']);
+            $title = htmlspecialchars($banner['title']);
+            $sub_title = htmlspecialchars($banner['sub_title']);
+            $description = nl2br(htmlspecialchars($banner['description']));
+        ?>
         <section class="page-banner" style="position: relative; overflow: hidden;">
             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
                 <video autoplay muted loop playsinline
                     style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
-                    <source src="assets/img/services/supply-chain-automation/supply-chain-automation.mp4" type="video/mp4">
+                    <source src="<?= BASE_URL. $video_path; ?>" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
 
@@ -125,273 +141,211 @@
             <div class="container" style="position: relative; z-index: 1;">
                 <div class="row">
                     <div class="content">
-                        <h1 class="wow fadeInUp" data-wow-delay="0.2s">Supply Chain Automation</h1>
-                        <h2 class="wow fadeInUp" data-wow-delay="0.2s">Automate. Streamline. Optimize.</h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">Supply Chain Automation is designed to simplify and enhance the entire supply chain process, from procurement to delivery. By integrating advanced automation technology, we enable businesses to operate with greater speed, efficiency, and precision across all levels of their supply chain.</p>
+                        <h1 class="wow fadeInUp" data-wow-delay="0.2s"><?= $title; ?></h1>
+                        <h2 class="wow fadeInUp" data-wow-delay="0.2s"><?= $sub_title; ?></h2>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s"><?= $description; ?></p>
                         <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.4s">Speak to our Expert Today</a>
                     </div>
                 </div>
             </div>
         </section>
+        <?php } ?>
+
         <!-- ==== End Home Banner ==== -->
 
         <!-- ==== Start Market Trends ==== -->
+      <?php
+        $fk_service_id = 3; // For Supply Chain Automation
+
+        $sql = "SELECT title, description FROM tbl_market_trends WHERE fk_service_id = $fk_service_id AND is_delete = 1 ORDER BY id ASC";
+        $result = $conn->query($sql);
+
+        // Prepare an array to collect rows
+        $trends = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $trends[] = $row;
+            }
+        }
+        ?>
+
+        <?php if (!empty($trends)): ?>
         <section class="market-trends wow fadeIn">
             <div class="container">
                 <div class="row">
                     <h2 class="sec-title wow fadeIn">Market Trends</h2>
-                    <div class="col-md-5 market-trend-info market-trend-01 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="market-info w-100">
-                            <h2>$212.81</h2>
-                            <p>billion is the projected value of the global logistics automation market by 2032.</p>
+
+                    <?php foreach ($trends as $index => $row): ?>
+                        <?php
+                            // Alternate class and column width
+                            $box_class = ($index % 2 == 0) ? 'market-trend-01' : 'market-trend-02';
+                            $col_class = ($index % 2 == 0) ? 'col-md-5' : 'col-md-7';
+                            $border_style = ($box_class === 'market-trend-02') ? 'style="border-right: none;"' : '';
+                        ?>
+                        <div class="<?= $col_class; ?> market-trend-info <?= $box_class; ?> wow fadeInUp" data-wow-delay="0.2s" <?= $border_style; ?>>
+                            <div class="market-info w-100">
+                                <h2><?= htmlspecialchars($row['title']); ?></h2>
+                                <p><?= htmlspecialchars($row['description']); ?></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-7 market-trend-info market-trend-02 wow fadeInUp" data-wow-delay="0.2s" style="border-right: none;">
-                        <div class="market-info">
-                            <h2>80%</h2>
-                            <p>of warehouses continue to operate manually, indicating substantial missed opportunities.</p>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
+
                 </div>
             </div>
         </section>
+        <?php endif; ?>
+
         <!-- ==== End Market Trends ==== -->
 
         <!-- ==== Start Offering ==== -->
-        <div class="offerings-container">
-            <div class="all-offerings">
-                <div class="container">
-                    <div class="row">
-                        <h2 class="offering-title mb-3 wow fadeIn" style="color: #21409A;">Our Offerings</h2>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/supply-chain-automation/manufacturing-excellence.webp" class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Manufacturing Excellence</h4>
-                                    <ul class="he-96" style="padding-left: 25px;">
-                                        <li>Lean Transformations</li>
-                                        <li>Site Master Planning</li>
-                                        <li>Demand Vs Capacity Analysis</li>
-                                        <li>De-Bottlenecking</li>
-                                    </ul>
-                                </div>
-                            </div>
+        <?php
+            $fk_service_id = 3; // Adjust per page context (e.g., Supply Chain Automation)
+
+            $sql = "SELECT title, description, image FROM tbl_our_offering WHERE fk_service_id = $fk_service_id AND is_delete = 1 ORDER BY id ASC";
+            $result = $conn->query($sql);
+            ?>
+
+            <?php if ($result && $result->num_rows > 0): ?>
+            <div class="offerings-container">
+                <div class="all-offerings">
+                    <div class="container">
+                        <div class="row">
+                            <h2 class="offering-title mb-3 wow fadeIn" style="color: #21409A;">Our Offerings</h2>
                         </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/supply-chain-automation/packaging-automation.webp" class="w-100">
+                        <div class="row">
+                            <?php while ($row = $result->fetch_assoc()): ?>
+                                <div class="col-lg-3">
+                                    <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
+                                        <div class="offering-img">
+                                            <img src="<?= BASE_URL. htmlspecialchars($row['image']); ?>" class="w-100">
+                                        </div>
+                                        <div class="offering-content offering-sl-content">
+                                            <h4 class="mb-2"><?= htmlspecialchars($row['title']); ?></h4>
+                                            <ul class="he-96" style="padding-left: 25px;">
+                                                <?php
+                                                    // Convert description to bullet points (split by line breaks or periods)
+                                                    $bullets = preg_split("/[\r\n\.]+/", $row['description']);
+                                                    foreach ($bullets as $point) {
+                                                        $trimmed = trim($point);
+                                                        if (!empty($trimmed)) {
+                                                            echo '<li>' . htmlspecialchars($trimmed) . '</li>';
+                                                        }
+                                                    }
+                                                ?>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Packaging Automation</h4>
-                                    <ul class="he-96" style="padding-left: 25px;">
-                                        <li>Packaging Technology Selection</li>
-                                        <li>Material - Machine Interface</li>
-                                        <li>Affordable Automation</li>
-                                        <li>Installation & Line Trials</li>
-                                    </ul>
-                                </div>
+                            <?php endwhile; ?>
+
+                            <!-- Optional empty card for layout alignment -->
+                            <div class="col-lg-3">
+                                <div class="offerings-card mb-4"></div>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/supply-chain-automation/industrial-digitization.webp" class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Industrial Digitization</h4>
-                                    <ul class="he-96" style="padding-left: 25px;">
-                                        <li>Advanced QMS</li>
-                                        <li>Simulation Solutions</li>
-                                        <li>Real Time Visualization</li>
-                                        <li>Virtual Reality in Packaging</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/supply-chain-automation/end-to-end-management.webp" class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">End-to-End Management</h4>
-                                    <ul class="he-96" style="padding-left: 25px;">
-                                        <li>Business Cases</li>
-                                        <li>Project Management And Control</li>
-                                        <li>Make vs Source</li>
-                                        <li>Load Ability Analysis</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4">
-                                <!-- <div class="offering-img">
-                                    <img src="assets/img/services/service-07.webp" class="w-100">
-                                </div>
-                                <div class="offering-content">
-                                    <h4 class="mb-2">Market Intelligence: Stay Competitive with Data-Driven
-                                        Insights</h4>
-                                    <p>Don't follow the trends—stay ahead of them. Our real-time sustainability
-                                        market intelligence helps you spot...</p>
-                                </div> -->
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <?php endif; ?>
+
         <!-- ==== End Offering ==== -->
 
         <!-- ==== Start Our Benefits ==== -->
-        <section class="our-benefits"
-            style="background-image: url(assets/img/services/sustainability/our-approach.webp); background-size: cover; background-position: left center; background-repeat: no-repeat, no-repeat;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Why Choose Us?</h2>
-                        <h4 class="wow fadeInUp" data-wow-delay="0.4s">Discover the Benefits of Supply Chain Automation</h4>
+        <?php
+            $fk_service_id = 3; // Supply Chain Automation (adjust per page)
+
+            $sql = "SELECT title, description, image FROM tbl_discover_benefits WHERE fk_service_id = $fk_service_id AND is_delete = 1 ORDER BY id ASC";
+            $result = $conn->query($sql);
+            ?>
+
+            <?php if ($result && $result->num_rows > 0): ?>
+            <section class="our-benefits"
+                style="background-image: url(assets/img/services/sustainability/our-approach.webp); background-size: cover; background-position: left center; background-repeat: no-repeat;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Why Choose Us?</h2>
+                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Discover the Benefits of Supply Chain Automation</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <div class="col-md-4 py-4">
+                                <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
+                                    <div class="icon">
+                                        <img src="<?= BASE_URL. htmlspecialchars($row['image']); ?>" alt="<?= htmlspecialchars($row['title']); ?>">
+                                    </div>
+                                    <h4><?= htmlspecialchars($row['title']); ?></h4>
+                                    <p><?= htmlspecialchars($row['description']); ?></p>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/supply-chain-automation/shape/increased-efficiency.png" alt="" srcset="">
-                            </div>
-                            <h4>Increased Efficiency</h4>
-                            <P>Automation minimizes manual tasks, improving speed and accuracy.</P>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/supply-chain-automation/shape/optimization.png" alt="" srcset="">
-                            </div>
-                            <h4>Optimization</h4>
-                            <P>Optimized resource use lowers operational costs.</P>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/supply-chain-automation/shape/enhanced-quality.png" alt="" srcset="">
-                            </div>
-                            <h4>Enhanced Quality</h4>
-                            <P>Automated systems reduce human error in tracking and inventory management.</P>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/supply-chain-automation/shape/real-time-process-visualization.png" alt="" srcset="">
-                            </div>
-                            <h4>Real-Time Process Visualization</h4>
-                            <P>Gain instant access to insights for better decision-making.</P>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/supply-chain-automation/shape/scalability.png" alt="" srcset="">
-                            </div>
-                            <h4>Scalability</h4>
-                            <P>Expand operations efficiently without increasing labour costs.</P>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/supply-chain-automation/shape/supply-chain-resilience.png" alt="" srcset="">
-                            </div>
-                            <h4>Supply Chain Resilience</h4>
-                            <P>Improved adaptability to market shifts and disruptions.</P>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
+            <?php endif; ?>
+
         <!-- ==== End Our Approach ==== -->
 
         <!-- ==== Start Success Stories ==== -->
+       <?php
+        $fk_service_id = 3; // Change this depending on the current service/page
+        $sql = "SELECT title, description, image FROM tbl_success_stories 
+                WHERE fk_service_id = $fk_service_id AND is_delete = 1 
+                ORDER BY id ASC LIMIT 2"; // Adjust LIMIT as needed
+        $result = $conn->query($sql);
+        ?>
+
+        <?php if ($result && $result->num_rows > 0): ?>
         <section class="success-stories">
             <div class="container">
                 <div class="row">
                     <div class="success-stories-header">
                         <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
                         <h1 class="wow fadeInUp" data-wow-delay="0.4s">Delivering Impact. Driving Results.</h1>
-                        <p class="wow fadeInUp" data-wow-delay="0.6s">Packfora's solutions have consistently helped global brands achieve
-                            their environmental and business goals.</p>
+                        <p class="wow fadeInUp" data-wow-delay="0.6s">
+                            Packfora's solutions have consistently helped global brands achieve their environmental and business goals.
+                        </p>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="success-card wow zoomIn" data-wow-delay="0.6s">
-                            <div class="card-img">
-                                <img src="assets/img/services/supply-chain-automation/stories/adhesive-SC-technology-and-investment-choices.webp" alt="Jameson">
-                            </div>
-                            <div class="card-content">
-                                <h3>Adhesive Supply Chain Technology & Investment Choices</h3>
-                                <p class="he-60">A Market Leader in Adhesives wanted to develop Supply Chain Automation plan to increase production capabilities and revamp existing packaging operations for achieving end-to-end value chain unlock.</p>
-                                <a href="#">
-                                    <h5>Learn More</h5>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="success-card wow zoomIn" data-wow-delay="0.6s">
-                            <div class="card-img">
-                                <img src="assets/img/services/supply-chain-automation/stories/F&B-packaging-operations.webp" alt="unilever">
-                            </div>
-                            <div class="card-content">
-                                <h3>F&B Packaging Operations</h3>
-                                <p class="he-60">A leading coffee manufacturer wanted to streamline the existing packaging operations, enhance productivity & reduce labor intensive operations.</p>
-                                <a href="#">
-                                    <h5>Learn More</h5>
-                                </a>
+                    <?php while ($row = $result->fetch_assoc()): ?>
+                        <div class="col-md-6">
+                            <div class="success-card wow zoomIn" data-wow-delay="0.6s">
+                                <div class="card-img">
+                                    <img src="<?= BASE_URL. htmlspecialchars($row['image']); ?>" alt="<?= htmlspecialchars($row['title']); ?>">
+                                </div>
+                                <div class="card-content">
+                                    <h3><?= htmlspecialchars($row['title']); ?></h3>
+                                    <p class="he-60">
+                                        <?= !empty($row['description']) ? htmlspecialchars($row['description']) : 'Read more to explore how Packfora made an impact in this case study.'; ?>
+                                    </p>
+                                    <a href="javascript:void(0);">
+                                        <h5>Learn More</h5>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endwhile; ?>
                 </div>
             </div>
-
-            <!-- <div class="container-fluid">
-                <div class="owl-carousel owl-theme success-slider">
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/jameson.webp" alt="Jameson">
-                        </div>
-                        <div class="card-content">
-                            <h3>Adhesive SC Technology & Investment Choices</h3>
-                            <p class="mb-3">A Market Leader in Adhesives wanted to develop SC Automation plan to increase production capabilities and revamp existing packaging operations for achieving end-to-end value chain unlock.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/unilever.webp" alt="unilever">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="pb-4">F&B Packaging Operations</h3>
-                            <p class="mb-4" style="padding-bottom: 10px;">A leading coffee manufacturer wanted to streamline the existing packaging operations, enhance productivity & reduce labor intensive operations.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </section>
+        <?php endif; ?>
+
         <!-- ==== End Success Stories ==== -->
 
         <!-- ==== Start Our Leaders ==== -->
+        <?php
+        $fk_service_id = 3; // change this based on the page
+        $sql = "SELECT name, designation, image, link FROM tbl_our_leaders 
+                WHERE fk_service_id = $fk_service_id AND is_delete = 1 
+                ORDER BY id ASC";
+        $result = $conn->query($sql);
+        ?>
+
+        <?php if ($result && $result->num_rows > 0): ?>
         <section class="our-leaders">
             <div class="container">
                 <div class="row">
@@ -400,60 +354,25 @@
                         <h1 class="wow fadeInUp" data-wow-delay="0.4s">A Dedicated Team of Packaging Professionals.</h1>
                     </div>
 
-                    <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/chirag.webp" class="w-100">
-                            <p>Chirag Master
-                                <br>VP & BU Lead - Growth, Delivery - sHPCO, Talent Flex & Mold Management Services
-                                <br><a href="https://www.linkedin.com/in/chirag-master-54364bb/?originalSubdomain=in
-                            " target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a>
-                            </p>
+                    <?php while ($row = $result->fetch_assoc()): ?>
+                        <div class="col-md-3 col-6">
+                            <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
+                                <img src="<?= BASE_URL. htmlspecialchars($row['image']); ?>" class="w-100" alt="<?= htmlspecialchars($row['name']); ?>">
+                                <p><?= htmlspecialchars($row['name']); ?></p>
+                                <h6><?= htmlspecialchars($row['designation']); ?></h6>
+                                <?php if (!empty($row['link'])): ?>
+                                    <a href="<?= htmlspecialchars($row['link']); ?>" target="_blank">
+                                        <img src="assets/img/leaders/linkedin.png" alt="LinkedIn" class="p-0">
+                                    </a>
+                                <?php endif; ?>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/samrat.webp" class="w-100">
-                            <p>Samrat Dasgupta
-                                <br>Packaging Producers
-                                <br><a href="https://www.linkedin.com/in/samrat-dasgupta-1326583a/
-                                " target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/shaktivel.webp" class="w-100">
-                            <p>Shaktivel Nadar
-                                <br>SHPCO
-                                <br><a href="https://www.linkedin.com/in/shaktivel-nadar-02315927/
-                                " target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-6">
-                        <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/amit.webp" class="w-100">
-                            <p>Amit Purkayastha
-                                <br>SHPCO
-                                <br><a href="https://www.linkedin.com/in/amit-purkayastha-537081103/
-                                " target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-2">
-                                </a>
-                            </p>
-                        </div>
-                    </div>
+                    <?php endwhile; ?>
                 </div>
             </div>
         </section>
+        <?php endif; ?>
+
         <!-- ==== End Our Leaders ==== -->
 
         <!-- ==== Start Sustainable Packaging ==== -->

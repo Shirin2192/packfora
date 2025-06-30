@@ -187,13 +187,20 @@
                 </div>
             </div>
         </section>
-
-
-
-
         <!-- ==== End Market Trends ==== -->
-
         <!-- ==== Start Offering ==== -->
+        <?php
+            // Fetch offerings from service ID = 2 (Sustainability)
+            $sql = "SELECT title, description, image FROM tbl_our_offering WHERE fk_service_id = 2 AND is_delete = '1' ORDER BY id ASC";
+            $result = $conn->query($sql);
+
+            $offerings = [];
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $offerings[] = $row;
+                }
+            }
+            ?>
         <div class="offerings-container">
             <div class="all-offerings">
                 <div class="container">
@@ -201,157 +208,57 @@
                         <h2 class="offering-title mb-3 wow fadeIn" style="color: #21409A;">Our Offerings</h2>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/sustainability/future-proof-your-business-with-sustainable-packaging.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content">
-                                    <h4 class="mb-2">Future-Proof Your Business with Sustainable Packaging</h4>
-                                    <p class="offering-sus-he1">Sustainability isn't just about compliance-it's about
-                                        growth, efficiency, and brand leadership. We help you eliminate waste, lower
-                                        emissions, and transition to circular economy models that secure your business
-                                        for the future.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/sustainability/R&D-in-sustainable-packaging.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content">
-                                    <h4 class="mb-2">R&D in Sustainable Packaging: Smarter Materials, Less Waste</h4>
-                                    <p>Leverage scientific research and advanced materials to make packaging lighter,
-                                        stronger, and more sustainable without compromising performance.</p>
-
-                                    <ul>
-                                        <li><strong>Plastic-Light:</strong> Reduce plastic use while optimizing
-                                            functionality</li>
-                                    </ul>
-
-                                    <div class="more-content" style="display: none;">
-                                        <ul>
-                                            <li><strong>Smart Plastics:</strong> Shift to recycled, bio-based, or
-                                                biodegradable alternatives</li>
-                                            <li><strong>Zero Plastic:</strong> Explore innovative non-plastic solutions
-                                                for a fully sustainable future</li>
-                                        </ul>
+                        <?php foreach ($offerings as $row): ?>
+                            <div class="col-lg-3">
+                                <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
+                                    <div class="offering-img">
+                                        <img src="<?= BASE_URL. htmlspecialchars($row['image']); ?>" class="w-100" alt="<?= htmlspecialchars($row['title']); ?>">
                                     </div>
+                                    <div class="offering-content<?= strlen(strip_tags($row['description'])) < 180 ? ' offering-sus-he2' : ''; ?>">
+                                        <h4 class="mb-2"><?= htmlspecialchars($row['title']); ?></h4>
 
-                                    <a href="javascript:void(0);" class="read-more-toggle">
-                                        <span class="toggle-text">Read More</span>
-                                        <i class="fa fa-chevron-down toggle-icon"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/sustainability/mastering-sustainability-compliance.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content">
-                                    <h4 class="mb-2">Mastering Sustainability Compliance: Stay Ahead of
-                                        Regulations</h4>
-                                    <p class="offering-sus-he1">Global regulations on plastic waste, recyclability, and
-                                        sustainability are evolving fast. We provide expert insights and compliance
-                                        frameworks that keep you ahead of legal changes-ensuring smooth, risk-free
-                                        operations.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/sustainability/science-backed-circularity.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content">
-                                    <h4 class="mb-2">Science-Backed Circularity: Optimize Every Decision</h4>
-                                    <p>We use Life Cycle Assessment (LCA), Carbon Footprinting, and AI-powered analytics
-                                        to help you:</p>
-                                    <ul>
-                                        <li>Choose the most sustainable materials</li>
-                                        <li>Reduce environmental impact while maintaining cost-effectiveness</li>
-                                    </ul>
+                                        <?php
+                                            // Parse description into main + rest
+                                            $desc = nl2br($row['description']);
+                                            $desc_parts = explode('<br />', $desc, 2);
+                                            $short = $desc_parts[0];
+                                            $rest = isset($desc_parts[1]) ? trim($desc_parts[1]) : '';
+                                        ?>
 
-                                    <div class="more-content" style="display: none;">
-                                        <ul>
-                                            <li>Improve waste management and recyclability across the supply chain</li>
-                                        </ul>
+                                        <p><?= $short; ?></p>
+
+                                        <?php if (!empty($rest)): ?>
+                                            <div class="more-content" style="display: none;">
+                                                <?= $rest; ?>
+                                            </div>
+                                            <a href="javascript:void(0);" class="read-more-toggle">
+                                                <span class="toggle-text">Read More</span>
+                                                <i class="fa fa-chevron-down toggle-icon"></i>
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
 
-                                    <a href="javascript:void(0);" class="read-more-toggle">
-                                        <span class="toggle-text">Read More</span>
-                                        <i class="fa fa-chevron-down toggle-icon"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/sustainability/strategic-sustainability-consulting.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content offering-sus-he2">
-                                    <h4 class="mb-2">Strategic Sustainability Consulting: Future-Proof Your
-                                        Brand</h4>
-                                    <p>A winning sustainability strategy goes beyond materials. We provide end-to-end
-                                        consulting to align your packaging with consumer expectations, regulatory
-                                        trends, and industry best practices-driving long-term success.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/sustainability/discover-the-future-of-sustainable-packaging.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content offering-sus-he2">
-                                    <h4 class="mb-2">Discover the Future of Sustainable Packaging</h4>
-                                    <p class="mb-4" style="padding-bottom: 12px;">Experience the future of sustainable
-                                        packaging at our exclusive industry fairs. Discover innovations, network with
-                                        experts, and stay ahead of market trends.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/sustainability/market-intelligence.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content offering-sus-he2">
-                                    <h4 class="mb-2">Market Intelligence: Stay Competitive with Data-Driven
-                                        Insights</h4>
-                                    <p>Don't follow the trends-stay ahead of them. Our real-time sustainability market
-                                        intelligence helps you spot opportunities, anticipate shifts, and gain a
-                                        competitive advantage in an evolving industry.</p>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- Static Contact Card -->
                         <div class="col-lg-3">
                             <div class="offerings-contact mb-4 mb-md-0 offering-co-sus-he wow zoomIn"
                                 data-wow-delay="0.2s"
                                 style="background-image: url('assets/img/services/services-contact-us.webp'); background-repeat: no-repeat; background-position: top;">
                                 <h3>Smarter Packaging, Better Future.</h3>
-                                <p>Innovative, efficient, and sustainable solutions for all your packaging
-                                    needs.</p>
+                                <p>Innovative, efficient, and sustainable solutions for all your packaging needs.</p>
                                 <div class="ContactUsBtn">
                                     <a href="contact-us.php" class="contact_us">Contact us</a>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- ==== End Offering ==== -->
 
         <!-- ==== Start Our Approach ==== -->
@@ -476,6 +383,20 @@
         <!-- ==== End Success Stories ==== -->
 
         <!-- ==== Start Our Leaders ==== -->
+        <?php
+        // Fetch leaders
+        $sql = "SELECT name, designation, link, image FROM tbl_our_leaders WHERE is_delete = '1' AND fk_service_id = 2 ORDER BY id ASC";
+        $result = $conn->query($sql);
+
+        $leaders = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $leaders[] = $row;
+            }
+        }
+        ?>
+
+        <?php if (!empty($leaders)) { ?>
         <section class="our-leaders">
             <div class="container">
                 <div class="row">
@@ -484,36 +405,24 @@
                         <h1 class="wow fadeInUp" data-wow-delay="0.4s">A Dedicated Team of Packaging Professionals.</h1>
                     </div>
 
-                    <div class="col-md-3 col-6">
-                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/jikul.webp" class="w-100">
-                            <p>Jikul Purohit</p><h6>VP & BU Lead - Delivery - Foods & Pharma</h6><a href="https://www.linkedin.com/in/jikul-purohit-6532526/?originalSubdomain=uk" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
+                    <?php foreach ($leaders as $leader): ?>
+                        <div class="col-md-3 col-6">
+                            <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
+                                <img src="<?= BASE_URL. htmlspecialchars($leader['image']); ?>" class="w-100" alt="<?= htmlspecialchars($leader['name']); ?>">
+                                <p><?= htmlspecialchars($leader['name']); ?></p>
+                                <h6><?= htmlspecialchars($leader['designation']); ?></h6>
+                                <a href="<?= htmlspecialchars($leader['link']); ?>" target="_blank">
+                                    <img src="assets/img/leaders/linkedin.png" alt="LinkedIn" class="p-0">
                                 </a>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-3 col-6">
-                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/ankita.webp" class="w-100">
-                            <p>Ankita Lokhande</p><h6>Foods, Pharma & CHC</h6><a href="https://www.linkedin.com/in/ankita-lokhande-8baa43168/?originalSubdomain=in" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
-                                </a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-6">
-                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
-                            <img src="assets/img/teams/supriya.webp" class="w-100">
-                            <p>Supriya Mantri</p><h6>Foods, Pharma & CHC</h6><a href="https://www.linkedin.com/in/supriya-mantri-a80977179/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
-                                </a></p>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
 
                 </div>
             </div>
         </section>
+        <?php } ?>
+
         <!-- ==== End Our Leaders ==== -->
 
         <!-- ==== Start Sustainable Packaging ==== -->
