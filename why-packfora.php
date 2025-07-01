@@ -6,15 +6,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="HTML5">
-    <meta name="description" content="Multi-Purpose">
-    <meta name="author" content="">
+    <meta name="keywords" content="packfora, about us, company, mission, packaging strategy, global packaging company">
+    <meta name="description" content="Discover Packfora’s journey, mission, and values. Learn what drives our commitment to innovative and sustainable packaging solutions.">
+    <meta name="author" content="Packfora">
+    <link rel="canonical" href="https://packfora.com/about-us.php">
 
     <!-- Title  -->
-    <title>End-to-End Packaging and Brand Consulting Solutions - Packfora</title>
+    <title>Get to Know Packfora’s Mission & Vision | About Us</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" href="assets/img/favicon.svg">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
@@ -59,6 +60,12 @@
     <!-- <div class="cursor"></div> -->
 
     <!-- ==================== Start progress-scroll-button ==================== -->
+    <!-- <div class="progress-wrap cursor-pointer">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div> -->
+
     <div id="scrollProgress"></div>
     <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to Top">
         <svg class="custom-logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,20 +108,17 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-<?php include 'db_connect.php';
-                include 'config.php' ?>
+
     <main>
         <!-- ==== Start Home Banner ==== -->
-        <section class="our-team-page-title-banner"
-            style="background-image: url(assets/img/our-team/why-packfora-banner.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
+        <section class="about-page-title-banner"
+            style="background-image: url(assets/img/about/about-us-banner.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
             <div class="container">
                 <div class="row">
-                    <div class="page-title-bar text-center">
-                        <h1 class="wow fadeInUp" data-wow-delay="0.2s">Career at Packfora</h1>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">A workplace built around people, possibilities, and purpose.</p>
-                        <div class="our-team-banner-btn mt-40">
-                            <a href="explore-opportunities.php" class="read_more mb-4 mb-md-0 wow fadeInUp" data-wow-delay="0.4s">Explore Opportunities</a>
-                            <a href="about-us.php" class="read_more wow fadeInUp" data-wow-delay="0.4s">About Us</a>
+                    <div class="page-title-bar text-center wow fadeInUp" data-wow-delay="0.4s">
+                        <h2>Packfora is a global packaging consulting firm offering<br>end-to-end packaging solutions that make packaging shine for <span>People, Planet, & Profit.</span></h2>
+                        <div class="about-banner-btn mt-50">
+                            <a href="contact-us.php" class="read_more">How we can help you!</a>
                         </div>
                     </div>
                 </div>
@@ -122,276 +126,161 @@
         </section>
         <!-- ==== End Home Banner ==== -->
 
-        <!-- ==== Start Shine With Us ==== -->
-        <div class="shine-us py-5">
+        <!-- ==== Start How We Do It? ==== -->
+        <div class="we-do py-5">
             <div class="container">
                 <div class="row">
-                    <h2 class="shine-us-title mb-50 wow fadeIn" data-wow-delay="0.2s">Why People Choose Packfora</h2>
+                    <h2 class="we-do-title mb-50 wow fadeIn">How We Do It?</h2>
                 </div>
-
-
                 <div class="row">
-                    <?php
-                    $sql = "SELECT * FROM tbl_why_people_choose_packfora WHERE is_delete = 1 ORDER BY id ASC";
-                    $result = $conn->query($sql);
-                    $reverse = false;
-
-                    if ($result->num_rows > 0):
-                        while ($row = $result->fetch_assoc()):
-                            // Determine layout direction (alternate rows)
-                            $flexClass = $reverse ? 'flex-column-reverse flex-md-row' : '';
-                            ?>
-                            <div class="col-md-12">
-                                <div class="shine-us-card mb-4 wow fadeInUp" data-wow-delay="0.2s">
-                                    <div class="row <?= $flexClass ?>">
-                                        <?php if ($reverse): ?>
-                                            <div class="col-md-7">
-                                                <div class="card-content card-content-left">
-                                                    <div class="d-flex">
-                                                        <h3><?= htmlspecialchars($row['title']) ?></h3>
-                                                        <img src="assets/img/shape/vector.png" alt="Decoration">
-                                                    </div>
-                                                    <p><?= htmlspecialchars($row['description']) ?></p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="card-img">
-                                                    <img src="<?= htmlspecialchars(BASE_URL .$row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
-                                                </div>
-                                            </div>
-                                        <?php else: ?>
-                                            <div class="col-md-5">
-                                                <div class="card-img">
-                                                    <img src="<?= htmlspecialchars(BASE_URL .$row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <div class="card-content card-content-right">
-                                                    <div class="d-flex">
-                                                        <h3><?= htmlspecialchars($row['title']) ?></h3>
-                                                        <img src="assets/img/shape/vector.png" alt="Decoration">
-                                                    </div>
-                                                    <p><?= htmlspecialchars($row['description']) ?></p>
-                                                </div>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
+                    <div class="col-lg-4">
+                        <div class="we-do-card mb-4">
+                            <div class="we-do-img wow fadeInUp" data-wow-delay="0.4s">
+                                <img src="assets/img/about/we-do-01.png">
                             </div>
-                    <?php
-                            $reverse = !$reverse; // toggle layout for next card
-                        endwhile;
-                    else:
-                        echo "<p>No records found.</p>";
-                    endif;
-
-                    
-                    ?>
+                            <h4 class="wow fadeInUp" data-wow-delay="0.2s">Triple Bottom Line Approach</h4>
+                            <p class="wow fadeInUp" data-wow-delay="0.4s">We integrate People, Planet and Profit into every packaging solution. Balancing impact and profitability.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="we-do-card mb-4">
+                            <div class="we-do-img wow fadeInUp" data-wow-delay="0.4s">
+                                <img src="assets/img/about/we-do-02.png">
+                            </div>
+                            <h4 class="wow fadeInUp" data-wow-delay="0.2s">End-to-End Value Chain</h4>
+                            <p class="wow fadeInUp" data-wow-delay="0.4s">From packaging ideation to execution, our strategies seamlessly integrate into
+                                your operations, ensuring efficiency & compliance.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="we-do-card mb-4">
+                            <div class="we-do-img wow fadeInUp" data-wow-delay="0.4s">
+                                <img src="assets/img/about/we-do-03.png">
+                            </div>
+                            <h4 class="wow fadeInUp" data-wow-delay="0.2s">Digitization & Innovation</h4>
+                            <p class="wow fadeInUp" data-wow-delay="0.4s">We leverage AI, automation, and real-time data to ensure efficient, innovative,
+                                and sustainable packaging solutions that benefit your business, our team, and
+                                the planet.</p>
+                        </div>
+                    </div>
                 </div>
-
+                <div class="we-do-card-btn mt-25">
+                    <a href="case-studies.php">Discover Our Process </a>
+                </div>
             </div>
         </div>
-        <!-- ==== End Shine With Us ==== -->
+        <!-- ==== End How We Do It? ==== -->
 
-        <!-- Start Student Talent Economy -->
-         <?php
-            $query = "SELECT * FROM tbl_student_talent_economy ORDER BY id DESC LIMIT 1";
-            $result = $conn->query($query);
-
-            if ($result->num_rows > 0):
-                $row = $result->fetch_assoc();
-        ?>
-            <div class="student-talent">
-                <div class="container-fluid p-md-0">
+        <!-- ==== Start Our Promise ==== -->
+        <div class="our-promise py-5"
+            style="background-image: url(assets/img/about/promise-bg.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
+            <div class="all-promises">
+                <div class="container">
                     <div class="row">
-                        <div class="col-md-6 p-0 wow fadeIn" data-wow-delay="0.2s">
-                            <img src="<?= htmlspecialchars(BASE_URL .$row['image']) ?>" alt="Student Talent Economy">
-                        </div>
-                        <div class="col-md-6 student-talent-economy p-md-5 p-3">
-                            <div class="row">
-                                <h2 class="shine-us-title wow fadeIn" data-wow-delay="0.2s">Student Talent Economy</h2>
-                                <div class="tomorrows-leaders py-5 my-md-3 wow fadeInUp" data-wow-delay="0.4s">
-                                    <h6><?= htmlspecialchars($row['title']) ?></h6>
-                                    <p><?= nl2br(htmlspecialchars($row['description'])) ?></p>
+                        <h2 class="our-promise-title mb-3 wow fadeIn">Our Promise</h2>
+                    </div>
+                    <div class="row align-items-stretch">
+                        <div class="col-lg-4 d-flex">
+                            <div class="promise-card mb-4 wow zoomIn w-100" data-wow-delay="0.2s">
+                                <div class="promise-img">
+                                    <img src="assets/img/about/veritable-expertise.webp" class="w-100">
                                 </div>
-                                <div class="learn-more-btn wow fadeInUp" data-wow-delay="0.6s">
-                                    <a href="javascript:void(0);" class="learn-more">Learn More</a>
+                                <div class="promise-content">
+                                    <h4 class="mb-4">Veritable<br>Expertise</h4>
+                                    <p>We bring unparalleled knowledge and experience to every aspect of
+                                        packaging, ensuring that your solutions are crafted with precision and
+                                        expertise.</p>
+                                    <a href="case-studies.php">
+                                        <h5>Learn More</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 d-flex">
+                            <div class="promise-card mb-4 wow zoomIn w-100" data-wow-delay="0.2s">
+                                <div class="promise-img">
+                                    <img src="assets/img/about/above-beyond.webp" class="w-100">
+                                </div>
+                                <div class="promise-content">
+                                    <h4 class="mb-4">Above &<br>Beyond</h4>
+                                    <p>Our dedication goes above and beyond mere promises. We are committed to
+                                        delivering results that exceed your expectations, every time.</p>
+                                    <a href="case-studies.php">
+                                        <h5>Learn More</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 d-flex">
+                            <div class="promise-card mb-4 wow zoomIn w-100" data-wow-delay="0.2s">
+                                <div class="promise-img">
+                                    <img src="assets/img/about/deep-meaningful-relationships.webp" class="w-100">
+                                </div>
+                                <div class="promise-content">
+                                    <h4 class="mb-4">Deep & Meaningful Relationships</h4>
+                                    <p class="mb-4" style="padding-bottom: 11.20px;">We prioritize building
+                                        lasting partnerships with our clients. Trust, collaboration, and mutual
+                                        success are at the heart of everything we do.</p>
+                                    <a href="case-studies.php">
+                                        <h5>Learn More</h5>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php
-        else:
-            echo "<p class='text-center'>No Student Talent data available.</p>";
-        endif;
-        ?>
-        <!-- End Student Talent Economy -->
+        </div>
+        <!-- ==== End Our Promise ==== -->
 
-        <!-- ==== Start Our Benefits ==== -->
-
-       <section class="our-benefits" style="background: #21409A;">
+        <!-- ==== Start Our Presence ==== -->
+        <div class="our-presence pt-50">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <h2 class="sec-title wow fadeIn">A Global Culture</h2>
-                        <h4 class="wow fadeIn" data-wow-delay="0.2s">
-                            With global presence of 10+ countries, we bring global perspectives to local execution.
-                        </h4>
-                    </div>
+                    <h2 class="our-presence-title mb-3 wow fadeIn">Our Presence</h2>
                 </div>
-                <div class="row">
-                    <?php
-                    $sql = "SELECT * FROM tbl_global_culture WHERE is_delete = 1 ORDER BY id ASC";
-                    $result = $conn->query($sql);
-
-                    if ($result->num_rows > 0):
-                        while ($row = $result->fetch_assoc()):
-                    ?>
-                            <div class="col-md-4 py-4">
-                                <div class="global-culture text-center wow zoomIn" data-wow-delay="0.4s">
-                                    <h4><?= htmlspecialchars($row['title']) ?></h4>
-                                    <div class="icon">
-                                        <img src="<?= htmlspecialchars(BASE_URL .$row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
-                                    </div>
-                                    <p><?= htmlspecialchars($row['description']) ?></p>
-                                </div>
+                <div class="row d-block d-md-none">
+                    <img src="assets/img/about/our-presence.webp" alt="">
+                </div>
+                <div class="row d-none d-md-flex">
+                    <div class="world-map-with-statistics">
+                        <div class="world-map-container">
+                            <img src="assets/img/about/world-map.webp" alt="World Map" class="world-map">
+                            <div class="pulse pulse-1"></div>
+                            <div class="pulse pulse-2"></div>
+                            <div class="pulse pulse-3"></div>
+                            <div class="pulse pulse-4"></div>
+                        </div>
+                        <div class="stat-circles">
+                            <div class="circle blue experts wow bounceIn" data-wow-delay="0.2s">
+                                <div class="number">150+</div>
+                                <div class="title">Global Experts</div>
+                                <div class="subtitle">Bringing Deep, Cross-Functional Expertise</div>
                             </div>
-                    <?php
-                        endwhile;
-                    else:
-                        echo '<div class="col-12 text-white text-center"><p>No records found.</p></div>';
-                    endif;
-
-                
-                    ?>
-                </div>
-            </div>
-        </section>
-        <!-- ==== End Our Approach ==== -->
-
-        <!-- Start Work with technocrats -->
-        <div class="technocrats">
-            <div class="container">
-                <div class="row">
-                    <h2 class="mb-3 wow fadeInUp">Work with technocrats</h2>
-                    <p class="mb-4 wow fadeInUp" data-wow-delay="0.2s">
-                        At Packfora, you're never boxed in by your job title. You're empowered by the people
-                        around you — experts, creators, and collaborators who span the full packaging ecosystem.
-                        You'll work with:
-                    </p>
-                </div>
-
-                <div class="row">
-                    <div class="technocrats-slider wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="owl-carousel owl-theme technocrats-nav">
-                            <?php
-                            $query = "SELECT * FROM tbl_work_with_technocarts WHERE is_delete = 1 ORDER BY id ASC";
-                            $result = $conn->query($query);
-
-                            if ($result->num_rows > 0):
-                                while ($row = $result->fetch_assoc()):
-                            ?>
-                                <div class="item work-technocrats">
-                                    <div class="item-content">
-                                        <h3><?= htmlspecialchars($row['title']) ?></h3>
-                                        <p><?= htmlspecialchars($row['description']) ?></p>
-                                    </div>
-                                </div>
-                            <?php
-                                endwhile;
-                            else:
-                                echo '<div class="text-center">No technocrats data available.</div>';
-                            endif;                          
-                            ?>
+                            <div class="circle orange experience wow bounceIn" data-wow-delay="0.2s">
+                                <div class="number">1000<sup>+</sup></div>
+                                <div class="title">Years of Leadership Experience</div>
+                                <div class="subtitle">Across the Packaging Value Chain</div>
+                            </div>
+                            <div class="circle blue team wow bounceIn" data-wow-delay="0.2s">
+                                <div class="number">10<sup>+</sup></div>
+                                <div class="title">Countries</div>
+                                <div class="subtitle">Packfora's Team Presence</div>
+                            </div>
+                            <div class="circle orange impact wow bounceIn" data-wow-delay="0.2s">
+                                <div class="number">21<sup>+</sup></div>
+                                <div class="title">Countries</div>
+                                <div class="subtitle">Global Impact Delivered to Global Clients</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- End Work with technocrats -->
-
-        <!-- Start Life at Packfora  -->
-        <div class="life-at-packfora">
-            <div class="container">
-                <div class="row">
-                    <h2 class="wow fadeIn">Life at Packfora</h2>
-                </div>
-
-               <div class="row">
-                    <div class="packfora-life-slider wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="owl-carousel owl-theme packforalife-nav">
-                            <?php
-                            $sql = "SELECT * FROM tbl_life_at_packfora WHERE is_delete = 1 ORDER BY id ASC";
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0):
-                                while ($row = $result->fetch_assoc()):
-                                    $videoPath = htmlspecialchars(BASE_URL . $row['video']);
-
-                                    // Assuming thumbnail name is manually linked to video or stored in `image` column
-                                    $thumbnailPath = BASE_URL . $row['image'];
-                            ?>
-                                <div class="item" data-video-url="<?= $videoPath ?>">
-                                    <div class="video-container">
-                                        <img src="<?= $thumbnailPath ?>" alt="Thumbnail">
-                                        <div class="play-btn">
-                                            <img src="assets/img/our-team/play.webp" alt="Play">
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php
-                                endwhile;
-                            else:
-                                echo '<div class="text-center text-white">No videos found.</div>';
-                            endif;
-
-                            $conn->close(); // Only for core PHP setup
-                            ?>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <!-- End Life at Packfora  -->
-
-        <!-- ==== Start Next Opportunity ==== -->
-        <section class="grow-your-career"
-            style="background-image: url(assets/img/our-team/next-opportunity.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-12">
-                        <div class="sp-info text-center">
-                            <h6 class="wow fadeInUp" data-wow-delay="0.2s">Ready to grow your career with us?</h6>
-                            <p class="wow fadeInUp" data-wow-delay="0.4s">Explore opportunities. Make an impact. Find your path at Packfora.</p>
-                        </div>
-                        <div class="our-team-banner-btn text-center mt-40 wow fadeInUp" data-wow-delay="0.6s">
-                            <a href="explore-opportunities.php" class="read_more mb-4 mb-md-0">Explore Opportunities</a>
-                            <a href="contact-us.php" class="read_more">Contact us</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- ==== End Next Opportunity ==== -->
+        <!-- ==== End Our Presence ==== -->
 
         <?php include('footer.php'); ?>
     </main>
-
-    <!-- Video Modal -->
-    <div class="modal fade video-modal" id="videoModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <span class="close-modal" data-bs-dismiss="modal">&times;</span>
-                    <video id="videoPlayer" controls autoplay></video>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- jQuery -->
     <script src="assets/common/js/lib/jquery-3.6.0.min.js"></script>
@@ -404,165 +293,6 @@
 
     <!-- custom scripts -->
     <script src="assets/js/scripts.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
-        $(document).ready(function() {
-            // Initialize the carousel
-            $('.packforalife-nav').owlCarousel({
-                loop: true,
-                margin: 20,
-                nav: true,
-                dots: false,
-                autoplay: true,
-                autoplayTimeout: 3000,
-                autoplayHoverPause: true,
-                navText: ['<span>&lt;</span>', '<span>&gt;</span>'],
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    576: {
-                        items: 2
-                    },
-                    992: {
-                        items: 3
-                    }
-                }
-            });
-
-            // Create video elements for each item
-            $('.video-container').each(function() {
-                var $container = $(this);
-                var $item = $container.closest('.item');
-                var videoUrl = $item.data('video-url');
-
-                // Create video element
-                var video = document.createElement('video');
-                video.className = 'hover-video';
-                video.src = videoUrl;
-                video.preload = 'metadata';
-                video.muted = true;
-                video.loop = false;
-
-                // Insert video after the image but keep play button visible
-                $container.append(video);
-
-                // Create YouTube-style progress bar
-                var progressBarContainer = document.createElement('div');
-                progressBarContainer.className = 'progress-bar-container';
-
-                var progressBar = document.createElement('div');
-                progressBar.className = 'progress-bar';
-
-                var timeDisplay = document.createElement('div');
-                timeDisplay.className = 'time-display';
-                timeDisplay.innerHTML = '0:00 / 0:00';
-
-                progressBarContainer.appendChild(progressBar);
-                $container.append(progressBarContainer);
-                $container.append(timeDisplay);
-            });
-
-            // Video hover functionality
-            $('.video-container').hover(
-                function() { // Mouse enter
-                    var $container = $(this);
-                    var video = $container.find('video')[0];
-                    var $progressBar = $container.find('.progress-bar');
-                    var $timeDisplay = $container.find('.time-display');
-                    var $playBtn = $container.find('.play-btn');
-
-                    // Hide the placeholder image and completely hide play button
-                    $container.find('img').first().css('opacity', '0');
-                    $playBtn.css('opacity', '0');
-
-                    // Show video
-                    $(video).css('opacity', '1');
-
-                    // Play video
-                    if (video.paused) {
-                        var playPromise = video.play();
-
-                        if (playPromise !== undefined) {
-                            playPromise.then(_ => {
-                                    // Show progress bar and time display
-                                    $container.find('.progress-bar-container').css('opacity', '1');
-                                    $timeDisplay.css('opacity', '1');
-
-                                    // Update progress bar and time
-                                    updateProgressAndTime(video, $progressBar, $timeDisplay);
-                                })
-                                .catch(e => {
-                                    console.log("Autoplay prevented:", e);
-                                    // Show play button if autoplay fails
-                                    $playBtn.css('opacity', '1');
-                                });
-                        }
-                    }
-                },
-                function() { // Mouse leave
-                    var $container = $(this);
-                    var video = $container.find('video')[0];
-                    var $playBtn = $container.find('.play-btn');
-
-                    // Show placeholder image and play button again
-                    $container.find('img').first().css('opacity', '1');
-                    $playBtn.css('opacity', '1');
-
-                    // Hide video, progress bar and time
-                    $(video).css('opacity', '0');
-                    $container.find('.progress-bar-container').css('opacity', '0');
-                    $container.find('.time-display').css('opacity', '0');
-
-                    // Pause video
-                    if (!video.paused) {
-                        video.pause();
-                    }
-                }
-            );
-
-            // Function to update progress bar and time display
-            function updateProgressAndTime(video, $progressBar, $timeDisplay) {
-                // Update only if video is playing
-                if (!video.paused) {
-                    // Update progress bar width
-                    var progress = (video.currentTime / video.duration) * 100;
-                    $progressBar.css('width', progress + '%');
-
-                    // Format and update time display
-                    var currentMinutes = Math.floor(video.currentTime / 60);
-                    var currentSeconds = Math.floor(video.currentTime % 60);
-                    var durationMinutes = Math.floor(video.duration / 60);
-                    var durationSeconds = Math.floor(video.duration % 60);
-
-                    // Add leading zero if seconds < 10
-                    currentSeconds = currentSeconds < 10 ? '0' + currentSeconds : currentSeconds;
-                    durationSeconds = durationSeconds < 10 ? '0' + durationSeconds : durationSeconds;
-
-                    $timeDisplay.text(currentMinutes + ':' + currentSeconds + ' / ' +
-                        durationMinutes + ':' + durationSeconds);
-
-                    // Call this function again in 250ms if video is still playing
-                    setTimeout(function() {
-                        updateProgressAndTime(video, $progressBar, $timeDisplay);
-                    }, 250);
-                }
-            }
-
-            // Enable click on entire video container to open modal
-            $('.video-container').on('click', function() {
-                var videoUrl = $(this).closest('.item').data('video-url');
-                $('#videoPlayer').attr('src', videoUrl);
-                $('#videoModal').modal('show');
-            });
-
-            // Reset video src when modal is closed
-            $('#videoModal').on('hidden.bs.modal', function() {
-                $('#videoPlayer').attr('src', '');
-            });
-        });
-    </script>
 </body>
 
 </html>

@@ -112,42 +112,61 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
+    <?php include 'db_connect.php';
+         include 'config.php';  
+    ?>
 
     <main>
         <!-- ==== Start Home Banner ==== -->
-        <section class="page-banner" style="position: relative; overflow: hidden;">
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
-                <video autoplay muted loop playsinline
-                    style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
-                    <source src="assets/img/services/supply-chain-automation/supply-chain-automation.mp4"
-                        type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+       <?php 
 
-                <div
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%); z-index: 1;">
-                </div>
-            </div>
+            // Set the service ID (dynamic or static)
+            $service_id = 9; // ← change to required service ID
 
-            <div class="container" style="position: relative; z-index: 1;">
-                <div class="row">
-                    <div class="content">
-                        <h1 class="wow fadeInUp" data-wow-delay="0.2s">Specification Management</h1>
-                        <h2 class="wow fadeInUp" data-wow-delay="0.2s">The hidden system behind great packaging.</h2>
-                        <p class="wow fadeInUp mb-2" data-wow-delay="0.4s">In high-speed, multi-SKU environments,
-                            specification mismanagement quietly erodes speed, compliance, and revenue. Whether it's
-                            inconsistent data, version confusion, or change delays — the impact is real, but fixable.
-                        </p>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">At Packfora, we bring structure, visibility, and
-                            intelligence to packaging specs — transforming them from a bottleneck into a competitive
-                            edge.
-                        </p>
-                        <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.4s">Speak to our
-                            Expert Today</a>
+            // Prepare and execute query
+            $sql = "SELECT title, sub_title, description, video FROM tbl_service_banner_video 
+                    WHERE fk_service_id = ? AND is_delete = '1' LIMIT 1";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $service_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            // Check if data is found
+            $banner = $result->fetch_assoc();
+
+            $stmt->close();
+            
+            ?>
+
+            <?php if ($banner): ?>
+            <section class="page-banner" style="position: relative; overflow: hidden;">
+                <!-- Video Background -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+                    <video autoplay muted loop playsinline
+                        style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
+                        <source src="<?= BASE_URL . htmlspecialchars($banner['video']) ?>" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+                         background: linear-gradient(to right, rgba(33, 64, 154, 0.7) 0%, rgba(33, 64, 154, 0.7) 30%, transparent 50%);
+                         z-index: 1;">
                     </div>
                 </div>
-            </div>
-        </section>
+
+                <!-- Text Content -->
+                <div class="container" style="position: relative; z-index: 1;">
+                    <div class="row">
+                        <div class="content">
+                            <h1 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($banner['title']) ?></h1>
+                            <h2 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($banner['sub_title']) ?></h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.4s"><?= htmlspecialchars($banner['description']) ?></p>
+                            <a href="contact-us.php" class="read_more wow fadeInUp" data-wow-delay="0.4s">Speak to our Expert Today</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <?php endif; ?>
         <!-- ==== End Home Banner ==== -->
 
 
@@ -159,104 +178,65 @@
                         <h2 class="offering-title mb-3 wow fadeIn" style="color: #21409A;">Our Offerings</h2>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/specification-management/data-migration.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content h-261">
-                                    <h4 class="mb-2">Data Migration for PLM Deployment</h4>
-                                    <p class="mb-2">Supporting smooth transitions from scattered data to a single
-                                        digital source of truth.</p>
-                                    <ul style="padding-left: 22px;">
-                                        <li>Build packaging data models and templates</li>
-                                        <li>Validate data with sites and suppliers</li>
-                                        <li>Prepare structured, migration-ready datasets</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/specification-management/change-management.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content h-261">
-                                    <h4 class="mb-2">Post-PLM Change Management</h4>
-                                    <p class="mb-2">Managing packaging data updates across the product lifecycle with
-                                        precision and speed.</p>
-                                    <ul style="padding-left: 22px;">
-                                        <li>Centralized spec management teams</li>
-                                        <li>Aligned with global standards and workflows</li>
-                                        <li>On-time, audit-ready updates across SKUs</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/specification-management/assesment.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content">
-                                    <h4 class="mb-2">Portfolio Assessment & Value Creation</h4>
-                                    <p class="mb-2">Using specification data as a lever for simplification,
-                                        sustainability, and savings.</p>
-                                    <p></p>
-                                    <ul style="padding-left: 22px;">
-                                        <li>Identify duplication, complexity, and gaps</li>
-                                        <li>Enable reporting across functions (Regulatory, Procurement, Sustainability)
-                                        </li>
-                                    </ul>
-                                    <div class="more-content" style="display: none;">
-                                        <ul style="padding-left: 22px;">
+                        <?php
+                        // SQL query to fetch offerings for service_id = 9
+                        $sql = "SELECT title, description, image 
+                                FROM tbl_our_offering 
+                                WHERE is_delete = '1' AND fk_service_id = 9 
+                                ORDER BY id ASC";
+                        $result = $conn->query($sql);
 
-                                            <li>Drive decisions through validated insights</li>
-                                        </ul>
+                        if ($result && $result->num_rows > 0):
+                            while ($row = $result->fetch_assoc()):
+                                $title = htmlspecialchars($row['title']);
+                                $desc = str_replace("\r", "", $row['description']);
+                                $image = htmlspecialchars($row['image']);
+
+                                $desc_lines = explode("\n", $desc);
+                                $summary = trim(array_shift($desc_lines)); // First line as summary
+                                $visible = array_slice($desc_lines, 0, 2);
+                                $hidden = array_slice($desc_lines, 2);
+                        ?>
+                            <div class="col-lg-3">
+                                <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
+                                    <div class="offering-img">
+                                        <img src="<?= BASE_URL. $image ?>" class="w-100" alt="<?= $title ?>">
                                     </div>
+                                    <div class="offering-content offering-sl-content <?= empty($hidden) ? 'h-261' : '' ?>">
+                                        <h4 class="mb-2"><?= $title ?></h4>
+                                        <p class="mb-2"><?= $summary ?></p>
+                                        <?php if (!empty($visible)): ?>
+                                            <ul style="padding-left: 22px;">
+                                                <?php foreach ($visible as $v): ?>
+                                                    <li><?= htmlspecialchars(trim($v)) ?></li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        <?php endif; ?>
 
-                                    <a href="javascript:void(0);" class="read-more-toggle">
-                                        <span class="toggle-text">Read More</span>
-                                        <i class="fa fa-chevron-down toggle-icon"></i>
-                                    </a>
+                                        <?php if (!empty($hidden)): ?>
+                                            <div class="more-content" style="display: none;">
+                                                <ul style="padding-left: 22px;">
+                                                    <?php foreach ($hidden as $h): ?>
+                                                        <li><?= htmlspecialchars(trim($h)) ?></li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            </div>
+                                            <a href="javascript:void(0);" class="read-more-toggle">
+                                                <span class="toggle-text">Read More</span>
+                                                <i class="fa fa-chevron-down toggle-icon"></i>
+                                            </a>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4 wow zoomIn" data-wow-delay="0.2s">
-                                <div class="offering-img">
-                                    <img src="assets/img/services/specification-management/digitisation.webp"
-                                        class="w-100">
-                                </div>
-                                <div class="offering-content offering-sl-content h-261">
-                                    <h4 class="mb-2">Digitization & Process Automation</h4>
-                                    <p class="mb-2">Laying the groundwork for real-time visibility and future-ready
-                                        operations.</p>
-                                    <ul class="he-96" style="padding-left: 22px;">
-                                        <li>Automated audit mechanisms and quality checks</li>
-                                        <li>Digital dashboards for tracking and governance</li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="offerings-card mb-4">
-                                <!-- <div class="offering-img">
-                                    <img src="assets/img/services/service-07.webp" class="w-100">
-                                </div>
-                                <div class="offering-content">
-                                    <h4 class="mb-2">Market Intelligence: Stay Competitive with Data-Driven
-                                        Insights</h4>
-                                    <p>Don't follow the trends—stay ahead of them. Our real-time sustainability
-                                        market intelligence helps you spot...</p>
-                                </div> -->
-                            </div>
-                        </div>
+                        <?php
+                            endwhile;
+                        else:
+                        ?>
+                            <p class="text-center">No offerings found.</p>
+                        <?php endif; ?>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -274,61 +254,35 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/supply-chain-automation/shape/increased-efficiency.png"
-                                    alt="" srcset="">
+                    <?php
+                    $sql = "SELECT title, image FROM tbl_discover_benefits 
+                            WHERE fk_service_id = 9 AND is_delete = '1' 
+                            ORDER BY id ASC";
+                    $result = $conn->query($sql);
+
+                    if ($result && $result->num_rows > 0):
+                        while ($row = $result->fetch_assoc()):
+                            $title = htmlspecialchars($row['title']);
+                            $image = htmlspecialchars($row['image']);
+                    ?>
+                        <div class="col-md-4 py-4">
+                            <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
+                                <div class="icon">
+                                    <img src="<?= BASE_URL. $image ?>" alt="">
+                                </div>
+                                <p class="mt-15"><?= $title ?></p>
                             </div>
-                            <h4>Aligns specifications across regions and teams</h4>
                         </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/supply-chain-automation/shape/optimization.png" alt=""
-                                    srcset="">
-                            </div>
-                            <h4>Enables rapid packaging changes and new product launches</h4>
+                    <?php
+                        endwhile;
+                    else:
+                    ?>
+                        <div class="col-12">
+                            <p class="text-center">No benefits found.</p>
                         </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/supply-chain-automation/shape/enhanced-quality.png" alt=""
-                                    srcset="">
-                            </div>
-                            <h4>Reduces errors & change redundancy</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/supply-chain-automation/shape/real-time-process-visualization.png"
-                                    alt="" srcset="">
-                            </div>
-                            <h4>Better inventory management & reduce material wastage</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/supply-chain-automation/shape/scalability.png" alt=""
-                                    srcset="">
-                            </div>
-                            <h4>Conforms to regulatory and sustainability reporting frameworks</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="benefits wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="icon">
-                                <img src="assets/img/services/supply-chain-automation/shape/supply-chain-resilience.png"
-                                    alt="" srcset="">
-                            </div>
-                            <h4>Builds strong foundation for future digitization and AI tools</h4>
-                        </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
+
             </div>
         </section>
         <!-- ==== End Our Approach ==== -->
@@ -345,69 +299,40 @@
                             their environmental and business goals.</p>
                     </div>
                 </div>
-
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="success-card wow zoomIn" data-wow-delay="0.6s">
-                            <div class="card-img">
-                                <img src="assets/img/services/supply-chain-automation/stories/adhesive-SC-technology-and-investment-choices.webp"
-                                    alt="Jameson">
-                            </div>
-                            <div class="card-content">
-                                <h3>Streamlined specification workflows across multiple categories and markets -
-                                    improving speed, governance and cross-functional access.</h3>
+                    <?php
+                    $query = "SELECT title, image FROM tbl_success_stories 
+                              WHERE fk_service_id = 9 AND is_delete = '1' 
+                              ORDER BY id ASC";
+                    $result = $conn->query($query);
 
-                                <a href="#">
-                                    <h5>Learn More</h5>
-                                </a>
+                    if ($result && $result->num_rows > 0):
+                        while ($row = $result->fetch_assoc()):
+                            $title = htmlspecialchars($row['title']);
+                            $image = htmlspecialchars($row['image']);
+                    ?>
+                        <div class="col-md-6">
+                            <div class="success-card wow zoomIn" data-wow-delay="0.6s">
+                                <div class="card-img">
+                                    <img src="<?= BASE_URL. $image ?>" alt="">
+                                </div>
+                                <div class="card-content">
+                                    <h3><?= $title ?></h3>
+                                    <a href="javascript:void(0);"><h5>Learn More</h5></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="success-card wow zoomIn" data-wow-delay="0.6s">
-                            <div class="card-img">
-                                <img src="assets/img/services/supply-chain-automation/stories/F&B-packaging-operations.webp"
-                                    alt="unilever">
-                            </div>
-                            <div class="card-content">
-                                <h3>Enabled global specification harmonization across brands — reducing manual rework
-                                    and accelerating change approvals.</h3>
-                                <br>
-                                <a href="#">
-                                    <h5>Learn More</h5>
-                                </a>
-                            </div>
+                    <?php
+                        endwhile;
+                    else:
+                    ?>
+                        <div class="col-12">
+                            <p class="text-center">No success stories available.</p>
                         </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
-            </div>
 
-            <!-- <div class="container-fluid">
-                <div class="owl-carousel owl-theme success-slider">
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/jameson.webp" alt="Jameson">
-                        </div>
-                        <div class="card-content">
-                            <h3>Adhesive SC Technology & Investment Choices</h3>
-                            <p class="mb-3">A Market Leader in Adhesives wanted to develop SC Automation plan to increase production capabilities and revamp existing packaging operations for achieving end-to-end value chain unlock.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/unilever.webp" alt="unilever">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="pb-4">F&B Packaging Operations</h3>
-                            <p class="mb-4" style="padding-bottom: 10px;">A leading coffee manufacturer wanted to streamline the existing packaging operations, enhance productivity & reduce labor intensive operations.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            </div>            
         </section>
         <!-- ==== End Success Stories ==== -->
 
