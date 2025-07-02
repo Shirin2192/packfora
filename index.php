@@ -191,105 +191,103 @@
          </section>
          <!-- ==== End Intro ==== -->
          <!-- ==== Start Services ==== -->
-         <?php 
-            // Desired custom sequence
-                $service_order = [
-                    'Design to Value',
-                    'Packaging Innovation & Engineering',
-                    'Sustainability',
-                    'Supply Chain Automation',
-                    'MaxMold',
-                    'Talent Flex',
-                    'Packaging Procurement',
-                    'Specification Management'
-                ];
-                       // Fetch all active services
-                $services = [];
-                $sql = "SELECT * FROM tbl_services WHERE is_delete = '1'";
-                $result = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $services[$row['service_name']] = $row; // key by service_name for easy mapping
-                }
-            ?>
-         <div class="services-container"
-            style="background-image: url('assets/img/home/services-bg.webp'); background-position: top right;">
-            <div class="all-services">
-               <div class="container">
-                  <div class="row">
-                     <h2 class="service-title mb-3 wow fadeIn">Our Services</h2>
-                     <p class="service-info mb-4 wow fadeInUp" data-wow-delay="0.2s">
-                        Our company unites multi-disciplinary expertise across the entire packaging value chain to create packaging solutions that are innovative, sustainable, and tailored to our clients' needs.
-                     </p>
-                  </div>
-                  <div class="row">
-                     <?php
-                        $i = 0;
-                        $more_services_html = ''; // Will store additional services
-                        foreach ($service_order as $name):
-                            if (!isset($services[$name])) continue;
-                        
-                            $service = $services[$name];
-                            $desc = $service['description'] ?: 'Coming soon...';
-                            $image = !empty($service['image']) ? BASE_URL . $service['image'] : BASE_URL . 'assets/img/default-service.jpg';
-                            $link = $service['link'] ?: '#';
-                            $target = (strtolower($name) === 'maxmold') ? 'target="_blank"' : '';
-                            $delay = 0.2 + (($i % 3) * 0.2);
-                        
-                            ob_start(); ?>
-                     <div class="col-lg-4">
-                        <div class="services-card mt-2 mb-4 wow fadeInUp slow" data-wow-delay="<?= $delay ?>s">
-                           <div>
-                              <a href="<?= $link ?>" <?= $target ?>>
-                                 <div class="service-img">
-                                    <img src="<?= $image ?>" class="w-100" alt="<?= htmlspecialchars($name) ?>">
-                                 </div>
-                                 <div class="service-content">
-                                    <h4 class="mb-2"><?= htmlspecialchars($name) ?></h4>
-                                    <p><?= htmlspecialchars($desc) ?></p>
-                                 </div>
-                              </a>
+            <?php
+               $orderedIds = [5, 7, 2, 3, 6, 1, 8, 9]; // strict order
+               $idsIn = implode(',', $orderedIds);
+               $services = [];
+
+               $sql = "SELECT * FROM tbl_services WHERE id IN ($idsIn) AND is_delete = 1";
+               $result = $conn->query($sql);
+               if ($result->num_rows > 0) {
+                   while ($row = $result->fetch_assoc()) {
+                       $services[$row['id']] = $row; // store by ID
+                   }
+               }
+
+               // Preserve custom sequence
+               $orderedServices = [];
+               foreach ($orderedIds as $id) {
+                   if (isset($services[$id])) {
+                       $orderedServices[] = $services[$id];
+                   }
+               }
+
+               $firstBatch = array_slice($orderedServices, 0, 5); // First visible 5
+               $additionalBatch = array_slice($orderedServices, 5); // Load more
+               ?>
+
+       <div class="services-container"
+         style="background-image: url('assets/img/home/services-bg.webp'); background-position: top right;">
+         <div class="all-services">
+            <div class="container">
+               <div class="row">
+                  <h2 class="service-title mb-3 wow fadeIn">Our Services</h2>
+                  <p class="service-info mb-4 wow fadeInUp" data-wow-delay="0.2s">Our company unites
+                     multi-disciplinary expertise across the
+                     entire packaging value chain to create packaging solutions that are innovative,
+                     sustainable, and tailored to our clients' needs.
+                  </p>
+               </div>
+               <div class="row">
+                   <?php foreach ($firstBatch as $index => $service): ?>
+                       <div class="col-lg-4">
+                           <div class="services-card mt-2 mb-4 wow fadeInUp slow" data-wow-delay="0.<?= $index + 2 ?>s">
+                               <div>
+                                   <a href="<?= htmlspecialchars($service['link']) ?>" <?= ($service['service_name'] === 'MaxMold') ? 'target="_blank"' : '' ?>>
+                                       <div class="service-img">
+                                           <img src="<?= BASE_URL. htmlspecialchars($service['image']) ?>" class="w-100">
+                                       </div>
+                                       <div class="service-content">
+                                           <h4 class="mb-2"><?= htmlspecialchars($service['service_name']) ?></h4>
+                                           <p><?= htmlspecialchars($service['description']) ?></p>
+                                       </div>
+                                   </a>
+                               </div>
                            </div>
-                        </div>
-                     </div>
-                     <?php
-                        $card_html = ob_get_clean();
-                        
-                        if ($i < 5) {
-                            echo $card_html;
-                        } elseif ($i == 5) {
-                            // Insert Show More Button First
-                            ?>
-                     <div class="col-lg-4">
-                        <div class="wow fadeInUp slow" data-wow-delay="0.6s">
+                       </div>
+                   <?php endforeach; ?>
+
+                   <!-- Load More Card -->
+                   <div class="col-lg-4">
+                       <div class="wow fadeInUp slow" data-wow-delay="0.6s">
                            <a href="#" class="text-decoration-none d-block h-100 load-more-clickable"
                               onclick="toggleMoreServices(event)">
-                              <div class="services-card more-services-card mt-2 mb-4" style="background-color: #2e3e8f;">
-                                 <div class="service-content text-white d-flex justify-content-center flex-column h-100">
-                                    <h2 class="mb-4 load-more-text" id="loadMoreText">
-                                       For More<br>Services<br>Click here <span id="plusIcon">+</span>
-                                    </h2>
-                                 </div>
-                              </div>
+                               <div class="services-card more-services-card mt-2 mb-4" style="background-color: #2e3e8f;">
+                                   <div class="service-content text-white d-flex justify-content-center flex-column h-100">
+                                       <h2 class="mb-4 load-more-text" id="loadMoreText">
+                                           For More<br>Services<br>Click here <span id="plusIcon" class="fa fa-chevron-down"></span>
+                                       </h2>
+                                   </div>
+                               </div>
                            </a>
-                        </div>
-                     </div>
-                     <?php
-                        $more_services_html .= $card_html; // Add current (6th) card to hidden
-                        } else {
-                        $more_services_html .= $card_html; // Add remaining cards
-                        }
-                        
-                        $i++;
-                        endforeach;
-                        ?>
-                  </div>
-                  <!-- Hidden section -->
-                  <div class="row d-none" id="additionalServices">
-                     <?= $more_services_html ?>
-                  </div>
+                       </div>
+                   </div>
                </div>
+
+               <!-- Additional Services -->
+               <div class="row additional-services" id="additionalServices" style="display: none;">
+                   <?php foreach ($additionalBatch as $service): ?>
+                       <div class="col-lg-4">
+                           <div class="services-card mt-2 mb-4 wow fadeInUp slow" data-wow-delay="0.2s">
+                               <div>
+                                   <a href="<?= htmlspecialchars($service['link']) ?>">
+                                       <div class="service-img">
+                                           <img src="<?= BASE_URL. htmlspecialchars($service['image']) ?>" class="w-100">
+                                       </div>
+                                       <div class="service-content">
+                                           <h4 class="mb-2"><?= htmlspecialchars($service['service_name']) ?></h4>
+                                           <p><?= htmlspecialchars($service['description']) ?></p>
+                                       </div>
+                                   </a>
+                               </div>
+                           </div>
+                       </div>
+                   <?php endforeach; ?>
+               </div>
+
             </div>
          </div>
+      </div>
          <!-- ==== End Services ==== -->
          <!-- ==== Start clients ==== -->
          <?php
@@ -362,97 +360,78 @@
          </div>
          <!-- ==================== End Impact ==================== -->
          <!-- ==== Start Case Studies ==== -->
+        <?php
+         $caseStudies = [];
+         $sql = "SELECT * FROM tbl_case_study WHERE is_delete = 1 ORDER BY date DESC";
+         $result = $conn->query($sql);
+         if ($result->num_rows > 0) {
+             while ($row = $result->fetch_assoc()) {
+                 $caseStudies[] = $row;
+             }
+         }
+         ?>
          <section class="case-study whiteBg">
-            <div class="container">
-               <h2 class="sec-title mb-4 wow fadeIn">Case Studies</h2>
-            </div>
-            <div class="container-fluid p-0">
-               <div class="gallery">
-                  <div class="owl-carousel case-study-carousel owl-theme wow zoomIn">
-                     <div class="item" style="background-image: url('assets/img/case-study/case-study-01.webp');">
-                        <div class="slide-content">
-                           <div class="content-box">
-                              <div>
-                                 <h2>Packfora enabled a leading FMCG brand to cut costs by 30% while enhancing recyclability and sustainability.
-                                 </h2>
-                              </div>
-                              <a href="case-study-inner.php">
-                              <button class="read-more-btn">Read Full Case Study</button>
-                              </a>
-                           </div>
-                        </div>
+             <div class="container">
+                 <h2 class="sec-title mb-4 wow fadeIn">Case Studies</h2>
+             </div>
+             <div class="container-fluid p-0">
+                 <div class="gallery">
+                     <div class="owl-carousel case-study-carousel owl-theme wow zoomIn">
+                         <?php foreach ($caseStudies as $case): ?>
+                             <div class="item" style="background-image: url('<?= BASE_URL. htmlspecialchars($case['image']) ?>');">
+                                 <div class="slide-content">
+                                     <div class="content-box">
+                                         <div>
+                                             <h2><?= htmlspecialchars($case['description']) ?></h2>
+                                         </div>
+                                         <a href="<?= htmlspecialchars($case['link']) ?>">
+                                             <button class="read-more-btn">Read Full Case Study</button>
+                                         </a>
+                                     </div>
+                                 </div>
+                             </div>
+                         <?php endforeach; ?>
                      </div>
-                     <div class="item" style="background-image: url('assets/img/case-study/case-study-02.webp');">
-                        <div class="slide-content">
-                           <div class="content-box">
-                              <div>
-                                 <h2>How Packfora streamlined a major pharma company in their
-                                    specificatiom management.
-                                 </h2>
-                              </div>
-                              <a href="pharma-case-study.php">
-                              <button class="read-more-btn">Read Full Case Study</button>
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="item" style="background-image: url('assets/img/case-study/case-study-03.webp');">
-                        <div class="slide-content">
-                           <div class="content-box">
-                              <div>
-                                 <h2>Check out how Packfora reimagined packaging for a new 1.5L water
-                                    bottle.
-                                 </h2>
-                              </div>
-                              <a href="1.5-litre-bottle-case-study.php">
-                              <button class="read-more-btn">Read Full Case Study</button>
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
+                 </div>
+             </div>
          </section>
+
          <!-- ==== End Case Studies ==== -->
          <!-- ==== Start Blogs ==== -->
-         <section class="blog-ds">
-            <div class="blog-slider py-5" id="blogs">
-               <div class="container">
-                  <h2 class="blog-title mb-4">Knowledge Centre</h2>
-                  <div class="owl-carousel owl-theme blogs-slider">
-                     <a href="blog1.php">
-                        <div class="blog-item wow fadeInUp" data-wow-delay="0.2s">
-                           <img src="assets/img/blog/thumb/blog1.webp" alt="Global Packaging" class="blog-image">
-                           <div class="blog-date">13/05/2024</div>
-                           <div class="blog-description">Late Varianting in Packaging: On-Demand Corrugate Printing
-                              for Agility and Sustainability
-                           </div>
+         <?php
+            $blogs = [];
+            $sql = "SELECT * FROM tbl_knowledge_centre WHERE is_delete = 1 ORDER BY date DESC";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $blogs[] = $row;
+                }
+            }
+            ?>
+            <section class="blog-ds">
+                <div class="blog-slider py-5" id="blogs">
+                    <div class="container">
+                        <h2 class="blog-title mb-4">Knowledge Centre</h2>
+                        <div class="owl-carousel owl-theme blogs-slider">
+                            <?php
+                            foreach ($blogs as $index => $blog):
+                                // Optional: slugify or use a dynamic link builder if blog content pages are dynamic
+                                $blogLink = "blog" . ($index + 1) . ".php"; // Adjust if using `slug` column
+                                $formattedDate = date("d/m/Y", strtotime($blog['date']));
+                            ?>
+                                <a href="<?= htmlspecialchars($blogLink) ?>">
+                                    <div class="blog-item wow fadeInUp" data-wow-delay="0.<?= $index + 2 ?>s">
+                                        <img src="<?= BASE_URL. htmlspecialchars($blog['image']) ?>" alt="Blog Thumbnail" class="blog-image">
+                                        <div class="blog-date"><?= $formattedDate ?></div>
+                                        <div class="blog-description"><?= htmlspecialchars($blog['title']) ?></div>
+                                    </div>
+                                </a>
+                            <?php endforeach; ?>
                         </div>
-                     </a>
-                     <a href="blog2.php">
-                        <div class="blog-item wow fadeInUp" data-wow-delay="0.4s">
-                           <img src="assets/img/blog/thumb/blog2.webp" alt="Plastic Packaging" class="blog-image">
-                           <div class="blog-date">08/05/2025</div>
-                           <div class="blog-description">Navigating PPWR 2025/40: Lessons from the Frontlines of
-                              Packaging Compliance
-                           </div>
-                        </div>
-                     </a>
-                     <a href="blog3.php">
-                        <div class="blog-item wow fadeInUp" data-wow-delay="0.6s">
-                           <img src="assets/img/blog/thumb/blog3.webp" alt="Accelerated packaging"
-                              class="blog-image">
-                           <div class="blog-date">03/05/2025</div>
-                           <div class="blog-description">8 Packaging Trends That Will Shape the Future:
-                              Sustainability, Innovation & Smart Design
-                           </div>
-                        </div>
-                     </a>
-                  </div>
-               </div>
-            </div>
-         </section>
+                    </div>
+                </div>
+            </section>
+
          <!-- ==== End Blogs ==== -->
          <!-- ==== Start Contact ==== -->
          <section class="contact-sa">

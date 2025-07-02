@@ -96,6 +96,9 @@
       </button>
       <!-- ==================== End progress-scroll-button ==================== -->
       <?php include('header.php'); ?>
+      <?php  include 'db_connect.php';
+            include 'config.php';  
+         ?>
       <main>
          <!-- ==== Start Home Banner ==== -->
          <section class="page-title-banner"
@@ -118,623 +121,61 @@
          <section class="our-leadership mt-4 pt-4">
             <div class="container">
                <div class="leaders-details">
+                  <?php // Fetch leaders (assuming is_delete = 1 means active)
+                  $sql = "SELECT * FROM tbl_leadership_team WHERE is_delete = 1 ORDER BY id ASC";
+                  $result = $conn->query($sql);
+                  ?>
                   <div class="row">
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/ramaiah-muthusubramanian.png" class="w-100 leader-img"
-                              data-title="Ramaiah Muthusubramanian"
-                              data-para1="Ramaiah Muthusubramanian, widely known as Muthu, is a global packaging 
-                              leader with over 30 years of experience in Packaging R&D, Supply Chain 
-                              Technology, and Procurement. Before co-founding Packfora, he held senior 
-                              leadership roles at Unilever, where he served as Global Packaging Director for 
-                              Laundry and Program Director for Sustainable Flexible Packaging. "
-                              data-para2="At Unilever, Muthu played a key role in embedding sustainability into the 
-                              packaging agenda, fostering partnerships across geographies, and 
-                              spearheading initiatives that influenced policy and industry benchmarks. He 
-                              championed cross-cultural collaboration, leading global teams across Europe, 
-                              Asia, and Latin America to drive design thinking, lifecycle innovation, and 
-                              consumer-centric packaging solutions. His work was pivotal in creating scalable 
-                              systems that supported Unilever’s commitment to reduce plastic waste and 
-                              promote circularity. "
-                              data-para3="Muthu holds a Master’s Diploma in Packaging Technology from IIP Mumbai and 
-                              a B.Sc. in Mathematics from Madura College. Known for his value @ velocity 
-                              mindset, he has led high-impact, cross-functional teams to deliver award
-                              winning, sustainable innovations."
-                              data-para4="As CEO at Packfora, he advocates for an ecosystem-driven approach, combining 
-                              expertise and collaboration to deliver end-to-end solutions. He is passionate 
-                              about future-proofing capabilities and driving circular, consumer-centric 
-                              packaging strategies. "
-                              data-designation="CEO" data-social='{"linkedin":"https://www.linkedin.com/in/ramaiah-muthusubramanian-9406902/?originalSubdomain=in"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Ramaiah Muthusubramanian</h6>
-                              <p>CEO</p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/ramaiah-muthusubramanian-9406902/?originalSubdomain=in" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
+                     <?php if ($result->num_rows > 0): ?>
+                         <?php while ($row = $result->fetch_assoc()): ?>
+                             <?php
+                                 // Break long description into para1–para4
+                                 $paragraphs = preg_split("/\r\n|\n|\r/", trim($row['description']));
+                                 $para1 = $paragraphs[0] ?? '';
+                                 $para2 = $paragraphs[1] ?? '';
+                                 $para3 = $paragraphs[2] ?? '';
+                                 $para4 = $paragraphs[3] ?? '';
+
+                                 // LinkedIn/social link
+                                 $social_json = json_encode(["linkedin" => $row['link']]);
+                             ?>
+                             <div class="col-md-3">
+                                 <div class="leader mb-4">
+                                     <img src="<?= BASE_URL. htmlspecialchars($row['image']) ?>" class="w-100 leader-img"
+                                         data-title="<?= htmlspecialchars($row['name']) ?>"
+                                         data-para1="<?= htmlspecialchars($para1) ?>"
+                                         data-para2="<?= htmlspecialchars($para2) ?>"
+                                         data-para3="<?= htmlspecialchars($para3) ?>"
+                                         data-para4="<?= htmlspecialchars($para4) ?>"
+                                         data-designation="<?= htmlspecialchars($row['designation']) ?>"
+                                         data-social='<?= htmlspecialchars($social_json, ENT_QUOTES, 'UTF-8') ?>'>
+
+                                     <div class="leader-info">
+                                         <h6 class="leader-name"><?= htmlspecialchars($row['name']) ?></h6>
+                                         <p><?= htmlspecialchars($row['designation']) ?></p>
+                                         <div class="post">
+                                             <?php if (!empty($row['link'])): ?>
+                                                 <div class="linkedin-icon">
+                                                     <a href="<?= htmlspecialchars($row['link']) ?>" target="_blank">
+                                                         <img src="assets/img/leaders/linkedin.png" alt="">
+                                                     </a>
+                                                 </div>
+                                             <?php endif; ?>
+                                             <div class="open-info">
+                                                 <a>
+                                                     <img src="assets/img/home/intro/Vector.png" alt="">
+                                                 </a>
+                                             </div>
+                                         </div>
+                                     </div>
                                  </div>
-                                 <div class="open-info">
-                                    <a>
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
+                             </div>
+                         <?php endwhile; ?>
+                     <?php else: ?>
+                         <p>No leadership data found.</p>
+                     <?php endif; ?>
                      </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/hitesh-shinoy.webp" class="w-100 leader-img"
-                              data-title="Hitesh Shenoy"
-                              data-para1="Hitesh Shenoy is a seasoned global packaging leader with over 25 years of
-                              cross-functional experience spanning packaging innovation, sustainability,
-                              value engineering, and supply chain enablement. He has held senior leadership
-                              roles at Unilever and GSK Consumer Healthcare, where he led complex, multimarket programs focused on compliance, digital transformation, and
-                              consumer-centric design. As former Senior Director – Global Technical
-                              Packaging at GSK, he drove strategic initiatives such as child-resistant/seniorfriendly packaging and global digital specification systems."
-                              data-para2="Currently Vice President at Packfora, Hitesh leads the Food and Pharmaceutical
-                              Packaging vertical, partnering with multinational clients to deliver sustainable
-                              and regulatory-compliant packaging solutions. He is a passionate advocate for
-                              packaging as a driver of both business value and environmental stewardship,
-                              with a keen focus on flexible packaging and circularity."
-                              data-para3=""
-                              data-para4=""
-                              data-designation="VP & BU Lead - Growth - Foods & Pharma"
-                              data-social='{"linkedin":"https://www.linkedin.com/in/hitesh-shenoy-2a84492/?originalSubdomain=sg"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Hitesh Shenoy</h6>
-                              <p>VP & BU Lead - Growth - Foods & Pharma</p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/hitesh-shenoy-2a84492/?originalSubdomain=sg" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a>
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/jikul-purohit.webp" class="w-100 leader-img"
-                              data-title="Jikul Purohit"
-                              data-para1="Jikul Purohit is a passionate packaging innovation and sustainability leader with
-                              over 17 years of cross-functional experience in R&D, product development, and
-                              value engineering. Based in London, UK, Jikul manages multi-country teams
-                              and brings a truly global perspective to his work. Before co-founding Packfora,
-                              he held several key roles at Unilever, where he led global and regional
-                              packaging projects across categories like Laundry, Skin Cleansing, and
-                              Beverages."
-                              data-para2="He holds a Post Graduate Diploma in Packaging from the Indian Institute of
-                              Packaging, Mumbai, and an engineering degree in Electronics from the
-                              University of Mumbai."
-                              data-para3="At Packfora, Jikul leads technology and innovation efforts, driving sustainable,
-                              future-ready solutions for clients in food, FMCG, and pharma sectors. His
-                              expertise lies in flexible packaging, circularity, and regulatory-compliant design
-                              systems that deliver impact at scale."
-                              data-para4=""
-                              data-designation="VP & BU Lead - Delivery - Foods & Pharma"
-                              data-social='{"linkedin":"https://www.linkedin.com/in/jikul-purohit-6532526/?originalSubdomain=uk"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Jikul Purohit</h6>
-                              <p>VP & BU Lead - Delivery - Foods & Pharma</p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/jikul-purohit-6532526/?originalSubdomain=uk" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a>
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/chirag-master.webp" class="w-100 leader-img"
-                              data-title="Chirag Master"
-                              data-para1="Chirag Master is a seasoned packaging leader with over 18 years of global
-                              experience in packaging design, development, procurement, and supply chain
-                              across personal care categories. Prior to co-founding Packfora, Chirag had a
-                              successful career at Unilever, with assignments in India, Thailand, and the UK."
-                              data-para2="His expertise spans innovation project management, sourcing digitization, and
-                              end-to-end packaging development, from concept to shelf. He holds a degree
-                              in Chemical Engineering and a Post Graduate Diploma in Packaging Science and
-                              Technology from SIES School of Packaging."
-                              data-para3="At Packfora, Chirag leads the Home, Personal Care, and Oral Care vertical,
-                              driving sustainable, consumer-centric solutions with a deep understanding of
-                              packaging materials, device development, and global innovation delivery"
-                              data-para4=""
-                              data-designation="VP & BU Lead - Growth, Delivery - SHPCO, Talent Flex, & Mold Management Services"
-                              data-social='{"linkedin":"https://www.linkedin.com/in/chirag-master-54364bb/?originalSubdomain=in"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Chirag Master</h6>
-                              <p>VP & BU Lead - Growth, Delivery - SHPCO, Talent Flex, & Mold Management Services</p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/chirag-master-54364bb/?originalSubdomain=in" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a>
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/tom-oravez.webp" class="w-100 leader-img"
-                              data-title="Tom Oravez"
-                              data-para1="Tom Oravez is a seasoned packaging innovation leader with over 20 years of
-                              experience driving packaging strategy, product innovation, and sustainable
-                              growth across major food companies. At Packfora, he leads the U.S. team and
-                              supports client initiatives across the America. He has held leadership roles in
-                              R&D and Supply Chain at General Mills, Conagra Brands, Pinnacle Foods, Mars,
-                              and Kraft Foods. His core strengths include Packaging Strategy & Development,
-                              Supply Chain Optimization, Productivity Programs, Technical Risk Management,
-                              and End-to-End Innovation Execution.
-                              "
-                              data-para2="He brings deep expertise in a wide range of packaging technologies from
-                              flexibles and cartons to cans, cups, bottles, glass, and corrugates and has a
-                              proven track record of building and guiding high-performing teams that deliver
-                              impactful innovation and renovation. Tom holds a B.S. in Packaging from
-                              Rutgers College of Engineering.
-                              "
-                              data-para3="He is passionate about talent development and driving cross-functional
-                              collaboration to create consumer-centric, sustainable packaging solutions.
-                              Based in New Jersey, Tom enjoys playing sports, camping, and traveling in his
-                              free time."
-                              data-para4=""
-                              data-designation="Food, Pharma & CHC"
-                              data-social='{"linkedin":"https://www.linkedin.com/in/tom-oravez/"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Tom Oravez</h6>
-                              <p>Food, Pharma & CHC</p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/tom-oravez/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a>
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/prashant-sukhtankar.webp" class="w-100 leader-img"
-                              data-title="Prashant Sukhtankar"
-                              data-para1="Prashant Sukhtankar is a Foods, Pharma & CHC  "
-                              data-para2=""
-                              data-para3=""
-                              data-para4=""
-                              data-designation="Foods, Pharma & CHC "
-                              data-social='{"linkedin":"https://www.linkedin.com/in/prashant-sukhtankar-70a90a18/?originalSubdomain=in"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Prashant Sukhtankar</h6>
-                              <p>Foods, Pharma & CHC </p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/prashant-sukhtankar-70a90a18/?originalSubdomain=in" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a>
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/ankita-lokhande.webp" class="w-100 leader-img"
-                              data-title="Ankita Lokhande"
-                              data-para1="Ankita Lokhande is a seasoned packaging leader with 14+ years of experience
-                              across the personal care, food & beverage, and FMCG industries. At Packfora,
-                              she drives global sustainability programs, design-to-value initiatives, capability
-                              building, and innovation for leading multinationals. She brings deep expertise
-                              in consumer-centric design, technical packaging development, and circular
-                              solutions with a proven ability to align functional performance with
-                              sustainability goals.
-                              "
-                              data-para2="Ankita partners with brand teams, industry alliances, and supply chain players
-                              to deliver high-impact packaging transformation. She holds a degree in
-                              Packaging Technology and is widely recognized for her thought leadership in
-                              sustainable packaging and innovation. Beyond work, she enjoys exploring
-                              interior design and creating functional, aesthetic living spaces.
-                              "
-                              data-para3=""
-                              data-para4=""
-                              data-designation="Foods, Pharma & CHC"
-                              data-social='{"linkedin":"https://www.linkedin.com/in/ankita-lokhande-8baa43168/?originalSubdomain=in"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Ankita Lokhande</h6>
-                              <p>Foods, Pharma & CHC</p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/ankita-lokhande-8baa43168/?originalSubdomain=in" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a>
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/brijesh-sounderajjan.webp" class="w-100 leader-img"
-                              data-title="Brijesh Sounderajjan"
-                              data-para1="Brijesh Sounderrajan is a seasoned packaging engineering leader with over 30
-                              years of experience across the FMCG industry. At Packfora, he leads the Talent
-                              Flex Growth with a strong focus on enabling Capacity, Capability and Flexibility
-                              build for the customers through right-fit packaging talent."
-                              data-para2="His career includes key roles at Godfrey Phillips India Ltd, Pidilite Industries,
-                              Godrej & Boyce, where he worked in several capacities heading production for
-                              the world-famous Marlboro brand in India. He has rich experience in the
-                              deployment of ERP solutions for procurement and inventory function and has
-                              been instrumental in Packaging development and new product launches across
-                              organizations."
-                              data-para3="He holds a Post Graduate Qualification in Packaging as well as Materials
-                              Management. He enjoys reading inspiring entrepreneurship initiatives, travel,
-                              and connecting with people."
-                              data-para4=""
-                              data-designation="SHPCO & Talent Flex" data-social='{"linkedin":"https://www.linkedin.com/in/brijesh-sounderrajan-5378277/"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Brijesh Sounderajjan</h6>
-                              <p>SHPCO & Talent Flex</p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/brijesh-sounderrajan-5378277/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a>
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/ankheeta-lath.webp" class="w-100 leader-img"
-                              data-title="Ankheeta Lath"
-                              data-para1="Ankheeta leads global marketing at Packfora, driving brand growth through
-                              innovative digital strategies, integrated campaigns, and impactful content. With
-                              an MBA in Marketing, she specializes in transforming marketing frameworks to
-                              deliver measurable impact across international markets."
-                              data-para2="Prior to Packfora, she spent over seven years at Informa Markets India, where
-                              she led conference content strategy and curation across key sectors including
-                              food, pharma, cosmetics, and nutrition. Known for her collaborative mindset
-                              and passion for team building, Ankheeta believes in the power of shared
-                              success: “I shine, we shine, client shine.”"
-                              data-para3=""
-                              data-para4=""
-                              data-designation="Director - Marketing " data-social='{"linkedin":"https://www.linkedin.com/in/ankheeta-lath-122a6598/?originalSubdomain=in"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Ankheeta Lath</h6>
-                              <p>Director - Marketing </p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/ankheeta-lath-122a6598/?originalSubdomain=in" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a>
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/baskaran-thiagarajan.webp" class="w-100 leader-img"
-                              data-title="SHPCO"
-                              data-para1="Baskaran is a seasoned manufacturing and operations leader with 29 years of
-                              experience across Plant Operations, Supply Chain Management, Lean
-                              Manufacturing, Operational Excellence, and Manufacturing Transformation. His
-                              expertise spans a wide range of sectors, including Chemicals, Paints, FMCG, and
-                              Alcobev. He most recently led India Contract Manufacturing Operations at
-                              Diageo, overseeing a network that contributed to 65% of Diageo India’s
-                              business.
-                              "
-                              data-para2="Prior to that, he held key leadership roles at Avery Dennison, Mondelez,
-                              Hindustan Unilever, United Phosphorus, Asian Paints, and DCW Ltd. Baskaran
-                              brings deep knowledge in Production Planning, Project Management, HSE,
-                              TPM, and Plant Engineering. A strong advocate of continuous improvement, he
-                              is a Certified Energy Manager (BEE), Certified TPM Instructor (JIPM), DuPont
-                              Certified Safety Trainer, and APICS-certified in Supply Chain Management."
-                              data-para3="He holds a B.E. in Mechanical Engineering from Thiagarajar College of
-                              Engineering, Madurai. Outside of work, he enjoys playing badminton and
-                              listening to music."
-                              data-para4=""
-                              data-designation="SHPCO"
-                              data-social='{"linkedin":"https://www.linkedin.com/in/baskaran-thiagarajan/?originalSubdomain=in"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Baskaran Thiagarajan</h6>
-                              <p>SHPCO</p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/baskaran-thiagarajan/?originalSubdomain=in" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a>
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/samrat-dasgupta.webp" class="w-100 leader-img"
-                              data-title="Samrat Dasgupta"
-                              data-para1="Samrat Dasgupta leads Supply Chain - Packaging & Automation at Packfora,
-                              bringing over 18 years of experience across FMCG, F&B, and industrial
-                              manufacturing. A techno-commercial leader, he specializes in packaging
-                              automation, supply chain optimization, and high-capex project delivery. With
-                              deep expertise in E2E value chains, from packaging design to sourcing, machine
-                              installation and logistics optimization, Samrat has successfully led the
-                              implementation of multiple high-speed automated lines across geographies."
-                              data-para2="He is known for driving packaging value engineering, digital transformation,
-                              and cost-saving initiatives, while managing P&L and leading cross-functional,
-                              multicultural teams. Samrat holds a B.E. and an MBA-PGBM from IIM Indore
-                              and is Lean IPD and Machine Safety certified."
-                              data-para3=""
-                              data-para4=""
-                              data-designation="SHPCO"
-                              data-social='{"linkedin":"https://www.linkedin.com/in/samrat-dasgupta-1326583a/"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Samrat Dasgupta</h6>
-                              <p>SHPCO</p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/samrat-dasgupta-1326583a/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a>
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/sheryll-umagtang.webp" class="w-100 leader-img"
-                              data-title="Sheryll Umagtang"
-                              data-para1="Sheryll Umagtang is a seasoned packaging professional with over 20 years of
-                              cross-functional experience spanning Packaging Innovation, Quality Assurance,
-                              Supplier Qualification, and Procurement. Her career spans multiple industries,
-                              including personal care, food & beverage, and spirits through key roles at
-                              Unilever, Diageo, Nutri Asia, and now Packfora.
-                              "
-                              data-para2="At Packfora, Sheryll partners with leading global and regional brands to deliver
-                              innovative packaging solutions that strike a balance between performance,
-                              sustainability, cost, and consumer appeal. She is skilled in managing projects
-                              from ideation to execution, defining specifications, collaborating closely with
-                              suppliers, and ensuring smooth, market-ready launches. She holds a degree in
-                              Chemical Engineering from the University of the Philippines Diliman.
-                              "
-                              data-para3="Outside of her professional life, Sheryll enjoys creative pursuits like painting,
-                              exploring mindfulness through reflective reading, cooking, and taking long
-                              walks — simple routines that bring her clarity, joy, and a sense of balance."
-                              data-para4=""
-                              data-designation="Food, Pharma & CHC"
-                              data-social='{"linkedin":"https://www.linkedin.com/in/sheryll-umagtang-174439216/"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Sheryll Umagtang</h6>
-                              <p>Foods, Pharma and CHC</p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/sheryll-umagtang-174439216/" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a>
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/rodney-pease.webp" class="w-100 leader-img"
-                              data-title="Rodney Pease"
-                              data-para1="Rodney Pease is a seasoned packaging engineering professional with extensive
-                              experience in the food & beverage industry. Over the years, he has built a
-                              strong track record in driving innovation, operational excellence, and
-                              sustainable packaging solutions across consumer product segments."
-                              data-para2="Rodney is highly skilled in packaging equipment, continuous improvement,
-                              mechanics, and sustainable materials—combining technical depth with a
-                              strategic business mindset. His career highlights include leading teams of
-                              packaging professionals, optimizing operations, and identifying growth
-                              opportunities through key partnerships and market insights. Known for his
-                              ability to align packaging strategy with business goals, Rodney has consistently
-                              delivered impactful, future-ready solutions.
-                              "
-                              data-para3=""
-                              data-para4=""
-                              data-designation="Food, Pharma & CHC"
-                              data-social='{"linkedin":"https://www.linkedin.com/in/rodney-pease-2768a850"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Rodney Pease</h6>
-                              <p>Foods, Pharma & CHC</p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/rodney-pease-2768a850" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a href="#">
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/micheal-harris.webp" class="w-100 leader-img"
-                              data-title="Micheal Harris"
-                              data-para1="Michael Harris is a seasoned packaging engineering leader with over 20 years
-                              of experience across the CPG, pharmaceutical, and food & beverage industries.
-                              At Packfora, he leads strategic packaging initiatives for major North American
-                              clients, with a strong focus on innovation, supplier collaboration, and crossfunctional execution."
-                              data-para2="His career includes key roles at Barry-Wehmiller Design Group, James Ross
-                              Consulting, Church & Dwight, CITGO, Pinnacle Foods, and Kraft Foods, where
-                              he managed global packaging development and product launches. Michael’s
-                              strengths lie in launching new products, optimizing materials, and building
-                              supplier relationships that deliver cost and sustainability gains.
-                              "
-                              data-para3="He holds a Packaging B.S. from Michigan State and an MBA from Davenport
-                              University. He enjoys reading, philosophy, travel, and parenting his 1.5-year-old
-                              son."
-                              data-para4=""
-                              data-designation="Foods, Pharma & CHC"
-                              data-social='{"linkedin":"https://www.linkedin.com/in/michael-l-harris-41a9897"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Micheal Harris</h6>
-                              <p>Foods, Pharma & CHC</p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="#" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a href="#">
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/chinmay-vasavada.webp" class="w-100 leader-img"
-                              data-title="Chinmay Vasavada"
-                              data-para1="Chinmay Vasavda is a strategic HR leader with over 18 years of experience
-                              across FMCG, chemicals, and consulting sectors. Passionate about building
-                              agile, future-ready organizations, he brings deep expertise in global HR
-                              business partnering, M&A integration, organization transformation, and
-                              capability building"
-                              data-para2="His career spans leading companies like Unilever, VVF Limited, and Sampat
-                              International, where he drove people-first strategies and led initiatives in digital
-                              HR, leadership development, and inclusive culture. Chinmay has worked across
-                              India, the US, Europe, Southeast Asia, and MENA, partnering with diverse
-                              functions from R&D to Sales and Finance. A technically trained professional
-                              turned HR expert, he thrives on enabling purposeful talent ecosystems in
-                              complex, multicultural environments.
-                              "
-                              data-para3=""
-                              data-para4=""
-                              data-designation="Director - People & Culture"
-                              data-social='{"linkedin":"https://www.linkedin.com/in/chinmay-vasavada-9956651b/?originalSubdomain=in"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Chinmay Vasavada</h6>
-                              <p>Director - People & Culture</p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/chinmay-vasavada-9956651b/?originalSubdomain=in" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a>
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-3">
-                        <div class="leader mb-4">
-                           <img src="assets/img/leaders/indra-jeevanandam.webp" class="w-100 leader-img"
-                              data-title="Indra Jeevanandam"
-                              data-para1="Indra Jeevanandam has over 12 years of experience in financial planning,
-                              pricing, profitability management, and cash flow optimization. At Packfora, she
-                              supports the Food & Pharma Business Unit by embedding pricing discipline,
-                              enhancing P&L transparency, forecasting revenue pipelines, and enabling cash
-                              flow predictability. Indra works closely with leadership and cross-functional
-                              teams to align financial strategies with business goals, ensuring clarity and
-                              accountability across operations.
-                              "
-                              data-para2="Her previous roles span leading organizations like Datamatics, VFS Global,
-                              Travelport, and Tresorie, where she managed receivables, fund flows, and
-                              financial reporting across diverse entities. Known for her calm, collaborative
-                              style, Indra excels at building financial systems that support agility and
-                              empowering non-finance teams with actionable insights.
-                              "
-                              data-para3="Outside work, she finds joy in travel, dance, and community service, while
-                              staying grounded through spiritual reflection."
-                              data-para4=""
-                              data-designation="Finance Business Partner"
-                              data-social='{"linkedin":"https://www.linkedin.com/in/indra-kartik-3a9582201/?originalSubdomain=in"}'>
-                           <div class="leader-info">
-                              <h6 class="leader-name">Indra Jeevanandam</h6>
-                              <p>Finance Business Partner</p>
-                              <div class="post">
-                                 <div class="linkedin-icon">
-                                    <a href="https://www.linkedin.com/in/indra-kartik-3a9582201/?originalSubdomain=in" target="_blank">
-                                    <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                 </div>
-                                 <div class="open-info">
-                                    <a>
-                                    <img src="assets/img/home/intro/Vector.png" alt="">
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+
                </div>
                <div id="popup" class="popup">
                   <div id="crossIcon" class="cross-icon">x</div>

@@ -108,7 +108,9 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-
+     <?php  include 'db_connect.php';
+            include 'config.php';  
+         ?>
     <main>
         <!-- ==== Start Home Banner ==== -->
         <section class="about-page-title-banner"
@@ -132,38 +134,29 @@
                 <div class="row">
                     <h2 class="we-do-title mb-50 wow fadeIn">How We Do It?</h2>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="we-do-card mb-4">
-                            <div class="we-do-img wow fadeInUp" data-wow-delay="0.4s">
-                                <img src="assets/img/about/we-do-01.png">
-                            </div>
-                            <h4 class="wow fadeInUp" data-wow-delay="0.2s">Triple Bottom Line Approach</h4>
-                            <p class="wow fadeInUp" data-wow-delay="0.4s">We integrate People, Planet and Profit into every packaging solution. Balancing impact and profitability.</p>
-                        </div>
+                    <?php 
+                    // Fetch active rows from tbl_how_we_do_it
+                    $sql = "SELECT * FROM tbl_how_we_do_it WHERE is_delete = 1 ORDER BY id ASC";
+                    $result = $conn->query($sql);
+                    ?>
+                    <div class="row">
+                        <?php if ($result->num_rows > 0): ?>
+                            <?php while ($row = $result->fetch_assoc()): ?>
+                                <div class="col-lg-4">
+                                    <div class="we-do-card mb-4">
+                                        <div class="we-do-img wow fadeInUp" data-wow-delay="0.4s">
+                                            <img src="<?= BASE_URL. htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                                        </div>
+                                        <h4 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($row['title']) ?></h4>
+                                        <p class="wow fadeInUp" data-wow-delay="0.4s"><?= htmlspecialchars($row['description']) ?></p>
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <div class="col-12"><p>No records found.</p></div>
+                        <?php endif; ?>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="we-do-card mb-4">
-                            <div class="we-do-img wow fadeInUp" data-wow-delay="0.4s">
-                                <img src="assets/img/about/we-do-02.png">
-                            </div>
-                            <h4 class="wow fadeInUp" data-wow-delay="0.2s">End-to-End Value Chain</h4>
-                            <p class="wow fadeInUp" data-wow-delay="0.4s">From packaging ideation to execution, our strategies seamlessly integrate into
-                                your operations, ensuring efficiency & compliance.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="we-do-card mb-4">
-                            <div class="we-do-img wow fadeInUp" data-wow-delay="0.4s">
-                                <img src="assets/img/about/we-do-03.png">
-                            </div>
-                            <h4 class="wow fadeInUp" data-wow-delay="0.2s">Digitization & Innovation</h4>
-                            <p class="wow fadeInUp" data-wow-delay="0.4s">We leverage AI, automation, and real-time data to ensure efficient, innovative,
-                                and sustainable packaging solutions that benefit your business, our team, and
-                                the planet.</p>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="we-do-card-btn mt-25">
                     <a href="case-studies.php">Discover Our Process </a>
                 </div>
@@ -179,55 +172,36 @@
                     <div class="row">
                         <h2 class="our-promise-title mb-3 wow fadeIn">Our Promise</h2>
                     </div>
-                    <div class="row align-items-stretch">
-                        <div class="col-lg-4 d-flex">
-                            <div class="promise-card mb-4 wow zoomIn w-100" data-wow-delay="0.2s">
-                                <div class="promise-img">
-                                    <img src="assets/img/about/veritable-expertise.webp" class="w-100">
-                                </div>
-                                <div class="promise-content">
-                                    <h4 class="mb-4">Veritable<br>Expertise</h4>
-                                    <p>We bring unparalleled knowledge and experience to every aspect of
-                                        packaging, ensuring that your solutions are crafted with precision and
-                                        expertise.</p>
-                                    <a href="case-studies.php">
-                                        <h5>Learn More</h5>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 d-flex">
-                            <div class="promise-card mb-4 wow zoomIn w-100" data-wow-delay="0.2s">
-                                <div class="promise-img">
-                                    <img src="assets/img/about/above-beyond.webp" class="w-100">
-                                </div>
-                                <div class="promise-content">
-                                    <h4 class="mb-4">Above &<br>Beyond</h4>
-                                    <p>Our dedication goes above and beyond mere promises. We are committed to
-                                        delivering results that exceed your expectations, every time.</p>
-                                    <a href="case-studies.php">
-                                        <h5>Learn More</h5>
-                                    </a>
+                    <?php $promiseData = [];
+                        $sql = "SELECT * FROM tbl_our_promise WHERE is_delete = 1 ORDER BY id ASC";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $promiseData[] = $row;
+                            }
+                        }
+                    ?>
+                   <div class="row align-items-stretch">
+                        <?php foreach ($promiseData as $promise): ?>
+                            <div class="col-lg-4 d-flex">
+                                <div class="promise-card mb-4 wow zoomIn w-100" data-wow-delay="0.2s">
+                                    <div class="promise-img">
+                                        <img src="<?= BASE_URL. htmlspecialchars($promise['image']) ?>" class="w-100" alt="<?= htmlspecialchars($promise['title']) ?>">
+                                    </div>
+                                    <div class="promise-content">
+                                        <h4 class="mb-4">
+                                            <?= nl2br(htmlspecialchars($promise['title'])) ?>
+                                        </h4>
+                                        <p><?= htmlspecialchars($promise['description']) ?></p>
+                                        <a href="case-studies.php">
+                                            <h5>Learn More</h5>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 d-flex">
-                            <div class="promise-card mb-4 wow zoomIn w-100" data-wow-delay="0.2s">
-                                <div class="promise-img">
-                                    <img src="assets/img/about/deep-meaningful-relationships.webp" class="w-100">
-                                </div>
-                                <div class="promise-content">
-                                    <h4 class="mb-4">Deep & Meaningful Relationships</h4>
-                                    <p class="mb-4" style="padding-bottom: 11.20px;">We prioritize building
-                                        lasting partnerships with our clients. Trust, collaboration, and mutual
-                                        success are at the heart of everything we do.</p>
-                                    <a href="case-studies.php">
-                                        <h5>Learn More</h5>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
+
                 </div>
             </div>
         </div>
