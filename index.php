@@ -95,58 +95,54 @@
       <?php include('header.php'); ?>
       <main>
          <!-- ==== Start Slider ==== -->
+         <?php 
+         // Fetch slider data
+            $sql = "SELECT * FROM tbl_slider WHERE status = 1 AND is_delete = 1 ORDER BY slide_order ASC";
+            $result = $conn->query($sql);
+
+            $sliders = [];
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $sliders[] = $row;
+                }
+            }
+            ?>
          <section class="home-slider">
             <div class="owl-carousel owl-theme hero-slider">
-               <div class="item slide1">
-                  <div class="container">
-                     <div class="content">
-                        <h2 class="wow fadeInUp" data-wow-delay="0.2s">Unlock Unimaginable Business Impact Using Packaging as a Business Weapon
-                        </h2>
-                        <a href="about-us.php" class="read_more wow fadeInUp" data-wow-delay="0.4s">Learn more about us</a>
+               <?php foreach ($sliders as $index => $slide): ?>
+                  <div class="item slide<?= $index + 1 ?>">
+                     <div class="container">
+                        <div class="content">
+                           <?php if ($index === 0): ?>
+                              <!-- First slide uses <h2> with animation classes -->
+                              <h2 class="wow fadeInUp" data-wow-delay="0.2s">
+                                 <?= htmlspecialchars($slide['title']) ?>
+                              </h2>
+                              <a href="<?= htmlspecialchars($slide['button_link']) ?>" class="read_more wow fadeInUp" data-wow-delay="0.4s">
+                                 <?= htmlspecialchars($slide['button_text']) ?>
+                              </a>
+                           <?php else: ?>
+                              <!-- Remaining slides -->
+                              <?php if (!empty($slide['image'])): ?>
+                                 <img src="<?= BASE_URL. htmlspecialchars($slide['image']) ?>" alt="">
+                              <?php endif; ?>
+                              <h1><?= htmlspecialchars($slide['title']) ?></h1>
+                              <?php if (!empty($slide['subtitle'])): ?>
+                                 <p><?= $slide['subtitle'] ?></p>
+                              <?php endif; ?>
+                              <?php if (!empty($slide['button_text'])): ?>
+                                 <a href="<?= htmlspecialchars($slide['button_link']) ?>" class="read_more">
+                                    <?= htmlspecialchars($slide['button_text']) ?>
+                                 </a>
+                              <?php endif; ?>
+                           <?php endif; ?>
+                        </div>
                      </div>
                   </div>
-               </div>
-               <div class="item slide5">
-                  <div class="container">
-                     <div class="content">
-                        <img src="assets/img/home/slider/maxmold-logo.png" alt="" srcset="">
-                        <h1>End-to-End Intelligence. Strategic Insights. Maximum Value.</h1>
-                        <p>Digitalis your Mold Management</p>
-                        <a href="maxmold.php" class="read_more">Explore More</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="item slide2">
-                  <div class="container">
-                     <div class="content">
-                        <img src="assets/img/home/slider/packfora-wh-logo.webp" alt="" srcset="">
-                        <h1>School of Packaging</h1>
-                        <p>Sharpen your packaging expertise with<br>industry-leading training.</p>
-                        <a href="#" class="read_more">Learn More About our Training Program</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="item slide3">
-                  <div class="container">
-                     <div class="content">
-                        <img src="assets/img/home/slider/packforum.webp" alt="" srcset="">
-                        <h1>Whitepaper 2024</h1>
-                        <p>Stay ahead with cutting-edge packaging insights.</p>
-                        <a href="#" class="read_more">Download Your Copy Now!</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="item slide4">
-                  <div class="container">
-                     <div class="content">
-                        <h1>Packaging Maturity Index</h1>
-                        <p>Assess where you stand and discover new<br>growth opportunities.</p>
-                        <a href="#" class="read_more">Click Below to Check Yours</a>
-                     </div>
-                  </div>
-               </div>
+               <?php endforeach; ?>
             </div>
          </section>
+
          <!-- ==== End Slider ==== -->
          <!-- ==== Start Intro ==== -->
          <section class="introWrapp">

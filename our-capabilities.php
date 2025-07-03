@@ -220,63 +220,61 @@
         <!-- ==== End Impact Enabled ==== -->
 
         <!-- ==== Start Our Pillars ==== -->
-        <section class="our-pillars py-5"
-            style="background-image: url(assets/img/capabilities/our-pillars-bg.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
-            <div class="container">
-                <div class="row">
-                    <h2 class="wow fadeIn">Our Pillars of Impact Enablement</h2>
-                    <p class="wow fadeIn" data-wow-delay="0.2s">We've built a capability stack that allows us to deliver
-                        outcomes across every packaging decision
-                        point:</p>
-                    <h3 class="wow fadeIn" data-wow-delay="0.4s">1. Science-Backed Approach</h3>
-                </div>
+            <?php
+            // DB Queries
+            $intro = $conn->query("SELECT * FROM tbl_pillars_intro WHERE is_delete = 1 ORDER BY id DESC LIMIT 1")->fetch_assoc();
+            $science_titles = $conn->query("SELECT * FROM tbl_science_backed WHERE is_delete = 1 ORDER BY id ASC")->fetch_all(MYSQLI_ASSOC);
+            $optimize_points = $conn->query("SELECT * FROM tbl_optimize_packaging WHERE is_delete = 1 ORDER BY id ASC")->fetch_all(MYSQLI_ASSOC);
+            $right_image = $conn->query("SELECT * FROM tbl_optimize_image WHERE is_delete = 1 ORDER BY id DESC LIMIT 1")->fetch_assoc();
+            ?>
 
-                <div class="row science-backed-approach py-4">
-                    <div class="col-md-4 mb-4 mb-md-0 wow zoomIn" data-wow-delay="0.4s">
-                        <div class="science-backed">
-                            <p>Model performance</p>
-                        </div>
+            <section class="our-pillars py-5"
+                style="background-image: url('assets/img/capabilities/our-pillars-bg.webp'); background-size: cover; background-position: top center; background-repeat: no-repeat;">
+                <div class="container">
+                    <div class="row">
+                        <?php if (!empty($intro)): ?>
+                            <h2 class="wow fadeIn"><?= htmlspecialchars($intro['main_title']) ?></h2>
+                            <p class="wow fadeIn" data-wow-delay="0.2s"><?= htmlspecialchars($intro['subtitle']) ?></p>
+                            <h3 class="wow fadeIn" data-wow-delay="0.4s"><?= htmlspecialchars($intro['sub_heading']) ?></h3>
+                        <?php endif; ?>
                     </div>
-                    <div class="col-md-4 mb-4 mb-md-0 d-flex justify-content-center wow zoomIn" data-wow-delay="0.4s">
-                        <div class="science-backed">
-                            <p>Minimize risk</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 wow zoomIn" data-wow-delay="0.4s">
-                        <div class="science-backed float-end">
-                            <p>Move faster</p>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row py-4 align-items-center">
-                    <div class="col-md-6">
-                        <div class="optimize-packaging text-center">
-                            <p class="wow fadeInUp" data-wow-delay="0.6s">We use advanced simulation to optimize
-                                packaging — before a single part hits production.</p>
-
-                            <div class="optimize-packaging-points pt-20 pt-md-5 wow fadeInUp" data-wow-delay="0.7s">
-                                <img src="assets/img/home/intro/Vector.png" alt="">
-                                <p>Identify stress points and failure risks early</p>
+                    <div class="row science-backed-approach py-4">
+                        <?php foreach ($science_titles as $index => $science): ?>
+                            <div class="col-md-4 mb-4 mb-md-0 wow zoomIn" data-wow-delay="0.<?= $index + 4 ?>s">
+                                <div class="science-backed <?= $index === 2 ? 'float-end' : ($index === 1 ? 'd-flex justify-content-center' : '') ?>">
+                                    <p><?= htmlspecialchars($science['title']) ?></p>
+                                </div>
                             </div>
+                        <?php endforeach; ?>
+                    </div>
 
-                            <div class="optimize-packaging-points mt-20 mt-md-5 wow fadeInUp" data-wow-delay="0.8s">
-                                <img src="assets/img/home/intro/Vector.png" alt="">
-                                <p>Accelerate decision-making with data</p>
-                            </div>
+                    <div class="row py-4 align-items-center">
+                        <div class="col-md-6">
+                            <div class="optimize-packaging text-center">
+                                <p class="wow fadeInUp" data-wow-delay="0.6s">
+                                    We use advanced simulation to optimize packaging — before a single part hits production.
+                                </p>
 
-                            <div class="optimize-packaging-points mt-20 mt-md-5 wow fadeInUp" data-wow-delay="0.9s">
-                                <img src="assets/img/home/intro/Vector.png" alt="">
-                                <p>Build smarter, lighter, more sustainable packs</p>
+                                <?php foreach ($optimize_points as $i => $opt): ?>
+                                    <div class="optimize-packaging-points <?= $i === 0 ? 'pt-20 pt-md-5' : 'mt-20 mt-md-5' ?> wow fadeInUp" data-wow-delay="0.<?= $i + 7 ?>s">
+                                        <img src="<?= BASE_URL. htmlspecialchars($opt['icon']) ?>" alt="">
+                                        <p><?= htmlspecialchars($opt['description']) ?></p>
+                                    </div>
+                                <?php endforeach; ?>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 wow zoomIn" data-wow-delay="0.6s">
-                        <img src="assets/img/capabilities/optimize-packaging.webp" alt="" srcset="">
+
+                        <?php if (!empty($right_image['image'])): ?>
+                        <div class="col-md-6 wow zoomIn" data-wow-delay="0.6s">
+                            <img src="<?= BASE_URL. htmlspecialchars($right_image['image']) ?>" alt="">
+                        </div>
+                        <?php endif; ?>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+
+
         <!-- ==== End Our Pillars ==== -->
 
         <!-- ==== Start Holistic Value Model ==== -->
