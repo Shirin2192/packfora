@@ -356,41 +356,48 @@
          </div>
          <!-- ==================== End Impact ==================== -->
          <!-- ==== Start Case Studies ==== -->
-        <?php
-         $caseStudies = [];
-         $sql = "SELECT * FROM tbl_case_study WHERE is_delete = 1 ORDER BY date DESC";
-         $result = $conn->query($sql);
-         if ($result->num_rows > 0) {
-             while ($row = $result->fetch_assoc()) {
-                 $caseStudies[] = $row;
-             }
-         }
+         <?php
+            $caseStudies = [];
+            $sql = "SELECT * FROM tbl_case_study WHERE is_delete = 1 AND is_active = 1 ORDER BY id ASC limit 3";
+            $result = $conn->query($sql);
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $caseStudies[] = $row;
+                }
+            }
          ?>
-         <section class="case-study whiteBg">
-             <div class="container">
-                 <h2 class="sec-title mb-4 wow fadeIn">Case Studies</h2>
-             </div>
-             <div class="container-fluid p-0">
-                 <div class="gallery">
-                     <div class="owl-carousel case-study-carousel owl-theme wow zoomIn">
-                         <?php foreach ($caseStudies as $case): ?>
-                             <div class="item" style="background-image: url('<?= BASE_URL. htmlspecialchars($case['image']) ?>');">
-                                 <div class="slide-content">
-                                     <div class="content-box">
-                                         <div>
-                                             <h2><?= htmlspecialchars($case['description']) ?></h2>
-                                         </div>
-                                         <a href="<?= htmlspecialchars($case['link']) ?>">
-                                             <button class="read-more-btn">Read Full Case Study</button>
-                                         </a>
-                                     </div>
-                                 </div>
-                             </div>
-                         <?php endforeach; ?>
-                     </div>
-                 </div>
-             </div>
-         </section>
+
+            <section class="case-study whiteBg">
+                <div class="container">
+                    <h2 class="sec-title mb-4 wow fadeIn">Case Studies</h2>
+                </div>
+                <div class="container-fluid p-0">
+                    <div class="gallery">
+                        <div class="owl-carousel case-study-carousel owl-theme wow zoomIn">
+                            <?php foreach ($caseStudies as $case): 
+                                $imgPath = 'uploads/' . $case['image']; // or use BASE_URL . 'uploads/' if BASE_URL is defined
+                                $title = htmlspecialchars($case['title']);
+                                $slug = htmlspecialchars($case['slug_url']);
+                            ?>
+                                <div class="item" style="background-image: url('<?= BASE_URL. $imgPath ?>');">
+                                    <div class="slide-content">
+                                        <div class="content-box">
+                                            <div>
+                                                <h2><?= $title ?></h2>
+                                            </div>
+                                            <a href="<?= $slug ?>">
+                                                <button class="read-more-btn">Read Full Case Study</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
 
          <!-- ==== End Case Studies ==== -->
          <!-- ==== Start Blogs ==== -->

@@ -6,16 +6,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="packaging case studies, real-world packaging, packaging success stories, packaging solutions">
-    <meta name="description" content="Read real-world case studies showing how Packfora solved packaging challenges with smart solutions across retail, FMCG, and e-commerce sectors.">
-    <meta name="author" content="Packfora">
-    <link rel="canonical" href="https://packfora.com/case-studies.php">
+    <meta name="keywords" content="HTML5">
+    <meta name="description" content="Multi-Purpose">
+    <meta name="author" content="">
 
     <!-- Title  -->
-    <title>Packaging Success Stories | Packfora Case Studies</title>
+    <title>End-to-End Packaging and Brand Consulting Solutions - Packfora</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/img/favicon.svg">
+    <link rel="shortcut icon" href="assets/imgs/favicon.svg">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
@@ -108,7 +107,7 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
- <?php include 'db_connect.php';
+    <?php include 'db_connect.php';
          include 'config.php';  
          ?>
     <main>
@@ -125,92 +124,123 @@
             </div>
         </section>
         <!-- ==== End Home Banner ==== -->
-
+        
         <!-- Start All Case Study -->
-        <?php
+       <?php
+// Database query
+$sql = "SELECT * FROM tbl_case_study WHERE is_delete = '1' ORDER BY id ASC";
+$result = $conn->query($sql);
+$case_studies = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $case_studies[] = $row;
+    }
+}
 
-                // Get all tags into associative array for mapping ID => Name
-                $all_tags = [];
-                $tags = ['featured' => [], 'capability' => [], 'industry' => []];
-                $tagQuery = "SELECT * FROM tbl_case_study_tags";
-                $tagResult = $conn->query($tagQuery);
-                while ($row = $tagResult->fetch_assoc()) {
-                    $all_tags[$row['id']] = $row['name'];
-                    $tags[$row['category']][] = $row;
-                }
+// Manually assign tags for filtering (based on ID)
+$case_study_tags = [
+    1 => "Sustainability,Sustainability & Carbon Reduction,Food & Beverage,FMCG & CPG,Procurement & Cost Reduction",
+    2 => "Specification Management,Pharmaceuticals,Personal Care & Cosmetics,Healthcare Devices",
+    3 => "Design-to-Value,Pack Format Innovation,Packaging Design & Engineering,Packaging Producers",
+    4 => "Design-to-Value",
+];
+?>
 
-                // Get case studies
-                $case_study_query = "SELECT * FROM tbl_case_study WHERE is_delete = 1 AND is_active = 1 ORDER BY publish_date DESC";
-                $case_study_result = $conn->query($case_study_query);
+<section class="case-studies">
+    <div class="container mt-5">
+        <h2 class="offering-title mb-3 wow fadeIn" style="color: rgb(33, 64, 154);">Packaging that Drives Business Impact</h2>
+        <p class="wow fadeInUp" data-wow-delay="0.6s">Real stories of how Packfora helped leading brands unlock efficiency, sustainability, and value across the packaging value.</p>
 
-                // Collect case studies in array
-                $case_studies = [];
-                while ($row = $case_study_result->fetch_assoc()) {
-                    $case_studies[] = $row;
-                }
-                ?>
-
-        <!-- HTML Starts -->
-        <section class="case-studies">
-            <div class="container mt-5">
-                <h2 class="offering-title mb-3 wow fadeIn" style="color: rgb(33, 64, 154);">Packaging that Drives Business Impact</h2>
-                <p class="wow fadeInUp" data-wow-delay="0.6s">Real stories of how Packfora helped leading brands unlock efficiency, sustainability, and value across the packaging value.</p>
-
-                <!-- Dropdown Filters -->
-                <div class="dropdown-container">
-                    <?php foreach (['featured' => 'Featured Topics', 'capability' => 'Capabilities', 'industry' => 'Industries'] as $key => $label): ?>
-                        <div class="filter-dropdown dropdown" id="<?= $key ?>">
-                            <div class="dropdown-toggle d-flex justify-content-between align-items-center drop" data-bs-toggle="dropdown">
-                                <span class="label"><?= $label ?></span>
-                                <span class="close-btn d-none">&times;</span>
-                            </div>
-                            <ul class="dropdown-menu dropdown-menus">
-                                <?php foreach ($tags[$key] as $tag): ?>
-                                    <li><a class="dropdown-item dropdown-items" href="#" data-value="<?= htmlspecialchars($tag['name']) ?>"><?= htmlspecialchars($tag['name']) ?></a></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    <?php endforeach; ?>
+        <!-- Dropdown filters -->
+        <div class="dropdown-container">
+            <!-- Featured Topics -->
+            <div class="filter-dropdown dropdown" id="featured-topics">
+                <div class="dropdown-toggle d-flex justify-content-between align-items-center drop" data-bs-toggle="dropdown">
+                    <span class="label">Featured Topics</span>
+                    <span class="close-btn d-none">&times;</span>
                 </div>
+                <ul class="dropdown-menu dropdown-menus">
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="all">Show All</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Sustainability">Sustainability</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Design-to-Value">Design-to-Value</a></li>
+                </ul>
+            </div>
 
-                <!-- Case Studies -->
-                <div class="content-sections">
-                    <div class="row">
-                        <?php foreach ($case_studies as $case):
-                            $tag_ids = explode(",", $case['tag_id']);
-                            $tag_names = [];
-                            foreach ($tag_ids as $id) {
-                                if (isset($all_tags[$id])) {
-                                    $tag_names[] = $all_tags[$id];
-                                }
-                            }
-                            $formatted_date = date("M j, Y", strtotime($case['publish_date']));
-                            $img_src = 'uploads/' . $case['image'];
-                            $data_tags = htmlspecialchars(implode(',', $tag_names));
-                        ?>
-                        <div class="col-lg-4 my-3 content-section" data-tags="<?= $data_tags ?>">
-                            <div class="wow fadeInUp" data-wow-delay="0.2s">
-                                <div class="case-study-box">
-                                    <div class="case-study-img">
-                                        <img src="<?= BASE_URL . $img_src ?>" alt="Case Study Image">
-                                        <p class="badge"><?= htmlspecialchars($case['badge']) ?></p>
-                                        <div class="case-study-body">
-                                            <a href="<?= htmlspecialchars($case['slug_url']) ?>">
-                                               <?php if(!empty($case['publish_date'])){?> <p class="meta"><?= $formatted_date ?></p> <?php } ?>
-                                                <h5 class="title"><?= htmlspecialchars($case['title']) ?></h5>
-                                                <h6>Read Full Case Study</h6>
-                                            </a>
-                                        </div>
-                                    </div>
+            <!-- Capabilities -->
+            <div class="filter-dropdown dropdown" id="capabilities">
+                <div class="dropdown-toggle d-flex justify-content-between align-items-center drop" data-bs-toggle="dropdown">
+                    <span class="label">Capabilities</span>
+                    <span class="close-btn d-none">&times;</span>
+                </div>
+                <ul class="dropdown-menu dropdown-menus">
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Specification Management">Specification Management</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="MaxMold">MaxMold</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Simulation & Modeling">Simulation & Modeling</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Supply Chain Optimization">Supply Chain Optimization</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Procurement & Cost Reduction">Procurement & Cost Reduction</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Packaging Design & Engineering">Packaging Design & Engineering</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Sustainability & Carbon Reduction">Sustainability & Carbon Reduction</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Global-to-Local Harmonization">Global-to-Local Harmonization</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Digital Transformation in Packaging">Digital Transformation in Packaging</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Pack Format Innovation">Pack Format Innovation</a></li>
+                </ul>
+            </div>
+
+            <!-- Industries -->
+            <div class="filter-dropdown dropdown" id="industries">
+                <div class="dropdown-toggle d-flex justify-content-between align-items-center drop" data-bs-toggle="dropdown">
+                    <span class="label">Industries</span>
+                    <span class="close-btn d-none">&times;</span>
+                </div>
+                <ul class="dropdown-menu dropdown-menus">
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Pharmaceuticals">Pharmaceuticals</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Food & Beverage">Food & Beverage</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Personal Care & Cosmetics">Personal Care & Cosmetics</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="FMCG & CPG">FMCG & CPG</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Automotive">Automotive</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Chemicals & Explosives">Chemicals & Explosives</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Packaging Producers">Packaging Producers</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="B2B Industrial">B2B Industrial</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Healthcare Devices">Healthcare Devices</a></li>
+                    <li><a class="dropdown-item dropdown-items" href="#" data-value="Retail & E-commerce">Retail & E-commerce</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Case Studies -->
+        <div class="content-sections">
+            <div class="row">
+                <?php foreach ($case_studies as $case): 
+                    $id = $case['id'];
+                    $title = $case['title'];
+                    $description = $case['description'];
+                    $link = $case['link'];
+                    $image = $case['image'];
+                    $date = date("M j, Y", strtotime($case['date']));
+                    $tags = isset($case_study_tags[$id]) ? $case_study_tags[$id] : '';
+                ?>
+                <div class="col-lg-4 my-3 content-section" data-tags="<?= htmlspecialchars($tags) ?>">
+                    <div class="wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="case-study-box">
+                            <div class="case-study-img">
+                                <img src="<?= BASE_URL. htmlspecialchars($image) ?>" alt="Case Study Image">
+                                <p class="badge"><?= htmlspecialchars($title) ?></p>
+                                <div class="case-study-body">
+                                    <a href="<?= htmlspecialchars($link) ?>">
+                                        <p class="meta"><?= $date ?></p>
+                                        <h5 class="title"><?= htmlspecialchars($description) ?></h5>
+                                        <h6>Read Full Case Study</h6>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <?php endforeach; ?>
                     </div>
                 </div>
+                <?php endforeach; ?>
             </div>
-        </section>
-
+        </div>
+    </div>
+</section>
 
 
         <!-- End All Case Study -->
