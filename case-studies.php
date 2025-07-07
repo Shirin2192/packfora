@@ -185,7 +185,7 @@
                                 }
                             }
                             $formatted_date = date("M j, Y", strtotime($case['publish_date']));
-                            $img_src = 'uploads/' . $case['image'];
+                            $img_src = $case['image'];
                             $data_tags = htmlspecialchars(implode(',', $tag_names));
                         ?>
                         <div class="col-lg-4 my-3 content-section" data-tags="<?= $data_tags ?>">
@@ -195,7 +195,7 @@
                                         <img src="<?= BASE_URL . $img_src ?>" alt="Case Study Image">
                                         <p class="badge"><?= htmlspecialchars($case['badge']) ?></p>
                                         <div class="case-study-body">
-                                            <a href="<?= htmlspecialchars($case['slug_url']) ?>">
+                                            <a target="_blank" href="<?= htmlspecialchars($case['slug_url'] . '?id=' . urlencode(base64_encode($case['id']))) ?>">
                                                <?php if(!empty($case['publish_date'])){?> <p class="meta"><?= $formatted_date ?></p> <?php } ?>
                                                 <h5 class="title"><?= htmlspecialchars($case['title']) ?></h5>
                                                 <h6>Read Full Case Study</h6>

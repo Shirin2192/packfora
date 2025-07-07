@@ -107,80 +107,128 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
+    <?php include 'db_connect.php';
+         include 'config.php';  
+         ?>
+    <?php
+        if (isset($_GET['id'])) {
+            $encoded_id = $_GET['id'];
+            $id = base64_decode($encoded_id);
+
+            // Optional: cast to int if it's supposed to be numeric
+            $id = intval($id);
+        }
+        ?>
+
 
     <main>
         <!-- ==== Start Home Banner ==== -->
+        <?php  // Query the case study by ID
+            $sql = "SELECT * FROM tbl_case_study WHERE id = $id AND is_delete = 1";
+            $result = $conn->query($sql);
+
+            if ($result && $result->num_rows > 0) {
+                $case = $result->fetch_assoc();
+            }
+        ?>
+       <?php if ($case): ?>
         <section class="case-study-inner-ptb"
-            style="background-image: url(assets/img/case-study/case-study-02.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
+            style="background-image: url(<?= BASE_URL. $case['image'] ?>); background-size: cover; background-position: top center; background-repeat: no-repeat;">
             <div class="container">
                 <div class="row">
                     <div class="page-title-bar text-center">
-                        <h1 class="wow fadeInUp" data-wow-delay="0.2s">Simplifying Specs, Scaling Impact</h1>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">How Packfora partnered with a global pharma major
-                            to streamline packaging specifications across 20+ sites — and built a future-ready data
-                            foundation.</p>
+                        <h1 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($case['title']) ?></h1>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s"><?= nl2br(htmlspecialchars($case['description'])) ?></p>
                     </div>
                 </div>
             </div>
         </section>
+        <?php else: ?>
+            <div class="container py-5 text-center">
+                <h2>Case Study Not Found</h2>
+            </div>
+        <?php endif; ?>
         <!-- ==== End Home Banner ==== -->
 
         <!-- ==== Start Short Description ==== -->
-        <div class="short-description py-5">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-1">
-                        <img src="assets/img/shape/big-arrow.png" alt="">
-                    </div>
-                    <div class="col-md-11">
-                        <h5>When packaging specifications are scattered across geographies, platforms, and people —
-                            speed, accuracy, and compliance take a hit. A leading pharmaceutical company needed a better
-                            way to manage its packaging and finished goods specs — one that could support both
-                            day-to-day efficiency and long-term transformation.</h5>
-                        <h5>Packfora led an end-to-end specification management transformation to unlock clarity,
-                            compliance, and control across their packaging lifecycle.</h5>
+        <?php if (!empty($case['description'])): ?>
+            <div class="short-description py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-1">
+                            <img src="assets/img/shape/big-arrow.png" alt="">
+                        </div>
+                        <div class="col-md-11">
+                            <?php
+                            // Convert new lines to separate <h5> tags
+                            $paragraphs = explode("\n", trim($case['description']));
+                            foreach ($paragraphs as $p):
+                                if (!empty(trim($p))):
+                            ?>
+                                <h5><?= htmlspecialchars(trim($p)) ?></h5>
+                            <?php
+                                endif;
+                            endforeach;
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <?php endif; ?>
+
         <!-- ==== End Short Description ==== -->
 
         <!-- ==== Start Case Study Video ==== -->
-        <div class="case-study-video py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="video-container position-relative">
-                            <video id="bgVideo" class="w-100" src="assets/img/case-study/inner/pharma.webm" autoplay
-                                loop muted></video>
-                            <div class="controls">
-                                <button id="playPauseBtn"><i class="fas fa-pause"></i></button>
-                                <button id="muteUnmuteBtn"><i class="fas fa-volume-mute"></i></button>
+
+        <?php
+         if (!empty($case['video'])): ?>
+            <div class="case-study-video py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="video-container position-relative">
+                                <video id="bgVideo" class="w-100" src="<?= htmlspecialchars(BASE_URL . $case['video']) ?>" autoplay loop muted></video>
+                                <div class="controls">
+                                    <button id="playPauseBtn"><i class="fas fa-pause"></i></button>
+                                    <button id="muteUnmuteBtn"><i class="fas fa-volume-mute"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <?php endif; ?>
         <!-- ==== End Case Study Video ==== -->
 
         <!-- Start Objective -->
-        <div class="objective py-5">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-6 wow fadeIn" data-wow-delay="0.2s">
-                        <img src="assets/img/case-study/inner/pharma-objective.webp" alt="" srcset="">
-                    </div>
-                    <div class="col-md-6">
-                        <h2 class="objective-title mb-4 wow fadeIn" data-wow-delay="0.2s">Objective</h2>
-                        <p class="objective-desc wow fadeInUp" data-wow-delay="0.4s">To improve the quality and
-                            reliability of existing spec data across more than 20 global manufacturing sites while
-                            accelerating new product development, establishing unified governance, and enabling a smooth
-                            transition to the client’s new PLM platform.</p>
+        <?php 
+        $objective = null;
+
+            // Fetch the latest matching objective
+            $sql = "SELECT * FROM tbl_case_study_objectives WHERE fk_case_study_id = $id AND is_delete = 1 ORDER BY id DESC LIMIT 1";
+            $result = mysqli_query($conn, $sql);
+            if ($result && mysqli_num_rows($result) > 0) {
+                $objective = mysqli_fetch_assoc($result);
+            }
+            ?>
+        <?php if (!empty($objective)) { ?>
+            <div class="objective py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 wow fadeIn" data-wow-delay="0.2s">
+                            <img src="<?= htmlspecialchars( BASE_URL. $objective['image']) ?>" alt="Objective Image" class="img-fluid">
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="objective-title mb-4 wow fadeIn" data-wow-delay="0.2s">Objective</h2>
+                            <p class="objective-desc wow fadeInUp" data-wow-delay="0.4s">
+                                <?= htmlspecialchars($objective['objective']) ?>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php } ?>
+
         <!-- End Objective -->
 
         <!-- ==== Start The Solution ==== -->
