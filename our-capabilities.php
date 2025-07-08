@@ -278,123 +278,105 @@
         <!-- ==== End Our Pillars ==== -->
 
         <!-- ==== Start Holistic Value Model ==== -->
+       <?php
+        // Assume $conn is your MySQLi connection object
+        $section = null;
+        $strategies = [];
+        $levers = [];
+
+        // 1. Fetch Section (assuming only one active section)
+        $sectionQuery = "SELECT * FROM tbl_holistic_model_sections WHERE is_active = 1 AND is_delete = 1 LIMIT 1";
+        $sectionResult = $conn->query($sectionQuery);
+        if ($sectionResult && $sectionResult->num_rows > 0) {
+            $section = $sectionResult->fetch_assoc();
+        }
+
+        // 2. Fetch Strategies
+        $strategiesQuery = "SELECT * FROM tbl_holistic_model_strategies WHERE is_active = 1 AND is_delete = 1";
+        $strategiesResult = $conn->query($strategiesQuery);
+
+        $strategies = [
+            'Technology' => ['Reduce' => [], 'Replace' => [], 'Redesign' => []],
+            'Procurement' => ['Supplier Strategy' => [], 'Should Cost' => [], 'Future Proofing' => []],
+        ];
+
+        if ($strategiesResult && $strategiesResult->num_rows > 0) {
+            while ($row = $strategiesResult->fetch_assoc()) {
+                $type = $row['section_type'];
+                $pillar = $row['pillar'];
+                $items = array_map('trim', explode(',', $row['items']));
+                if (isset($strategies[$type][$pillar])) {
+                    $strategies[$type][$pillar] = $items;
+                }
+            }
+        }
+
+        // 3. Fetch Levers
+        $leversQuery = "SELECT * FROM tbl_holistic_model_levers WHERE is_active = 1 AND is_delete = 1";
+        $leversResult = $conn->query($leversQuery);
+        if ($leversResult && $leversResult->num_rows > 0) {
+            while ($row = $leversResult->fetch_assoc()) {
+                $levers[] = $row;
+            }
+        }
+        ?>
+
         <section class="holistic-value-model py-5">
             <div class="container">
                 <div class="row">
-                    <h3 class="wow fadeIn" data-wow-delay="0.2s">2. Holistic Value Model</h3>
-                    <p class="wow fadeInUp" data-wow-delay="0.2s">A proven framework for business impact — today and
-                        tomorrow. We apply a proprietary model that
-                        shows where value lies — and how to unlock it across cost, compliance, and competitiveness.</p>
+                    <?php if ($section): ?>
+                        <h3 class="wow fadeIn" data-wow-delay="0.2s"><?= $section['title'] ?></h3>
+                        <p class="wow fadeInUp" data-wow-delay="0.2s"><?= $section['description'] ?></p>
+                    <?php endif; ?>
                 </div>
 
                 <div class="row pt-40">
-                    <div class="col-lg-6">
-                        <div class="offerings-card mb-4 mb-md-0 wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="section-card">
-                                <div class="section-header technology-header">
-                                    Technology
-                                    <!-- <div class="header-image">
-                                            <img src="https://sda.in.net/web/packfora/final/assets/img/shape/gradient-02.png" alt="Technology">
-                                        </div> -->
-                                </div>
-                                <div class="content-area">
-                                    <div class="row">
-                                        <div class="col-md-4 border-end">
-                                            <div class="strategy-title">Reduce</div>
-                                            <div class="divider"></div>
-                                            <div class="strategy-item">Waste</div>
-                                            <div class="divider"></div>
-                                            <div class="strategy-item">Complexity Reduction</div>
-                                        </div>
-                                        <div class="col-md-4 border-end">
-                                            <div class="strategy-title strategy-title-mob-top">Replace</div>
-                                            <div class="divider"></div>
-                                            <div class="strategy-item">Technology</div>
-                                            <div class="divider"></div>
-                                            <div class="strategy-item">Materials</div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="strategy-title strategy-title-mob-top">Redesign</div>
-                                            <div class="divider"></div>
-                                            <div class="strategy-item">Specification</div>
-                                            <div class="divider"></div>
-                                            <div class="strategy-item">Right Sizing</div>
+                    <?php foreach (['Technology', 'Procurement'] as $type): ?>
+                        <div class="col-lg-6">
+                            <div class="offerings-card mb-4 mb-md-0 wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="section-card">
+                                    <div class="section-header <?= strtolower($type) ?>-header">
+                                        <?= $type ?>
+                                    </div>
+                                    <div class="content-area">
+                                        <div class="row">
+                                            <?php foreach ($strategies[$type] as $pillar => $items): ?>
+                                                <div class="col-md-4<?= $pillar !== array_key_last($strategies[$type]) ? ' border-end' : '' ?>">
+                                                    <div class="strategy-title"><?= $pillar ?></div>
+                                                    <div class="divider"></div>
+                                                    <?php foreach ($items as $item): ?>
+                                                        <div class="strategy-item"><?= $item ?></div>
+                                                        <div class="divider"></div>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            <?php endforeach; ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="offerings-card mb-4 mb-md-0 wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="section-card">
-                                <div class="section-header procurement-header">
-                                    Procurement
-                                    <!-- <div class="header-image">
-                                            <img src="https://sda.in.net/web/packfora/final/assets/img/shape/gradient-02.png" alt="Procurement">
-                                        </div> -->
-                                </div>
-                                <div class="content-area">
-                                    <div class="row">
-                                        <div class="col-md-4 border-end">
-                                            <div class="strategy-title">Supplier Strategy</div>
-                                            <div class="divider"></div>
-                                            <div class="strategy-item">Profiling Cost Quality Service</div>
-                                            <div class="divider"></div>
-                                            <div class="strategy-item">Partnership/ Contracts</div>
-                                        </div>
-                                        <div class="col-md-4 border-end">
-                                            <div class="strategy-title strategy-title-mob-top">Should Cost</div>
-                                            <div class="divider"></div>
-                                            <div class="strategy-item">MOQ</div>
-                                            <div class="divider"></div>
-                                            <div class="strategy-item">Value Chain Understanding</div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="strategy-title strategy-title-mob-top">Future Proofing</div>
-                                            <div class="divider"></div>
-                                            <div class="strategy-item">Periodical Review</div>
-                                            <div class="divider"></div>
-                                            <div class="strategy-item">Market Intelligence</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
 
+                <!-- Levers Section -->
                 <div class="row mt-3 wow fadeInUp" data-wow-delay="0.4s">
                     <p class="mb-0">The levers we activate:</p>
 
-                    <div class="optimize-packaging-points pt-20 pt-md-5 wow fadeInUp" data-wow-delay="0.7s">
-                        <img src="assets/img/home/intro/blue-arrow.webp" alt="">
-                        <p>Reduce waste and system complexity</p>
-                    </div>
-
-                    <div class="optimize-packaging-points mt-0 mt-md-5 wow fadeInUp" data-wow-delay="0.8s">
-                        <img src="assets/img/home/intro/blue-arrow.webp" alt="">
-                        <p>Replace outdated specs and materials</p>
-                    </div>
-
-                    <div class="optimize-packaging-points mt-0 mt-md-5 wow fadeInUp" data-wow-delay="0.9s">
-                        <img src="assets/img/home/intro/blue-arrow.webp" alt="">
-                        <p>Redesign for right-sizing and resource efficiency</p>
-                    </div>
-
-                    <div class="optimize-packaging-points mt-0 mt-md-5 wow fadeInUp" data-wow-delay="0.9s">
-                        <img src="assets/img/home/intro/blue-arrow.webp" alt="">
-                        <p>Optimize procurement with cost, supply, and market intelligence</p>
-                    </div>
+                    <?php foreach ($levers as $index => $lever): ?>
+                        <div class="optimize-packaging-points mt-0 mt-md-5 wow fadeInUp" data-wow-delay="<?= 0.7 + ($index * 0.1) ?>s">
+                            <img src="assets/img/home/intro/blue-arrow.webp" alt="">
+                            <p><?= $lever['title'] ?></p>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
 
+                <!-- Footer Notes -->
                 <div class="row levers-activate py-4">
                     <div class="col-md-6 wow fadeInUp" data-wow-delay="0.6s">
                         <div class="levers">
                             <p>Not just cost - out - value-in </p>
                         </div>
                     </div>
-
                     <div class="col-md-6 d-flex justify-content-center wow fadeInUp" data-wow-delay="0.6s">
                         <div class="levers mt-4 mt-md-0">
                             <p>Not just today's savings - tomorrow's advantage</p>
@@ -403,6 +385,7 @@
                 </div>
             </div>
         </section>
+
         <!-- ==== Start Holistic Value Model ==== -->
 
         <!-- ==== Start End-to-End Value Chain Expertise ==== -->

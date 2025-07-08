@@ -358,7 +358,7 @@
          <!-- ==== Start Case Studies ==== -->
          <?php
             $caseStudies = [];
-            $sql = "SELECT * FROM tbl_case_study WHERE is_delete = 1 AND is_active = 1 ORDER BY id ASC limit 3";
+            $sql = "SELECT * FROM tbl_case_study WHERE is_delete = 1 ORDER BY id ASC limit 3";
             $result = $conn->query($sql);
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -375,11 +375,11 @@
                     <div class="gallery">
                         <div class="owl-carousel case-study-carousel owl-theme wow zoomIn">
                             <?php foreach ($caseStudies as $case): 
-                                $imgPath = 'uploads/' . $case['image']; // or use BASE_URL . 'uploads/' if BASE_URL is defined
+                                $imgPath = BASE_URL. 'uploads/' . $case['image']; // or use BASE_URL . 'uploads/' if BASE_URL is defined
                                 $title = htmlspecialchars($case['title']);
                                 $slug = htmlspecialchars($case['slug_url']);
                             ?>
-                                <div class="item" style="background-image: url('<?= BASE_URL. $imgPath ?>');">
+                                <div class="item" style="background-image: url('<?= $imgPath ?>');">
                                     <div class="slide-content">
                                         <div class="content-box">
                                             <div>
