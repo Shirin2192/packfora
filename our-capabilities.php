@@ -389,47 +389,54 @@
         <!-- ==== Start Holistic Value Model ==== -->
 
         <!-- ==== Start End-to-End Value Chain Expertise ==== -->
-        <section class="value-chain-expertise py-5">
-            <div class="container">
-                <div class="row">
-                    <h3 class="wow fadeIn" data-wow-delay="0.2s">3. End-to-End Value Chain Expertise</h3>
-                    <p class="wow fadeInUp" data-wow-delay="0.2s">Packaging decisions impact every part of the value
-                        chain — and we understand those
-                        interconnections deeply. We bring expertise across the entire ecosystem:</p>
-                </div>
+        <?php 
+            // Get the main section (assuming only one active)
+            $section = null;
+            $sql_section = "SELECT * FROM tbl_value_chain_section WHERE is_delete = 1 ORDER BY id ASC LIMIT 1";
+            $result_section = $conn->query($sql_section);
+            if ($result_section && $result_section->num_rows > 0) {
+                $section = $result_section->fetch_assoc();
+                $section_id = $section['id'];
 
-                <div class="row pt-40">
-                    <div class="col-md-3">
-                        <div class="value-chain-expertise-box wow zoomIn" data-wow-delay="0.4s">
-                            <h2>Consumer</h2>
-                            <p>We enable packaging choices that enhance product experience, brand equity, and market
-                                competitiveness.</p>
-                        </div>
+                // Fetch expertise blocks linked to this section
+                $expertise_list = [];
+                $sql_exp = "SELECT * FROM tbl_value_chain_expertise WHERE is_delete = 1 AND fk_section_id = $section_id ORDER BY id ASC";
+                $result_exp = $conn->query($sql_exp);
+                if ($result_exp && $result_exp->num_rows > 0) {
+                    while ($row = $result_exp->fetch_assoc()) {
+                        $expertise_list[] = $row;
+                    }
+                }
+            }
+            ?>
+            <?php if ($section): ?>
+            <section class="value-chain-expertise py-5">
+                <div class="container">
+                    <div class="row">
+                        <h3 class="wow fadeIn" data-wow-delay="0.2s">
+                            <?php echo htmlspecialchars($section['main_title']); ?>
+                        </h3>
+                        <p class="wow fadeInUp" data-wow-delay="0.2s">
+                            <?php echo nl2br(htmlspecialchars($section['main_description'])); ?>
+                        </p>
                     </div>
-                    <div class="col-md-3 mt-4 mt-md-0">
-                        <div class="value-chain-expertise-box wow zoomIn" data-wow-delay="0.4s">
-                            <h2>Brand</h2>
-                            <p>We ensure packaging aligns with real-world consumer expectations — from functionality and
-                                usability to sustainability.</p>
-                        </div>
+
+                    <?php if (!empty($expertise_list)): ?>
+                    <div class="row pt-40">
+                        <?php foreach ($expertise_list as $index => $item): ?>
+                            <div class="col-md-3 <?php echo $index > 0 ? 'mt-4 mt-md-0' : ''; ?>">
+                                <div class="value-chain-expertise-box wow zoomIn" data-wow-delay="0.4s">
+                                    <h2><?php echo htmlspecialchars($item['title']); ?></h2>
+                                    <p><?php echo nl2br(htmlspecialchars($item['description'])); ?></p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                    <div class="col-md-3 mt-4 mt-md-0">
-                        <div class="value-chain-expertise-box wow zoomIn" data-wow-delay="0.4s">
-                            <h2>Brand Owner Supply Chain</h2>
-                            <p>We optimize how packaging flows through manufacturing, warehousing, and logistics —
-                                balancing cost, agility, and carbon impact.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mt-4 mt-md-0">
-                        <div class="value-chain-expertise-box wow zoomIn" data-wow-delay="0.4s">
-                            <h2>Supplier Supply Chain</h2>
-                            <p>We help brands work smarter with suppliers and converters — driving material selection,
-                                lead time optimization, and supply resilience.</p>
-                        </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
-            </div>
-        </section>
+            </section>
+            <?php endif; ?>
+
         <!-- ==== End End-to-End Value Chain Expertise ==== -->
 
         <!-- ==== Start Next Opportunity ==== -->
