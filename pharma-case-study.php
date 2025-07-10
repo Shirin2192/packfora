@@ -232,107 +232,105 @@
         <!-- End Objective -->
 
         <!-- ==== Start The Solution ==== -->
-        <section class="the-solution">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="wow fadeIn">The Solution</h2>
-                        <p class="wow fadeIn" data-wow-delay="0.2s">We created a behavior-first packaging format that
-                            enables action, not just access. Rooted in real consumer behavior, the format made healthy
-                            choices easy, visible, and repeatable.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 py-4">
-                        <div class="solutions wow zoomIn" data-wow-delay="0.4s">
-                            <div class="solution-icon">
-                                <img src="assets/img/case-study/inner/data-quality.svg" alt="" srcset="">
+         <?php
+        // Fetch header
+            $header_sql = "SELECT * FROM tbl_case_study_solution_header WHERE case_study_id = $id";
+            $header_result = $conn->query($header_sql);
+            $header = $header_result->fetch_assoc();
+
+            // Fetch cards (only if header found)
+            $cards = [];
+            if ($header) {
+                $header_id = $header['id'];
+                $card_sql = "SELECT * FROM tbl_case_study_solutions WHERE fk_header_id = $header_id";
+                $card_result = $conn->query($card_sql);
+                while ($row = $card_result->fetch_assoc()) {
+                    $cards[] = $row;
+                }
+            }
+            ?>
+            <?php if (!empty($header)) { ?>
+                <section class="the-solution">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="wow fadeIn"><?= htmlspecialchars($header['main_title']) ?></h2>
+                                <p class="wow fadeIn" data-wow-delay="0.2s"><?= nl2br(htmlspecialchars($header['main_description'])) ?></p>
                             </div>
-                            <h4>Data Quality & Validation <br> Process</h4>
-                            <ul class="p-0 text-white text-left solution-list">
-                                <li>Built a specialized 20+ member team of packaging and product SMEs — in under 2
-                                    months</li>
-                                <li>Established global contact nodes across 20+ manufacturing sites</li>
-                                <li>Executed a maker-checker model to improve and validate data prior to PLM migration
-                                </li>
-                            </ul>
+                        </div>
+
+                        <div class="row">
+                            <?php foreach ($cards as $card): ?>
+                                <div class="col-md-4 py-4">
+                                    <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
+                                        <div class="solution-icon">
+                                            <img src="<?= htmlspecialchars(BASE_URL. $card['image']) ?>" alt="<?= htmlspecialchars($card['title']) ?>">
+                                        </div>
+                                        <h4><?= nl2br(htmlspecialchars($card['title'])) ?></h4>
+                                        <?php if (!empty($card['description'])): ?>
+                                            <ul class="p-0 text-white text-left solution-list">
+                                                <?php
+                                                // Split by newline to create list items
+                                                $bullets = explode("\n", $card['description']);
+                                                foreach ($bullets as $bullet) {
+                                                    if (trim($bullet) !== '') {
+                                                        echo '<li>' . htmlspecialchars(trim($bullet)) . '</li>';
+                                                    }
+                                                }
+                                                ?>
+                                            </ul>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
-                    <div class="col-md-4 py-4">
-                        <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <div class="solution-icon">
-                                <img src="assets/img/case-study/inner/end-to-end.svg" alt="" srcset="">
-                            </div>
-                            <h4>End-to-End Specification <br> Management</h4>
-                            <ul class="p-0 text-white text-left solution-list">
-                                <li>Took full accountability of specification creation in both legacy and new PLM
-                                    systems</li>
-                                <li>Reduced turnaround time for new specs — especially for NPD programs</li>
-                                <li>Delivered structured reporting across regulatory, sustainability, and cost-saving
-                                    metrics</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <div class="solution-icon">
-                                <img src="assets/img/case-study/inner/global-data.svg" alt="" srcset="">
-                            </div>
-                            <h4>Global Data Governance for Change Management</h4>
-                            <ul class="p-0 text-white text-left solution-list">
-                                <li>Designed one global process with harmonized specification protocols</li>
-                                <li>Defined minimum data requirements for spec accuracy across all regions</li>
-                                <li>Ensured alignment with compliance and regulatory standards</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                </section>
+            <?php } ?>
+
         <!-- ==== End The Solution ==== -->
 
         <!-- Start Business Impact -->
-        <div class="business-impact">
-            <div class="container">
-                <div class="row">
-                    <h2 class="mb-3 wow fadeInUp">Business Impact</h2>
-                </div>
+        <?php 
+        // Case study ID (replace with dynamic ID based on context)
+                $sql = "SELECT * FROM tbl_case_study_business_impact WHERE case_study_id = $id ORDER BY id ASC";
+                $result = $conn->query($sql);
+                ?>
+            <div class="business-impact">
+                <div class="container">
+                    <div class="row">
+                        <h2 class="mb-3 wow fadeInUp">Business Impact</h2>
+                    </div>
 
-                <div class="row align-items-stretch">
-                    <div class="col-lg-4 d-flex">
-                        <div class="business-impact-info wow fadeInUp p-4 w-100" data-wow-delay="0.2s"
-                            style="background: #f8f9fa;">
-                            <img src="assets/img/shape/gradient-01.png" alt="">
-                            <h5>Faster, More Confident Decision-Making</h5>
-                            <p>With structured, validated data, teams could move faster without second-guessing specs
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 d-flex my-md-0 my-4">
-                        <div class="business-impact-info wow fadeInUp p-4 w-100" data-wow-delay="0.4s"
-                            style="background: #f8f9fa;">
-                            <img src="assets/img/shape/gradient-02.png" alt="">
-                            <h5>Simplified Global Collaboration</h5>
-                            <p>A unified process eliminated ambiguity and built consistency across sites and
-                                stakeholders</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 d-flex">
-                        <div class="business-impact-info wow fadeInUp p-4 w-100" data-wow-delay="0.8s"
-                            style="background: #f8f9fa;">
-                            <img src="assets/img/shape/gradient-03.png" alt="">
-                            <h5>A Stronger Foundation for the Future</h5>
-                            <p>The client is now better equipped to drive cost savings, meet sustainability targets, and
-                                handle regulatory shifts — with data that’s ready for it all</p>
-                        </div>
+                    <div class="row align-items-stretch">
+                        <?php
+                        if ($result && $result->num_rows > 0):
+                            $delay = 0.2;
+                            while ($row = $result->fetch_assoc()):
+                        ?>
+                            <div class="col-lg-4 d-flex <?= $delay > 0.2 ? 'my-md-0 my-4' : '' ?>">
+                                <div class="business-impact-info wow fadeInUp p-4 w-100" data-wow-delay="<?= $delay ?>s" style="background: #f8f9fa;">
+                                    <img src="<?= htmlspecialchars( BASE_URL. $row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                                    <h5><?= htmlspecialchars($row['title']) ?></h5>
+                                    <p><?= htmlspecialchars($row['description']) ?></p>
+                                </div>
+                            </div>
+                        <?php
+                            $delay += 0.2;
+                            endwhile;
+                        else:
+                        ?>
+                            <div class="col-12">
+                                <p>No business impact data available.</p>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
-
             </div>
-        </div>
         <!-- End Business Impact -->
 
         <!-- ==== Start Why It Matters ==== -->
+
         <section class="why-it-matters"
             style="background-image: url(assets/img/our-team/next-opportunity.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
             <div class="container">

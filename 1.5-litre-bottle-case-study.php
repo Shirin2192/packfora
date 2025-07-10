@@ -228,45 +228,58 @@
         <!-- End Objective -->
 
         <!-- ==== Start The Solution ==== -->
+        <?php
+        // Fetch header
+            $header_sql = "SELECT * FROM tbl_case_study_solution_header WHERE case_study_id = $id";
+            $header_result = $conn->query($header_sql);
+            $header = $header_result->fetch_assoc();
+
+            // Fetch cards (only if header found)
+            $cards = [];
+            if ($header) {
+                $header_id = $header['id'];
+                $card_sql = "SELECT * FROM tbl_case_study_solutions WHERE fk_header_id = $header_id";
+                $card_result = $conn->query($card_sql);
+                while ($row = $card_result->fetch_assoc()) {
+                    $cards[] = $row;
+                }
+            }
+            ?>
+        <?php if (!empty($header)) { ?>
         <section class="the-solution">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="wow fadeIn">The Solution</h2>
-                        <p class="wow fadeIn" data-wow-delay="0.2s">Packfora explored 15+ combinations of formats across three levels of intervention:</p>
+                        <h2 class="wow fadeIn"><?= htmlspecialchars($header['main_title']) ?></h2>
+                        <p class="wow fadeIn" data-wow-delay="0.2s"><?= nl2br(htmlspecialchars($header['main_description'])) ?></p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 py-4">
-                        <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <div class="solution-icon">
-                                <img src="assets/img/case-study/inner/primary.svg" alt="" srcset="">
+                    <?php foreach ($cards as $card) { ?>
+                        <div class="col-md-4 py-4">
+                            <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
+                                <div class="solution-icon">
+                                    <img src="<?= htmlspecialchars( BASE_URL. $card['image']) ?>" alt="<?= htmlspecialchars($card['title']) ?>">
+                                </div>
+                                <h4><?= htmlspecialchars($card['title']) ?></h4>
+                                <?php if (!empty($card['description'])): ?>
+                                    <p><?= nl2br(htmlspecialchars($card['description'])) ?></p>
+                                <?php endif; ?>
                             </div>
-                            <h4>Primary Packaging</h4>
                         </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <div class="solution-icon">
-                                <img src="assets/img/case-study/inner/secondary.svg" alt="" srcset="">
-                            </div>
-                            <h4>Secondary Packaging</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <div class="solution-icon">
-                                <img src="assets/img/case-study/inner/integrated-primary.svg" alt="" srcset="">
-                            </div>
-                            <h4>Integrated Primary + Secondary Systems</h4>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
         </section>
+        <?php } ?>
+
         <!-- ==== End The Solution ==== -->
 
         <!-- Start Business Impact -->
+         <?php 
+            $sql = "SELECT * FROM tbl_case_study_business_impact WHERE case_study_id = $id ORDER BY id ASC";
+            $result = $conn->query($sql);
+        ?>
         <div class="business-impact">
             <div class="container">
                 <div class="row">
@@ -274,27 +287,27 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="business-impact-info wow fadeInUp" data-wow-delay="0.2s">
-                            <img src="assets/img/shape/gradient-01.png" alt="">
-                            <h5>Customer Satisfaction</h5>
-                            <p>Our approach validated the client's internal R&D work — boosting confidence that they were on the right path for scale-up</p>
+                    <?php
+                    if ($result && $result->num_rows > 0):
+                        $delay = 0.2;
+                        while ($row = $result->fetch_assoc()):
+                    ?>
+                        <div class="col-lg-4 <?= $delay == 0.4 ? 'my-md-0 my-4' : '' ?>">
+                            <div class="business-impact-info wow fadeInUp" data-wow-delay="<?= $delay ?>s">
+                                <img src="<?= htmlspecialchars(BASE_URL.$row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                                <h5><?= htmlspecialchars($row['title']) ?></h5>
+                                <p><?= htmlspecialchars($row['description']) ?></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 my-md-0 my-4">
-                        <div class="business-impact-info wow fadeInUp" data-wow-delay="0.4s">
-                            <img src="assets/img/shape/gradient-02.png" alt="">
-                            <h5>Due Diligence</h5>
-                            <p>We evaluated over 15 viable formats and recommended the best-fit solution based on performance, feasibility, and sustainability</p>
+                    <?php
+                        $delay += 0.2;
+                        endwhile;
+                    else:
+                    ?>
+                        <div class="col-12">
+                            <p>No business impact found for this case study.</p>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="business-impact-info wow fadeInUp" data-wow-delay="0.8s">
-                            <img src="assets/img/shape/gradient-03.png" alt="">
-                            <h5>Speed to Market</h5>
-                            <p>Delivered insights within tight timelines — keeping the program on track without operational delays</p>
-                        </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

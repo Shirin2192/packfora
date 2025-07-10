@@ -228,79 +228,91 @@
         <!-- End Objective -->
 
         <!-- ==== Start The Solution ==== -->
-        <section class="the-solution">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="wow fadeIn">The Solution</h2>
-                        <p class="wow fadeIn" data-wow-delay="0.2s">We created a behavior-first packaging format that enables action, not just access. Rooted in real consumer behavior, the format made healthy choices easy, visible, and repeatable.</p>
+         <?php
+        // Fetch header
+            $header_sql = "SELECT * FROM tbl_case_study_solution_header WHERE case_study_id = $id";
+            $header_result = $conn->query($header_sql);
+            $header = $header_result->fetch_assoc();
+
+            // Fetch cards (only if header found)
+            $cards = [];
+            if ($header) {
+                $header_id = $header['id'];
+                $card_sql = "SELECT * FROM tbl_case_study_solutions WHERE fk_header_id = $header_id";
+                $card_result = $conn->query($card_sql);
+                while ($row = $card_result->fetch_assoc()) {
+                    $cards[] = $row;
+                }
+            }
+            ?>
+        <?php if (!empty($header)) { ?>
+            <section class="the-solution">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="wow fadeIn"><?= htmlspecialchars($header['main_title']) ?></h2>
+                            <p class="wow fadeIn" data-wow-delay="0.2s">
+                                <?= nl2br(htmlspecialchars($header['main_description'])) ?>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <?php foreach ($cards as $card): ?>
+                            <div class="col-md-4 py-4">
+                                <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
+                                    <div class="solution-icon">
+                                        <img src="<?= htmlspecialchars(BASE_URL. $card['image']) ?>" alt="<?= htmlspecialchars($card['title']) ?>">
+                                    </div>
+                                    <h4><?= htmlspecialchars($card['title']) ?></h4>
+                                    <?php if (!empty($card['description'])): ?>
+                                        <p><?= htmlspecialchars($card['description']) ?></p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 py-4">
-                        <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <div class="solution-icon">
-                                <img src="assets/img/our-team/clientele.png" alt="" srcset="">
-                            </div>
-                            <h4>Built for daily life</h4>
-                            <P>Fridge-fit, shelf-ready, and intuitive to use</P>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <div class="solution-icon">
-                                <img src="assets/img/our-team/projects.png" alt="" srcset="">
-                            </div>
-                            <h4>Sustainably made</h4>
-                            <P>100% recyclable materials and vegetable-based ink</P>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                            <div class="solution-icon">
-                                <img src="assets/img/our-team/culture.png" alt="" srcset="">
-                            </div>
-                            <h4>Inclusive by design</h4>
-                            <P>Tactile cues for the visually impaired</P>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
+        <?php } ?>
+
         <!-- ==== End The Solution ==== -->
 
         <!-- Start Business Impact -->
-        <div class="business-impact">
-            <div class="container">
-                <div class="row">
-                    <h2 class="mb-3 wow fadeInUp">Business Impact</h2>
+        <?php 
+        // Case study ID (replace with dynamic ID based on context)
+                $sql = "SELECT * FROM tbl_case_study_business_impact WHERE case_study_id = $id ORDER BY id ASC";
+                $result = $conn->query($sql);
+                ?>
+                <div class="business-impact">
+                    <div class="container">
+                        <div class="row">
+                            <h2 class="mb-3 wow fadeInUp">Business Impact</h2>
+                        </div>
+
+                        <div class="row">
+                            <?php if ($result && $result->num_rows > 0): ?>
+                                <?php
+                                $delay = 0.2;
+                                while ($row = $result->fetch_assoc()):
+                                ?>
+                                    <div class="col-lg-4 mb-4">
+                                        <div class="business-impact-info wow fadeInUp" data-wow-delay="<?= $delay ?>">
+                                            <img src="<?= BASE_URL. $row['image'] ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                                            <h5><?= htmlspecialchars($row['title']) ?></h5>
+                                            <p><?= htmlspecialchars($row['description']) ?></p>
+                                        </div>
+                                    </div>
+                                    <?php $delay += 0.2; ?>
+                                <?php endwhile; ?>
+                            <?php else: ?>
+                                <div class="col-12">
+                                    <p>No business impact data available.</p>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="business-impact-info wow fadeInUp" data-wow-delay="0.2s">
-                            <img src="assets/img/shape/gradient-01.png" alt="">
-                            <h5>Time to Market</h5>
-                            <p>From brief to shelf within 4 months</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 my-md-0 my-4">
-                        <div class="business-impact-info wow fadeInUp" data-wow-delay="0.4s">
-                            <img src="assets/img/shape/gradient-02.png" alt="">
-                            <h5>Consumer Validation</h5>
-                            <p>75% said the pack helped them remember to eat fruit daily</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="business-impact-info wow fadeInUp" data-wow-delay="0.8s">
-                            <img src="assets/img/shape/gradient-03.png" alt="">
-                            <h5>Scalability</h5>
-                            <p>Commercial rollout in Singapore, with more markets planned</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- End Business Impact -->
 
         <!-- ==== Start Why It Matters ==== -->
