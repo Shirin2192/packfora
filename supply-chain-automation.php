@@ -290,11 +290,18 @@
 
         <!-- ==== Start Success Stories ==== -->
        <?php
-        $fk_service_id = 3; // Change this depending on the current service/page
-        $sql = "SELECT title, description, image FROM tbl_success_stories 
-                WHERE fk_service_id = $fk_service_id AND is_delete = 1 
-                ORDER BY id ASC LIMIT 2"; // Adjust LIMIT as needed
-        $result = $conn->query($sql);
+        $tag_id = 6; // Replace this with the tag_id you want to filter by
+        $success_stories = [];
+
+        // Prepare and execute the SQL query
+        $sql = "SELECT title, description, image, slug_url FROM tbl_case_study 
+                WHERE FIND_IN_SET(?, tag_id) AND is_active = 1 AND is_delete = 1 
+                ORDER BY id ASC LIMIT 2";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $tag_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
         ?>
 
         <?php if ($result && $result->num_rows > 0): ?>
@@ -315,14 +322,14 @@
                         <div class="col-md-6">
                             <div class="success-card wow zoomIn" data-wow-delay="0.6s">
                                 <div class="card-img">
-                                    <img src="<?= BASE_URL. htmlspecialchars($row['image']); ?>" alt="<?= htmlspecialchars($row['title']); ?>">
+                                    <img src="<?= BASE_URL . htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
                                 </div>
                                 <div class="card-content">
-                                    <h3><?= htmlspecialchars($row['title']); ?></h3>
+                                    <h3><?= htmlspecialchars($row['title']) ?></h3>
                                     <p class="he-60">
                                         <?= !empty($row['description']) ? htmlspecialchars($row['description']) : 'Read more to explore how Packfora made an impact in this case study.'; ?>
                                     </p>
-                                    <a href="javascript:void(0);">
+                                    <a href="<?= htmlspecialchars($story['slug_url'] . '?id=' . urlencode(base64_encode($story['id']))) ?>">
                                         <h5>Learn More</h5>
                                     </a>
                                 </div>
@@ -333,6 +340,7 @@
             </div>
         </section>
         <?php endif; ?>
+
 
         <!-- ==== End Success Stories ==== -->
 

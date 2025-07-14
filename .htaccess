@@ -1,0 +1,19 @@
+#RewriteEngine On
+#RewriteBase /
+
+# Skip if file or folder exists
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite clean slugs like /global-foods-major to case-study-inner.php?slug=global-foods-major
+#RewriteRule ^([a-zA-Z0-9\-]+)$ case-study-inner.php?slug=$1 [QSA,L]
+
+RewriteEngine On
+RewriteBase /packfora/
+
+# Skip existing files and directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Route /your-slug to case-study-inner.php?slug=your-slug
+RewriteRule ^([a-zA-Z0-9\-]+)$ case-study-inner.php?slug=$1 [QSA,L]

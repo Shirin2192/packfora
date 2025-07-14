@@ -342,53 +342,63 @@
         <!-- ==== End Our Approach ==== -->
 
         <!-- ==== Start Success Stories ==== -->
-        <?php
-            $fk_service_id = 8; // Replace with the correct service ID (optional filter)
+      <?php
+        $tag_id = 19;
 
-            $query = "SELECT title, description, image 
-                      FROM tbl_success_stories 
-                      WHERE fk_service_id = ? AND is_delete = '1' 
-                      ORDER BY id ASC LIMIT 2";
+        $sql = "SELECT title, description, image, slug_url 
+                FROM tbl_case_study 
+                WHERE FIND_IN_SET(?, tag_id) AND is_active = 1 AND is_delete = 1 
+                ORDER BY id ASC";
 
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("i", $fk_service_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            ?>
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $tag_id); // ✅ Only one param matches one ?
+        $stmt->execute();
+        $result = $stmt->get_result();
+        ?>
 
-            <section class="success-stories">
-                <div class="container">
-                    <div class="row">
-                        <div class="success-stories-header">
-                            <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
-                            <h1 class="wow fadeInUp" data-wow-delay="0.4s">Proven Success with Global Clients</h1>
-                            <p class="wow fadeInUp" data-wow-delay="0.6s">
-                                Packfora's solutions have consistently helped global brands achieve
-                                their environmental and business goals.
-                            </p>
-                        </div>
+
+        <section class="success-stories">
+            <div class="container">
+                <div class="row">
+                    <div class="success-stories-header">
+                        <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
+                        <h1 class="wow fadeInUp" data-wow-delay="0.4s">Proven Success with Global Clients</h1>
+                        <p class="wow fadeInUp" data-wow-delay="0.6s">
+                            Packfora's solutions have consistently helped global brands achieve
+                            their environmental and business goals.
+                        </p>
                     </div>
+                </div>
 
-                    <div class="row">
+                <div class="row">
+                    <?php if ($result->num_rows > 0): ?>
                         <?php while ($row = $result->fetch_assoc()): ?>
                             <div class="col-md-6">
                                 <div class="success-card wow zoomIn" data-wow-delay="0.6s">
                                     <div class="card-img">
-                                        <img src="<?= BASE_URL. htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                                        <img src="<?= BASE_URL . htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
                                     </div>
                                     <div class="card-content">
                                         <h3><?= htmlspecialchars($row['title']) ?></h3>
                                         <p class="he-96"><?= htmlspecialchars($row['description']) ?></p>
-                                        <a href="javascript:void(0);">
+                                        <a href="<?= htmlspecialchars($story['slug_url'] . '?id=' . urlencode(base64_encode($story['id']))) ?>">
                                             <h5>Learn More</h5>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         <?php endwhile; ?>
-                    </div>
+                    <?php else: ?>
+                        <div class="col-12 text-center">
+                            <p>No success stories available for this tag.</p>
+                        </div>
+                    <?php endif; ?>
                 </div>
-            </section>
+            </div>
+        </section>
+
+        <?php $stmt->close(); ?>
+
 
         <!-- ==== End Success Stories ==== -->
 

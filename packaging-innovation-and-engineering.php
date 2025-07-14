@@ -263,15 +263,20 @@
         <!-- ==== End Our Approach ==== -->
 
         <!-- ==== Start Success Stories ==== -->
-        <?php
+         <?php
             $success_stories = [];
            
-                $query = "SELECT * FROM tbl_success_stories WHERE fk_service_id = 7 AND is_delete = '1'";
-                $result = mysqli_query($conn, $query);
-                if ($result && mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $success_stories[] = $row;
-                    }
+                $tag_id = 8; // Replace with dynamic value if needed
+
+                $sql = "SELECT * FROM tbl_case_study WHERE FIND_IN_SET(?, tag_id) AND is_delete = 1 AND is_active = 1 ORDER BY id DESC";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("s", $tag_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                $success_stories = [];
+                while ($row = $result->fetch_assoc()) {
+                    $success_stories[] = $row;
                 }
            
         ?>
@@ -281,68 +286,35 @@
                     <div class="success-stories-header">
                         <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
                         <h1 class="wow fadeInUp" data-wow-delay="0.4s">Delivering Impact. Driving Results.</h1>
-                        <p class="wow fadeInUp" data-wow-delay="0.6s">Packfora's solutions have consistently helped global brands achieve
-                            their environmental and business goals.</p>
+                        <p class="wow fadeInUp" data-wow-delay="0.6s">
+                            Packfora's solutions have consistently helped global brands achieve their environmental and business goals.
+                        </p>
                     </div>
-                </div>
-
-                <div class="row">
-                    <?php foreach ($success_stories as $story): ?>
-                    <div class="col-md-4">
-                        <div class="success-card wow zoomIn" data-wow-delay="0.6s">
-                            <div class="card-img">
-                                <img src="<?= BASE_URL . htmlspecialchars($story['image']) ?>"
-                                    alt="<?= htmlspecialchars($story['title']) ?>">
-                            </div>
-                            <div class="card-content">
-                                <h3><?= htmlspecialchars($story['title']) ?></h3>
-                                <p class="he-60"><?= htmlspecialchars($story['description']) ?></p>
-                                <a href="javascript:void(0);">
-                                    <h5>Learn More</h5>
-                                </a>
-                            </div>
-                        </div>
-                    </div>    
-                     <?php endforeach; ?>               
                 </div>
             </div>
 
-            <!-- <div class="container-fluid">
-                <div class="owl-carousel owl-theme success-slider">
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/jameson.webp" alt="Jameson">
-                        </div>
-                        <div class="card-content">
-                            <h3>Global Health Company</h3>
-                            <p>Delivered a comprehensive sustainability agenda, developing an ambitious program targeting 2030 goals.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/unilever.webp" alt="unilever">
-                        </div>
-                        <div class="card-content">
-                            <h3>Leading CPG Manufacturer</h3>
-                            <p>Achieved $90M in savings through packaging innovations and strategic partnerships.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-
-                    <div class="success-card">
-                        <div class="card-img">
-                            <img src="assets/img/services/sustainability/stories/jameson.webp" alt="Jameson">
-                        </div>
-                        <div class="card-content">
-                            <h3>FMCG Giant</h3>
-                            <p>Centralized and digitized lab operations, reducing design and prototyping time by 60%.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
+            <div class="container-fluid wow fadeInUp" data-wow-delay="0.8s">
+                <div class="owl-carousel owl-theme success-slider dtv-success">
+                    <?php if (!empty($success_stories)): ?>
+                        <?php foreach ($success_stories as $story): ?>
+                            <div class="success-card">
+                                <div class="card-img">
+                                    <img src="<?= BASE_URL . htmlspecialchars($story['image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
+                                </div>
+                                <div class="card-content">
+                                    <h3><?= htmlspecialchars($story['title']) ?></h3>
+                                    <p><?= htmlspecialchars($story['description']) ?></p>
+                                    <a href="<?= htmlspecialchars($story['slug_url'] . '?id=' . urlencode(base64_encode($story['id']))) ?>">
+                                        <h5>Learn More</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p class="text-center">No success stories found for this tag.</p>
+                    <?php endif; ?>
                 </div>
-            </div> -->
+            </div>
         </section>
         <!-- ==== End Success Stories ==== -->
 

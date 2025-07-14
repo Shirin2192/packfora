@@ -341,13 +341,23 @@
         <!-- ==== End Our Approach ==== -->
 
         <!-- ==== Start Success Stories ==== -->
-          <?php
-        $service_id = 2; // Replace with the actual service context if dynamic
-        $sql = "SELECT * FROM tbl_success_stories WHERE fk_service_id = $service_id AND is_delete = 1 ORDER BY id ASC";
-        $result = $conn->query($sql);
-        $success_stories = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
-        ?>
+         <?php
+            $success_stories = [];
+           
+                $tag_id = 1; // Replace with dynamic value if needed
 
+                $sql = "SELECT * FROM tbl_case_study WHERE FIND_IN_SET(?, tag_id) AND is_delete = 1 AND is_active = 1 ORDER BY id DESC";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("s", $tag_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                $success_stories = [];
+                while ($row = $result->fetch_assoc()) {
+                    $success_stories[] = $row;
+                }
+           
+        ?>
         <section class="success-stories">
             <div class="container">
                 <div class="row">
@@ -362,20 +372,25 @@
             </div>
 
             <div class="container-fluid wow fadeInUp" data-wow-delay="0.8s">
-                <div class="owl-carousel owl-theme success-slider">
-                    <?php foreach ($success_stories as $story): ?>
-                        <div class="success-card">
-                            <div class="card-img">
-                                <img src="<?= BASE_URL . $story['image'] ?>" alt="<?= htmlspecialchars($story['title']) ?>">
+                <div class="owl-carousel owl-theme success-slider dtv-success">
+                    <?php if (!empty($success_stories)): ?>
+                        <?php foreach ($success_stories as $story): ?>
+                            <div class="success-card">
+                                <div class="card-img">
+                                    <img src="<?= BASE_URL . htmlspecialchars($story['image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
+                                </div>
+                                <div class="card-content">
+                                    <h3><?= htmlspecialchars($story['title']) ?></h3>
+                                    <p><?= htmlspecialchars($story['description']) ?></p>
+                                    <a href="<?= htmlspecialchars($story['slug_url'] . '?id=' . urlencode(base64_encode($story['id']))) ?>">
+                                        <h5>Learn More</h5>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="card-content he-70 sus-cs-cont">
-                                <h3><?= htmlspecialchars($story['title']) ?></h3>
-                                <a href="#">
-                                    <h5>Learn More</h5>
-                                </a>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p class="text-center">No success stories found for this tag.</p>
+                    <?php endif; ?>
                 </div>
             </div>
         </section>

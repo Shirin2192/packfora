@@ -274,60 +274,71 @@ if ($result && $result->num_rows > 0) {
         <!-- ==== End Our Approach ==== -->
 
         <!-- ==== Start Success Stories ==== -->
-        <?php $service_id = 1;
+        <?php
+            $tag_id = 23; // Replace this dynamically as needed
+            $limit = 6;
+            $success_stories = [];
 
-        // Fetch stories
-        $sql = "SELECT title, description, image FROM tbl_success_stories 
-                WHERE fk_service_id = ? AND is_delete = '1'
-                ORDER BY id ASC LIMIT 6";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $service_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        ?>
-        <section class="success-stories">
-            <div class="container">
-                <div class="row">
-                    <div class="success-stories-header">
-                        <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
-                        <h1 class="wow fadeInUp" data-wow-delay="0.4s">Delivering Impact. Driving Results.</h1>
-                        <p class="wow fadeInUp" data-wow-delay="0.6s">
-                            Packfora's solutions have consistently helped global brands achieve their environmental and business goals.
-                        </p>
-                    </div>
-                </div>
+            // Fetch case studies based on tag_id
+            $sql = "SELECT title, description, image, slug_url 
+                    FROM tbl_case_study 
+                    WHERE FIND_IN_SET(?, tag_id) 
+                    AND is_active = 1 AND is_delete = 1 
+                    ORDER BY id ASC 
+                    LIMIT ?";
 
-                <div class="row">
-                    <?php
-                    if ($result->num_rows > 0):
-                        while ($story = $result->fetch_assoc()):
-                    ?>
-                    <div class="col-md-6">
-                        <div class="success-card wow zoomIn" data-wow-delay="0.6s">
-                            <div class="card-img">
-                                <img src="<?= BASE_URL. htmlspecialchars($story['image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
-                            </div>
-                            <div class="card-content">
-                                <h3><?= htmlspecialchars($story['title']) ?></h3>
-                                <p><?= htmlspecialchars($story['description']) ?></p>
-                                <a href="javascript:void(0);">
-                                    <h5>Learn More</h5>
-                                </a>
-                            </div>
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("si", $tag_id, $limit);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            ?>
+
+            <?php if ($result && $result->num_rows > 0): ?>
+            <section class="success-stories">
+                <div class="container">
+                    <div class="row">
+                        <div class="success-stories-header">
+                            <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
+                            <h1 class="wow fadeInUp" data-wow-delay="0.4s">Delivering Impact. Driving Results.</h1>
+                            <p class="wow fadeInUp" data-wow-delay="0.6s">
+                                Packfora's solutions have consistently helped global brands achieve their environmental and business goals.
+                            </p>
                         </div>
                     </div>
-                    <?php
-                        endwhile;
-                    else:
-                        echo '<div class="col-12"><p class="text-center">No success stories available.</p></div>';
-                    endif;
-                    ?>
+
+                    <div class="row">
+                        <?php while ($story = $result->fetch_assoc()): ?>
+                        <div class="col-md-6">
+                            <div class="success-card wow zoomIn" data-wow-delay="0.6s">
+                                <div class="card-img">
+                                    <img src="<?= BASE_URL . htmlspecialchars($story['image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
+                                </div>
+                                <div class="card-content">
+                                    <h3><?= htmlspecialchars($story['title']) ?></h3>
+                                    <p><?= htmlspecialchars($story['description']) ?></p>
+                                    <a href="<?= htmlspecialchars($story['slug_url'] . '?id=' . urlencode(base64_encode($story['id']))) ?>">
+                                        <h5>Learn More</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endwhile; ?>
+                    </div>
                 </div>
-            </div>
-        </section>
-        <?php
-$stmt->close();
-                ?>
+            </section>
+            <?php else: ?>
+            <section class="success-stories">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <p>No success stories available for this tag.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <?php endif; ?>
+            <?php $stmt->close(); ?>
+
                 <!-- ==== End Success Stories ==== -->
 
         <!-- ==== Start Our Leaders ==== -->
