@@ -280,7 +280,7 @@ if ($result && $result->num_rows > 0) {
             $success_stories = [];
 
             // Fetch case studies based on tag_id
-            $sql = "SELECT title, description, image, slug_url 
+            $sql = "SELECT title, description, main_image, slug_url 
                     FROM tbl_case_study 
                     WHERE FIND_IN_SET(?, tag_id) 
                     AND is_active = 1 AND is_delete = 1 
@@ -311,7 +311,7 @@ if ($result && $result->num_rows > 0) {
                         <div class="col-md-6">
                             <div class="success-card wow zoomIn" data-wow-delay="0.6s">
                                 <div class="card-img">
-                                    <img src="<?= BASE_URL . htmlspecialchars($story['image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
+                                    <img src="<?= BASE_URL . htmlspecialchars($story['main_image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
                                 </div>
                                 <div class="card-content">
                                     <h3><?= htmlspecialchars($story['title']) ?></h3>

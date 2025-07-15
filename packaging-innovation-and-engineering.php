@@ -299,7 +299,7 @@
                         <?php foreach ($success_stories as $story): ?>
                             <div class="success-card">
                                 <div class="card-img">
-                                    <img src="<?= BASE_URL . htmlspecialchars($story['image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
+                                    <img src="<?= BASE_URL . htmlspecialchars($story['main_image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
                                 </div>
                                 <div class="card-content">
                                     <h3><?= htmlspecialchars($story['title']) ?></h3>

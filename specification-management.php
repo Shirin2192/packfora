@@ -288,52 +288,58 @@
         <!-- ==== End Our Approach ==== -->
 
         <!-- ==== Start Success Stories ==== -->
+        <?php
+        $tag_id = 3; // Replace this with the tag_id you want to filter by
+        $success_stories = [];
+
+        // Prepare and execute the SQL query
+        $sql = "SELECT title, description, main_image, slug_url FROM tbl_case_study 
+                WHERE FIND_IN_SET(?, tag_id) AND is_active = 1 AND is_delete = 1 
+                ORDER BY id ASC LIMIT 1";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $tag_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        ?>
+
+        <?php if ($result && $result->num_rows > 0): ?>
         <section class="success-stories">
             <div class="container">
                 <div class="row">
                     <div class="success-stories-header">
                         <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
                         <h1 class="wow fadeInUp" data-wow-delay="0.4s">Delivering Impact. Driving Results.</h1>
-                        <p class="wow fadeInUp" data-wow-delay="0.6s">Packfora's solutions have consistently helped
-                            global brands achieve
-                            their environmental and business goals.</p>
+                        <p class="wow fadeInUp" data-wow-delay="0.6s">
+                            Packfora's solutions have consistently helped global brands achieve their environmental and business goals.
+                        </p>
                     </div>
                 </div>
-                <div class="row">
-                    <?php
-                    $query = "SELECT title, image FROM tbl_success_stories 
-                              WHERE fk_service_id = 9 AND is_delete = '1' 
-                              ORDER BY id ASC";
-                    $result = $conn->query($query);
 
-                    if ($result && $result->num_rows > 0):
-                        while ($row = $result->fetch_assoc()):
-                            $title = htmlspecialchars($row['title']);
-                            $image = htmlspecialchars($row['image']);
-                    ?>
+                <div class="row">
+                    <?php while ($row = $result->fetch_assoc()): ?>
                         <div class="col-md-6">
                             <div class="success-card wow zoomIn" data-wow-delay="0.6s">
                                 <div class="card-img">
-                                    <img src="<?= BASE_URL. $image ?>" alt="">
+                                    <img src="<?=  htmlspecialchars(BASE_URL .$row['main_image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
                                 </div>
                                 <div class="card-content">
-                                    <h3><?= $title ?></h3>
-                                    <a href="javascript:void(0);"><h5>Learn More</h5></a>
+                                    <h3><?= htmlspecialchars($row['title']) ?></h3>
+                                    <p class="he-60">
+                                        <?= !empty($row['description']) ? htmlspecialchars(shorten_text($row['description'], 25)) : 'Read more to explore how Packfora made an impact in this case study.'; ?>
+                                    </p>
+                                    <a href="<?= htmlspecialchars($story['slug_url'] . '?id=' . urlencode(base64_encode($story['id']))) ?>">
+                                        <h5>Learn More</h5>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    <?php
-                        endwhile;
-                    else:
-                    ?>
-                        <div class="col-12">
-                            <p class="text-center">No success stories available.</p>
-                        </div>
-                    <?php endif; ?>
+                    <?php endwhile; ?>
                 </div>
-
-            </div>            
+            </div>
         </section>
+        <?php endif; ?>
+
         <!-- ==== End Success Stories ==== -->
 
         <!-- ==== Start Our Leaders ==== -->

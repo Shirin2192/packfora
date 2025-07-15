@@ -345,7 +345,7 @@
       <?php
         $tag_id = 19;
 
-        $sql = "SELECT title, description, image, slug_url 
+        $sql = "SELECT title, description, main_image, slug_url 
                 FROM tbl_case_study 
                 WHERE FIND_IN_SET(?, tag_id) AND is_active = 1 AND is_delete = 1 
                 ORDER BY id ASC";

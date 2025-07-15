@@ -111,21 +111,14 @@
          include 'config.php';  
          ?>
  <?php
-if (isset($_GET['slug'])) {
-    $slug = $_GET['slug'];
-    echo "Slug from URL: " . htmlspecialchars($slug);
-    // You can now use $slug to query the database or load the case study, etc.
-} else {
-    echo "No slug found.";
-}
 
- // if (isset($_GET['id'])) {
-        //     $encoded_id = $_GET['id'];
-        //     $id = base64_decode($encoded_id);
+ if (isset($_GET['id'])) {
+            $encoded_id = $_GET['id'];
+            $id = base64_decode($encoded_id);
 
-        //     // Optional: cast to int if it's supposed to be numeric
-        //     $id = intval($id);
-        // }
+            // Optional: cast to int if it's supposed to be numeric
+            $id = intval($id);
+        }
 ?>
 
        

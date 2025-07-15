@@ -357,16 +357,22 @@
          <!-- ==================== End Impact ==================== -->
          <!-- ==== Start Case Studies ==== -->
          <?php
+            $tagIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]; // <-- update this list based on what tags you want
             $caseStudies = [];
-            $sql = "SELECT * FROM tbl_case_study WHERE is_delete = 1 ORDER BY id ASC limit 3";
-            $result = $conn->query($sql);
-            if ($result && $result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $caseStudies[] = $row;
+
+            foreach ($tagIds as $tagId) {
+                $sql = "SELECT * FROM tbl_case_study 
+                        WHERE FIND_IN_SET('$tagId', tag_id) AND is_delete = 1 
+                        ORDER BY id ASC ";
+
+                $result = $conn->query($sql);
+                if ($result && $result->num_rows > 0) {
+                    $case = $result->fetch_assoc();
+                    $case['tag_id_resolved'] = $tagId; // optional if you want to know which tag this came from
+                    $caseStudies[] = $case;
                 }
             }
          ?>
-
             <section class="case-study whiteBg">
                 <div class="container">
                     <h2 class="sec-title mb-4 wow fadeIn">Case Studies</h2>
@@ -375,11 +381,11 @@
                     <div class="gallery">
                         <div class="owl-carousel case-study-carousel owl-theme wow zoomIn">
                             <?php foreach ($caseStudies as $case): 
-                                $imgPath = BASE_URL. 'uploads/' . $case['image']; // or use BASE_URL . 'uploads/' if BASE_URL is defined
+                                $imgPath = $case['image'];
                                 $title = htmlspecialchars($case['title']);
-                                $slug = htmlspecialchars($case['slug_url']);
+                                $slug = htmlspecialchars($case['slug_url'] . '?id=' . urlencode(base64_encode($case['id'])));
                             ?>
-                                <div class="item" style="background-image: url('<?= $imgPath ?>');">
+                                <div class="item" style="background-image: url('<?= BASE_URL. $imgPath ?>');">
                                     <div class="slide-content">
                                         <div class="content-box">
                                             <div>
@@ -396,6 +402,7 @@
                     </div>
                 </div>
             </section>
+
 
 
 

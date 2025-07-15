@@ -299,58 +299,64 @@
 
         <!-- ==== Start Success Stories ==== -->
         <?php
-            $success_stories = [];
-           
-                $tag_id = 2; // Replace with dynamic value if needed
+        $success_stories = [];
 
-                $sql = "SELECT * FROM tbl_case_study WHERE FIND_IN_SET(?, tag_id) AND is_delete = 1 AND is_active = 1 ORDER BY id DESC";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("s", $tag_id);
-                $stmt->execute();
-                $result = $stmt->get_result();
+        $tag_id = 2;
 
-                $success_stories = [];
-                while ($row = $result->fetch_assoc()) {
-                    $success_stories[] = $row;
-                }
-           
+        $sql = "SELECT * FROM tbl_case_study WHERE FIND_IN_SET(?, tag_id) AND is_delete = 1 AND is_active = 1 ORDER BY id DESC";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $tag_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $success_stories = [];
+        while ($row = $result->fetch_assoc()) {
+            $success_stories[] = $row;
+        }
+
+        $total_stories = count($success_stories);
         ?>
-        <section class="success-stories">
-            <div class="container">
-                <div class="row">
-                    <div class="success-stories-header">
-                        <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
-                        <h1 class="wow fadeInUp" data-wow-delay="0.4s">Delivering Impact. Driving Results.</h1>
-                        <p class="wow fadeInUp" data-wow-delay="0.6s">
-                            Packfora's solutions have consistently helped global brands achieve their environmental and business goals.
-                        </p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="container-fluid wow fadeInUp" data-wow-delay="0.8s">
+        <div class="container-fluid wow fadeInUp" data-wow-delay="0.8s">
+            <?php if ($total_stories > 3): ?>
                 <div class="owl-carousel owl-theme success-slider dtv-success">
-                    <?php if (!empty($success_stories)): ?>
-                        <?php foreach ($success_stories as $story): ?>
+                    <?php foreach ($success_stories as $story): ?>
+                        <div class="success-card">
+                            <div class="card-img">
+                                <img src="<?= BASE_URL . htmlspecialchars($story['image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
+                            </div>
+                            <div class="card-content">
+                                <h3><?= htmlspecialchars($story['title']) ?></h3>
+                                <p><?= htmlspecialchars(shorten_text($story['description'], 25)) ?></p>
+                                <a href="<?= BASE_URL . htmlspecialchars($story['slug_url']) ?>">
+                                    <h5>Learn More</h5>
+                                </a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <div class="row">
+                    <?php foreach ($success_stories as $story): ?>
+                        <div class="col-md-4">
                             <div class="success-card">
                                 <div class="card-img">
                                     <img src="<?= BASE_URL . htmlspecialchars($story['image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
                                 </div>
                                 <div class="card-content">
                                     <h3><?= htmlspecialchars($story['title']) ?></h3>
-                                    <p><?= htmlspecialchars($story['description']) ?></p>
-                                    <a href="<?= htmlspecialchars($story['slug_url'] . '?id=' . urlencode(base64_encode($story['id']))) ?>">
+                                    <p><?= htmlspecialchars(shorten_text($story['description'], 25)) ?></p>
+                                    <a href="<?= BASE_URL . htmlspecialchars($story['slug_url']) ?>">
                                         <h5>Learn More</h5>
                                     </a>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <p class="text-center">No success stories found for this tag.</p>
-                    <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-            </div>
-        </section>
+            <?php endif; ?>
+        </div>
+
 
         <!-- ==== End Success Stories ==== -->
 

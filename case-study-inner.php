@@ -111,6 +111,8 @@
          include 'config.php';  
          ?>
     <?php
+       $slug = $_GET['slug'];
+       print_r($slug);die;
         if (isset($_GET['id'])) {
             $encoded_id = $_GET['id'];
             $id = base64_decode($encoded_id);
