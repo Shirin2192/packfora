@@ -6,15 +6,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="HTML5">
-    <meta name="description" content="Multi-Purpose">
-    <meta name="author" content="">
+    <meta name="keywords"
+        content="contact packfora, packaging company contact, get in touch packfora, packaging inquiries">
+    <meta name="description"
+        content="Explore Packfora's trusted client partnerships with global brands. See how we deliver innovative packaging that builds lasting impact and industry trust.">
+    <meta name="author" content="Packfora">
+    <link rel="canonical" href="https://packfora.com/contact-us.php">
 
     <!-- Title  -->
-    <title>End-to-End Packaging and Brand Consulting Solutions - Packfora</title>
+    <title>Trusted by Global Brands - Our Clients | Packfora</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" href="assets/img/favicon.svg">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
@@ -107,231 +110,78 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-    <?php include 'db_connect.php';
+ <?php include 'db_connect.php';
          include 'config.php';  
          ?>
-    <?php
-        if (isset($_GET['id'])) {
-            $encoded_id = $_GET['id'];
-            $id = base64_decode($encoded_id);
-
-            // Optional: cast to int if it's supposed to be numeric
-            $id = intval($id);
-        }
-        ?>
-
     <main>
         <!-- ==== Start Home Banner ==== -->
-       <?php  // Query the case study by ID
-            $sql = "SELECT * FROM tbl_case_study WHERE id = $id AND is_delete = 1";
-            $result = $conn->query($sql);
-
-            if ($result && $result->num_rows > 0) {
-                $case = $result->fetch_assoc();
-            }
-        ?>
-       <?php if ($case): ?>
-        <section class="case-study-inner-ptb"
-            style="background-image: url(<?= BASE_URL. $case['image'] ?>); background-size: cover; background-position: top center; background-repeat: no-repeat;">
+        <section class="clients-page-title-banner"
+            style="background-image: url(assets/img/contact/contact-us-banner.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
             <div class="container">
                 <div class="row">
                     <div class="page-title-bar text-center">
-                        <h1 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($case['title']) ?></h1>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s"><?= nl2br(htmlspecialchars($case['description'])) ?></p>
+                        <!-- <h2>Your Next Step Starts Here</h2> -->
+                        <h1 class="wow fadeInUp" data-wow-delay="0.2s">Trusted by Industry Leaders</h1>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s">Building strong partnerships with global brands
+                        </p>
+                        <div class="clients-banner-btn mt-40 wow fadeInUp" data-wow-delay="0.2s">
+                            <a href="case-studies.php" class="read_more">Discover the Impact</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <?php else: ?>
-            <div class="container py-5 text-center">
-                <h2>Case Study Not Found</h2>
-            </div>
-        <?php endif; ?>
         <!-- ==== End Home Banner ==== -->
 
-        <!-- ==== Start Short Description ==== -->
-        <?php if (!empty($case['description'])): ?>
-            <div class="short-description py-5">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-md-1">
-                            <img src="assets/img/shape/big-arrow.png" alt="">
-                        </div>
-                        <div class="col-md-11">
-                            <?php
-                            // Convert new lines to separate <h5> tags
-                            $paragraphs = explode("\n", trim($case['description']));
-                            foreach ($paragraphs as $p):
-                                if (!empty(trim($p))):
-                            ?>
-                                <h5><?= htmlspecialchars(trim($p)) ?></h5>
-                            <?php
-                                endif;
-                            endforeach;
-                            ?>
-                        </div>
-                    </div>
+        <!-- ==== Start Clients Logos ==== -->
+        <section class="clients-logos py-5">
+            <div class="container">
+                <div class="row">
+                    <h2 class="contact-us-title mb-30 wow fadeIn" style="visibility: visible; animation-name: fadeIn;">Our Valued Clients</h2>
                 </div>
-            </div>
-            <?php endif; ?>
-        <!-- ==== End Short Description ==== -->
-
-        <!-- ==== Start Case Study Video ==== -->
-       <?php
-         if (!empty($case['video'])): ?>
-            <div class="case-study-video py-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="video-container position-relative">
-                                <video id="bgVideo" class="w-100" src="<?= htmlspecialchars(BASE_URL . $case['video']) ?>" autoplay loop muted></video>
-                                <div class="controls">
-                                    <button id="playPauseBtn"><i class="fas fa-pause"></i></button>
-                                    <button id="muteUnmuteBtn"><i class="fas fa-volume-mute"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php endif; ?>
-        <!-- ==== End Case Study Video ==== -->
-
-        <!-- Start Objective -->
-        <?php 
-        $objective = null;
-
-            // Fetch the latest matching objective
-            $sql = "SELECT * FROM tbl_case_study_objectives WHERE fk_case_study_id = $id AND is_delete = 1 ORDER BY id DESC LIMIT 1";
-            $result = mysqli_query($conn, $sql);
-            if ($result && mysqli_num_rows($result) > 0) {
-                $objective = mysqli_fetch_assoc($result);
-            }
-            ?>
-        <?php if (!empty($objective)) { ?>
-            <div class="objective py-5">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-md-6 wow fadeIn" data-wow-delay="0.2s">
-                            <img src="<?= htmlspecialchars( BASE_URL. $objective['image']) ?>" alt="Objective Image" class="img-fluid">
-                        </div>
-                        <div class="col-md-6">
-                            <h2 class="objective-title mb-4 wow fadeIn" data-wow-delay="0.2s">Objective</h2>
-                            <p class="objective-desc wow fadeInUp" data-wow-delay="0.4s">
-                                <?= htmlspecialchars($objective['objective']) ?>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
-        <!-- End Objective -->
-
-        <!-- ==== Start The Solution ==== -->
-         <?php
-        // Fetch header
-            $header_sql = "SELECT * FROM tbl_case_study_solution_header WHERE case_study_id = $id";
-            $header_result = $conn->query($header_sql);
-            $header = $header_result->fetch_assoc();
-
-            // Fetch cards (only if header found)
-            $cards = [];
-            if ($header) {
-                $header_id = $header['id'];
-                $card_sql = "SELECT * FROM tbl_case_study_solutions WHERE fk_header_id = $header_id";
-                $card_result = $conn->query($card_sql);
-                while ($row = $card_result->fetch_assoc()) {
-                    $cards[] = $row;
-                }
-            }
-            ?>
-        <?php if (!empty($header)) { ?>
-            <section class="the-solution">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="wow fadeIn"><?= htmlspecialchars($header['main_title']) ?></h2>
-                            <p class="wow fadeIn" data-wow-delay="0.2s">
-                                <?= nl2br(htmlspecialchars($header['main_description'])) ?>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <?php foreach ($cards as $card): ?>
-                            <div class="col-md-4 py-4">
-                                <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
-                                    <div class="solution-icon">
-                                        <img src="<?= htmlspecialchars(BASE_URL. $card['image']) ?>" alt="<?= htmlspecialchars($card['title']) ?>">
-                                    </div>
-                                    <h4><?= htmlspecialchars($card['title']) ?></h4>
-                                    <?php if (!empty($card['description'])): ?>
-                                        <p><?= htmlspecialchars($card['description']) ?></p>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </section>
-        <?php } ?>
-
-        <!-- ==== End The Solution ==== -->
-
-        <!-- Start Business Impact -->
-        <?php 
-        // Case study ID (replace with dynamic ID based on context)
-                $sql = "SELECT * FROM tbl_case_study_business_impact WHERE case_study_id = $id ORDER BY id ASC";
-                $result = $conn->query($sql);
-                ?>
-                <div class="business-impact">
-                    <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="row">
-                            <h2 class="mb-3 wow fadeInUp">Business Impact</h2>
-                        </div>
+                        <?php
+                        $query = "SELECT image FROM our_clients WHERE is_delete = '1' AND show_on_clients_page= '1' ORDER BY id ASC";
+                        $result = $conn->query($query);
+                        if ($result && $result->num_rows > 0):
+                            while ($row = $result->fetch_assoc()):
+                        ?>
+                            <div class="col-lg-2 col-4 my-3 wow zoomIn" data-wow-delay="0.4s">
+                                <img src="<?php echo htmlspecialchars(BASE_URL .$row['image']); ?>" alt="">
+                            </div>
+                        <?php
+                            endwhile;
+                        endif;
+                        ?>
+</div>
 
-                        <div class="row">
-                            <?php if ($result && $result->num_rows > 0): ?>
-                                <?php
-                                $delay = 0.2;
-                                while ($row = $result->fetch_assoc()):
-                                ?>
-                                    <div class="col-lg-4 mb-4">
-                                        <div class="business-impact-info wow fadeInUp" data-wow-delay="<?= $delay ?>">
-                                            <img src="<?= BASE_URL. $row['image'] ?>" alt="<?= htmlspecialchars($row['title']) ?>">
-                                            <h5><?= htmlspecialchars($row['title']) ?></h5>
-                                            <p><?= htmlspecialchars($row['description']) ?></p>
-                                        </div>
-                                    </div>
-                                    <?php $delay += 0.2; ?>
-                                <?php endwhile; ?>
-                            <?php else: ?>
-                                <div class="col-12">
-                                    <p>No business impact data available.</p>
-                                </div>
-                            <?php endif; ?>
-                        </div>
                     </div>
                 </div>
+            </div>
+        </section>
+        <!-- ==== End Clients Logos ==== -->
 
-        <!-- End Business Impact -->
-
-        <!-- ==== Start Why It Matters ==== -->
-        <section class="why-it-matters" style="background-image: url(assets/img/our-team/next-opportunity.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
+        <!-- ==== Start Contact Us ==== -->
+        <section class="grow-your-career"
+            style="background-image: url(assets/img/our-team/next-opportunity.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-md-9">
-                        <h6 class="wow fadeInUp" data-wow-delay="0.2s">Why It Matters</h6>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">As consumer wellness becomes more behavior-driven, packaging must evolve from passive protection to active participation. This project proved that structured, inclusive design can unlock new value — for consumers and for business.</p>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="sp-info float-end wow fadeInUp" data-wow-delay="0.4s">
-                            <a href="contact-us.php" class="read_more">Contact us</a>
+                    <div class="col-md-12">
+                        <div class="sp-info text-center">
+                            <h6 class="wow fadeInUp" data-wow-delay="0.2s">Contact Us</h6>
+                            <p class="wow fadeInUp" data-wow-delay="0.4s">Let's collaborate on your next packaging
+                                innovation</p>
+                        </div>
+                        <div class="our-team-banner-btn text-center mt-40 wow fadeInUp" data-wow-delay="0.6s">
+                            <a href="contact-us.php" class="read_more">Contact Us</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- ==== End Why It Matters ==== -->
+        <!-- ==== End Contact Us ==== -->
 
         <?php include('footer.php'); ?>
     </main>
@@ -348,29 +198,19 @@
     <!-- custom scripts -->
     <script src="assets/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="assets/view_js/contact_us.js"></script>
 
     <script>
-        const video = document.getElementById('bgVideo');
-        const playPauseBtn = document.getElementById('playPauseBtn');
-        const muteUnmuteBtn = document.getElementById('muteUnmuteBtn');
-
-        playPauseBtn.addEventListener('click', () => {
-            const icon = playPauseBtn.querySelector('i');
-            if (video.paused) {
-                video.play();
-                icon.className = 'fas fa-pause';
+        $('#form_hear_about_us').on('change', function () {
+            if ($(this).val() === 'Other') {
+                $(this).hide();
+                $('#other_hear_about_us').show().attr('required', true);
             } else {
-                video.pause();
-                icon.className = 'fas fa-play';
+                $('#other_hear_about_us').hide().removeAttr('required');
             }
         });
-
-        muteUnmuteBtn.addEventListener('click', () => {
-            const icon = muteUnmuteBtn.querySelector('i');
-            video.muted = !video.muted;
-            icon.className = video.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
-        });
     </script>
+
 </body>
 
 </html>

@@ -3,7 +3,7 @@
     <div class="container">
         <!-- Logo -->
         <a class="logo" href="index.php">
-            <img src="assets/imgs/packfora-white-logo.png" alt="logo">
+            <img src="assets/img/packfora-white-logo.png" alt="logo">
         </a>
 
         <!-- Mobile Toggle Button -->
@@ -25,6 +25,7 @@
                         <li><a class="dropdown-item" href="why-packfora.php">Why Packfora</a></li>
                         <li><a class="dropdown-item" href="our-capabilities.php">Our Capabilities</a></li>
                         <li><a class="dropdown-item" href="leadership.php">Our Leadership</a></li>
+                        <li><a class="dropdown-item" href="our-clients.php">Our Clients</a></li>
                     </ul>
                 </li>
                 <!-- <li class="nav-item dropdown">
@@ -73,7 +74,7 @@
                         How We Do It
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Our Approach</a></li>
+                        <!-- <li><a class="dropdown-item" href="#">Our Approach</a></li> -->
                         <li><a class="dropdown-item" href="case-studies.php">Case Studies</a></li>
                         <li><a class="dropdown-item" href="knowledge-centre.php">Knowledge Centre</a></li>
                         <li class="dropdown-submenu">
@@ -149,6 +150,9 @@
                             <li>
                                 <a href="leadership.php" class="sub-link">Our Leadership</a>
                             </li>
+                            <li>
+                                <a href="our-clients.php" class="sub-link">Our Clients</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -202,9 +206,9 @@
                     </div>
                     <div class="sub-menu">
                         <ul>
-                            <li>
+                            <!-- <li>
                                 <a href="#" class="sub-link">Our Approach</a>
-                            </li>
+                            </li> -->
                             <li>
                                 <a href="case-studies.php" class="sub-link">Case Studies</a>
                             </li>
@@ -269,7 +273,7 @@
         <div class="cont-info valign">
             <div class="text-center full-width">
                 <div class="logo">
-                    <a href="index.php"><img src="assets/imgs/packfora-white-logo.png" alt=""></a>
+                    <a href="index.php"><img src="assets/img/packfora-white-logo.png" alt=""></a>
                 </div>
                 <div class="social-icon mt-40">
                     <a href="https://in.linkedin.com/company/packfora-llp" target="_blank">

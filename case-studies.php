@@ -11,7 +11,7 @@
     <meta name="author" content="Packfora">
     <link rel="canonical" href="https://packfora.com/case-studies.php">
 
-    <!-- Title  -->
+    <!-- Title-->  
     <title>Packaging Success Stories | Packfora Case Studies</title>
 
     <!-- Favicon -->
@@ -157,7 +157,7 @@
                 <p class="wow fadeInUp" data-wow-delay="0.6s">Real stories of how Packfora helped leading brands unlock efficiency, sustainability, and value across the packaging value.</p>
 
                 <!-- Dropdown Filters -->
-                <div class="dropdown-container">
+                <!-- <div class="dropdown-container">
                     <?php foreach (['featured' => 'Featured Topics', 'capability' => 'Capabilities', 'industry' => 'Industries'] as $key => $label): ?>
                         <div class="filter-dropdown dropdown" id="<?= $key ?>">
                             <div class="dropdown-toggle d-flex justify-content-between align-items-center drop" data-bs-toggle="dropdown">
@@ -171,7 +171,36 @@
                             </ul>
                         </div>
                     <?php endforeach; ?>
+                </div> -->
+
+                <div class="dropdown-container">
+                    <?php 
+                    foreach ([
+                        'featured'   => 'Featured Topics',
+                        'capability' => 'Capabilities',
+                        'industry'   => 'Industries'
+                    ] as $key => $label): 
+                    ?>
+                        <div class="filter-dropdown dropdown" id="<?= $key ?>" data-default-label="<?= $label ?>">
+                            <div class="dropdown-toggle d-flex justify-content-between align-items-center drop" data-bs-toggle="dropdown">
+                                <span class="label"><?= $label ?></span>
+                                <span class="close-btn d-none">&times;</span>
+                            </div>
+                            <ul class="dropdown-menu dropdown-menus">
+                                <?php foreach ($tags[$key] as $tag): ?>
+                                    <li>
+                                        <a class="dropdown-item dropdown-items" 
+                                           href="#" 
+                                           data-value="<?= htmlspecialchars($tag['name']) ?>">
+                                           <?= htmlspecialchars($tag['name']) ?>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
+
 
                 <!-- Case Studies -->
                 <div class="content-sections">
@@ -195,7 +224,7 @@
                                         <img src="<?= BASE_URL . $img_src ?>" alt="Case Study Image">
                                         <p class="badge"><?= htmlspecialchars($case['badge']) ?></p>
                                         <div class="case-study-body">
-                                            <a target="_blank" href="<?= htmlspecialchars($case['slug_url'] . '?id=' . urlencode(base64_encode($case['id']))) ?>">
+                                            <a href="<?= htmlspecialchars($case['slug_url'] . '?id=' . urlencode(base64_encode($case['id']))) ?>">
                                                <?php if(!empty($case['publish_date'])){?> <p class="meta"><?= $formatted_date ?></p> <?php } ?>
                                                 <h5 class="title"><?= htmlspecialchars($case['title']) ?></h5>
                                                 <h6>Read Full Case Study</h6>
@@ -250,65 +279,271 @@
     <!-- custom scripts -->
     <script src="assets/js/scripts.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownItems = document.querySelectorAll('.dropdown-items');
-            const dropdowns = document.querySelectorAll('.filter-dropdown');
-            const contentSections = document.querySelectorAll('.content-section');
+       // document.addEventListener('DOMContentLoaded', function() {
+       //     const dropdownItems = document.querySelectorAll('.dropdown-items');
+       //     const dropdowns = document.querySelectorAll('.filter-dropdown');
+       //     const contentSections = document.querySelectorAll('.content-section');
 
-            dropdownItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const selectedValue = this.getAttribute('data-value');
-                    const parentDropdown = this.closest('.dropdown');
-                    const categoryId = parentDropdown.id;
+       //     dropdownItems.forEach(item => {
+       //         item.addEventListener('click', function(e) {
+       //             e.preventDefault();
+       //             const selectedValue = this.getAttribute('data-value');
+       //             const parentDropdown = this.closest('.dropdown');
+       //             const categoryId = parentDropdown.id;
 
-                    // Reset all dropdowns
-                    dropdowns.forEach(dropdown => {
-                        dropdown.classList.remove('active');
-                        const label = dropdown.querySelector('.label');
-                        label.textContent = dropdown.id === 'featured-topics' ?
-                            'Featured Topics' :
-                            dropdown.id === 'capabilities' ? 'Capabilities' :
-                            'Industries';
-                        dropdown.querySelector('.close-btn').classList.add('d-none');
-                    });
+       //              // Reset all dropdowns
+       //             dropdowns.forEach(dropdown => {
+       //                 dropdown.classList.remove('active');
+       //                 const label = dropdown.querySelector('.label');
+       //                 label.textContent = dropdown.id === 'featured-topics' ?
+       //                     'Featured Topics' :
+       //                     dropdown.id === 'capabilities' ? 'Capabilities' :
+       //                     'Industries';
+       //                 dropdown.querySelector('.close-btn').classList.add('d-none');
+       //             });
 
-                    // Update clicked dropdown
-                    parentDropdown.classList.add('active');
-                    parentDropdown.querySelector('.label').textContent = selectedValue;
-                    const closeBtn = parentDropdown.querySelector('.close-btn');
-                    closeBtn.classList.remove('d-none');
+       //              // Update clicked dropdown
+       //             parentDropdown.classList.add('active');
+       //             parentDropdown.querySelector('.label').textContent = selectedValue;
+       //             const closeBtn = parentDropdown.querySelector('.close-btn');
+       //             closeBtn.classList.remove('d-none');
 
-                    // Show content sections that match selectedValue in data-tags
-                    contentSections.forEach(section => {
-                        const tags = section.getAttribute('data-tags') || '';
-                        if (tags.includes(selectedValue)) {
-                            section.classList.remove('hidden');
-                        } else {
-                            section.classList.add('hidden');
-                        }
-                    });
+       //              // Show content sections that match selectedValue in data-tags
+       //             contentSections.forEach(section => {
+       //                 const tags = section.getAttribute('data-tags') || '';
+       //                 if (tags.includes(selectedValue)) {
+       //                     section.classList.remove('hidden');
+       //                 } else {
+       //                     section.classList.add('hidden');
+       //                 }
+       //             });
 
-                    // Close button logic
-                    closeBtn.onclick = function(event) {
-                        event.stopPropagation();
-                        parentDropdown.classList.remove('active');
-                        parentDropdown.querySelector('.label').textContent =
-                            categoryId === 'featured-topics' ? 'Featured Topics' :
-                            categoryId === 'capabilities' ? 'Capabilities' : 'Industries';
-                        closeBtn.classList.add('d-none');
-                        contentSections.forEach(section => section.classList.remove('hidden'));
+       //              // Close button logic
+       //             closeBtn.onclick = function(event) {
+       //                 event.stopPropagation();
+       //                 parentDropdown.classList.remove('active');
+       //                 parentDropdown.querySelector('.label').textContent =
+       //                     categoryId === 'featured-topics' ? 'Featured Topics' :
+       //                     categoryId === 'capabilities' ? 'Capabilities' : 'Industries';
+       //                 closeBtn.classList.add('d-none');
+       //                 contentSections.forEach(section => section.classList.remove('hidden'));
 
-                        // Close the dropdown menu when close button is clicked
-                        const dropdownMenu = parentDropdown.querySelector('.dropdown-menus');
-                        if (dropdownMenu) {
-                            dropdownMenu.classList.remove('show');
-                        }
-                    };
-                });
-            });
-        });
+       //                  // Close the dropdown menu when close button is clicked
+       //          const dropdownMenu = parentDropdown.querySelector('.dropdown-menus');
+       //                  if (dropdownMenu) {
+       //                      dropdownMenu.classList.remove('show');
+       //                  }
+       //              };
+       //          });
+       //      });
+       //  });
     </script>
+    <script>
+// document.addEventListener('DOMContentLoaded', function () {
+//     const dropdownItems = document.querySelectorAll('.dropdown-items');
+//     const contentSections = document.querySelectorAll('.content-section');
+
+//     const selectedFilters = {
+//         featured: null,
+//         capability: null,
+//         industry: null
+//     };
+
+//     dropdownItems.forEach(item => {
+//         item.addEventListener('click', function (e) {
+//             e.preventDefault();
+
+//             const selectedValue = this.getAttribute('data-value');
+//             const parentDropdown = this.closest('.filter-dropdown');
+//             const category = parentDropdown.id;
+
+//             // Update label of the clicked dropdown
+//             const label = parentDropdown.querySelector('.label');
+//             label.textContent = selectedValue;
+
+//             // Show close button
+//             parentDropdown.querySelector('.close-btn').classList.remove('d-none');
+
+//             // Save the selected filter
+//             selectedFilters[category] = selectedValue;
+
+//             // Apply filter
+//             filterContent();
+//         });
+//     });
+
+//     document.querySelectorAll('.close-btn').forEach(btn => {
+//         btn.addEventListener('click', function (e) {
+//             e.stopPropagation();
+//             const parentDropdown = this.closest('.filter-dropdown');
+//             const category = parentDropdown.id;
+
+//             // Reset dropdown
+//             const label = parentDropdown.querySelector('.label');
+//             label.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+//             this.classList.add('d-none');
+
+//             // Remove filter from memory
+//             selectedFilters[category] = null;
+
+//             // Re-apply filter
+//             filterContent();
+//         });
+//     });
+
+//     function filterContent() {
+//         contentSections.forEach(section => {
+//             const tags = section.getAttribute('data-tags') || '';
+//             let isVisible = true;
+//             for (const key in selectedFilters) {
+//                 if (selectedFilters[key] && !tags.toLowerCase().includes(selectedFilters[key].toLowerCase())) {
+//                     isVisible = false;
+//                     break;
+//                 }
+//             }
+
+//             if (isVisible) {
+//                 section.classList.remove('hidden');
+//             } else {
+//                 section.classList.add('hidden');
+//             }
+//         });
+//     }
+// });
+</script>
+    <script>
+// document.addEventListener('DOMContentLoaded', function() {
+//     const dropdownItems = document.querySelectorAll('.dropdown-items');
+//     const dropdowns = document.querySelectorAll('.filter-dropdown');
+//     const contentSections = document.querySelectorAll('.content-section');
+
+//     dropdownItems.forEach(item => {
+//         item.addEventListener('click', function(e) {
+//             e.preventDefault();
+//             const selectedValue = this.getAttribute('data-value');
+//             const parentDropdown = this.closest('.dropdown');
+//             const categoryId = parentDropdown.id;
+
+//             // ✅ Reset only this dropdown to selected value
+//             const label = parentDropdown.querySelector('.label');
+//             label.textContent = selectedValue;
+
+//             const closeBtn = parentDropdown.querySelector('.close-btn');
+//             closeBtn.classList.remove('d-none');
+//             parentDropdown.classList.add('active');
+
+//             // ✅ Show only matching content sections
+//             contentSections.forEach(section => {
+//                 const tags = section.getAttribute('data-tags') || '';
+//                 if (tags.toLowerCase().includes(selectedValue.toLowerCase())) {
+//                     section.classList.remove('hidden');
+//                 } else {
+//                     section.classList.add('hidden');
+//                 }
+//             });
+
+//             // ✅ Setup close button logic
+//             closeBtn.onclick = function(event) {
+//                 event.stopPropagation();
+//                 parentDropdown.classList.remove('active');
+
+//                 // ✅ Restore original label using data-default-label
+//                 const originalLabel = parentDropdown.getAttribute('data-default-label') || categoryId;
+//                 label.textContent = originalLabel;
+
+//                 closeBtn.classList.add('d-none');
+
+//                 // ✅ Show all content again
+//                 contentSections.forEach(section => section.classList.remove('hidden'));
+
+//                 // ✅ Close dropdown menu
+//                 const dropdownMenu = parentDropdown.querySelector('.dropdown-menus');
+//                 if (dropdownMenu) {
+//                     dropdownMenu.classList.remove('show');
+//                 }
+//             };
+//         });
+//     });
+// });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const dropdownItems = document.querySelectorAll('.dropdown-items');
+    const contentSections = document.querySelectorAll('.content-section');
+    const selectedFilters = {
+        featured: null,
+        capability: null,
+        industry: null
+    };
+
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const selectedValue = this.getAttribute('data-value');
+            const parentDropdown = this.closest('.filter-dropdown');
+            const category = parentDropdown.id;
+
+            // Always update label and selection (even if same as before)
+            const label = parentDropdown.querySelector('.label');
+            label.textContent = selectedValue;
+
+            const closeBtn = parentDropdown.querySelector('.close-btn');
+            closeBtn.classList.remove('d-none');
+            parentDropdown.classList.add('active');
+
+            // Save selection
+            selectedFilters[category] = selectedValue;
+
+            // Apply filter
+            filterContent();
+        });
+    });
+
+    document.querySelectorAll('.close-btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const parentDropdown = this.closest('.filter-dropdown');
+            const category = parentDropdown.id;
+
+            // Reset label from data-default-label
+            const label = parentDropdown.querySelector('.label');
+            const defaultLabel = parentDropdown.getAttribute('data-default-label');
+            label.textContent = defaultLabel;
+
+            this.classList.add('d-none');
+            parentDropdown.classList.remove('active');
+
+            // Clear filter
+            selectedFilters[category] = null;
+
+            // Re-apply filter
+            filterContent();
+        });
+    });
+
+    function filterContent() {
+        contentSections.forEach(section => {
+            const tags = (section.getAttribute('data-tags') || '').toLowerCase();
+            let isVisible = true;
+
+            for (const key in selectedFilters) {
+                const value = selectedFilters[key];
+                if (value && !tags.includes(value.toLowerCase())) {
+                    isVisible = false;
+                    break;
+                }
+            }
+
+            // Apply show/hide
+            section.classList.toggle('hidden', !isVisible);
+        });
+    }
+});
+</script>
+
+
+
 </body>
 
 </html>

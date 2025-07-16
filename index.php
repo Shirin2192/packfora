@@ -187,108 +187,57 @@
          </section>
          <!-- ==== End Intro ==== -->
          <!-- ==== Start Services ==== -->
-            <?php
-               $orderedIds = [5, 7, 2, 3, 6, 1, 8, 9]; // strict order
-               $idsIn = implode(',', $orderedIds);
-               $services = [];
+          <?php
+            $tagIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]; // <-- update this list based on what tags you want
+            $caseStudies = [];
 
-               $sql = "SELECT * FROM tbl_services WHERE id IN ($idsIn) AND is_delete = 1";
-               $result = $conn->query($sql);
-               if ($result->num_rows > 0) {
-                   while ($row = $result->fetch_assoc()) {
-                       $services[$row['id']] = $row; // store by ID
-                   }
-               }
+            foreach ($tagIds as $tagId) {
+                $sql = "SELECT * FROM tbl_case_study 
+                        WHERE FIND_IN_SET('$tagId', tag_id) AND is_delete = 1 
+                        ORDER BY id ASC ";
 
-               // Preserve custom sequence
-               $orderedServices = [];
-               foreach ($orderedIds as $id) {
-                   if (isset($services[$id])) {
-                       $orderedServices[] = $services[$id];
-                   }
-               }
-
-               $firstBatch = array_slice($orderedServices, 0, 5); // First visible 5
-               $additionalBatch = array_slice($orderedServices, 5); // Load more
-               ?>
-
-       <div class="services-container"
-         style="background-image: url('assets/img/home/services-bg.webp'); background-position: top right;">
-         <div class="all-services">
-            <div class="container">
-               <div class="row">
-                  <h2 class="service-title mb-3 wow fadeIn">Our Services</h2>
-                  <p class="service-info mb-4 wow fadeInUp" data-wow-delay="0.2s">Our company unites
-                     multi-disciplinary expertise across the
-                     entire packaging value chain to create packaging solutions that are innovative,
-                     sustainable, and tailored to our clients' needs.
-                  </p>
-               </div>
-               <div class="row">
-                   <?php foreach ($firstBatch as $index => $service): ?>
-                       <div class="col-lg-4">
-                           <div class="services-card mt-2 mb-4 wow fadeInUp slow" data-wow-delay="0.<?= $index + 2 ?>s">
-                               <div>
-                                   <a href="<?= htmlspecialchars($service['link']) ?>" <?= ($service['service_name'] === 'MaxMold') ? 'target="_blank"' : '' ?>>
-                                       <div class="service-img">
-                                           <img src="<?= BASE_URL. htmlspecialchars($service['image']) ?>" class="w-100">
-                                       </div>
-                                       <div class="service-content">
-                                           <h4 class="mb-2"><?= htmlspecialchars($service['service_name']) ?></h4>
-                                           <p><?= htmlspecialchars($service['description']) ?></p>
-                                       </div>
-                                   </a>
-                               </div>
-                           </div>
-                       </div>
-                   <?php endforeach; ?>
-
-                   <!-- Load More Card -->
-                   <div class="col-lg-4">
-                       <div class="wow fadeInUp slow" data-wow-delay="0.6s">
-                           <a href="#" class="text-decoration-none d-block h-100 load-more-clickable"
-                              onclick="toggleMoreServices(event)">
-                               <div class="services-card more-services-card mt-2 mb-4" style="background-color: #2e3e8f;">
-                                   <div class="service-content text-white d-flex justify-content-center flex-column h-100">
-                                       <h2 class="mb-4 load-more-text" id="loadMoreText">
-                                           For More<br>Services<br>Click here <span id="plusIcon" class="fa fa-chevron-down"></span>
-                                       </h2>
-                                   </div>
-                               </div>
-                           </a>
-                       </div>
-                   </div>
-               </div>
-
-               <!-- Additional Services -->
-               <div class="row additional-services" id="additionalServices" style="display: none;">
-                   <?php foreach ($additionalBatch as $service): ?>
-                       <div class="col-lg-4">
-                           <div class="services-card mt-2 mb-4 wow fadeInUp slow" data-wow-delay="0.2s">
-                               <div>
-                                   <a href="<?= htmlspecialchars($service['link']) ?>">
-                                       <div class="service-img">
-                                           <img src="<?= BASE_URL. htmlspecialchars($service['image']) ?>" class="w-100">
-                                       </div>
-                                       <div class="service-content">
-                                           <h4 class="mb-2"><?= htmlspecialchars($service['service_name']) ?></h4>
-                                           <p><?= htmlspecialchars($service['description']) ?></p>
-                                       </div>
-                                   </a>
-                               </div>
-                           </div>
-                       </div>
-                   <?php endforeach; ?>
-               </div>
-
-            </div>
-         </div>
-      </div>
+                $result = $conn->query($sql);
+                if ($result && $result->num_rows > 0) {
+                    $case = $result->fetch_assoc();
+                    $case['tag_id_resolved'] = $tagId; // optional if you want to know which tag this came from
+                    $caseStudies[] = $case;
+                }
+            }
+         ?>
+            <section class="case-study whiteBg">
+                <div class="container">
+                    <h2 class="sec-title mb-4 wow fadeIn">Case Studies</h2>
+                </div>
+                <div class="container-fluid p-0">
+                    <div class="gallery">
+                        <div class="owl-carousel case-study-carousel owl-theme wow zoomIn">
+                            <?php foreach ($caseStudies as $case): 
+                                $imgPath = $case['main_image'];
+                                $title = htmlspecialchars($case['title']);
+                                $slug = htmlspecialchars($case['slug_url'] . '?id=' . urlencode(base64_encode($case['id'])));
+                            ?>
+                                <div class="item" style="background-image: url('<?= BASE_URL. $imgPath ?>');">
+                                    <div class="slide-content">
+                                        <div class="content-box">
+                                            <div>
+                                                <h2><?= $title ?></h2>
+                                            </div>
+                                            <a href="<?= $slug ?>">
+                                                <button class="read-more-btn">Read Full Case Study</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </section>
          <!-- ==== End Services ==== -->
          <!-- ==== Start clients ==== -->
          <?php
             // Connect to DB (assumes $conn is defined)
-            $sql = "SELECT * FROM our_clients WHERE is_delete = '1' ORDER BY id ASC";
+            $sql = "SELECT * FROM our_clients WHERE is_delete = '1' AND show_on_homepage ='1' ORDER BY id ASC";
             $result = mysqli_query($conn, $sql);
             ?>
          <div class="clients" id="client">
