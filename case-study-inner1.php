@@ -14,7 +14,7 @@
     <title>End-to-End Packaging and Brand Consulting Solutions - Packfora</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" href="assets/img/favicon.svg">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
@@ -107,257 +107,160 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-    <?php include 'db_connect.php';
-         include 'config.php';  
-         ?>
-    <?php
-        if (isset($_GET['id'])) {
-            $encoded_id = $_GET['id'];
-            $id = base64_decode($encoded_id);
-
-            // Optional: cast to int if it's supposed to be numeric
-            $id = intval($id);
-        }
-        ?>
-
 
     <main>
         <!-- ==== Start Home Banner ==== -->
-        <?php  // Query the case study by ID
-            $sql = "SELECT * FROM tbl_case_study WHERE id = $id AND is_delete = 1";
-            $result = $conn->query($sql);
-
-            if ($result && $result->num_rows > 0) {
-                $case = $result->fetch_assoc();
-            }
-        ?>
-       <?php if ($case): ?>
         <section class="case-study-inner-ptb"
-            style="background-image: url(<?= BASE_URL. $case['image'] ?>); background-size: cover; background-position: top center; background-repeat: no-repeat;">
+            style="background-image: url(assets/img/case-study/case-study-01.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
             <div class="container">
                 <div class="row">
                     <div class="page-title-bar text-center">
-                        <h1 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($case['title']) ?></h1>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s"><?= nl2br(htmlspecialchars($case['description'])) ?></p>
+                        <h1 class="wow fadeInUp" data-wow-delay="0.2s">75% of Consumers Built a Habit — with Just One
+                            Pack. </h1>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s">How behavior-first packaging helped a global fruit
+                            brand drive healthier routines.</p>
                     </div>
                 </div>
             </div>
         </section>
-        <?php else: ?>
-            <div class="container py-5 text-center">
-                <h2>Case Study Not Found</h2>
-            </div>
-        <?php endif; ?>
         <!-- ==== End Home Banner ==== -->
 
         <!-- ==== Start Short Description ==== -->
-        <?php if (!empty($case['description'])): ?>
-            <div class="short-description py-5">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-md-1">
-                            <img src="assets/img/shape/big-arrow.png" alt="">
-                        </div>
-                        <div class="col-md-11">
-                            <?php
-                            // Convert new lines to separate <h5> tags
-                            $paragraphs = explode("\n", trim($case['description']));
-                            foreach ($paragraphs as $p):
-                                if (!empty(trim($p))):
-                            ?>
-                                <h5><?= htmlspecialchars(trim($p)) ?></h5>
-                            <?php
-                                endif;
-                            endforeach;
-                            ?>
-                        </div>
+        <div class="short-description py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-1">
+                        <img src="assets/img/shape/big-arrow.png" alt="">
+                    </div>
+                    <div class="col-md-11">
+                        <h5>We partnered with a $2.5B horticulture leader to design a packaging solution that did more
+                            than protect fruit — it built a habit. Inspired by the pillbox design, the 7-day fruit
+                            regimen pack helped consumers stay consistent, supported ESG goals, and moved from pilot to
+                            commercial rollout in just four months.</h5>
                     </div>
                 </div>
             </div>
-            <?php endif; ?>
-
+        </div>
         <!-- ==== End Short Description ==== -->
 
         <!-- ==== Start Case Study Video ==== -->
-
-        <?php
-         if (!empty($case['video'])): ?>
-            <div class="case-study-video py-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="video-container position-relative">
-                                <video id="bgVideo" class="w-100" src="<?= htmlspecialchars(BASE_URL . $case['video']) ?>" autoplay loop muted></video>
-                                <div class="controls">
-                                    <button id="playPauseBtn"><i class="fas fa-pause"></i></button>
-                                    <button id="muteUnmuteBtn"><i class="fas fa-volume-mute"></i></button>
-                                </div>
+        <div class="case-study-video py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="video-container position-relative">
+                            <video id="bgVideo" class="w-100" src="assets/img/case-study/inner/zespri.webm" autoplay loop
+                                muted></video>
+                            <div class="controls">
+                                <button id="playPauseBtn"><i class="fas fa-pause"></i></button>
+                                <button id="muteUnmuteBtn"><i class="fas fa-volume-mute"></i></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <?php endif; ?>
+        </div>
         <!-- ==== End Case Study Video ==== -->
 
         <!-- Start Objective -->
-        <?php 
-        $objective = null;
-
-            // Fetch the latest matching objective
-            $sql = "SELECT * FROM tbl_case_study_objectives WHERE fk_case_study_id = $id AND is_delete = 1 ORDER BY id DESC LIMIT 1";
-            $result = mysqli_query($conn, $sql);
-            if ($result && mysqli_num_rows($result) > 0) {
-                $objective = mysqli_fetch_assoc($result);
-            }
-            ?>
-        <?php if (!empty($objective)) { ?>
-            <div class="objective py-5">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-md-6 wow fadeIn" data-wow-delay="0.2s">
-                            <img src="<?= htmlspecialchars( BASE_URL. $objective['image']) ?>" alt="Objective Image" class="img-fluid">
-                        </div>
-                        <div class="col-md-6">
-                            <h2 class="objective-title mb-4 wow fadeIn" data-wow-delay="0.2s">Objective</h2>
-                            <p class="objective-desc wow fadeInUp" data-wow-delay="0.4s">
-                                <?= htmlspecialchars($objective['objective']) ?>
-                            </p>
-                        </div>
+        <div class="objective py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 wow fadeIn" data-wow-delay="0.2s">
+                        <img src="assets/img/case-study/inner/objective.webp" alt="" srcset="">
+                    </div>
+                    <div class="col-md-6">
+                        <h2 class="objective-title mb-4 wow fadeIn" data-wow-delay="0.2s">Objective</h2>
+                        <p class="objective-desc wow fadeInUp" data-wow-delay="0.4s">To close the gap between public health recommendations and daily consumer behavior —through a packaging intervention that simplifies decision-making, builds structure, and drives consistent fruit intake.</p>
                     </div>
                 </div>
             </div>
-        <?php } ?>
-
+        </div>
         <!-- End Objective -->
 
         <!-- ==== Start The Solution ==== -->
-<?php
-$case_study_id = $id; // dynamically set this ID
-
-// Fetch header content
-$headerQuery = "SELECT * FROM tbl_case_study_solution_header WHERE case_study_id = ? AND is_active = 1 AND is_delete = 1 LIMIT 1";
-$stmt = $conn->prepare($headerQuery);
-$stmt->bind_param("i", $case_study_id);
-$stmt->execute();
-$headerResult = $stmt->get_result();
-$header = $headerResult->fetch_assoc();
-
-// Fetch all solution items
-$solutions = [];
-if (!empty($header)) {
-    $solutionQuery = "SELECT * FROM tbl_case_study_solutions WHERE fk_header_id = ? AND is_delete = 1 ORDER BY id ASC";
-    $stmt2 = $conn->prepare($solutionQuery);
-    $stmt2->bind_param("i", $header['id']);
-    $stmt2->execute();
-    $solutionResult = $stmt2->get_result();
-    while ($row = $solutionResult->fetch_assoc()) {
-        $solutions[] = $row;
-    }
-}
-?>
-
-<?php if (!empty($header)): ?>
-<section class="the-solution">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="wow fadeIn"><?= htmlspecialchars($header['main_title']) ?></h2>
-                <p class="wow fadeIn" data-wow-delay="0.2s"><?= htmlspecialchars($header['main_description']) ?></p>
-            </div>
-        </div>
-
-        <div class="row">
-            <?php foreach ($solutions as $solution): ?>
-                <div class="col-md-4 py-4">
-                    <div class="solutions wow zoomIn" data-wow-delay="0.4s">
-                        <div class="solution-icon">
-                            <img src="<?= htmlspecialchars($solution['image']) ?>" alt="<?= htmlspecialchars($solution['title']) ?>" />
-                        </div>
-                        <h4><?= htmlspecialchars($solution['title']) ?></h4>
-
-                        <?php
-                        // Extract <li> items from HTML description
-                        preg_match_all('/<li[^>]*>(.*?)<\/li>/i', $solution['description'], $matches);
-                        $items = $matches[1] ?? [];
-                        $first = array_shift($items);
-                        ?>
-
-                        <?php if (!empty($first)): ?>
-                            <p class="text-white text-left">• <?= htmlspecialchars($first) ?></p>
-                        <?php endif; ?>
-
-                        <?php if (!empty($items)): ?>
-                            <div class="more-content" style="display: none;">
-                                <?php foreach ($items as $item): ?>
-                                    <p class="text-white text-left">• <?= htmlspecialchars($item) ?></p>
-                                <?php endforeach; ?>
-                            </div>
-
-                            <a href="javascript:void(0);" class="read-more-toggle">
-                                <span class="toggle-text">Read More</span>
-                                <i class="fa fa-chevron-down toggle-icon"></i>
-                            </a>
-                        <?php endif; ?>
+        <section class="the-solution">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="wow fadeIn">The Solution</h2>
+                        <p class="wow fadeIn" data-wow-delay="0.2s">We created a behavior-first packaging format that enables action, not just access. Rooted in real consumer behavior, the format made healthy choices easy, visible, and repeatable.</p>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-<?php endif; ?>
+                <div class="row">
+                    <div class="col-md-4 py-4">
+                        <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
+                            <div class="solution-icon">
+                                <img src="assets/img/our-team/clientele.png" alt="" srcset="">
+                            </div>
+                            <h4>Built for daily life</h4>
+                            <P>Fridge-fit, shelf-ready, and intuitive to use</P>
+                        </div>
+                    </div>
+                    <div class="col-md-4 py-4">
+                        <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
+                            <div class="solution-icon">
+                                <img src="assets/img/our-team/projects.png" alt="" srcset="">
+                            </div>
+                            <h4>Sustainably made</h4>
+                            <P>100% recyclable materials and vegetable-based ink</P>
+                        </div>
+                    </div>
+                    <div class="col-md-4 py-4">
+                        <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
+                            <div class="solution-icon">
+                                <img src="assets/img/our-team/culture.png" alt="" srcset="">
+                            </div>
+                            <h4>Inclusive by design</h4>
+                            <P>Tactile cues for the visually impaired</P>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- ==== End The Solution ==== -->
 
         <!-- Start Business Impact -->
-        <?php 
-        // Case study ID (replace with dynamic ID based on context)
-                $sql = "SELECT * FROM tbl_case_study_business_impact WHERE case_study_id = $id ORDER BY id ASC";
-                $result = $conn->query($sql);
-                ?>
-            <div class="business-impact">
-                <div class="container">
-                    <div class="row">
-                        <h2 class="mb-3 wow fadeInUp">Business Impact</h2>
-                    </div>
+        <div class="business-impact">
+            <div class="container">
+                <div class="row">
+                    <h2 class="mb-3 wow fadeInUp">Business Impact</h2>
+                </div>
 
-                    <div class="row align-items-stretch">
-                        <?php
-                        if ($result && $result->num_rows > 0):
-                            $delay = 0.2;
-                            while ($row = $result->fetch_assoc()):
-                        ?>
-                            <div class="col-lg-4 d-flex <?= $delay > 0.2 ? 'my-md-0 my-4' : '' ?>">
-                                <div class="business-impact-info wow fadeInUp p-4 w-100" data-wow-delay="<?= $delay ?>s" style="background: #f8f9fa;">
-                                    <img src="<?= htmlspecialchars( BASE_URL. $row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
-                                    <h5><?= htmlspecialchars($row['title']) ?></h5>
-                                    <p><?= htmlspecialchars($row['description']) ?></p>
-                                </div>
-                            </div>
-                        <?php
-                            $delay += 0.2;
-                            endwhile;
-                        else:
-                        ?>
-                            <div class="col-12">
-                                <p>No business impact data available.</p>
-                            </div>
-                        <?php endif; ?>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="business-impact-info wow fadeInUp" data-wow-delay="0.2s">
+                            <img src="assets/img/shape/gradient-01.png" alt="">
+                            <h5>Time to Market</h5>
+                            <p>From brief to shelf within 4 months</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 my-md-0 my-4">
+                        <div class="business-impact-info wow fadeInUp" data-wow-delay="0.4s">
+                            <img src="assets/img/shape/gradient-02.png" alt="">
+                            <h5>Consumer Validation</h5>
+                            <p>75% said the pack helped them remember to eat fruit daily</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="business-impact-info wow fadeInUp" data-wow-delay="0.8s">
+                            <img src="assets/img/shape/gradient-03.png" alt="">
+                            <h5>Scalability</h5>
+                            <p>Commercial rollout in Singapore, with more markets planned</p>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         <!-- End Business Impact -->
 
         <!-- ==== Start Why It Matters ==== -->
-
-        <section class="why-it-matters"
-            style="background-image: url(assets/img/our-team/next-opportunity.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
+        <section class="why-it-matters" style="background-image: url(assets/img/our-team/next-opportunity.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-9">
                         <h6 class="wow fadeInUp" data-wow-delay="0.2s">Why It Matters</h6>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">Global scale demands global order.</p>
-                        <p class="wow fadeInUp" data-wow-delay="0.6s">We transformed fragmented specs into a single
-                            source of truth — ready for what's next.</p>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s">As consumer wellness becomes more behavior-driven, packaging must evolve from passive protection to active participation. This project proved that structured, inclusive design can unlock new value — for consumers and for business.</p>
                     </div>
                     <div class="col-md-3">
                         <div class="sp-info float-end wow fadeInUp" data-wow-delay="0.4s">
@@ -406,38 +309,7 @@ if (!empty($header)) {
             video.muted = !video.muted;
             icon.className = video.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
         });
-
-
     </script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll('.read-more-toggle').forEach(function(toggle) {
-        toggle.addEventListener('click', function() {
-            const card = this.closest('.solutions');
-            const moreContent = card.querySelector('.more-content');
-            const toggleText = this.querySelector('.toggle-text');
-            const toggleIcon = this.querySelector('.toggle-icon');
-
-            if (moreContent.style.display === 'none' || moreContent.style.display === '') {
-                moreContent.style.display = 'block';
-                toggleText.textContent = 'Read Less';
-                toggleIcon.classList.remove('fa-chevron-down');
-                toggleIcon.classList.add('fa-chevron-up');
-            } else {
-                moreContent.style.display = 'none';
-                toggleText.textContent = 'Read More';
-                toggleIcon.classList.remove('fa-chevron-up');
-                toggleIcon.classList.add('fa-chevron-down');
-            }
-        });
-    });
-});
-</script>
-
-
- 
-
 </body>
 
 </html>
