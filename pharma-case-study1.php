@@ -9,7 +9,7 @@
     <meta name="keywords" content="HTML5">
     <meta name="description" content="Multi-Purpose">
     <meta name="author" content="">
-
+    <?php echo "hiii";die; ?>
     <!-- Title  -->
     <title>End-to-End Packaging and Brand Consulting Solutions - Packfora</title>
 

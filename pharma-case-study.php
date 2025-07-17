@@ -110,6 +110,7 @@
     <?php include 'db_connect.php';
          include 'config.php';  
          ?>
+
     <?php
         if (isset($_GET['id'])) {
             $encoded_id = $_GET['id'];
@@ -235,65 +236,68 @@
 <?php
 $case_study_id = $id; // dynamically set this ID
 
-// Fetch header content
-$headerQuery = "SELECT * FROM tbl_case_study_solution_header WHERE case_study_id = ? AND is_active = 1 AND is_delete = 1 LIMIT 1";
-$stmt = $conn->prepare($headerQuery);
-$stmt->bind_param("i", $case_study_id);
-$stmt->execute();
-$headerResult = $stmt->get_result();
+// Fetch header
+$headerStmt = $conn->prepare("SELECT * FROM tbl_case_study_solution_header WHERE case_study_id = ?  LIMIT 1");
+$headerStmt->bind_param("i", $case_study_id);
+$headerStmt->execute();
+$headerResult = $headerStmt->get_result();
 $header = $headerResult->fetch_assoc();
 
-// Fetch all solution items
+// Fetch solutions
 $solutions = [];
 if (!empty($header)) {
-    $solutionQuery = "SELECT * FROM tbl_case_study_solutions WHERE fk_header_id = ? AND is_delete = 1 ORDER BY id ASC";
-    $stmt2 = $conn->prepare($solutionQuery);
-    $stmt2->bind_param("i", $header['id']);
-    $stmt2->execute();
-    $solutionResult = $stmt2->get_result();
-    while ($row = $solutionResult->fetch_assoc()) {
+    $solutionStmt = $conn->prepare("SELECT * FROM tbl_case_study_solutions WHERE fk_header_id = ? AND is_delete = 1 ORDER BY id ASC");
+    $solutionStmt->bind_param("i", $header['id']);
+    $solutionStmt->execute();
+    $result = $solutionStmt->get_result();
+    while ($row = $result->fetch_assoc()) {
         $solutions[] = $row;
     }
 }
 ?>
 
 <?php if (!empty($header)): ?>
+
 <section class="the-solution">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 class="wow fadeIn"><?= htmlspecialchars($header['main_title']) ?></h2>
-                <p class="wow fadeIn" data-wow-delay="0.2s"><?= htmlspecialchars($header['main_description']) ?></p>
+
+                <h2><?= htmlspecialchars($header['main_title']) ?></h2>
+                <p><?= htmlspecialchars($header['main_description']) ?></p>
             </div>
         </div>
 
         <div class="row">
             <?php foreach ($solutions as $solution): ?>
                 <div class="col-md-4 py-4">
-                    <div class="solutions wow zoomIn" data-wow-delay="0.4s">
+                    <div class="solutions">
                         <div class="solution-icon">
-                            <img src="<?= htmlspecialchars($solution['image']) ?>" alt="<?= htmlspecialchars($solution['title']) ?>" />
+                            <img src="<?= htmlspecialchars($solution['image']) ?>" alt="<?= htmlspecialchars($solution['title']) ?>">
                         </div>
                         <h4><?= htmlspecialchars($solution['title']) ?></h4>
 
                         <?php
                         // Extract <li> items from HTML description
+                        // echo $solution['description'];die;
                         preg_match_all('/<li[^>]*>(.*?)<\/li>/i', $solution['description'], $matches);
-                        $items = $matches[1] ?? [];
-                        $first = array_shift($items);
+                        $li_items = $matches[1] ?? [];
                         ?>
 
-                        <?php if (!empty($first)): ?>
-                            <p class="text-white text-left">• <?= htmlspecialchars($first) ?></p>
-                        <?php endif; ?>
+                        <ul class="p-0 mb-0 text-white text-left solution-list">
+                            <?php if (!empty($li_items)): ?>
+                                <li><?= htmlspecialchars(array_shift($li_items)) ?></li>
+                            <?php endif; ?>
+                        </ul>
 
-                        <?php if (!empty($items)): ?>
-                            <div class="more-content" style="display: none;">
-                                <?php foreach ($items as $item): ?>
-                                    <p class="text-white text-left">• <?= htmlspecialchars($item) ?></p>
-                                <?php endforeach; ?>
+                        <?php if (!empty($li_items)): ?>
+                            <div class="more-content" style="display:none;">
+                                <ul class="p-0 text-white text-left solution-list">
+                                    <?php foreach ($li_items as $item): ?>
+                                        <li><?= htmlspecialchars($item) ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
                             </div>
-
                             <a href="javascript:void(0);" class="read-more-toggle">
                                 <span class="toggle-text">Read More</span>
                                 <i class="fa fa-chevron-down toggle-icon"></i>
@@ -306,6 +310,7 @@ if (!empty($header)) {
     </div>
 </section>
 <?php endif; ?>
+
         <!-- ==== End The Solution ==== -->
 
         <!-- Start Business Impact -->

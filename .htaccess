@@ -15,8 +15,8 @@ RewriteRule ^([a-zA-Z0-9\-]+)$ case-study-inner.php?slug=$1 [QSA,L]
 #RewriteRule ^case-study/([a-zA-Z0-9-_]+)/?$ case-study.php?slug=$1 [L,QSA]
 
 
-RewriteEngine On
-RewriteBase /packfora/packfora/
+#RewriteEngine On
+#RewriteBase /packfora/packfora/
 
 # Rewrite /pharma-case-study/slug → pharma-case-study.php?slug=slug
-RewriteRule ^pharma-case-study/([a-zA-Z0-9-_]+)/?$ pharma-case-study.php?slug=$1 [L,QSA]
+#RewriteRule ^pharma-case-study/([a-zA-Z0-9-_]+)/?$ pharma-case-study.php?slug=$1 [L,QSA]
