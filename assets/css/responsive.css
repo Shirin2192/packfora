@@ -1,6 +1,10 @@
-@media only screen and (max-width: 768px) {
+@media (min-width: 320px) and (max-width: 490px) {
+    #additionalServices .more-service {
+        padding: 0px 2px;
+    }
+}
 
-    /* Home Page  */
+@media only screen and (max-width: 768px) {
     body {
         overflow-x: hidden !important;
     }
@@ -136,10 +140,6 @@
 
     .blog-slider .blog-item {
         width: 100%;
-    }
-
-    .clients .owl-carousel .owl-item img {
-        margin: 0;
     }
 
     .case-study .sec-title {
@@ -328,10 +328,6 @@
         width: 95%;
     }
 
-    .sp-info {
-        float: left !important;
-    }
-
     .next-opportunity .sp-info .read_more {
         font-size: 16px;
         padding: 10px 20px;
@@ -348,6 +344,24 @@
 
     .shine-us-card .card-content h4 {
         font-size: 16px;
+    }
+
+    /* Clients Page */
+    .clients-page-title-banner {
+        height: 70vh;
+    }
+    
+    .clients-page-title-banner .page-title-bar h1 {
+        font-size: 37px;
+    }
+
+    .clients-page-title-banner .page-title-bar {
+        width: 90%;
+        margin-bottom: 60px;
+    }
+
+    .clients-logos img {
+        padding: 12px;
     }
 
     /* Contact Us Page */
@@ -781,6 +795,19 @@
         margin: 0 auto 50px;
     }
 
+    /* Knowledge Centre */
+    .latest-blog {
+        padding: 20px !important;
+    }
+
+    .latest-blog h5 {
+        margin: 150px 0px 35px 0px;
+    }
+
+    .related-blog-details {
+        height: 210px;
+    }
+
     /* case study */
     .case-study-inner-ptb {
         height: 70vh;
@@ -1000,5 +1027,159 @@
 
     .story-placeholder {
         padding: 60px 25px;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1025px) {
+    .hero-slider .item {
+        height: 50vh;
+    }
+
+    .content {
+        width: 55%;
+    }
+
+    .slide1 .content h2 {
+        font-size: 28px;
+    }
+
+    .slide5 .content p,
+    .slide3 .content p,
+    .slide2 .content p,
+    .slide4 .content p {
+        font-size: 16px;
+    }
+
+    .slide5 .content img {
+        width: 30% !important;
+    }
+
+    .slide5 .content h1 {
+        font-size: 28px;
+    }
+
+    .box-container {
+        flex-wrap: nowrap;
+    }
+
+    .box-front,
+    .box-back {
+        padding: 20px;
+    }
+
+    .box-front h3 {
+        font-size: 17px;
+    }
+
+    .box-front p {
+        font-size: 32px;
+    }
+
+    .gallery,
+    .case-study-carousel .item {
+        height: 40vh !important;
+    }
+
+    .content-box {
+        width: 50%;
+
+    }
+
+    .scroll-section .image-container {
+        height: 500px;
+        flex-direction: row;
+    }
+
+    .about-page-title-banner,
+    .our-team-page-title-banner,
+    .contact-page-title-banner,
+    .page-title-banner,
+    .capabilities-title-banner, .clients-page-title-banner, #videoSection, .case-study-inner-ptb {
+        height: 42vh !important;
+        margin-top: 25px;
+    }
+
+    .measurable-results-01 {
+        border-right: 1px solid #888888 !important;
+    }
+
+    .we-do-card p {
+        height: 165px;
+    }
+
+    .impact-enabled .intentional-way p {
+        width: 95%;
+    }
+
+    .science-backed-approach .science-backed p {
+        font-size: 20px;
+    }
+
+    .strategy-title-mob-top {
+        border-top: none;
+        margin-top: 0 !important;
+        padding-top: 0;
+    }
+
+    .levers-activate .levers p {
+        font-size: 14px;
+    }
+
+    .value-chain-expertise-box h2 {
+        font-size: 20px;
+    }
+
+    .value-chain-expertise-box p {
+        height: 150px;
+    }
+
+    .sp-info {
+        float: none !important;
+    }
+
+    .services-card .service-content {
+        height: 230px;
+    }
+
+    .more-services-card {
+        height: 492px;
+    }
+
+    .our-benefits .global-culture p {
+        width: 100%;
+    }
+
+    .contact-page-title-banner .page-title-bar {
+        width: 90%;
+        margin-bottom: 60px;
+    }
+
+    .contact-page-title-banner .page-title-bar h1 {
+        font-size: 37px;
+    }
+
+    .contact-us-info {
+        margin: 10px 0px;
+    }
+
+    .ipad-inquiry {
+        display: flex;
+        gap: 40px;
+        margin-top: 40px;
+        align-items: center;
+    }
+    
+    .btn-secondary-cta {
+        padding: 10px;
+    }
+    
+    .related-blogs {
+        margin-top: 20px;
+        border-left: none;
+        height: auto;
+    }
+    .case-study-inner-ptb .page-title-bar {
+        margin-bottom: 60px;
     }
 }

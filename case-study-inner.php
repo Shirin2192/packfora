@@ -120,9 +120,10 @@
         }
         ?>
 
+
     <main>
         <!-- ==== Start Home Banner ==== -->
-       <?php  // Query the case study by ID
+        <?php  // Query the case study by ID
             $sql = "SELECT * FROM tbl_case_study WHERE id = $id AND is_delete = 1";
             $result = $conn->query($sql);
 
@@ -132,7 +133,7 @@
         ?>
        <?php if ($case): ?>
         <section class="case-study-inner-ptb"
-            style="background-image: url(<?= BASE_URL. $case['image'] ?>); background-size: cover; background-position: top center; background-repeat: no-repeat;">
+            style="background-image: url(<?= BASE_URL. $case['main_image'] ?>); background-size: cover; background-position: top center; background-repeat: no-repeat;">
             <div class="container">
                 <div class="row">
                     <div class="page-title-bar text-center">
@@ -174,10 +175,12 @@
                 </div>
             </div>
             <?php endif; ?>
+
         <!-- ==== End Short Description ==== -->
 
         <!-- ==== Start Case Study Video ==== -->
-       <?php
+
+        <?php
          if (!empty($case['video'])): ?>
             <div class="case-study-video py-5">
                 <div class="container">
@@ -225,47 +228,77 @@
                 </div>
             </div>
         <?php } ?>
+
         <!-- End Objective -->
 
         <!-- ==== Start The Solution ==== -->
-         <?php
-        // Fetch header
-            $header_sql = "SELECT * FROM tbl_case_study_solution_header WHERE case_study_id = $id";
-            $header_result = $conn->query($header_sql);
-            $header = $header_result->fetch_assoc();
-
-            // Fetch cards (only if header found)
-            $cards = [];
-            if ($header) {
-                $header_id = $header['id'];
-                $card_sql = "SELECT * FROM tbl_case_study_solutions WHERE fk_header_id = $header_id";
-                $card_result = $conn->query($card_sql);
-                while ($row = $card_result->fetch_assoc()) {
-                    $cards[] = $row;
+            <?php
+            $case_study_id = $id; // dynamically set this ID
+            
+            // Fetch header content
+            $headerQuery = "SELECT * FROM tbl_case_study_solution_header WHERE case_study_id = ? LIMIT 1";
+            $stmt = $conn->prepare($headerQuery);
+            $stmt->bind_param("i", $case_study_id);
+            $stmt->execute();
+            $headerResult = $stmt->get_result();
+            $header = $headerResult->fetch_assoc();
+            // Fetch all solution items
+            $solutions = [];
+            
+            if (!empty($header)) {
+                $solutionQuery = "SELECT * FROM tbl_case_study_solutions WHERE fk_header_id = ? AND is_delete = 1 ORDER BY id ASC";
+                $stmt2 = $conn->prepare($solutionQuery);
+                $stmt2->bind_param("i", $header['id']);
+                $stmt2->execute();
+                $solutionResult = $stmt2->get_result();
+                while ($row = $solutionResult->fetch_assoc()) {
+                    $solutions[] = $row;
                 }
             }
             ?>
-        <?php if (!empty($header)) { ?>
+
+            <?php if (!empty($header)): ?>
             <section class="the-solution">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <h2 class="wow fadeIn"><?= htmlspecialchars($header['main_title']) ?></h2>
-                            <p class="wow fadeIn" data-wow-delay="0.2s">
-                                <?= nl2br(htmlspecialchars($header['main_description'])) ?>
-                            </p>
+                            <p class="wow fadeIn" data-wow-delay="0.2s"><?= htmlspecialchars($header['main_description']) ?></p>
                         </div>
                     </div>
+            
                     <div class="row">
-                        <?php foreach ($cards as $card): ?>
+                        <?php foreach ($solutions as $solution): ?>
                             <div class="col-md-4 py-4">
-                                <div class="solutions text-center wow zoomIn" data-wow-delay="0.4s">
+                                <div class="solutions wow zoomIn" data-wow-delay="0.4s">
                                     <div class="solution-icon">
-                                        <img src="<?= htmlspecialchars(BASE_URL. $card['image']) ?>" alt="<?= htmlspecialchars($card['title']) ?>">
+                                        <img src="<?= BASE_URL . $solution['image'] ?>" alt="<?= htmlspecialchars($solution['title']) ?>" />
                                     </div>
-                                    <h4><?= htmlspecialchars($card['title']) ?></h4>
-                                    <?php if (!empty($card['description'])): ?>
-                                        <p><?= htmlspecialchars($card['description']) ?></p>
+                                    <h4><?= nl2br(htmlspecialchars_decode($solution['title'])) ?></h4>
+                                    <?php
+                                    // Extract <li> items from HTML description
+                                    // echo $solution['description'];
+                                    preg_match_all('/<li[^>]*>(.*?)<\/li>/i', $solution['description'], $matches);
+                                    $items = $matches[1] ?? [];
+                                    $first = array_shift($items);
+                                    ?>
+                                    
+            
+                                    <?php if (!empty($first)): ?>
+                                        <p class="text-white text-left">• <?= htmlspecialchars($first) ?></p>
+                                    <?php endif; ?>
+            
+                                    <?php if (!empty($items)): ?>
+                                        <div class="more-content" style="display: none;">
+                                            <?php foreach ($items as $item): ?>
+                                                <p class="text-white text-left">• <?= htmlspecialchars($item) ?></p>
+                                            <?php endforeach; ?>
+                                        </div>
+            
+                                        <a href="javascript:void(0);" class="read-more-toggle">
+                                            <span class="toggle-text">Read More</span>
+                                            <i class="fa fa-chevron-down toggle-icon"></i>
+                                        </a>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -273,7 +306,8 @@
                     </div>
                 </div>
             </section>
-        <?php } ?>
+            <?php endif; ?>
+
 
         <!-- ==== End The Solution ==== -->
 
@@ -283,45 +317,48 @@
                 $sql = "SELECT * FROM tbl_case_study_business_impact WHERE case_study_id = $id ORDER BY id ASC";
                 $result = $conn->query($sql);
                 ?>
-                <div class="business-impact">
-                    <div class="container">
-                        <div class="row">
-                            <h2 class="mb-3 wow fadeInUp">Business Impact</h2>
-                        </div>
-
-                        <div class="row">
-                            <?php if ($result && $result->num_rows > 0): ?>
+               <?php if (!empty($result) && $result->num_rows > 0): ?>
+                    <div class="business-impact">
+                        <div class="container">
+                            <div class="row">
+                                <h2 class="mb-3 wow fadeInUp">Business Impact</h2>
+                            </div>
+                
+                            <div class="row align-items-stretch">
                                 <?php
                                 $delay = 0.2;
                                 while ($row = $result->fetch_assoc()):
+                                    // Add margin for all cards except the first in mobile view
+                                    $cardClass = ($delay > 0.2) ? 'my-md-0 my-4' : '';
                                 ?>
-                                    <div class="col-lg-4 mb-4">
-                                        <div class="business-impact-info wow fadeInUp" data-wow-delay="<?= $delay ?>">
-                                            <img src="<?= BASE_URL. $row['image'] ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                                    <div class="col-lg-4 d-flex <?= $cardClass ?>">
+                                        <div class="business-impact-info wow fadeInUp p-4 w-100" data-wow-delay="<?= number_format($delay, 1) ?>s" style="background: #f8f9fa;">
+                                            <img src="<?= htmlspecialchars(BASE_URL . $row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
                                             <h5><?= htmlspecialchars($row['title']) ?></h5>
                                             <p><?= htmlspecialchars($row['description']) ?></p>
                                         </div>
                                     </div>
-                                    <?php $delay += 0.2; ?>
-                                <?php endwhile; ?>
-                            <?php else: ?>
-                                <div class="col-12">
-                                    <p>No business impact data available.</p>
-                                </div>
-                            <?php endif; ?>
+                                <?php
+                                    $delay += 0.2;
+                                endwhile;
+                                ?>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
 
         <!-- End Business Impact -->
 
         <!-- ==== Start Why It Matters ==== -->
-        <section class="why-it-matters" style="background-image: url(assets/img/our-team/next-opportunity.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
+        <section class="why-it-matters"
+            style="background-image: url(assets/img/our-team/next-opportunity.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-9">
                         <h6 class="wow fadeInUp" data-wow-delay="0.2s">Why It Matters</h6>
-                        <p class="wow fadeInUp" data-wow-delay="0.4s">As consumer wellness becomes more behavior-driven, packaging must evolve from passive protection to active participation. This project proved that structured, inclusive design can unlock new value — for consumers and for business.</p>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s">Global scale demands global order.</p>
+                        <p class="wow fadeInUp" data-wow-delay="0.6s">We transformed fragmented specs into a single
+                            source of truth — ready for what's next.</p>
                     </div>
                     <div class="col-md-3">
                         <div class="sp-info float-end wow fadeInUp" data-wow-delay="0.4s">
@@ -371,6 +408,38 @@
             icon.className = video.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
         });
     </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const toggles = document.querySelectorAll(".read-more-toggle");
+
+    toggles.forEach(toggle => {
+        toggle.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const moreContent = this.previousElementSibling; // .more-content
+            const toggleText = this.querySelector(".toggle-text");
+            const toggleIcon = this.querySelector(".toggle-icon");
+
+            // Check current state using class, not style
+            if (moreContent.classList.contains("show")) {
+                moreContent.classList.remove("show");
+                toggleText.textContent = "Read More";
+                toggleIcon.classList.remove("fa-chevron-up");
+                toggleIcon.classList.add("fa-chevron-down");
+            } else {
+                moreContent.classList.add("show");
+                toggleText.textContent = "Read Less";
+                toggleIcon.classList.remove("fa-chevron-down");
+                toggleIcon.classList.add("fa-chevron-up");
+            }
+        });
+    });
+});
+</script>
+
+
+
+
 </body>
 
 </html>

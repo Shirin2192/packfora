@@ -112,7 +112,7 @@ $(document).ready(function () {
         nav: false,
         dots: true,
         autoplay: true,
-        autoplayTimeout: 3000,
+        autoplayTimeout: 5000,
         autoplayHoverPause: false,
         animateOut: 'fadeOut',
         responsive: {
@@ -177,7 +177,7 @@ $(document).ready(function () {
         nav: false,
         dots: false,
         autoplay: true,
-        autoplayTimeout: 3000,
+        autoplayTimeout: 5000,
         responsive: {
             0: {
                 items: 1.2

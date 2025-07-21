@@ -36,6 +36,19 @@
   transition: all 0.3s ease;
 }
 
+.nav-links {
+  padding: 5px 25px !important;
+  border-radius: 30px;
+  font-size: 16px;
+  color: #fff;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 700;
+}
+
+.nav-links:hover {
+  color: #ffffff;
+}
+
 .nav-link::after {
   content: "";
   position: absolute;
@@ -63,9 +76,27 @@
   background-color: #fff;
 }
 
+.dropdown-item:hover {
+    background: #f0e4ff;
+    color: #A154A1;
+}
+
+.hamenu {
+  background: linear-gradient(135deg, #8a2be2 0%, #414099 50%);
+}
+
+.hamenu .menu-links {
+  background: transparent;
+}
+
+.hamenu .cont-info {
+  background: transparent;
+  border-left: 1px solid #f0e4ff;
+}
+
 /* Hero Banner Styles */
 .hero-section {
-  background-image: url('../img/home/mx/hero-banner.png');
+  background-image: url('../img/home/mx/hero-banner.webp');
   background-size: cover;
   background-repeat: no-repeat;
   color: white;
@@ -84,10 +115,10 @@
 
 .hero-section h1 {
   font-size: 90px;
-    font-family: "Bricolage Grotesque", sans-serif;
-    font-weight: 600;
-    line-height: 1;
-    margin-bottom: 0;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 0;
 }
 
 .tabs-pill {
@@ -532,16 +563,19 @@
   padding: 60px 55px;
   border-radius: 20px;
 }
-.maxmold-story{
+
+.maxmold-story {
   padding: 0 0 0 22px;
 }
-.maxmold-story p{
+
+.maxmold-story p {
   color: #fff;
   font-size: 16px;
   font-family: "Bricolage Grotesque", sans-serif;
   margin-bottom: 12px;
 }
-.maxmold-story p:last-child{
+
+.maxmold-story p:last-child {
   margin-bottom: 0;
 }
 

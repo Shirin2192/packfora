@@ -110,7 +110,6 @@
     <?php include 'db_connect.php';
          include 'config.php';  
          ?>
-
     <?php
         if (isset($_GET['id'])) {
             $encoded_id = $_GET['id'];
@@ -134,7 +133,7 @@
         ?>
        <?php if ($case): ?>
         <section class="case-study-inner-ptb"
-            style="background-image: url(<?= BASE_URL. $case['image'] ?>); background-size: cover; background-position: top center; background-repeat: no-repeat;">
+            style="background-image: url(<?= BASE_URL. $case['main_image'] ?>); background-size: cover; background-position: top center; background-repeat: no-repeat;">
             <div class="container">
                 <div class="row">
                     <div class="page-title-bar text-center">
@@ -233,83 +232,82 @@
         <!-- End Objective -->
 
         <!-- ==== Start The Solution ==== -->
-<?php
-$case_study_id = $id; // dynamically set this ID
+            <?php
+            $case_study_id = $id; // dynamically set this ID
+            
+            // Fetch header content
+            $headerQuery = "SELECT * FROM tbl_case_study_solution_header WHERE case_study_id = ? LIMIT 1";
+            $stmt = $conn->prepare($headerQuery);
+            $stmt->bind_param("i", $case_study_id);
+            $stmt->execute();
+            $headerResult = $stmt->get_result();
+            $header = $headerResult->fetch_assoc();
+            // Fetch all solution items
+            $solutions = [];
+            
+            if (!empty($header)) {
+                $solutionQuery = "SELECT * FROM tbl_case_study_solutions WHERE fk_header_id = ? AND is_delete = 1 ORDER BY id ASC";
+                $stmt2 = $conn->prepare($solutionQuery);
+                $stmt2->bind_param("i", $header['id']);
+                $stmt2->execute();
+                $solutionResult = $stmt2->get_result();
+                while ($row = $solutionResult->fetch_assoc()) {
+                    $solutions[] = $row;
+                }
+            }
+            ?>
 
-// Fetch header
-$headerStmt = $conn->prepare("SELECT * FROM tbl_case_study_solution_header WHERE case_study_id = ?  LIMIT 1");
-$headerStmt->bind_param("i", $case_study_id);
-$headerStmt->execute();
-$headerResult = $headerStmt->get_result();
-$header = $headerResult->fetch_assoc();
-
-// Fetch solutions
-$solutions = [];
-if (!empty($header)) {
-    $solutionStmt = $conn->prepare("SELECT * FROM tbl_case_study_solutions WHERE fk_header_id = ? AND is_delete = 1 ORDER BY id ASC");
-    $solutionStmt->bind_param("i", $header['id']);
-    $solutionStmt->execute();
-    $result = $solutionStmt->get_result();
-    while ($row = $result->fetch_assoc()) {
-        $solutions[] = $row;
-    }
-}
-?>
-
-<?php if (!empty($header)): ?>
-
-<section class="the-solution">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-
-                <h2><?= htmlspecialchars($header['main_title']) ?></h2>
-                <p><?= htmlspecialchars($header['main_description']) ?></p>
-            </div>
-        </div>
-
-        <div class="row">
-            <?php foreach ($solutions as $solution): ?>
-                <div class="col-md-4 py-4">
-                    <div class="solutions">
-                        <div class="solution-icon">
-                            <img src="<?= htmlspecialchars($solution['image']) ?>" alt="<?= htmlspecialchars($solution['title']) ?>">
+            <?php if (!empty($header)): ?>
+            <section class="the-solution">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="wow fadeIn"><?= htmlspecialchars($header['main_title']) ?></h2>
+                            <p class="wow fadeIn" data-wow-delay="0.2s"><?= htmlspecialchars($header['main_description']) ?></p>
                         </div>
-                        <h4><?= htmlspecialchars($solution['title']) ?></h4>
-
-                        <?php
-                        // Extract <li> items from HTML description
-                        // echo $solution['description'];die;
-                        preg_match_all('/<li[^>]*>(.*?)<\/li>/i', $solution['description'], $matches);
-                        $li_items = $matches[1] ?? [];
-                        ?>
-
-                        <ul class="p-0 mb-0 text-white text-left solution-list">
-                            <?php if (!empty($li_items)): ?>
-                                <li><?= htmlspecialchars(array_shift($li_items)) ?></li>
-                            <?php endif; ?>
-                        </ul>
-
-                        <?php if (!empty($li_items)): ?>
-                            <div class="more-content" style="display:none;">
-                                <ul class="p-0 text-white text-left solution-list">
-                                    <?php foreach ($li_items as $item): ?>
-                                        <li><?= htmlspecialchars($item) ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
+                    </div>
+            
+                    <div class="row">
+                        <?php foreach ($solutions as $solution): ?>
+                            <div class="col-md-4 py-4">
+                                <div class="solutions wow zoomIn" data-wow-delay="0.4s">
+                                    <div class="solution-icon">
+                                        <img src="<?= BASE_URL . $solution['image'] ?>" alt="<?= htmlspecialchars($solution['title']) ?>" />
+                                    </div>
+                                    <h4><?= nl2br(htmlspecialchars_decode($solution['title'])) ?></h4>
+                                    <?php
+                                    // Extract <li> items from HTML description
+                                    // echo $solution['description'];
+                                    preg_match_all('/<li[^>]*>(.*?)<\/li>/i', $solution['description'], $matches);
+                                    $items = $matches[1] ?? [];
+                                    $first = array_shift($items);
+                                    ?>
+                                    
+            
+                                    <?php if (!empty($first)): ?>
+                                        <p class="text-white text-left">• <?= htmlspecialchars($first) ?></p>
+                                    <?php endif; ?>
+            
+                                    <?php if (!empty($items)): ?>
+                                        <div class="more-content" style="display: none;">
+                                            <?php foreach ($items as $item): ?>
+                                                <p class="text-white text-left">• <?= htmlspecialchars($item) ?></p>
+                                            <?php endforeach; ?>
+                                        </div>
+            
+                                        <a href="javascript:void(0);" class="read-more-toggle">
+                                            <span class="toggle-text">Read More</span>
+                                            <i class="fa fa-chevron-down toggle-icon"></i>
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
                             </div>
-                            <a href="javascript:void(0);" class="read-more-toggle">
-                                <span class="toggle-text">Read More</span>
-                                <i class="fa fa-chevron-down toggle-icon"></i>
-                            </a>
-                        <?php endif; ?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-<?php endif; ?>
+            </section>
+            <?php endif; ?>
+
 
         <!-- ==== End The Solution ==== -->
 
@@ -319,41 +317,39 @@ if (!empty($header)) {
                 $sql = "SELECT * FROM tbl_case_study_business_impact WHERE case_study_id = $id ORDER BY id ASC";
                 $result = $conn->query($sql);
                 ?>
-            <div class="business-impact">
-                <div class="container">
-                    <div class="row">
-                        <h2 class="mb-3 wow fadeInUp">Business Impact</h2>
+               <?php if (!empty($result) && $result->num_rows > 0): ?>
+                    <div class="business-impact">
+                        <div class="container">
+                            <div class="row">
+                                <h2 class="mb-3 wow fadeInUp">Business Impact</h2>
+                            </div>
+                
+                            <div class="row align-items-stretch">
+                                <?php
+                                $delay = 0.2;
+                                while ($row = $result->fetch_assoc()):
+                                    // Add margin for all cards except the first in mobile view
+                                    $cardClass = ($delay > 0.2) ? 'my-md-0 my-4' : '';
+                                ?>
+                                    <div class="col-lg-4 d-flex <?= $cardClass ?>">
+                                        <div class="business-impact-info wow fadeInUp p-4 w-100" data-wow-delay="<?= number_format($delay, 1) ?>s" style="background: #f8f9fa;">
+                                            <img src="<?= htmlspecialchars(BASE_URL . $row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                                            <h5><?= htmlspecialchars($row['title']) ?></h5>
+                                            <p><?= htmlspecialchars($row['description']) ?></p>
+                                        </div>
+                                    </div>
+                                <?php
+                                    $delay += 0.2;
+                                endwhile;
+                                ?>
+                            </div>
+                        </div>
                     </div>
+                <?php endif; ?>
 
-                    <div class="row align-items-stretch">
-                        <?php
-                        if ($result && $result->num_rows > 0):
-                            $delay = 0.2;
-                            while ($row = $result->fetch_assoc()):
-                        ?>
-                            <div class="col-lg-4 d-flex <?= $delay > 0.2 ? 'my-md-0 my-4' : '' ?>">
-                                <div class="business-impact-info wow fadeInUp p-4 w-100" data-wow-delay="<?= $delay ?>s" style="background: #f8f9fa;">
-                                    <img src="<?= htmlspecialchars( BASE_URL. $row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
-                                    <h5><?= htmlspecialchars($row['title']) ?></h5>
-                                    <p><?= htmlspecialchars($row['description']) ?></p>
-                                </div>
-                            </div>
-                        <?php
-                            $delay += 0.2;
-                            endwhile;
-                        else:
-                        ?>
-                            <div class="col-12">
-                                <p>No business impact data available.</p>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
         <!-- End Business Impact -->
 
         <!-- ==== Start Why It Matters ==== -->
-
         <section class="why-it-matters"
             style="background-image: url(assets/img/our-team/next-opportunity.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
             <div class="container">
@@ -411,29 +407,30 @@ if (!empty($header)) {
             video.muted = !video.muted;
             icon.className = video.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
         });
-
-
     </script>
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll('.read-more-toggle').forEach(function(toggle) {
-        toggle.addEventListener('click', function() {
-            const card = this.closest('.solutions');
-            const moreContent = card.querySelector('.more-content');
-            const toggleText = this.querySelector('.toggle-text');
-            const toggleIcon = this.querySelector('.toggle-icon');
+    const toggles = document.querySelectorAll(".read-more-toggle");
 
-            if (moreContent.style.display === 'none' || moreContent.style.display === '') {
-                moreContent.style.display = 'block';
-                toggleText.textContent = 'Read Less';
-                toggleIcon.classList.remove('fa-chevron-down');
-                toggleIcon.classList.add('fa-chevron-up');
+    toggles.forEach(toggle => {
+        toggle.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const moreContent = this.previousElementSibling; // .more-content
+            const toggleText = this.querySelector(".toggle-text");
+            const toggleIcon = this.querySelector(".toggle-icon");
+
+            // Check current state using class, not style
+            if (moreContent.classList.contains("show")) {
+                moreContent.classList.remove("show");
+                toggleText.textContent = "Read More";
+                toggleIcon.classList.remove("fa-chevron-up");
+                toggleIcon.classList.add("fa-chevron-down");
             } else {
-                moreContent.style.display = 'none';
-                toggleText.textContent = 'Read More';
-                toggleIcon.classList.remove('fa-chevron-up');
-                toggleIcon.classList.add('fa-chevron-down');
+                moreContent.classList.add("show");
+                toggleText.textContent = "Read Less";
+                toggleIcon.classList.remove("fa-chevron-down");
+                toggleIcon.classList.add("fa-chevron-up");
             }
         });
     });
@@ -441,7 +438,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
- 
+
 
 </body>
 

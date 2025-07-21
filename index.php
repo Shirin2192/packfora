@@ -367,7 +367,7 @@
                 }
             }
             ?>
-            <section class="blog-ds">
+            <!-- <section class="blog-ds">
                 <div class="blog-slider py-5" id="blogs">
                     <div class="container">
                         <h2 class="blog-title mb-4">Knowledge Centre</h2>
@@ -389,8 +389,46 @@
                         </div>
                     </div>
                 </div>
+            </section> -->
+            <section class="blog-ds">
+               <div class="blog-slider py-5" id="blogs">
+                  <div class="container">
+                     <h2 class="blog-title mb-4">Knowledge Centre</h2>
+                     <div class="owl-carousel owl-theme blogs-slider">
+                        <a href="blog2.php">
+                           <div class="blog-item wow fadeInUp" data-wow-delay="0.2s">
+                              <img src="assets/img/blog/thumb/navigating-PPWR-thumb.webp" alt="Plastic Packaging" class="blog-image">
+                              <div class="blog-date">11/05/2025</div>
+                              <div class="read-time">Reading time - 7 Minutes</div>
+                              <div class="blog-description">Navigating PPWR 2025/40: Lessons from the Frontlines of
+                                 Packaging Compliance
+                              </div>
+                           </div>
+                        </a>
+                        <a href="blog1.php">
+                           <div class="blog-item wow fadeInUp" data-wow-delay="0.4s">
+                              <img src="assets/img/blog/thumb/late-varianting-thumb.webp" alt="Global Packaging" class="blog-image">
+                              <div class="blog-date">03/04/2025</div>
+                              <div class="read-time">Reading time - 7 Minutes</div>
+                              <div class="blog-description">Late Varianting in Packaging: On-Demand Corrugate Printing
+                                 for Agility and Sustainability
+                              </div>
+                           </div>
+                        </a>
+                        <a href="blog3.php">
+                           <div class="blog-item wow fadeInUp" data-wow-delay="0.6s">
+                              <img src="assets/img/blog/thumb/8packaging-trends-thumb.webp" alt="Accelerated packaging" class="blog-image">
+                              <div class="blog-date">01/03/2025</div>
+                              <div class="read-time">Reading time - 5 Minutes</div>
+                              <div class="blog-description">8 Packaging Trends That Will Shape the Future:
+                                 Sustainability, Innovation & Smart Design
+                              </div>
+                           </div>
+                        </a>
+                     </div>
+                  </div>
+               </div>
             </section>
-
          <!-- ==== End Blogs ==== -->
          <!-- ==== Start Contact ==== -->
          <section class="contact-sa">

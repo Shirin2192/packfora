@@ -110,19 +110,16 @@
 <?php include 'db_connect.php';
          include 'config.php';  
          ?>
- <?php
-
- if (isset($_GET['id'])) {
+    <?php
+        if (isset($_GET['id'])) {
             $encoded_id = $_GET['id'];
             $id = base64_decode($encoded_id);
 
             // Optional: cast to int if it's supposed to be numeric
             $id = intval($id);
         }
-?>
+        ?>
 
-       
-      
     <main>
         <!-- ==== Start Home Banner ==== -->
         <?php  // Query the case study by ID
@@ -135,7 +132,7 @@
         ?>
        <?php if ($case): ?>
         <section class="case-study-inner-ptb"
-            style="background-image: url(<?= BASE_URL. $case['image'] ?>); background-size: cover; background-position: top center; background-repeat: no-repeat;">
+            style="background-image: url(<?= BASE_URL. $case['main_image'] ?>); background-size: cover; background-position: top center; background-repeat: no-repeat;">
             <div class="container">
                 <div class="row">
                     <div class="page-title-bar text-center">
@@ -231,7 +228,7 @@
         <!-- End Objective -->
 
         <!-- ==== Start The Solution ==== -->
-        <?php
+          <?php
         // Fetch header
             $header_sql = "SELECT * FROM tbl_case_study_solution_header WHERE case_study_id = $id";
             $header_result = $conn->query($header_sql);
@@ -275,7 +272,6 @@
             </div>
         </section>
         <?php } ?>
-
         <!-- ==== End The Solution ==== -->
 
         <!-- Start Business Impact -->
@@ -283,37 +279,38 @@
             $sql = "SELECT * FROM tbl_case_study_business_impact WHERE case_study_id = $id ORDER BY id ASC";
             $result = $conn->query($sql);
         ?>
-        <div class="business-impact">
-            <div class="container">
-                <div class="row">
-                    <h2 class="mb-3 wow fadeInUp">Business Impact</h2>
-                </div>
-
-                <div class="row">
-                    <?php
-                    if ($result && $result->num_rows > 0):
+       <?php if (!empty($result) && $result->num_rows > 0): ?>
+            <div class="business-impact">
+                <div class="container">
+                    <div class="row">
+                        <h2 class="mb-3 wow fadeInUp">Business Impact</h2>
+                    </div>
+        
+                    <div class="row">
+                        <?php
                         $delay = 0.2;
+                        $cardIndex = 0;
                         while ($row = $result->fetch_assoc()):
-                    ?>
-                        <div class="col-lg-4 <?= $delay == 0.4 ? 'my-md-0 my-4' : '' ?>">
-                            <div class="business-impact-info wow fadeInUp" data-wow-delay="<?= $delay ?>s">
-                                <img src="<?= htmlspecialchars(BASE_URL.$row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
-                                <h5><?= htmlspecialchars($row['title']) ?></h5>
-                                <p><?= htmlspecialchars($row['description']) ?></p>
+                            // Apply spacing for middle column only (optional)
+                            $colClass = ($cardIndex % 3 == 1) ? 'my-md-0 my-4' : '';
+                        ?>
+                            <div class="col-lg-4 <?= $colClass ?>">
+                                <div class="business-impact-info wow fadeInUp" data-wow-delay="<?= number_format($delay, 1) ?>s">
+                                    <img src="<?= htmlspecialchars(BASE_URL . $row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                                    <h5><?= htmlspecialchars($row['title']) ?></h5>
+                                    <p><?= htmlspecialchars($row['description']) ?></p>
+                                </div>
                             </div>
-                        </div>
-                    <?php
-                        $delay += 0.2;
+                        <?php
+                            $delay += 0.2;
+                            $cardIndex++;
                         endwhile;
-                    else:
-                    ?>
-                        <div class="col-12">
-                            <p>No business impact found for this case study.</p>
-                        </div>
-                    <?php endif; ?>
+                        ?>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php endif; ?>
+
         <!-- End Business Impact -->
 
         <!-- ==== Start Why It Matters ==== -->

@@ -14,7 +14,7 @@
     <title>End-to-End Packaging and Brand Consulting Solutions - Packfora</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" href="assets/img/favicon.svg">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
@@ -37,9 +37,6 @@
 </head>
 
 <body>
-    <?php include 'db_connect.php';
-         include 'config.php';  
-         ?>
     <!-- ==================== Start Loading ==================== -->
     <!-- <div class="loader-wrap">
         <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
@@ -114,14 +111,13 @@
     <main>
         <!-- ==== Start Home Banner ==== -->
         <section class="contact-page-title-banner"
-            style="background-image: url(assets/img/contact/contact-us-banner.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
+            style="background-image: url(assets/img/blog/knowledge-centre-banner.webp); background-size: cover; background-position: top center; background-repeat: no-repeat, no-repeat;">
             <div class="container">
                 <div class="row">
                     <div class="page-title-bar text-center">
-                        <!-- <h2>Your Next Step Starts Here</h2> -->
                         <h1 class="wow fadeInUp" data-wow-delay="0.2s">Knowledge Centre</h1>
-                        <!-- <p class="wow fadeInUp" data-wow-delay="0.4s">Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> -->
+                        <p class="wow fadeInUp" data-wow-delay="0.4s">Ideas That Create Impact—Across People, Planet,
+                            and Profit</p>
                         <div class="about-banner-btn mt-40 wow fadeInUp" data-wow-delay="0.2s">
                             <a href="#get-in-touch" class="read_more">Read Blogs</a>
                         </div>
@@ -135,95 +131,147 @@
         <section class="blog-page py-5">
             <div class="container">
                 <div class="row">
-                    <h2 class="offering-title mb-3 wow fadeIn" style="color: #21409A;">Blog</h2>
+                    <h2 class="offering-title mb-3 wow fadeIn" style="color: #21409A;">Latest Blogs</h2>
                 </div>
-                <?php
-                    $query = "SELECT * FROM tbl_blogs WHERE is_delete = '1' ORDER BY id DESC LIMIT 1"; // You can extend to multiple if needed
-                    $result = mysqli_query($conn, $query);
-
-                    if (mysqli_num_rows($result) > 0) {
-                    $blog = mysqli_fetch_assoc($result);
-                    // Split description into paragraphs for animation
-                    $paragraphs = preg_split("/\.\s+/", $blog['description']);
-                ?>
-              <div class="row">
-                    <div class="col-md-12">
-                        <div class="container-fluid blogs-content active pe-lg-0">
-                            <div class="row align-items-center">
-                            <div class="col-md-6 py-4 pe-lg-0">
-                                <div class="blog-content">
-                                <h3 class="wow fadeInUp" data-wow-delay="0.2s"><?= htmlspecialchars($blog['title']); ?></h3>
-                                <?php
-                                $delay = 0.3;
-                                foreach ($paragraphs as $para) {
-                                    $trimmed = trim($para);
-                                    if (!empty($trimmed)) {
-                                    echo '<p class="wow fadeInUp" data-wow-delay="' . number_format($delay, 1) . 's">' . htmlspecialchars($trimmed) . '.</p>';
-                                    $delay += 0.1;
-                                    }
-                                }
-                                ?>
-                                <div class="about-banner-btn mt-40 wow fadeInUp" data-wow-delay="<?= number_format($delay, 1) ?>s">
-                                    <a href="<?= !empty($blog['link']) ? $blog['link'] : '#get-in-touch'; ?>" class="read_more">Read Blogs</a>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 pe-lg-0 wow zoomIn" data-wow-delay="0.2s">
-                                <img src="<?= BASE_URL . htmlspecialchars($blog['image']); ?>" alt="Main Blog Image">
-                            </div>
+                <div class="row">
+                    <div class="col-lg-7 col-md-12 wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="blogs-content active"
+                            style="background-image: url(assets/img/blog/main/navigating-PPWR.webp); background-size: cover; background-position: left center; background-repeat: no-repeat, no-repeat; position: relative; height: 480px;">
+                            <div class="latest-blog p-5">
+                                <a href="blog2.php">
+                                    <div class="latest-blog-data">
+                                        <h5>May 11, 2025 | Reading time - 7 Minutes</h5>
+                                        <h3>    ons from the Frontlines of Packaging Compliance
+                                        </h3>
+                                        <h6>Over the past few months, I've been having a recurring conversation with our
+                                            clients, especially those operating across Europe.</h6>
+                                    </div>
+                                </a>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-lg-5 col-md-12 wow fadeInUp" data-wow-delay="0.4s">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-6">
+                                <div class="related-blog mt-4 mt-lg-auto">
+                                    <div class="row">
+                                        <div class="col-md-6 col-6">
+                                            <img src="assets/img/blog/thumb/late-varianting-thumb.webp" alt=""
+                                                srcset="">
+                                        </div>
+                                        <div class="col-md-6 col-6 ps-0">
+                                            <div class="related-blog-details">
+                                                <h3 class="mb-4">Late Varianting in Packaging: On-Demand Corrugate
+                                                    Printing for
+                                                    Agility and Sustainability</h3>
+                                                <h6>In recent conversations with both global FMCG firms...</h6>
+                                                <a href="blog1.php">
+                                                    <h5>Learn More</h5>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-6">
+                                <div class="related-blog mt-4">
+                                    <div class="row">
+                                        <div class="col-md-6 col-6">
+                                            <img src="assets/img/blog/thumb/8packaging-trends-thumb.webp" alt=""
+                                                srcset="">
+                                        </div>
+                                        <div class="col-md-6 col-6 ps-0">
+                                            <div class="related-blog-details">
+                                                <h3 class="mb-4">8 Packaging Trends That Will Shape the Future:
+                                                    Sustainability,
+                                                    Innovation & Smart Design</h3>
+                                                <h6>We've often said that the future of packaging won't...</h6>
+                                                <a href="blog3.php">
+                                                    <h5>Learn More</h5>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            <?php
-            }
-            ?>
             </div>
         </section>
         <!-- ==== End Blog ==== -->
 
         <!-- ==== Start More Blog ==== -->
-        <div class="more-blog py-5" style="background: #efefef;">
+        <!-- <div class="more-blog pb-5">
             <div class="container">
                 <div class="row">
                     <h2 class="offering-title mb-3 wow fadeIn" style="color: #21409A;">More Blogs</h2>
                 </div>
-                <?php
-                    // Query to get blogs where is_delete = '1' and id != 1
-                    $sql = "SELECT * FROM tbl_blogs WHERE is_delete = '1' AND id != 1 ORDER BY id ASC";
-                    $result = $conn->query($sql);
-
-                    $blogs = [];
-                    if ($result && $result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            $blogs[] = $row;
-                        }
-                    }
-                ?>
                 <div class="row">
-                    <?php foreach ($blogs as $blog): ?>
-                        <div class="col-lg-3 my-2 my-lg-auto">
-                            <div class="blogs-card wow zoomIn slow" data-wow-delay="0.2s">
-                                <div class="blogs-img">
-                                    <img src="<?= BASE_URL .htmlspecialchars($blog['image']) ?>" class="w-100" alt="<?= htmlspecialchars($blog['title']) ?>">
-                                </div>
-                                <div class="blogs-content">
-                                    <h4 class="mb-2"><?= htmlspecialchars($blog['title']) ?></h4>
-                                    <p><?= htmlspecialchars($blog['description']) ?></p>
-                                    <?php if (!empty($blog['link']) && $blog['link'] !== '#'): ?>
-                                        <a href="<?= htmlspecialchars($blog['link']) ?>">
-                                            <h5>Learn More</h5>
-                                        </a>
-                                    <?php else: ?>
-                                        <h5>Learn More</h5>
-                                    <?php endif; ?>
-                                </div>
+                    <div class="col-lg-3 my-2 my-lg-auto">
+                        <div class="blogs-card wow zoomIn slow" data-wow-delay="0.2s">
+                            <div class="blogs-img">
+                                <img src="assets/img/services/product-innovation.webp" class="w-100">
+                            </div>
+                            <div class="blogs-content">
+                                <h4 class="mb-2">Product Innovation</h4>
+                                <p>Leverage data-driven insights to accelerate go-to-market strategies and
+                                    amplify packaging's role in brand growth.</p>
+                                <h5>Learn More</h5>
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                    </div>
+                    <div class="col-lg-3 my-2 my-lg-auto">
+                        <div class="blogs-card wow zoomIn slow" data-wow-delay="0.2s">
+                            <div class="blogs-img">
+                                <img src="assets/img/services/design-to-value.webp" class="w-100">
+                            </div>
+                            <div class="blogs-content">
+                                <h4 class="mb-2">Design to Value</h4>
+                                <p>Design cost-effective packaging solutions that align with evolving
+                                    industry trends and consumer expectations.</p>
+                                <a href="design-to-value.php">
+                                    <h5>Learn More</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 my-2 my-lg-auto">
+                        <div class="blogs-card wow zoomIn slow" data-wow-delay="0.2s">
+                            <div class="blogs-img">
+                                <img src="assets/img/services/mold-management.webp" class="w-100">
+                            </div>
+                            <div class="blogs-content">
+                                <h4 class="mb-2">Mold Management</h4>
+                                <p>Optimize production with advanced mold management, extending lifecycle
+                                    value and minimizing costs.</p>
+                                <h5>Learn More</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 my-2 my-lg-auto">
+                        <div class="blogs-card wow zoomIn slow" data-wow-delay="0.2s">
+                            <div class="blogs-img">
+                                <img src="assets/img/services/packaging-innovation-engineering.webp" class="w-100">
+                            </div>
+                            <div class="blogs-content">
+                                <h4 class="mb-2">Packaging Innovation & Engineering</h4>
+                                <p>Pushing the boundaries of packaging with next-gen innovations—leveraging rapid
+                                    prototyping.</p>
+                                <a href="packaging-innovation-and-engineering.php">
+                                    <h5>Learn More</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
+                <div class="row">
+                    <div class="connect-expert mt-4">
+                        <a href="" class="read_more mt-30">Load More</a>
+                    </div>
+                </div>
             </div>
-        </div>
+        </div> -->
         <!-- ==== End More Blog ==== -->
 
         <?php include('footer.php'); ?>

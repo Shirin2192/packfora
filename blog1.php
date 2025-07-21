@@ -25,7 +25,7 @@
     <meta name="twitter:image" content="">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/imgs/favicon.svg" type="image/svg+xml">
+    <link rel="shortcut icon" href="assets/img/favicon.svg" type="image/svg+xml">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
@@ -104,14 +104,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="blog-head text-center pt-50">
-                            <h5>Updated May 13, 2025 12:52 PM</h5>
+                            <h5>Updated Apr 3, 2025 12:00 PM | Reading time - 7 Minutes</h5>
                             <h3>Late Varianting in Packaging: On-Demand Corrugate Printing for Agility and Sustainability</h3>
-                            <img src="assets/img/blog/blog1.webp" alt="">
+                            <img src="assets/img/blog/main/late-varianting.webp" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-9">
+                    <div class="col-lg-9 col-md-12">
                         <div class="blog-detail-content">
                             <h4>Why Packaging Needs to Catch Up</h4>
                             <p>In recent conversations with both global FMCG firms and high-growth nutraceutical startups, one challenge keeps surfacing: packaging is lagging the rest of the supply chain.</p>
@@ -216,7 +216,7 @@
                             <p>Curious whether Late Varianting is right for your supply chain?</p>
                             <p><strong>Get in touch with Packfora's experts</strong> to assess your current setup and identify opportunities for transformation—one box at a time.</p>
 
-                            <div class="published-by d-flex gap-3 align-items-center pt-40">
+                            <!-- <div class="published-by d-flex gap-3 align-items-center pt-40">
                                 <div class="publisher-img">
                                     <img src="assets/img/blog/publisher/publisher.png" alt="">
                                 </div>
@@ -229,48 +229,47 @@
                                         <img src="assets/img/leaders/linkedin.png" alt="">
                                     </a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
-                    <div class="col-md-3 related-blogs fadeInUp" data-wow-delay="0.2s">
-                        <div class="related-blog border-0 p-0 mb-3">
-                            <h4>Related Blogs</h4>
+                    <div class="col-lg-3 col-md-12 related-blogs fadeInUp" data-wow-delay="0.2s">
+                        <div class="related-blog border-0 p-0">
+                            <h4 class="mb-0">Related Blogs</h4>
                         </div>
-                        <div class="related-blog mt-3 mt-lg-auto">
-                            <div class="row">
-                                <div class="col-md-6 col-6">
-                                    <img src="assets/img/blog/main-blog.webp" alt="" srcset="">
-                                </div>
-                                <div class="col-md-6 col-6 ps-0">
-                                    <div class="related-blog-details">
-                                        <h6>The Problem with Packaging That's Planned Too Early</h6>
-                                        <h5>Learn More</h5>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-6">
+                                <div class="related-blog mt-4">
+                                    <div class="row">
+                                        <div class="col-md-6 col-6">
+                                            <img src="assets/img/blog/thumb/navigating-PPWR-thumb.webp" alt="" srcset="">
+                                        </div>
+                                        <div class="col-md-6 col-6 ps-0">
+                                            <div class="related-blog-details">
+                                                <h3 class="mb-4">Navigating PPWR 2025/40: Lessons...</h3>
+                                                <h6>Over the past few months, I've been...</h6>
+                                                <a href="blog2.php">
+                                                    <h5>Learn More</h5>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="related-blog my-3">
-                            <div class="row">
-                                <div class="col-md-6 col-6">
-                                    <img src="assets/img/blog/main-blog.webp" alt="" srcset="">
-                                </div>
-                                <div class="col-md-6 col-6 ps-0">
-                                    <div class="related-blog-details">
-                                        <h6>The Problem with Packaging That's Planned Too Early</h6>
-                                        <h5>Learn More</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="related-blog">
-                            <div class="row">
-                                <div class="col-md-6 col-6">
-                                    <img src="assets/img/blog/main-blog.webp" alt="" srcset="">
-                                </div>
-                                <div class="col-md-6 col-6 ps-0">
-                                    <div class="related-blog-details">
-                                        <h6>The Problem with Packaging That's Planned Too Early</h6>
-                                        <h5>Learn More</h5>
+                            <div class="col-lg-12 col-md-6">
+                                <div class="related-blog mt-4">
+                                    <div class="row">
+                                        <div class="col-md-6 col-6">
+                                            <img src="assets/img/blog/thumb/8packaging-trends-thumb.webp" alt="" srcset="">
+                                        </div>
+                                        <div class="col-md-6 col-6 ps-0">
+                                            <div class="related-blog-details">
+                                                <h3 class="mb-4">8 Packaging Trends That Will Shape...</h3>
+                                                <h6>We've often said that the future of...</h6>
+                                                <a href="blog3.php">
+                                                    <h5>Learn More</h5>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
