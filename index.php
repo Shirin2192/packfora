@@ -359,13 +359,13 @@
          <!-- ==== Start Blogs ==== -->
          <?php
             $blogs = [];
-            $sql = "SELECT * FROM tbl_knowledge_centre WHERE is_delete = 1 ORDER BY date DESC";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $blogs[] = $row;
-                }
-            }
+            // $sql = "SELECT * FROM tbl_knowledge_centre WHERE is_delete = 1 ORDER BY date DESC";
+            // $result = $conn->query($sql);
+            // if ($result->num_rows > 0) {
+            //     while ($row = $result->fetch_assoc()) {
+            //         $blogs[] = $row;
+            //     }
+            // }
             ?>
             <!-- <section class="blog-ds">
                 <div class="blog-slider py-5" id="blogs">
@@ -390,41 +390,42 @@
                     </div>
                 </div>
             </section> -->
+            <?php
+            // Fetch blogs
+            $sql = "SELECT * FROM tbl_blogs WHERE is_active = 1 AND is_delete = 1 ";
+            $result = $conn->query($sql);
+
+            $blogs = [];
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $blogs[] = [
+                        'slug' => $row['slug'],
+                        'img' => $row['image'],
+                        'title' => $row['title'],
+                        'date' => date('d/m/Y', strtotime($row['created_at'])),
+                        'read_time' => $row['read_time'],
+                        'summary' => $row['summary'],
+                        'id'=>$row['id'],
+                    ];
+                }
+            }
+            ?>
             <section class="blog-ds">
                <div class="blog-slider py-5" id="blogs">
                   <div class="container">
                      <h2 class="blog-title mb-4">Knowledge Centre</h2>
                      <div class="owl-carousel owl-theme blogs-slider">
-                        <a href="blog2.php">
-                           <div class="blog-item wow fadeInUp" data-wow-delay="0.2s">
-                              <img src="assets/img/blog/thumb/navigating-PPWR-thumb.webp" alt="Plastic Packaging" class="blog-image">
-                              <div class="blog-date">11/05/2025</div>
-                              <div class="read-time">Reading time - 7 Minutes</div>
-                              <div class="blog-description">Navigating PPWR 2025/40: Lessons from the Frontlines of
-                                 Packaging Compliance
+                        <?php foreach ($blogs as $blog): ?>
+                           <a href="<?= $blog['slug']. '?id=' . urlencode(base64_encode($blog['id'])) ?>">
+                              <div class="blog-item wow fadeInUp" data-wow-delay="">
+                                 <img src="<?= BASE_URL. $blog['img'] ?>" alt="<?= $blog['title'] ?>" class="blog-image">
+                                 <div class="blog-date"><?= $blog['date'] ?></div>
+                                 <div class="read-time"><?= $blog['read_time'] ?></div>
+                                 <div class="blog-description"><?= $blog['title'] ?></div>
                               </div>
-                           </div>
-                        </a>
-                        <a href="blog1.php">
-                           <div class="blog-item wow fadeInUp" data-wow-delay="0.4s">
-                              <img src="assets/img/blog/thumb/late-varianting-thumb.webp" alt="Global Packaging" class="blog-image">
-                              <div class="blog-date">03/04/2025</div>
-                              <div class="read-time">Reading time - 7 Minutes</div>
-                              <div class="blog-description">Late Varianting in Packaging: On-Demand Corrugate Printing
-                                 for Agility and Sustainability
-                              </div>
-                           </div>
-                        </a>
-                        <a href="blog3.php">
-                           <div class="blog-item wow fadeInUp" data-wow-delay="0.6s">
-                              <img src="assets/img/blog/thumb/8packaging-trends-thumb.webp" alt="Accelerated packaging" class="blog-image">
-                              <div class="blog-date">01/03/2025</div>
-                              <div class="read-time">Reading time - 5 Minutes</div>
-                              <div class="blog-description">8 Packaging Trends That Will Shape the Future:
-                                 Sustainability, Innovation & Smart Design
-                              </div>
-                           </div>
-                        </a>
+                           </a>
+                        <?php endforeach; ?>
                      </div>
                   </div>
                </div>

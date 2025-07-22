@@ -96,9 +96,13 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-
+     <?php include 'db_connect.php';
+         include 'config.php';  
+         ?>
     <main>
         <!-- ==== Start Blog ==== -->
+ 
+
         <section class="blog-page py-5">
             <div class="container">
                 <div class="row">

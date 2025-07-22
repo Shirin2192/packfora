@@ -124,262 +124,117 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-
+     <?php include 'db_connect.php';
+         include 'config.php';  
+         ?>
     <main>
         <!-- ==== Start Blog ==== -->
+               <?php
+// $base_url = dirname($_SERVER['SCRIPT_NAME']);
+
+// $base_url = rtrim($base_url, '/') . '/';
+
+// // Get the slug from URL
+// $slug = $_GET['slug'] ?? '';
+// // Sample content source (use a DB in production)
+// $blogs = [
+//     'late-varianting-in-packaging-on-demand-corrugate-printing' => [
+//         'title' => 'Late Varianting in Packaging: On-Demand Corrugate Printing for Agility and Sustainability',
+//         'date' => 'Apr 3, 2025 12:00 PM',
+//         'reading_time' => '7 Minutes',
+//         'main_image' => 'assets/img/blog/main/late-varianting.webp',
+//         'content_file' => 'blog-content/late-varianting.html'
+//     ],
+//     // Add more blogs as needed
+// ];
+
+// // Check if blog exists
+// if (!array_key_exists($slug, $blogs)) {
+//     echo "<h2>Blog not found</h2>";
+//     exit;
+// }
+               // $blog = $blogs[$slug];
+             if (isset($_GET['id'])) {
+            $encoded_id = $_GET['id'];
+            $id = base64_decode($encoded_id);
+
+            // Optional: cast to int if it's supposed to be numeric
+            $id = intval($id);
+        }             
+
+
+
+?>
+<?php  // Query the case study by ID
+            $sql = "SELECT * FROM tbl_blogs WHERE id = $id AND is_delete = 1";
+$result = $conn->query($sql);
+
+if ($result && $result->num_rows > 0) {
+    $blog = $result->fetch_assoc();
+} else {
+    echo "<h2>Blog not found</h2>";
+    exit;
+}
+            // Helper
+function formatDate($datetime) {
+    return date('F d, Y h:i A', strtotime($datetime));
+}
+        ?>
         <section class="blog-page py-5">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="blog-head text-center pt-50">
-                            <h5>Updated May 11, 2025 12:00 PM | Reading time - 7 Minutes</h5>
-                            <h3>Navigating PPWR 2025/40: Lessons from the Frontlines of Packaging Compliance</h3>
-                            <img src="assets/img/blog/main/navigating-PPWR.webp" alt="">
+                            <h5>Updated <?= formatDate($blog['publish_date']) ?> |<?= $blog['read_time'] ?></h5>
+                            <h3><?= htmlspecialchars($blog['title']) ?></h3>
+                            <img src="<?= BASE_URL. $blog['image'] ?>" alt="">
                         </div>
                     </div>
                 </div>
+
                 <div class="row mt-4">
                     <div class="col-lg-9 col-md-12">
                         <div class="blog-detail-content">
-                            <p>Over the past few months, I've been having a recurring conversation with our clients,
-                                especially those operating across Europe. Whether it's a food startup in one part of
-                                Europe or a global pharma brand headquartered in other, the question is always the same:
-                                “How do we stay compliant—and stay competitive—with PPWR?”</p>
-                            <p>When one of our clients called us just a week after the Packaging and Packaging Waste
-                                Regulation (PPWR) came into effect in February, their concern wasn't just about fines or
-                                penalties. It was about rethinking their entire packaging strategy to align with the
-                                future of sustainable compliance. If you're navigating similar questions, here's a
-                                breakdown of what PPWR 2025/40 really means—and what smart businesses are doing about
-                                it.</p>
-
-                            <h4>Understanding PPWR 2025/40</h4>
-                            <p>The European Union's PPWR 2025/40 represents a major shift in how packaging is regulated.
-                                Unlike the previous Directive 94/62/EC, PPWR is a regulation—meaning it applies
-                                uniformly across all EU member states. No country-level interpretation. No delays in
-                                adoption. Just one consistent framework designed to accelerate a circular packaging
-                                economy.</p>
-                            <p>Here's what the regulation is trying to achieve:</p>
-                            <ul>
-                                <li><strong>Reduce Packaging Waste:</strong> Cut down excess volume and unnecessary
-                                    weight.</li>
-                                <li><strong>Enhance Recyclability:</strong> Ensure all packaging meets minimum
-                                    recyclability standards by
-                                    2030.</li>
-                                <li><strong>Increase Reuse:</strong> Encourage the adoption of reusable packaging
-                                    systems.</li>
-                                <li><strong>Incorporate Recycled Content:</strong> Set recycled content targets for
-                                    plastic packaging.
-                                </li>
-                                <li><strong>Harmonize Regulations:</strong> Create consistency across all EU countries.
-                                </li>
-                            </ul>
-
-                            <h4>Critical Compliance Deadlines</h4>
-                            <p>If you're mapping out a multi-year packaging roadmap, these are the dates that need to be
-                                front and center on your compliance calendar:</p>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Regulation Area</th>
-                                        <th>Mandate</th>
-                                        <th>Effective Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Harmful Substance Bans</td>
-                                        <td>PFAS & BPA banned</td>
-                                        <td>Mid-2025</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Labeling Standards</td>
-                                        <td>Mandatory recyclability labels</td>
-                                        <td>Jan 1, 2028</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Deposit-Return Systems</td>
-                                        <td>Mandatory for beverage containers</td>
-                                        <td>Jan 1, 2029</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Packaging Minimization</td>
-                                        <td>Empty space ≤ 40%</td>
-                                        <td>Jan 1, 2030</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Recyclability</td>
-                                        <td>All packaging must be at least Grade C</td>
-                                        <td>Jan 1, 2030</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Recycled Content</td>
-                                        <td>25% (non-food), 10% (food contact)</td>
-                                        <td>Jan 1, 2030</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Reusable Packaging</td>
-                                        <td>10-50% reuse targets</td>
-                                        <td>Jan 1, 2030</td>
-                                    </tr>
-                                    <tr>
-                                        <td>EPR Modulation</td>
-                                        <td>Higher fees for non-recyclable packaging</td>
-                                        <td>Jan 1, 2030</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Higher Recyclability</td>
-                                        <td>Grade B for all packaging</td>
-                                        <td>Jan 1, 2038</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Higher Recycled Content</td>
-                                        <td>65% (non-food), 30% (food contact)</td>
-                                        <td>Jan 1, 2040</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <h4>Extended Producer Responsibility (EPR) Under PPWR</h4>
-                            <p>We've seen firsthand how Extended Producer Responsibility (EPR) continues to evolve under
-                                PPWR. At its core, it's about shifting the full lifecycle responsibility to the
-                                producers—from packaging design to waste management and end-of-life processing.</p>
-                            <p>Here's what that means in practice:</p>
-                            <ul>
-                                <li><strong>Registration:</strong> You must register with the authorities in each EU
-                                    country where your packaging is sold.</li>
-                                <li><strong>Fee Modulation:</strong> EPR fees are now tied to the recyclability and
-                                    sustainability of your packaging.</li>
-                                <li><strong>Data Reporting:</strong> You'll be expected to report materials, volumes,
-                                    and recycling data regularly and accurately.</li>
-                            </ul>
-
-                            <h4>Design for Recycling (DfR) and Recyclability Standards</h4>
-                            <p>By 2030, every piece of packaging needs to be designed with recyclability in mind. This
-                                isn't just about using 'recyclable' materials—it's about ensuring that your packaging
-                                can be collected, sorted, and reprocessed within existing systems.</p>
-                            <p>What we often advise clients to focus on:</p>
-                            <ul>
-                                <li>Choose mono-materials where possible.</li>
-                                <li>Avoid toxic adhesives, inks, and components that hinder recycling.</li>
-                                <li>Make disassembly intuitive and feasible at scale.</li>
-                            </ul>
-
-                            <h4>Recycled Content and Material Restrictions</h4>
-                            <p>PPWR puts a firm spotlight on reducing reliance on virgin plastic. It also bans
-                                substances that are known to pose risks to human health or the environment.</p>
-                            <p>What's changing:</p>
-                            <ul>
-                                <li>Recycled content is now mandatory—25% for non-food plastic packaging, and 10% for
-                                    food-contact packaging by 2030.</li>
-                                <li>From August 12, 2026, PFAS will be banned in all food contact packaging.</li>
-                                <li>Heavy metals like lead, cadmium, mercury, and hexavalent chromium must not exceed
-                                    100 mg/kg in packaging materials.</li>
-                            </ul>
-
-                            <h4>Labeling and Consumer Information</h4>
-                            <p>We've worked with clients to update their packaging labels in advance of the 2028
-                                deadline—and one thing is clear: transparency is no longer optional.</p>
-                            <p>PPWR mandates standardized, easy-to-understand labeling, including:</p>
-                            <ul>
-                                <li>Clear material identification on-pack</li>
-                                <li>QR codes or digital access to recycling instructions</li>
-                                <li>Harmonized waste bin symbols to guide disposal behavior</li>
-                            </ul>
-
-                            <h4>Strategic Steps for Compliance</h4>
-                            <p>So, how should your business respond? Here's what we're recommending:</p>
-                            <ul>
-                                <li><strong>1. Conduct Packaging Audits:</strong> Assess current packaging materials and
-                                    designs against PPWR requirements.</li>
-                                <li><strong>2. Redesign for Compliance:</strong> Collaborate with packaging experts to
-                                    develop recyclable and reusable packaging solutions.</li>
-                                <li><strong>3. Engage with EPR Schemes:</strong> Register with national EPR programs and
-                                    understand fee structures.</li>
-                                <li><strong>4. Implement Tracking Systems:</strong> Establish systems for monitoring
-                                    packaging materials, volumes, and waste management practices.</li>
-                                <li><strong>5. Educate Stakeholders:</strong> Train internal teams and supply chain
-                                    partners on PPWR obligations and best practices.</li>
-                            </ul>
-
-                            <h4>Conclusion</h4>
-                            <p>PPWR 2025/40 isn't just another regulatory hurdle, it's a call to transform how we think
-                                about packaging. We've seen that early movers not only avoid compliance risks but also
-                                build consumer trust and unlock long-term cost savings.</p>
-                            <p>If your team is still figuring out the way forward, we're here to help. We've supported
-                                businesses at every stage of their compliance journey—from diagnostics to
-                                implementation.</p>
-
-                            <h4>Need Assistance with PPWR Compliance?</h4>
-                            <p>Let's work together to build a packaging strategy that's future-ready. Reach out to our
-                                team to explore how we can support your compliance goals.</p>
-
-                            <h4>Download Our PPWR Compliance Guide</h4>
-                            <p>For a concise summary of the regulation and actionable next steps, download our detailed
-                                guide. -</p>
-
-                            <strong>Further Reading:</strong>
-                            <p><a href="https://environment.ec.europa.eu/topics/waste-and-recycling/packaging-waste_en" target="_blank">EU Packaging Waste - European Commission</a></p>
-                            <p><a href="https://www.cdf1.com/eu-ppwr-timeline-key-deadlines-and-compliance-phases-for-bulk-packaging/" target="_blank">PPWR Timeline & Compliance Phases</a></p>
-
-                            <small><strong>Note:</strong> This blog is intended for informational purposes only and does not constitute legal advice. For specific guidance, consult with a legal professional or regulatory expert.</small>
-
-                            <!-- <div class="published-by d-flex gap-3 align-items-center pt-40">
-                                <div class="publisher-img">
-                                    <img src="assets/img/blog/publisher/publisher.png" alt="">
-                                </div>
-                                <div class="publisher-info">
-                                    <h5 class="mb-0">Packfora Leadership Team</h5>
-                                    <p class="mb-0">Chief Packaging Officer (CPO)</p>
-                                </div>
-                                <div class="publisher-linkedin">
-                                    <a href="https://www.linkedin.com/in/hitesh-shenoy-2a84492/?originalSubdomain=sg" target="_blank">
-                                        <img src="assets/img/leaders/linkedin.png" alt="">
-                                    </a>
-                                </div>
-                            </div> -->
+                            <?= $blog['content'] ?>
                         </div>
                     </div>
+
+                    <!-- Sidebar -->
                     <div class="col-lg-3 col-md-12 related-blogs fadeInUp" data-wow-delay="0.2s">
                         <div class="related-blog border-0 p-0">
                             <h4 class="mb-0">Related Blogs</h4>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12 col-md-6">
-                                <div class="related-blog mt-4">
-                                    <div class="row">
-                                        <div class="col-md-6 col-6">
-                                            <img src="assets/img/blog/thumb/late-varianting-thumb.webp" alt="" srcset="">
-                                        </div>
-                                        <div class="col-md-6 col-6 ps-0">
-                                            <div class="related-blog-details">
-                                                <h3 class="mb-4">Late Varianting in Packaging: On-Demand...</h3>
-                                                <h6>In recent conversations with both...</h6>
-                                                <a href="blog1.php">
-                                                    <h5>Learn More</h5>
-                                                </a>
+                            <?php
+                            // Get 2 related blogs (excluding current)
+                            $relatedSql = "SELECT * FROM tbl_blogs WHERE id != $id AND is_delete = 1 ORDER BY publish_date DESC LIMIT 2";
+                            $relatedRes = $conn->query($relatedSql);
+
+                            while ($rel = $relatedRes->fetch_assoc()) {
+                                $rel_title = substr($rel['title'], 0, 25) . '...';
+                                $rel_summary = substr(strip_tags($rel['summary']), 0, 35) . '...';
+
+                                $rel_url = $rel['slug']. '?id=' . urlencode(base64_encode($rel['id'])); // or slug-based URL
+                            ?>
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="related-blog mt-4">
+                                        <div class="row">
+                                            <div class="col-md-6 col-6">
+                                                <img src="<?= BASE_URL. $rel['image'] ?>" alt="">
+                                            </div>
+                                            <div class="col-md-6 col-6 ps-0">
+                                                <div class="related-blog-details">
+                                                    <h3 class="mb-4"><?= $rel_title ?></h3>
+                                                    <h6><?= $rel_summary ?></h6>
+                                                    <a href="<?= $rel_url ?>">
+                                                        <h5>Learn More</h5>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-12 col-md-6">
-                                <div class="related-blog mt-4">
-                                    <div class="row">
-                                        <div class="col-md-6 col-6">
-                                            <img src="assets/img/blog/thumb/8packaging-trends-thumb.webp" alt="" srcset="">
-                                        </div>
-                                        <div class="col-md-6 col-6 ps-0">
-                                            <div class="related-blog-details">
-                                                <h3 class="mb-4">8 Packaging Trends That Will Shape...</h3>
-                                                <h6>We've often said that the future of...</h6>
-                                                <a href="blog3.php">
-                                                    <h5>Learn More</h5>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

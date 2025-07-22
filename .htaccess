@@ -1,9 +1,9 @@
 RewriteEngine On
 RewriteBase /packfora/packfora/
 
-# Skip if actual file or directory exists
+# Skip if file or directory exists
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Route any slug (e.g., /slug-name) to case-study-inner.php?slug=slug-name
-RewriteRule ^([a-zA-Z0-9\-]+)$ case-study-inner.php?slug=$1 [QSA,L]
+# Route all slugs to a single handler
+RewriteRule ^([a-zA-Z0-9\-]+)$ slug-router.php?slug=$1 [QSA,L]
