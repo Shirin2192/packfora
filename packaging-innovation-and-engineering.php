@@ -332,31 +332,45 @@
         ?>
 
         <section class="our-leaders">
-            <div class="container">
-                <div class="row">
-                    <div class="success-stories-header">
-                        <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Our Leaders</h2>
-                        <h1 class="wow fadeInUp" data-wow-delay="0.4s">A Dedicated Team of Packaging Professionals.</h1>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="success-stories-header">
+                <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Our Leaders</h2>
+                <h1 class="wow fadeInUp" data-wow-delay="0.4s">A Dedicated Team of Packaging Professionals.</h1>
+            </div>
 
-                    <?php foreach ($our_leaders as $leader): ?>
-                        <div class="col-md-3 col-6">
-                            <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
-                                <img src="<?= BASE_URL . htmlspecialchars($leader['image']) ?>" class="w-100" alt="<?= htmlspecialchars($leader['name']) ?>">
-                                <p><?= htmlspecialchars($leader['name']) ?></p>
-                                <h6><?= htmlspecialchars($leader['designation']) ?></h6>
-                                <?php if (!empty($leader['link'])): ?>
-                                    <a href="<?= htmlspecialchars($leader['link']) ?>" target="_blank">
-                                        <img src="assets/img/leaders/linkedin.png" alt="LinkedIn" class="p-0">
-                                    </a>
-                                <?php endif; ?>
+            <?php
+            // Loop through leaders and display each in a col
+            if (!empty($our_leaders)) {
+                foreach ($our_leaders as $leader) {
+                    $name = htmlspecialchars($leader['name']);
+                    $designation = htmlspecialchars($leader['designation']);
+                    $image = htmlspecialchars( BASE_URL . $leader['image']); // full or relative path
+                    $linkedin = htmlspecialchars($leader['link']);
+            ?>
+                <div class="col-md-3 col-6">
+                    <a href="<?= $linkedin ?>" target="_blank" rel="noopener noreferrer">
+                        <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
+                            <img src="<?= $image ?>" class="w-100" alt="<?= $name ?>">
+                            <p><?= $name ?></p>
+                            <h6><?= $designation ?></h6>
+                            <div class="icons d-flex float-end">
+                                <img src="assets/img/leaders/linkedin.png" alt="LinkedIn Icon" class="p-0">
+                                <img src="assets/img/home/intro/Vector.png" alt="Arrow Icon" class="p-0">
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                    </a>
                 </div>
-            </div>
-        </section>
-      
+            <?php
+                }
+            } else {
+                echo "<div class='col-12 text-center'><p>No leaders found.</p></div>";
+            }
+            ?>
+        </div>
+    </div>
+</section>
+
         <!-- ==== End Our Leaders ==== -->
 
         <!-- ==== Start Sustainable Packaging ==== -->

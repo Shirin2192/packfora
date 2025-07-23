@@ -299,72 +299,81 @@
 
         <!-- ==== Start Success Stories ==== -->
         <?php
-        $success_stories = [];
-
-        $tag_id = 2;
-
-        $sql = "SELECT * FROM tbl_case_study WHERE FIND_IN_SET(?, tag_id) AND is_delete = 1 AND is_active = 1 ORDER BY id DESC";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $tag_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        $success_stories = [];
-        while ($row = $result->fetch_assoc()) {
-            $success_stories[] = $row;
-        }
-
-        $total_stories = count($success_stories);
-        ?>
-
-        <div class="container-fluid wow fadeInUp" data-wow-delay="0.8s">
-            <?php if ($total_stories > 3): ?>
-                <div class="owl-carousel owl-theme success-slider dtv-success">
-                    <?php foreach ($success_stories as $story): ?>
-                        <div class="success-card">
-                            <div class="card-img">
-                                <img src="<?= BASE_URL . htmlspecialchars($story['image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
-                            </div>
-                            <div class="card-content">
-                                <h3><?= htmlspecialchars($story['title']) ?></h3>
-                                <p><?= htmlspecialchars(shorten_text($story['description'], 25)) ?></p>
-                                <a href="<?= BASE_URL . htmlspecialchars($story['slug_url']) ?>">
-                                    <h5>Learn More</h5>
-                                </a>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php else: ?>
+                $success_stories = [];
+                
+                $tag_id = 2;
+                
+                $sql = "SELECT * FROM tbl_case_study WHERE FIND_IN_SET(?, tag_id) AND is_delete = 1 AND is_active = 1 ORDER BY id DESC";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("s", $tag_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                
+                $success_stories = [];
+                while ($row = $result->fetch_assoc()) {
+                    $success_stories[] = $row;
+                }
+                
+                $total_stories = count($success_stories);
+                ?>
+        <section class="success-stories">
+            <div class="container">
                 <div class="row">
-                    <?php foreach ($success_stories as $story): ?>
-                        <div class="col-md-4">
-                            <div class="success-card">
-                                <div class="card-img">
-                                    <img src="<?= BASE_URL . htmlspecialchars($story['image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
-                                </div>
-                                <div class="card-content">
-                                    <h3><?= htmlspecialchars($story['title']) ?></h3>
-                                    <p><?= htmlspecialchars(shorten_text($story['description'], 25)) ?></p>
-                                    <a href="<?= BASE_URL . htmlspecialchars($story['slug_url']) ?>">
-                                        <h5>Learn More</h5>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
+                    <div class="success-stories-header">
+                        <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Success Stories</h2>
+                        <h1 class="wow fadeInUp" data-wow-delay="0.4s">Delivering Impact. Driving Results.</h1>
+                        <p class="wow fadeInUp" data-wow-delay="0.6s">
+                            Packfora's solutions have consistently helped global brands achieve their environmental and business goals.
+                        </p>
+                    </div>
                 </div>
-            <?php endif; ?>
-        </div>
+            </div>
 
+           <div class="container wow fadeInUp" data-wow-delay="0.8s">
+    <?php if ($total_stories > 3): ?>
+        <div class="owl-carousel owl-theme success-slider dtv-success">
+            <?php foreach ($success_stories as $story): ?>
+                <div class="success-card">
+                    <div class="card-img">
+                        <img src="<?= BASE_URL . htmlspecialchars($story['main_image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
+                    </div>
+                    <div class="card-content">
+                        <h3><?= htmlspecialchars($story['title']) ?></h3>
+                        <p><?= htmlspecialchars(shorten_text($story['description'], 20)) ?></p>
+                        <a href="<?= BASE_URL . htmlspecialchars($story['slug_url']) ?>">
+                            <h5>Learn More</h5>
+                        </a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <div class="row">
+            <?php foreach ($success_stories as $story): ?>
+                <div class="col-md-4">
+                    <div class="success-card">
+                        <div class="card-img">
+                            <img src="<?= BASE_URL . htmlspecialchars($story['main_image']) ?>" alt="<?= htmlspecialchars($story['title']) ?>">
+                        </div>
+                        <div class="card-content">
+                            <h3><?= htmlspecialchars($story['title']) ?></h3>
+                            <p><?= htmlspecialchars(shorten_text($story['description'], 20)) ?></p>
+                            <a href="<?= htmlspecialchars($story['slug_url'] . '?id=' . urlencode(base64_encode($story['id']))) ?>">
+                                <h5>Learn More</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</div>
+
+        </section>
 
         <!-- ==== End Success Stories ==== -->
 
         <!-- ==== Start Our Leaders ==== -->
-        <?php // Query to get leaders with `fk_service_id = 5` and `is_delete = 1`
-            $sql = "SELECT * FROM tbl_our_leaders WHERE fk_service_id = 5 AND is_delete = 1";
-            $result = $conn->query($sql);
-        ?>
         <section class="our-leaders">
             <div class="container">
                 <div class="row">
@@ -374,33 +383,41 @@
                     </div>
 
                     <div class="owl-carousel owl-theme mt-3 team-leaders">
-                        <?php if ($result->num_rows > 0): ?>
-                            <?php while ($row = $result->fetch_assoc()): ?>
-                                <div>
-                                    <div class="leaders wow zoomIn" data-wow-delay="0.4s">
-                                        <img src="<?= BASE_URL .htmlspecialchars($row['image']) ?>" class="w-100" alt="<?= htmlspecialchars($row['name']) ?>">
-                                        <p>
-                                            <?= htmlspecialchars($row['name']) ?><br>
-                                            <?= htmlspecialchars($row['designation']) ?><br>
-                                            <?php if (!empty($row['link'])): ?>
-                                                <a href="<?= htmlspecialchars($row['link']) ?>" target="_blank">
-                                                    <img src="assets/img/leaders/linkedin.png" alt="LinkedIn" class="p-2">
-                                                </a>
-                                            <?php endif; ?>
-                                        </p>
-                                    </div>
+                        <?php
+                        // Fetch leaders from DB
+                        $sql = "SELECT * FROM tbl_our_leaders WHERE fk_service_id = 5 AND is_delete = 1 ORDER BY id ASC";
+                        $result = $conn->query($sql);
+
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $name = $row['name'];
+                                $designation = $row['designation'];
+                                $image = BASE_URL. $row['image']; // e.g., uploads/leaders/hitesh-shenoy.webp
+                                $linkedin = $row['link'];
+                        ?>
+                        <a href="<?= htmlspecialchars($linkedin) ?>" target="_blank" rel="noopener noreferrer">
+                            <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
+                                <img src="<?= htmlspecialchars($image) ?>" class="w-100" alt="<?= htmlspecialchars($name) ?>">
+                                <p><?= htmlspecialchars($name) ?></p>
+                                <h6><?= htmlspecialchars($designation) ?></h6>
+                                <div class="icons d-flex float-end">
+                                    <img src="assets/img/leaders/linkedin.png" alt="" class="p-0">
+                                    <img src="assets/img/home/intro/Vector.png" alt="" class="p-0">
                                 </div>
-                            <?php endwhile; ?>
-                        <?php else: ?>
-                            <p class="text-center">No leaders found.</p>
-                        <?php endif; ?>
+                            </div>
+                        </a>
+                        <?php
+                            }
+                        } else {
+                            echo "<p class='text-center'>No leaders found.</p>";
+                        }
+                        ?>
                     </div>
                 </div>
-            </div>          
+            </div>
         </section>
-         <?php
-            $conn->close();
-            ?>
+
+         
         <!-- ==== End Our Leaders ==== -->
 
         <!-- ==== Start Sustainable Packaging ==== -->

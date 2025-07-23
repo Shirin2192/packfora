@@ -280,7 +280,7 @@ if ($result && $result->num_rows > 0) {
             $success_stories = [];
 
             // Fetch case studies based on tag_id
-            $sql = "SELECT title, description, main_image, slug_url 
+            $sql = "SELECT *
                     FROM tbl_case_study 
                     WHERE FIND_IN_SET(?, tag_id) 
                     AND is_active = 1 AND is_delete = 1 
@@ -342,63 +342,49 @@ if ($result && $result->num_rows > 0) {
                 <!-- ==== End Success Stories ==== -->
 
         <!-- ==== Start Our Leaders ==== -->
-        <?php
-
-           $service_id = 1;
-
-            // Prepare and execute the query
-            $sql = "SELECT name, designation, link, image FROM tbl_our_leaders 
-                    WHERE fk_service_id = ? AND is_delete = '1' 
-                    ORDER BY id ASC";
-
-            $stmt = $conn->prepare($sql);
-            if ($stmt === false) {
-                die("Prepare failed: " . $conn->error);
-            }
-
-            $stmt->bind_param("i", $service_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            ?>
-
-            <!-- Our Leaders Section -->
-            <section class="our-leaders">
-                <div class="container">
-                    <div class="row">
-                        <div class="success-stories-header">
-                            <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Our Leaders</h2>
-                            <h1 class="wow fadeInUp" data-wow-delay="0.4s">A Dedicated Team of Packaging Professionals.</h1>
-                        </div>
-
-                        <?php if ($result->num_rows > 0): ?>
-                            <?php while($leader = $result->fetch_assoc()): ?>
-                                <div class="col-md-3 col-6">
-                                    <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
-                                        <img src="<?= BASE_URL . htmlspecialchars($leader['image']) ?>" class="w-100" alt="<?= htmlspecialchars($leader['name']) ?>">
-                                        <p><?= htmlspecialchars($leader['name']) ?></p>
-                                        <h6><?= htmlspecialchars($leader['designation']) ?></h6>
-                                        <?php if (!empty($leader['link'])): ?>
-                                            <a href="<?= htmlspecialchars($leader['link']) ?>" target="_blank">
-                                                <img src="assets/img/leaders/linkedin.png" alt="LinkedIn" class="p-0">
-                                            </a>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                            <?php endwhile; ?>
-                        <?php else: ?>
-                            <div class="col-12">
-                                <p class="text-center">No leaders found for this service.</p>
-                            </div>
-                        <?php endif; ?>
+        <section class="our-leaders">
+            <div class="container">
+                <div class="row">
+                    <div class="success-stories-header">
+                        <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Our Leaders</h2>
+                        <h1 class="wow fadeInUp" data-wow-delay="0.4s">A Dedicated Team of Packaging Professionals.</h1>
                     </div>
-                </div>
-            </section>
 
-            <?php
-            // Close resources
-            $stmt->close();
-            $conn->close();
-            ?>
+                    <?php
+                    // Query to get leaders with `fk_service_id = 1` and `is_delete = 1`
+                    $sql = "SELECT * FROM tbl_our_leaders WHERE fk_service_id = 1 AND is_delete = 1"; 
+                    $result = $conn->query($sql);
+                    $our_leaders = [];
+                    if ($result) {
+                        while ($row = $result->fetch_assoc()) {
+                            $our_leaders[] = $row;
+                        }
+                    }
+
+                    foreach ($our_leaders as $leader):
+                        $name = htmlspecialchars($leader['name']);
+                        $designation = htmlspecialchars($leader['designation']);
+                        $image = !empty(BASE_URL. $leader['image']) ? BASE_URL . $leader['image'] : 'assets/img/default-leader.webp';
+                        $linkedin = !empty($leader['link']) ? $leader['link'] : '#';
+                    ?>
+                    <div class="col-md-3 col-6">
+                        <a href="<?= $linkedin ?>" target="_blank" rel="noopener noreferrer">
+                            <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
+                                <img src="<?= $image ?>" class="w-100" alt="<?= $name ?>">
+                                <p><?= $name ?></p>
+                                <h6><?= $designation ?></h6>
+                                <div class="icons d-flex float-end">
+                                    <img src="assets/img/leaders/linkedin.png" alt="LinkedIn" class="p-0">
+                                    <img src="assets/img/home/intro/Vector.png" alt="Vector" class="p-0">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+
         <!-- ==== End Our Leaders ==== -->
 
         <!-- ==== Start Sustainable Packaging ==== -->

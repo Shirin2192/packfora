@@ -403,7 +403,7 @@
                         'slug' => $row['slug'],
                         'img' => $row['image'],
                         'title' => $row['title'],
-                        'date' => date('d/m/Y', strtotime($row['created_at'])),
+                        'date' => date('d/m/Y', strtotime($row['publish_date'])),
                         'read_time' => $row['read_time'],
                         'summary' => $row['summary'],
                         'id'=>$row['id'],

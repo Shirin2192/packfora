@@ -107,7 +107,9 @@
     <!-- ==================== End progress-scroll-button ==================== -->
 
     <?php include('header.php'); ?>
-
+     <?php include 'db_connect.php';
+         include 'config.php';  
+         ?>
     <main>
         <!-- ==== Start Home Banner ==== -->
         <section class="contact-page-title-banner"
@@ -133,72 +135,81 @@
                 <div class="row">
                     <h2 class="offering-title mb-3 wow fadeIn" style="color: #21409A;">Latest Blogs</h2>
                 </div>
+
+                <?php
+                    $sql = "SELECT * FROM tbl_blogs WHERE is_active = 1 AND is_delete = 1 ORDER BY publish_date DESC LIMIT 3";
+                    $result = $conn->query($sql);
+                    $blogs = [];
+
+                    if ($result && $result->num_rows > 0) {
+                        $blogs = $result->fetch_all(MYSQLI_ASSOC);
+                    }
+                ?>
+
                 <div class="row">
-                    <div class="col-lg-7 col-md-12 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="blogs-content active"
-                            style="background-image: url(assets/img/blog/main/navigating-PPWR.webp); background-size: cover; background-position: left center; background-repeat: no-repeat, no-repeat; position: relative; height: 480px;">
-                            <div class="latest-blog p-5">
-                                <a href="blog2.php">
-                                    <div class="latest-blog-data">
-                                        <h5>May 11, 2025 | Reading time - 7 Minutes</h5>
-                                        <h3>    ons from the Frontlines of Packaging Compliance
-                                        </h3>
-                                        <h6>Over the past few months, I've been having a recurring conversation with our
-                                            clients, especially those operating across Europe.</h6>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-md-12 wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-6">
-                                <div class="related-blog mt-4 mt-lg-auto">
-                                    <div class="row">
-                                        <div class="col-md-6 col-6">
-                                            <img src="assets/img/blog/thumb/late-varianting-thumb.webp" alt=""
-                                                srcset="">
-                                        </div>
-                                        <div class="col-md-6 col-6 ps-0">
-                                            <div class="related-blog-details">
-                                                <h3 class="mb-4">Late Varianting in Packaging: On-Demand Corrugate
-                                                    Printing for
-                                                    Agility and Sustainability</h3>
-                                                <h6>In recent conversations with both global FMCG firms...</h6>
-                                                <a href="blog1.php">
-                                                    <h5>Learn More</h5>
-                                                </a>
+                    <?php if (!empty($blogs)): ?>
+                        <?php foreach ($blogs as $index => $row): 
+                            $title = $row['title'];
+                            $summary = $row['summary'];
+                            $slug = $row['slug'];
+                            $read_time = $row['read_time'];
+                            $date = date("F d, Y", strtotime($row['publish_date']));
+                            $image = BASE_URL . $row['image'];
+                            $url = $slug . '?id=' . urlencode(base64_encode($row['id']));
+                        ?>
+
+                        <?php if ($index === 0): // Main blog ?>
+                            <div class="col-lg-7 col-md-12 wow fadeInUp" data-wow-delay="0.2s">
+                                <div class="blogs-content active"
+                                    style="background-image: url(<?= $image ?>); background-size: cover; background-position: left center; background-repeat: no-repeat; position: relative; height: 480px;">
+                                    <div class="latest-blog p-5">
+                                        <a href="<?= $url ?>">
+                                            <div class="latest-blog-data">
+                                                <h5><?= $date . " | " . $read_time ?></h5>
+                                                <h3><?= $title ?></h3>
+                                                <h6><?= $summary ?></h6>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-6">
-                                <div class="related-blog mt-4">
-                                    <div class="row">
-                                        <div class="col-md-6 col-6">
-                                            <img src="assets/img/blog/thumb/8packaging-trends-thumb.webp" alt=""
-                                                srcset="">
-                                        </div>
-                                        <div class="col-md-6 col-6 ps-0">
-                                            <div class="related-blog-details">
-                                                <h3 class="mb-4">8 Packaging Trends That Will Shape the Future:
-                                                    Sustainability,
-                                                    Innovation & Smart Design</h3>
-                                                <h6>We've often said that the future of packaging won't...</h6>
-                                                <a href="blog3.php">
-                                                    <h5>Learn More</h5>
-                                                </a>
+
+                            <div class="col-lg-5 col-md-12 wow fadeInUp" data-wow-delay="0.4s">
+                                <div class="row">
+                        <?php else: ?>
+                                    <div class="col-lg-12 col-md-6">
+                                        <?php if ($index === 1){ ?>
+                                        <div class="related-blog mt-4 mt-lg-auto">
+                                            <?php }else{ ?>
+                                                <div class="related-blog mt-4">
+                                            <?php }?>
+                                            <div class="row">
+                                                <div class="col-md-6 col-6">
+                                                    <img src="<?= $image ?>" alt="">
+                                                </div>
+                                                <div class="col-md-6 col-6 ps-0">
+                                                    <div class="related-blog-details">
+                                                        <h3 class="mb-4"><?= $title ?></h3>
+                                                        <h6><?= substr($summary, 0, 45) . "...." ?></h6>
+                                                        <a href="<?= $url ?>">
+                                                            <h5>Learn More</h5>
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                                </div> <!-- End inner row -->
+                            </div> <!-- End right col -->
+                    <?php else: ?>
+                        <p>No blogs available.</p>
+                    <?php endif; ?>
+                </div> <!-- End main row -->
             </div>
         </section>
+
         <!-- ==== End Blog ==== -->
 
         <!-- ==== Start More Blog ==== -->

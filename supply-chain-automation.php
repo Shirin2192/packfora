@@ -289,12 +289,12 @@
         <!-- ==== End Our Approach ==== -->
 
         <!-- ==== Start Success Stories ==== -->
-       <?php
+      <?php
         $tag_id = 6; // Replace this with the tag_id you want to filter by
         $success_stories = [];
 
         // Prepare and execute the SQL query
-        $sql = "SELECT title, description, main_image, slug_url FROM tbl_case_study 
+        $sql = "SELECT * FROM tbl_case_study 
                 WHERE FIND_IN_SET(?, tag_id) AND is_active = 1 AND is_delete = 1 
                 ORDER BY id ASC LIMIT 2";
 
@@ -322,14 +322,14 @@
                         <div class="col-md-6">
                             <div class="success-card wow zoomIn" data-wow-delay="0.6s">
                                 <div class="card-img">
-                                    <img src="<?= BASE_URL . htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                                    <img src="<?= BASE_URL . htmlspecialchars($row['main_image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
                                 </div>
                                 <div class="card-content">
                                     <h3><?= htmlspecialchars($row['title']) ?></h3>
                                     <p class="he-60">
-                                        <?= !empty($row['description']) ? htmlspecialchars($row['description']) : 'Read more to explore how Packfora made an impact in this case study.'; ?>
+                                        <?= !empty($row['description']) ? htmlspecialchars(shorten_text($row['description'], 20)) : 'Read more to explore how Packfora made an impact in this case study.'; ?>
                                     </p>
-                                    <a href="<?= htmlspecialchars($story['slug_url'] . '?id=' . urlencode(base64_encode($story['id']))) ?>">
+                                    <a href="<?= htmlspecialchars($row['slug_url'] . '?id=' . urlencode(base64_encode($row['id']))) ?>">
                                         <h5>Learn More</h5>
                                     </a>
                                 </div>
@@ -340,46 +340,60 @@
             </div>
         </section>
         <?php endif; ?>
-
-
         <!-- ==== End Success Stories ==== -->
 
         <!-- ==== Start Our Leaders ==== -->
         <?php
-        $fk_service_id = 3; // change this based on the page
-        $sql = "SELECT name, designation, image, link FROM tbl_our_leaders 
-                WHERE fk_service_id = $fk_service_id AND is_delete = 1 
-                ORDER BY id ASC";
+        // Query to get leaders with `fk_service_id = 4` and `is_delete = 1`
+        $sql = "SELECT * FROM tbl_our_leaders WHERE fk_service_id = 3 AND is_delete = 1"; 
         $result = $conn->query($sql);
+        $our_leaders = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $our_leaders[] = $row;
+            }
+        }
         ?>
-
-        <?php if ($result && $result->num_rows > 0): ?>
-        <section class="our-leaders">
-            <div class="container">
-                <div class="row">
-                    <div class="success-stories-header">
-                        <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Our Leaders</h2>
-                        <h1 class="wow fadeInUp" data-wow-delay="0.4s">A Dedicated Team of Packaging Professionals.</h1>
-                    </div>
-
-                    <?php while ($row = $result->fetch_assoc()): ?>
-                        <div class="col-md-3 col-6">
-                            <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
-                                <img src="<?= BASE_URL. htmlspecialchars($row['image']); ?>" class="w-100" alt="<?= htmlspecialchars($row['name']); ?>">
-                                <p><?= htmlspecialchars($row['name']); ?></p>
-                                <h6><?= htmlspecialchars($row['designation']); ?></h6>
-                                <?php if (!empty($row['link'])): ?>
-                                    <a href="<?= htmlspecialchars($row['link']); ?>" target="_blank">
-                                        <img src="assets/img/leaders/linkedin.png" alt="LinkedIn" class="p-0">
-                                    </a>
-                                <?php endif; ?>
-                            </div>
+        <!-- ==== Start Our Leaders ==== -->
+            <section class="our-leaders">
+                <div class="container">
+                    <div class="row">
+                        <div class="success-stories-header">
+                            <h2 class="sec-title wow fadeInUp" data-wow-delay="0.2s">Our Leaders</h2>
+                            <h1 class="wow fadeInUp" data-wow-delay="0.4s">A Dedicated Team of Packaging Professionals.</h1>
                         </div>
-                    <?php endwhile; ?>
+
+                        <?php
+                        // Loop through each leader and output their HTML
+                        if (!empty($our_leaders)) {
+                            foreach ($our_leaders as $leader) {
+                                $name = htmlspecialchars($leader['name']);
+                                $designation = htmlspecialchars($leader['designation']);
+                                $image = htmlspecialchars(BASE_URL. $leader['image']); // path like 'assets/img/leaders/xyz.webp'
+                                $linkedin = htmlspecialchars($leader['link']);
+                        ?>
+                            <div class="col-md-3 col-6">
+                                <a href="<?= $linkedin ?>" target="_blank" rel="noopener noreferrer">
+                                    <div class="text-center leaders wow zoomIn" data-wow-delay="0.4s">
+                                        <img src="<?= $image ?>" class="w-100" alt="<?= $name ?>">
+                                        <p><?= $name ?></p>
+                                        <h6><?= $designation ?></h6>
+                                        <div class="icons d-flex float-end">
+                                            <img src="assets/img/leaders/linkedin.png" alt="LinkedIn Icon" class="p-0">
+                                            <img src="assets/img/home/intro/Vector.png" alt="Arrow Icon" class="p-0">
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php
+                            }
+                        } else {
+                            echo "<div class='col-12 text-center'><p>No leaders found.</p></div>";
+                        }
+                        ?>
+                    </div>
                 </div>
-            </div>
-        </section>
-        <?php endif; ?>
+            </section>
 
         <!-- ==== End Our Leaders ==== -->
 
